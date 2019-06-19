@@ -1,0 +1,32 @@
+- name: Clone Emacs Git repo
+  git:
+    repo: https://git.savannah.gnu.org/git/emacs.git
+    dest: '{{ emacs_src_dir }}'
+  register: git_clone_emacs
+
+- name: Install Emacs dependencies
+  macports:
+    state: present
+    selfupdate: true
+    name:
+      - autoconf
+      - automake
+      - librsvg
+      - ImageMagick
+      - jansson
+      - gnutls
+      - libxml2
+      - ccache
+      - texinfo
+  become: true
+
+- name: Check for Emacs.app installed
+  stat:
+    path: '{{ ansible_env.HOME }}/Applications/Emacs.app'
+  register: emacs_app_stat
+
+- name: Build and install Emacs
+  script: build_install_ns_port.sh
+  args:
+    chdir: '{{ emacs_src_dir }}'
+  when: git_clone_emacs is changed or not emacs_app_stat.stat.exists

@@ -1,0 +1,1 @@
+computer_name: '{{ inventory_hostname }}'

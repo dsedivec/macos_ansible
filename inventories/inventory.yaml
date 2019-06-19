@@ -1,0 +1,8 @@
+all:
+  hosts:
+    lime:
+      ansible_connection: local
+
+    dale:
+      ansible_connection: local
+      computer_name: Dale

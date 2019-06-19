@@ -1,0 +1,1 @@
+emacs_src_dir: '{{ ansible_env.HOME }}/repositories/emacs'

@@ -1,0 +1,13 @@
+- name: Set ComputerName
+  shell: scutil --set ComputerName {{ computer_name | quote }}
+
+- name: Set LocalHostName
+  shell: scutil --set LocalHostName {{ inventory_hostname | quote }}
+
+- name: Set NetBIOSName
+  osx_defaults:
+    state: present
+    # Cannot find a way to set this without a path to a plist.
+    domain: /Library/Preferences/SystemConfiguration/com.apple.smb.server
+    key: NetBIOSName
+    value: '{{ inventory_hostname }}'

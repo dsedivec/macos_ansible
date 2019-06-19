@@ -1,0 +1,14 @@
+- name: Install MacPorts
+  script: install_macports.py
+  args:
+    creates: /opt/local/bin/port
+
+- name: Configure variants
+  lineinfile:
+    path: /opt/local/etc/macports/variants.conf
+    line: '{{ item }}'
+    state: present
+  loop:
+    - '+no_x11'
+    - '-x11'
+    - '+bash_completion'
