@@ -8,5 +8,6 @@
     - {role: fonts, tags: [fonts]}
     - {role: macos_prefs, tags: [macos_prefs]}
     - {role: software_emacs, tags: [software_emacs]}
+    - {role: dotfiles, tags: [dotfiles]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'

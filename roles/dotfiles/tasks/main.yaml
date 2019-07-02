@@ -1,0 +1,63 @@
+- name: Install Bash
+  package:
+    state: installed
+    name: bash
+
+- name: Change user's shell to MacPorts Bash
+  user:
+    name: '{{ ansible_user }}'
+    shell: /opt/local/bin/bash
+    create_home: no
+  become: true
+
+- name: Install Stow
+  package:
+    name: stow
+    state: present
+  become: true
+
+- name: Don't let stowing dotfiles make the bin dir a symlink
+  file:
+    path: '{{ user_bin_dir }}'
+    state: directory
+
+- name: Clone dotfiles repository
+  git:
+    repo: '{{ dotfiles_remote_repo }}'
+    dest: '{{ dotfiles_local_repo }}'
+    # update=yes will "git reset --hard", which could lose local
+    # changes, which could be bad.
+    update: no
+
+- name: Install dotfiles
+  command:
+    argv:
+      - stow
+      - -d
+      - '{{ dotfiles_local_repo }}'
+      - -t
+      - '{{ ansible_env.HOME }}'
+      - common
+
+- name: Clone dotfiles-private repository
+  git:
+    repo: '{{ dotfiles_private_remote_repo }}'
+    dest: '{{ dotfiles_private_local_repo }}'
+    update: no
+
+- name: Install dotfiles-private
+  command:
+    argv:
+      - stow
+      - -d
+      - '{{ dotfiles_private_local_repo }}'
+      - -t
+      - '{{ ansible_env.HOME }}'
+      - '{{ dotfiles_private_which }}'
+
+- name: Fix permissions on ~/.ssh
+  file:
+    state: directory
+    path: '{{ ansible_env.HOME }}/.ssh'
+    mode: u=rwX,go=
+    recurse: true
