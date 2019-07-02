@@ -1,0 +1,21 @@
+- name: Install Google Chrome
+  command:
+    argv: ['{{macfit}}', --owner, '{{ansible_user}}', --system,
+           https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg]
+    creates: /Applications/Google Chrome.app
+  become: yes
+
+# I am not at all confident that Dropbox will tolerate being installed to
+# ~/Applications.
+- name: Install Dropbox
+  command:
+    argv: ['{{ macfit }}', --owner, '{{ ansible_user }}', --system,
+           'https://www.dropbox.com/download?plat=mac&full=1']
+    creates: /Applications/Dropbox.app
+  become: yes
+
+- name: Install 1Password
+  command:
+    argv: ['{{ macfit }}', https://app-updates.agilebits.com/download/OPM7]
+    creates: /Applications/1Password 7.app
+  become: yes
