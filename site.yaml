@@ -1,5 +1,6 @@
 - hosts: all
   roles:
+    - {role: pkg_facts, tags: [always]}
     - {role: macos_system, tags: [macos_system]}
     - {role: macports, tags: [macports]}
     - {role: software_emacs, tags: [software_emacs]}

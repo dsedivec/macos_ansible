@@ -1,0 +1,9 @@
+- name: Load installed packages
+  command: pkgutil --pkgs
+  check_mode: no
+  changed_when: False
+  register: pkgutil_output
+
+- name: Set macos_installed_pkgs fact
+  set_fact:
+    macos_installed_pkgs: '{{ pkgutil_output.stdout_lines | default }}'
