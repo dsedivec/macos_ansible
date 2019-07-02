@@ -1,0 +1,13 @@
+- name: Install MacTeX
+  command:
+    argv:
+      - '{{ macfit }}'
+      - http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg
+      - --owner
+      - '{{ ansible_user }}'
+      - --cache-dir
+      - '{{ ansible_env.HOME }}'
+      - --debug
+  become: true
+  when: ('org.tug.mactex.texlive2019' not in macos_installed_pkgs)
+        or ('org.tug.mactex.gui2019' not in macos_installed_pkgs)
