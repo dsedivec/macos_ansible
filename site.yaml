@@ -1,7 +1,7 @@
 - hosts: all
   roles:
-    - macos_system
-    - macports
-    - software_emacs
+    - {role: macos_system, tags: [macos_system]}
+    - {role: macports, tags: [macports]}
+    - {role: software_emacs, tags: [software_emacs]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'
