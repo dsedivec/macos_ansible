@@ -1,0 +1,62 @@
+- name: Clone change_modifiers repo
+  git:
+    repo: '{{ macos_prefs_change_modifiers_remote_repo }}'
+    dest: '{{ macos_prefs_change_modifiers_local_repo }}'
+    update: no
+
+- name: Remap modifier keys
+  command:
+    argv:
+      - python
+      - '{{ macos_prefs_change_modifiers_local_repo }}/change_modifiers.py'
+      - set
+      - caps_lock,control
+      - command,option
+      - option,command
+  register: change_modifiers
+  changed_when: change_modifiers.stdout
+
+- name: Clone Display Manager repo
+  git:
+    repo: '{{ macos_prefs_display_manager_remote_repo }}'
+    dest: '{{ macos_prefs_display_manager_local_repo }}'
+    update: no
+
+- name: Get current resolution
+  shell: /usr/bin/python '{{ macos_prefs_display_manager | quote }}'
+         show current main | awk '/^resolution:/{print $2}'
+  register: current_resolution
+  changed_when: False
+
+- name: Set resolution
+  command:
+    argv: [/usr/bin/python, '{{ macos_prefs_display_manager }}',
+           res, '{{ macos_prefs_main_resolution|replace("x", " ") }}',
+           0, only-hidpi, main]
+  when: not ansible_check_mode
+        and current_resolution.stdout.strip() != macos_prefs_main_resolution
+
+# The PyObjC included in Mojave is *slow*.  Install faster from MacPorts.
+
+- name: Install Python 2.7 and PyObjC from MacPorts
+  x_macports:
+    name: [python27, py27-pyobjc-cocoa]
+    state: present
+
+- name: Check for faster MacPorts Python
+  script: get_prefs_python_interpreter.sh
+  check_mode: no
+  changed_when: False
+  register: prefs_python_interpreter
+
+- block:
+    - name: Set preference
+      x_osx_defaults:
+        host: '{{ item.host | default }}'
+        domain: '{{ item.domain | default("NSGlobalDomain") }}'
+        key: '{{ item.key }}'
+        type: '{{ item.type }}'
+        value: '{{ item.value }}'
+      loop: '{{ macos_prefs_set }}'
+  vars:
+    ansible_python_interpreter: '{{ prefs_python_interpreter.stdout.strip() }}'

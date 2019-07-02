@@ -1,0 +1,118 @@
+macos_prefs_change_modifiers_remote_repo: git@github.com:dsedivec/change_modifiers.git
+macos_prefs_change_modifiers_local_repo: '{{ repositories_root }}/change_modifiers'
+
+macos_prefs_display_manager_remote_repo: https://github.com/univ-of-utah-marriott-library-apple/display_manager
+macos_prefs_display_manager_local_repo: '{{ repositories_root }}/display_manager'
+macos_prefs_display_manager: '{{ macos_prefs_display_manager_local_repo }}/display_manager.py'
+macos_prefs_main_resolution: 1440x900
+
+macos_prefs_set:
+  # Most/all of these seem to be necessary to set trackpad "Swipe
+  # between pages" to "Swipe with three fingers".  First one
+  # *disables* two finger swipe.  Most/all of the rest seem to be
+  # necessary to *enable* three finger swipe.
+  - key: AppleEnableSwipeNavigateWithScrolls
+    type: bool
+    value: false
+  - host: currentHost
+    key: com.apple.trackpad.threeFingerHorizSwipeGesture
+    type: int
+    value: 1
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadThreeFingerHorizSwipeGesture
+    type: int
+    value: 1
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: TrackpadThreeFingerHorizSwipeGesture
+    type: int
+    value: 1
+
+  - key: com.apple.swipescrolldirection
+    type: bool
+    value: false
+
+  - host: currentHost
+    domain: com.apple.screensaver
+    key: idleTime
+    type: int
+    value: 300
+
+  - host: currentHost
+    domain: com.apple.screensaver
+    key: moduleDict
+    type: dict
+    value:
+      moduleName: Flurry
+      path: /System/Library/Screen Savers/Flurry.saver
+      type: 0
+
+  - domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: false
+
+  - domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyExposeAllWindows
+    # key: 'AppleSymbolicHotKeys:32'
+    key: [AppleSymbolicHotKeys, 32]
+    type: dict
+    value:
+      enabled: true
+      value:
+        parameters:
+          - 65535
+          # <f9>
+          - 0x65
+          # NX_SECONDARYFNMASK
+          - 0x800000
+        type: standard
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyExposeApplicationWindows
+    key: [AppleSymbolicHotKeys, 33]
+    type: dict
+    value:
+      enabled: true
+      value:
+        parameters:
+          - 65535
+          # <f10>
+          - 0x6D
+          # NX_SECONDARYFNMASK
+          - 0x800000
+        type: standard
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyExposeAllWindowsSlow
+    key: [AppleSymbolicHotKeys, 34]
+    type: dict
+    value:
+      enabled: true
+      value:
+        parameters:
+          - 65535
+          # <f9>
+          - 0x65
+          # NX_SECONDARYFNMASK | NX_SHIFTMASK
+          - 0x820000
+        type: standard
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyExposeApplicationWindowsSlow
+    key: [AppleSymbolicHotKeys, 35]
+    type: dict
+    value:
+      enabled: true
+      value:
+        parameters:
+          - 65535
+          # <f10>
+          - 0x6D
+          # NX_SECONDARYFNMASK | NX_SHIFTMASK
+          - 0x820000
+        type: standard

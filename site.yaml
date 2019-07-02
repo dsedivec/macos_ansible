@@ -5,6 +5,7 @@
     - {role: macports, tags: [macports]}
     - {role: software_macfit, tags: [software_macfit]}
     - {role: software_mactex, tags: [software_mactex]}
+    - {role: macos_prefs, tags: [macos_prefs]}
     - {role: software_emacs, tags: [software_emacs]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#
+# Watch for changes in ~/Library/Preferences, print out diffs
+# afterwards.  Used to figure out what preferences are changed when
+# you click things in the GUI.
+
+set -euo pipefail
+
+PRINT_PLIST=$HOME/Downloads/printplist.py
+
+temp_dir=$(mktemp -d)
+rm_temp_dir() {
+	echo "Cleaning up"
+	rm -rf "$temp_dir"
+}
+trap rm_temp_dir EXIT
+
+excludes=$temp_dir/exclude
+cat > "$excludes" <<EOF
+com.apple.AddressBook.plist
+com.apple.homed.plist
+com.apple.homed.notbackedup.plist
+EOF
+
+rsync -a --exclude-from="$excludes" ~/Library/Preferences "$temp_dir"/
+echo "Watching, kill to compare"
+change_log=$temp_dir/changed
+! fswatch -r ~/Library/Preferences -E --exclude '\.plist.[a-zA-Z0-9]+$' \
+	| tee "$change_log"
+while read -r file; do
+	echo
+	echo "########## $file"
+	echo
+	"$PRINT_PLIST" "$file" > "$temp_dir/after"
+	old_file=$temp_dir/${file#$HOME/Library/}
+	if [ ! -e "$old_file" ]; then
+		echo "$file is new:"
+		cat "$temp_dir/after"
+	else
+		"$PRINT_PLIST" "$old_file" > "$temp_dir/before"
+		! colordiff -y -W 200 "$temp_dir/before" "$temp_dir/after"
+	fi
+done < <(sort -u "$change_log")
