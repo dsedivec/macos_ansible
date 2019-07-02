@@ -34,3 +34,14 @@
   args:
     chdir: '{{ emacs_src_dir }}'
   when: git_clone_emacs is changed or not emacs_app_stat.stat.exists
+
+- name: Make bin directory
+  file:
+    state: directory
+    path: '{{ user_bin_dir }}'
+
+- name: Symlink emacsclient into bin directory
+  file:
+    state: link
+    path: '{{ user_bin_dir }}/emacsclient'
+    src: '{{ (user_app_dir + "/Emacs.app/Contents/MacOS/bin/emacsclient") | relpath(user_bin_dir) }}'
