@@ -1,0 +1,18 @@
+- name: Install Vim
+  package:
+    name: vim
+    state: present
+  become: true
+
+- name: Make Vim autoload directory
+  file:
+    path: '{{ user_vim_dir }}/autoload'
+    state: directory
+
+- name: Download vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: '{{ user_vim_dir }}/autoload/'
+
+- name: Install Vim plug-ins
+  command: vim +PlugInstall +qall

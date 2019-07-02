@@ -9,5 +9,6 @@
     - {role: macos_prefs, tags: [macos_prefs]}
     - {role: software_emacs, tags: [software_emacs]}
     - {role: dotfiles, tags: [dotfiles]}
+    - {role: software_vim, tags: [software_vim]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'
