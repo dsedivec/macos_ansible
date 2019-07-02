@@ -1,7 +1,8 @@
 all:
   hosts:
-    lime:
+    dale_work:
       ansible_connection: local
+      computer_name: Dale's Work Machine
 
     dale:
       ansible_connection: local
