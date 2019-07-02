@@ -1,0 +1,11 @@
+- name: Clone macfit repo
+  git:
+    repo: '{{ macfit_remote_repo }}'
+    dest: '{{ macfit_local_repo }}'
+    update: no
+
+- name: Symlink macfit into bin dir
+  file:
+    state: link
+    src: '{{ macfit_local_repo | relpath(macfit | dirname) }}/macfit.py'
+    dest: '{{ macfit }}'
