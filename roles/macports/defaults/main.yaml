@@ -1,0 +1,51 @@
+default_ports:
+  - aspell
+  - aspell-dict-en
+  - bash-completion
+  - ccache
+  - colordiff
+  - coreutils
+  - ctags
+  - dash
+  - emacs-app
+  - fd
+  - ffmpeg +nonfree
+  - figlet
+  - file
+  - fping
+  - fswatch
+  - fzf
+  - git
+  - graphviz +rsvg
+  - grep
+  - gunits
+  - iperf3
+  - jq
+  - less
+  - lftp
+  - mercurial
+  - mp3splt
+  - mtr
+  - neomutt
+  - nmap
+  - npm6
+  - openjdk11
+  - openssh +gsskex
+  - p7zip
+  - parallel
+  - patchutils
+  - pstree
+  - pv
+  - python37
+  - ripgrep
+  - samba3
+  - sbcl
+  - sleepwatcher
+  - socat
+  - sox
+  - sshfs
+  - tidy
+  - tmux
+  - unrar
+  - watch
+  - youtube-dl

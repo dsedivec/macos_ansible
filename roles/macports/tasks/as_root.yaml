@@ -12,3 +12,8 @@
     - '+no_x11'
     - '-x11'
     - '+bash_completion'
+
+- name: Install default ports
+  x_macports:
+    name: '{{ default_ports }}'
+    state: present
