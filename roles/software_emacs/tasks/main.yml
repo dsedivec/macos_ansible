@@ -22,6 +22,8 @@
       - libxml2
       - ccache
       - texinfo
+      # org-mode needs this to build.
+      - gnutar
   become: true
 
 - name: Check for Emacs.app installed
@@ -45,3 +47,35 @@
     state: link
     path: '{{ user_bin_dir }}/emacsclient'
     src: '{{ (user_app_dir + "/Emacs.app/Contents/MacOS/bin/emacsclient") | relpath(user_bin_dir) }}'
+
+- name: Clone dot-emacs-d repository
+  git:
+    repo: '{{ dot_emacs_d_remote_repo }}'
+    dest: '{{ dot_emacs_d_local_repo }}'
+    update: no
+
+- name: Clone org-mode repository
+  git:
+    repo: '{{ org_mode_remote_repo }}'
+    dest: '{{ org_mode_local_repo }}'
+    update: no
+  register: git_org_mode
+
+- name: Check for org-mode package and metadata
+  find:
+    paths:
+      - '{{ org_mode_local_repo }}'
+    use_regex: true
+    patterns:
+      - '^archive-contents$'
+      - '^org-plus-contrib-20\d{6}.tar$'
+  register: org_package_files
+
+- name: Build org-mode package
+  command: ./build-emacs-package.sh
+  args:
+    chdir: '{{ org_mode_local_repo }}'
+  when: git_org_mode is changed or not (
+            'archive-contents' in (org_package_files.files | map(attribute='path') | map('basename') | list)
+            and org_package_files.matched >= 2
+        )
