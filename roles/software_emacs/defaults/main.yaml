@@ -1,1 +1,2 @@
 emacs_src_dir: '{{ repositories_root }}/emacs'
+software_emacs_update_git: false

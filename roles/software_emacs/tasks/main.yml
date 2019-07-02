@@ -2,6 +2,10 @@
   git:
     repo: https://git.savannah.gnu.org/git/emacs.git
     dest: '{{ emacs_src_dir }}'
+    # update=yes will "git reset --hard", which could lose local commits.
+    # Also, if Emacs.app already exists, maybe it's annoying to rebuild Emacs
+    # too frequently.
+    update: '{{ software_emacs_update_git }}'
   register: git_clone_emacs
 
 - name: Install Emacs dependencies
