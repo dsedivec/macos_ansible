@@ -1,0 +1,2 @@
+user_app_dir: '{{ ansible_env.HOME }}/Applications'
+repositories_root: '{{ ansible_env.HOME }}/repositories'

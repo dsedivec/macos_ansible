@@ -22,7 +22,7 @@
 
 - name: Check for Emacs.app installed
   stat:
-    path: '{{ ansible_env.HOME }}/Applications/Emacs.app'
+    path: '{{ user_app_dir }}/Emacs.app'
   register: emacs_app_stat
 
 - name: Build and install Emacs
