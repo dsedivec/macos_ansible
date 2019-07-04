@@ -106,6 +106,8 @@ def set_value(op, key_idx, container):
             if str_key in container:
                 op.key_list[key_idx] = str_key
                 return set_value(op, key_idx, container)
+        if op.state == 'absent':
+            return False
         if is_last_key:
             cur_value = None
         elif is_dict and op.dict_create:
@@ -133,9 +135,9 @@ def set_value(op, key_idx, container):
                 )
             )
         if op.state == 'absent':
-            if cur_value is not None:
-                del container[key]
-                changed = True
+            assert cur_value is not None
+            del container[key]
+            changed = True
         else:
             assert op.state == 'present', repr(op.state)
             if op.add_merge:
