@@ -1,0 +1,8 @@
+# I am not at all confident that Dropbox will tolerate being installed to
+# ~/Applications, so put it in /Applications.
+- name: Install Dropbox
+  command:
+    argv: ['{{ macfit }}', --owner, '{{ ansible_user }}', --dest-system,
+           'https://www.dropbox.com/download?plat=mac&full=1']
+    creates: /Applications/Dropbox.app
+  become: yes

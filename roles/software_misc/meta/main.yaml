@@ -1,2 +1,6 @@
 dependencies:
   - role: software_macfit
+  # For 1Password and others
+  - role: software_dropbox
+  # For iTerm and others
+  - role: software_dockutil

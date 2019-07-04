@@ -1,0 +1,21 @@
+- name: Clone dockutil repo
+  git:
+    repo: '{{ dockutil_remote_repo }}'
+    dest: '{{ dockutil_local_repo }}'
+    update: no
+
+- name: Symlink dockutil into '{{ user_bin_dir }}'
+  file:
+    state: link
+    src: '{{ (dockutil_local_repo + "/scripts") | relpath(user_bin_dir) }}/dockutil'
+    dest: '{{ user_bin_dir }}/dockutil'
+
+- name: Read list of things in the Dock
+  shell: dockutil --list | cut -f1
+  changed_when: false
+  check_mode: no
+  register: dockutil
+
+- name: Set fact for list of things in the Dock
+  set_fact:
+    macos_dock_items: '{{ dockutil.stdout_lines | map("trim") | list }}'

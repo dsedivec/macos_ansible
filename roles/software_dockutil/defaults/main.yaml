@@ -1,0 +1,2 @@
+dockutil_remote_repo: https://github.com/kcrawford/dockutil.git
+dockutil_local_repo: '{{ repositories_root }}/dockutil'

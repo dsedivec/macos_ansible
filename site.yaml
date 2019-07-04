@@ -12,8 +12,10 @@
     - {role: software_emacs, tags: [software_emacs]}
     - {role: dotfiles, tags: [dotfiles]}
     - {role: software_vim, tags: [software_vim]}
+    - {role: software_dropbox, tags: [software_dropbox]}
     - {role: user_venvs, tags: [user_venvs]}
     - {role: software_python_dev, tags: [software_python_dev]}
+    - {role: software_dockutil, tags: [software_dockutil]}
     - {role: software_misc, tags: [software_misc]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'

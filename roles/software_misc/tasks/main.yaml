@@ -1,17 +1,8 @@
 - name: Install Google Chrome
   command:
-    argv: ['{{macfit}}', --owner, '{{ansible_user}}', --system,
+    argv: ['{{macfit}}', --owner, '{{ansible_user}}',
            https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg]
     creates: /Applications/Google Chrome.app
-  become: yes
-
-# I am not at all confident that Dropbox will tolerate being installed to
-# ~/Applications.
-- name: Install Dropbox
-  command:
-    argv: ['{{ macfit }}', --owner, '{{ ansible_user }}', --system,
-           'https://www.dropbox.com/download?plat=mac&full=1']
-    creates: /Applications/Dropbox.app
   become: yes
 
 - name: Install 1Password
@@ -19,3 +10,82 @@
     argv: ['{{ macfit }}', https://app-updates.agilebits.com/download/OPM7]
     creates: /Applications/1Password 7.app
   become: yes
+
+- name: Install Witch
+  command:
+    argv: ['{{ macfit }}', -n, witch.dmg, https://manytricks.com/download/witch]
+    creates: '{{ witch_prefpane }}'
+  register: install_witch
+
+# A little unfortunate that this is going to open up a GUI window?
+# Maybe this is a bad idea?
+- name: Run Witch after first installation
+  command:
+    argv: [open, '{{ witch_prefpane }}']
+  when: install_witch is changed
+
+- name: Install iTerm
+  command:
+    argv: ['{{ macfit }}', https://iterm2.com/downloads/stable/latest]
+    creates: '{{ user_app_dir }}/iTerm.app'
+
+- name: Set iTerm preferences
+  x_osx_defaults:
+    domain: com.googlecode.iterm2
+    key: '{{ item.0 }}'
+    type: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - [LoadPrefsFromCustomFolder, int, 1]
+    - [PrefsCustomFolder, string, '{{ dropbox_dir }}/app_sync/iTerm']
+    - [NoSyncNeverRemindPrefsChangesLostForFile, bool, true]
+    - [NoSyncNeverRemindPrefsChangesLostForFile_selection, int, 0]
+  vars:
+    ansible_python_interpreter: /opt/local/bin/python2.7
+
+- debug: var=macos_dock_items
+
+- name: Put iTerm on Dock
+  command:
+    argv: [dockutil, --add, '{{ user_app_dir }}/iTerm.app']
+  when: '"iTerm" not in macos_dock_items'
+
+- name: Install Alfred
+  command:
+    argv: ['{{ macfit }}', --scrape-html, 'https://.*/Alfred.*\.dmg$',
+           https://www.alfredapp.com/]
+    creates: '{{ user_app_dir }}/Alfred 4.app'
+
+- name: Set Alfred preferences
+  x_osx_defaults:
+    domain: com.runningwithcrayons.Alfred-Preferences
+    key: syncfolder
+    type: string
+    # Alfred seems to prefer this spelling, not an absolute path.
+    value: '~/Dropbox'
+
+- name: Install Dash
+  command:
+    argv: ['{{ macfit }}', 'https://newyork.kapeli.com/downloads/v4/Dash.zip']
+    creates: '{{ user_app_dir }}/Dash.app'
+
+- name: Install Amphetamine
+  command: mas install 937984704
+  args:
+    creates: /Applications/Amphetamine.app
+
+- name: Set Amphetamine preferences
+  x_osx_defaults:
+    domain: /Users/dale/Library/Containers/com.if.Amphetamine/Data/Library/Preferences/com.if.Amphetamine
+    key: '{{ item.0 }}'
+    type: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - ["Default Duration", int, 14]
+    - ["End Session On Low Battery", int, 1]
+    - ["Hide Dock Icon", int, 1]
+    - ["Icon Style", int, 5]
+    - ["Ignore Battery on AC", int, 1]
+    - ["Lower Icon Opacity", int, 1]
+    - ["Session End Time Calcuation", int, 1]
+    - ["Show Welcome Window", int, 0]
