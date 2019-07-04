@@ -327,9 +327,9 @@ def run_module():
     params = module.params.copy()
     if params['host'].strip() == 'currentHost':
         params['host'] = CF.kCFPreferencesCurrentHost
-    elif not params['host'] or not params['host'].strip():
+    elif not params['host'].strip() or params['host'] == 'anyHost':
         params['host'] = CF.kCFPreferencesAnyHost
-    if not params['user'] or not params['user'].strip():
+    if not params['user'].strip() or params['user'] == 'currentUser':
         params['user'] = CF.kCFPreferencesCurrentUser
     if params['domain'] == 'NSGlobalDomain':
         params['domain'] = CF.kCFPreferencesAnyApplication
