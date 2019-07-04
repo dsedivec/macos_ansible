@@ -11,3 +11,14 @@
     domain: /Library/Preferences/SystemConfiguration/com.apple.smb.server
     key: NetBIOSName
     value: '{{ inventory_hostname }}'
+
+- name: Check firewall status
+  command: /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
+  changed_when: false
+  register: firewall_state
+
+- name: Enable the firewall
+  command: /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+  when: >
+    "firewall is enabled" not in (firewall_state.stdout | default("")).lower()
+  become: yes
