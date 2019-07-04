@@ -1,0 +1,27 @@
+- name: Install Pythons
+  macports:
+    state: present
+    name: [python27, py27-virtualenv, python37]
+  become: yes
+
+- name: Build Python 2.7 virtualenv
+  command:
+    argv: [/opt/local/bin/virtualenv-2.7, '{{ user_py2_venv_dir }}']
+    creates: '{{ user_py2_venv_bin }}/activate'
+  register: virtualenv
+
+- name: Upgrade pip in 2.7 virtualenv
+  command:
+    argv: ['{{ user_py2_venv_bin }}/pip', 'install', '--upgrade', 'pip']
+  when: virtualenv is changed
+
+- name: Build Python 3.7 virtualenv
+  command:
+    argv: [/opt/local/bin/python3.7, '-m', venv, '{{ user_py3_venv_dir }}']
+    creates: '{{ user_py3_venv_bin }}/activate'
+  register: virtualenv
+
+- name: Upgrade pip in 3.7 virtualenv
+  command:
+    argv: ['{{ user_py3_venv_bin }}/pip', 'install', '--upgrade', 'pip']
+  when: virtualenv is changed

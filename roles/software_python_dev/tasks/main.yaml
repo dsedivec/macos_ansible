@@ -1,0 +1,61 @@
+- name: Install Python 2 development tools
+  include_tasks: install_python_dev_tool.yaml
+  loop:
+    - package: flake8
+    - package: pylint
+    - package: ipython
+    - package: jedi
+    - package: gnureadline
+  vars:
+    virtualenv: '{{ user_py2_venv_dir }}'
+
+- name: Fix gnureadline in Python 2
+  file:
+    state: link
+    src: site-packages/readline.py
+    dest: '{{ user_py2_venv_dir }}/lib/python2.7/readline.py'
+
+- name: Install Python 3 development tools
+  include_tasks: install_python_dev_tool.yaml
+  loop:
+    - package: flake8
+    - package: pylint
+    - package: ipython
+    - package: jedi
+    - package: black
+      bins: [black]
+    - package: isort
+      bins: [isort]
+  vars:
+    virtualenv: '{{ user_py3_venv_dir }}'
+
+# GNU readline + MacPorts + Python = still a pain in the ass
+#
+# This is approximately how MacPorts handles this problematic
+# combination in its own py37-gnureadline port.  Using easy_install so
+# that gnureadline gets installed in a subdirectory of site-packages,
+# a subdirectory which we can then insert into the path before the
+# MacPorts lib-dynload path.  (MacPorts modifies setup.py to use
+# extra_path='readline' instead of installing with easy_install.
+# extra_path is "deprecated" BTW.)
+#
+# Alternative path here would be to just install actual virtualenv
+# rather than using venv.  If we installed with virtualenv, we could
+# use the same fix we use for Python 2, above.
+
+- name: Install gnureadline for Python 3 with easy_install
+  easy_install:
+    executable: '{{ user_py3_venv_bin }}/easy_install'
+    name: gnureadline
+    state: present
+
+- name: Install readline_path.py
+  copy:
+    src: readline_path.py
+    dest: '{{ user_py3_venv_dir }}/lib/python3.7/site-packages/'
+
+- name: Install readline_path.pth
+  copy:
+    content: |
+      import readline_path
+    dest: '{{ user_py3_venv_dir }}/lib/python3.7/site-packages/readline_path.pth'

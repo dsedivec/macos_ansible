@@ -1,0 +1,14 @@
+- name: 'Install {{ item.package }} with pip'
+  pip:
+    virtualenv: '{{ virtualenv }}'
+    state: present
+    name: '{{ item.package }}'
+
+- name: 'Symlink scripts for {{ item.package }} into {{ user_bin_dir }}'
+  file:
+    state: link
+    src: '{{ (virtualenv + "/bin") | relpath(user_bin_dir) }}/{{ bin }}'
+    path: '{{ user_bin_dir }}/{{ bin }}'
+  loop: '{{ item.bins | default([]) }}'
+  loop_control:
+    loop_var: bin
