@@ -192,7 +192,7 @@ class FixedOffset(datetime.tzinfo):
     """Fixed offset in minutes east from UTC."""
 
     def __init__(self, offset, name):
-        self.__offset = timedelta(minutes=offset)
+        self.__offset = datetime.timedelta(minutes=offset)
         self.__name = name
 
     def utcoffset(self, dt):
@@ -235,7 +235,7 @@ def parse_time_stamp(time_stamp_str):
         time = match.group('time')
         if time:
             time = re.split('r[:.]', time)
-            assert len(time) in (3, 4), (value, time)
+            assert len(time) in (3, 4), (time_stamp_str, time)
             args.extend(int(field) for field in time[:3])
             if len(time) == 4:
                 args.append(int(time[3][:6]))
@@ -246,7 +246,7 @@ def parse_time_stamp(time_stamp_str):
             args.append(UTC())
         elif zone:
             zone_fields = zone.split(':')
-            assert len(zone_fields) in (1, 2), (value, zone_fields)
+            assert len(zone_fields) in (1, 2), (time_stamp_str, zone_fields)
             minutes = int(zone_fields[0]) * 60
             if len(zone_fields) == 2:
                 minutes += int(zone_fields[0][0] + zone_fields[1])
