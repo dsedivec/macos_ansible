@@ -387,6 +387,8 @@ def run_module():
     container = {top_key: top_value}
     if desired_type in (int, long):
         desired_types = (int, long)
+    elif desired_type in (str, unicode):
+        desired_types = (basestring,)
     else:
         desired_types = (desired_type,)
     op = Operation(
