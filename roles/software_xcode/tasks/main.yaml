@@ -1,0 +1,37 @@
+- name: Install Xcode from the Mac App Store
+  # [dale@Dale brew]$ mas search Xcode | head -1
+  #    497799835  Xcode (10.2.1)
+  #
+  # I guarantee you are going to have to update this, but "mas lucky
+  # Xcode" was too much risk for me.
+  command: mas install 497799835
+  args:
+    creates: /Applications/Xcode.app
+
+- name: Install Xcode command line tools
+  command: xcode-select --install
+  args:
+    # From https://github.com/Homebrew/install/blob/master/install
+    creates: /Library/Developer/CommandLineTools/usr/bin/git
+
+- name: Find current Xcode developer directory
+  command: xcode-select -p
+  changed_when: false
+  register: xcode_select
+
+- name: Reset Xcode developer directory to /Applications/Xcode.app (hopefully)
+  command: xcode-select --reset
+  become: yes
+  when: 'not (xcode_select.stdout_lines[0]|default("")).startswith("/Applications/Xcode.app")'
+
+- name: Check if we need to accept the Xcode license
+  # This command is also courtesy of Homebrew's installer.
+  shell: '/usr/bin/xcrun clang 2>&1'
+  failed_when: false
+  changed_when: false
+  register: xcode_license
+
+- name: Accept Xcode license
+  command: xcodebuild -license accept
+  become: yes
+  when: '"license" in (xcode_license.stdout | default("")).lower()'

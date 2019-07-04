@@ -1,0 +1,6 @@
+- name: Install mas, Mac App Store CLI
+  script: utils/install_latest_pkg_from_github.py mas-cli/mas
+  args:
+    creates: /usr/local/bin/mas
+  become: yes
+

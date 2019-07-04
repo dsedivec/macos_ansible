@@ -2,6 +2,8 @@
   roles:
     - {role: pkg_facts, tags: [always]}
     - {role: macos_system, tags: [macos_system]}
+    - {role: software_mas, tags: [software_mas]}
+    - {role: software_xcode, tags: [software_xcode]}
     - {role: macports, tags: [macports]}
     - {role: software_macfit, tags: [software_macfit]}
     - {role: software_mactex, tags: [software_mactex]}
