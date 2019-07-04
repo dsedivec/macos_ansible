@@ -36,6 +36,7 @@ echo "Watching, kill to compare"
 change_log=$temp_dir/changed
 fswatch -r "${PREFS_DIRS[@]}" -E --exclude '\.plist.[a-zA-Z0-9]+$' \
 	| tee "$change_log"
+diff=$(mktemp)
 while read -r file; do
 	echo
 	echo "########## $file"
@@ -48,5 +49,11 @@ while read -r file; do
 	else
 		"$PRINT_PLIST" "$old_file" > "$temp_dir/before"
 		colordiff -y -W 200 "$temp_dir/before" "$temp_dir/after"
+		echo diff "$file" >> "$diff"
+		diff -u "$temp_dir/before" "$temp_dir/after" >> "$diff"
 	fi
 done < <(sort -u "$change_log")
+
+echo
+echo
+echo "diff: $diff"
