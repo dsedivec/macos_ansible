@@ -7,6 +7,14 @@ macos_prefs_display_manager: '{{ macos_prefs_display_manager_local_repo }}/displ
 macos_prefs_main_resolution: 1440x900
 
 macos_prefs_set:
+  - key: NSQuitAlwaysKeepsWindows
+    type: bool
+    value: true
+
+  - key: AppleICUForce24HourTime
+    type: bool
+    value: true
+
   # Most/all of these seem to be necessary to set trackpad "Swipe
   # between pages" to "Swipe with three fingers".  First one
   # *disables* two finger swipe.  Most/all of the rest seem to be
@@ -31,6 +39,110 @@ macos_prefs_set:
     type: bool
     value: false
 
+  # I think some of the following preferences---perhaps many of
+  # them---will need check_type=false.  System Preferences changed
+  # them from e.g. bools to ints.
+
+  - host: currentHost
+    key: com.apple.mouse.tapBehavior
+    type: int
+    value: 1
+  - host: currentHost
+    key: com.apple.trackpad.fiveFingerPinchSwipeGesture
+    type: int
+    value: 0
+  - host: currentHost
+    key: com.apple.trackpad.fourFingerHorizSwipeGesture
+    type: int
+    value: 0
+  - host: currentHost
+    key: com.apple.trackpad.fourFingerPinchSwipeGesture
+    type: int
+    value: 0
+  - host: currentHost
+    key: com.apple.trackpad.threeFingerVertSwipeGesture
+    type: int
+    value: 1
+  - host: currentHost
+    key: com.apple.trackpad.twoFingerFromRightEdgeSwipeGesture
+    type: int
+    value: 0
+
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: Clicking
+    type: bool
+    value: true
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadFiveFingerPinchGesture
+    type: int
+    value: 0
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadFourFingerHorizSwipeGesture
+    type: int
+    value: 0
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadFourFingerPinchGesture
+    type: int
+    value: 0
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadThreeFingerVertSwipeGesture
+    type: int
+    value: 1
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadTwoFingerFromRightEdgeSwipeGesture
+    type: int
+    value: 0
+
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: Clicking
+    type: bool
+    value: true
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: DragLock
+    type: bool
+    value: false
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: Dragging
+    type: bool
+    value: false
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: TrackpadFiveFingerPinchGesture
+    type: int
+    value: 0
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: TrackpadFourFingerHorizSwipeGesture
+    type: int
+    value: 0
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: TrackpadFourFingerPinchGesture
+    type: int
+    value: 0
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: TrackpadTwoFingerFromRightEdgeSwipeGesture
+    type: int
+    value: 0
+
+  - domain: com.apple.dock
+    key: showDesktopGestureEnabled
+    type: bool
+    value: false
+  - domain: com.apple.dock
+    key: showLaunchpadGestureEnabled
+    type: bool
+    value: false
+  - domain: com.apple.dock
+    key: showMissionControlGestureEnabled
+    type: bool
+    value: false
+  - domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: false
+  - domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+
   - host: currentHost
     domain: com.apple.screensaver
     key: idleTime
@@ -45,16 +157,6 @@ macos_prefs_set:
       moduleName: Flurry
       path: /System/Library/Screen Savers/Flurry.saver
       type: 0
-
-  - domain: com.apple.dock
-    key: show-recents
-    type: bool
-    value: false
-
-  - domain: com.apple.dock
-    key: autohide
-    type: bool
-    value: true
 
   - domain: com.apple.symbolichotkeys
     # kCGSHotKeyExposeAllWindows
@@ -116,3 +218,8 @@ macos_prefs_set:
           # NX_SECONDARYFNMASK | NX_SHIFTMASK
           - 0x820000
         type: standard
+
+  - domain: com.apple.menuextra.clock
+    key: DateFormat
+    type: string
+    value: 'EEE H:mm:ss'

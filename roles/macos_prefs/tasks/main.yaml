@@ -49,14 +49,14 @@
   changed_when: False
   register: prefs_python_interpreter
 
-- block:
-    - name: Set preference
-      x_osx_defaults:
-        host: '{{ item.host | default }}'
-        domain: '{{ item.domain | default("NSGlobalDomain") }}'
-        key: '{{ item.key }}'
-        type: '{{ item.type }}'
-        value: '{{ item.value }}'
-      loop: '{{ macos_prefs_set }}'
+- name: Set preference
+  x_osx_defaults:
+    host: '{{ item.host | default }}'
+    domain: '{{ item.domain | default("NSGlobalDomain") }}'
+    key: '{{ item.key }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  become: '{{ item.become | default(False) }}'
+  loop: '{{ macos_prefs_set }}'
   vars:
     ansible_python_interpreter: '{{ prefs_python_interpreter.stdout.strip() }}'
