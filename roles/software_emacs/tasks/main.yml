@@ -25,6 +25,7 @@
       # org-mode needs this to build.
       - gnutar
   become: true
+  tags: [slow]
 
 - name: Check for Emacs.app installed
   stat:
