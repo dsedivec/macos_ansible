@@ -103,3 +103,92 @@
     - ["Lower Icon Opacity", int, 1]
     - ["Session End Time Calcuation", int, 1]
     - ["Show Welcome Window", int, 0]
+
+- name: Install BetterTouchTool
+  command:
+    argv: ['{{ macfit }}', https://bettertouchtool.net/releases/BetterTouchTool.zip]
+    creates: '{{ user_app_dir }}/BetterTouchTool.app'
+
+- name: Set BetterTouchTool preferences
+  x_osx_defaults:
+    domain: com.hegenberg.BetterTouchTool
+    key: windowSnappingEnabled
+    type: bool
+    value: false
+
+- name: Install iStat Menus
+  command:
+    argv: ['{{ macfit }}', https://download.bjango.com/istatmenus/]
+    creates: '{{ user_app_dir }}/iStat Menus.app'
+
+- name: Install Burp Suite Community Edition
+  command:
+    argv:
+      - '{{ macfit }}'
+      - --run-installer
+      - 'Burp Suite Community Edition Installer.app/Contents/MacOS/JavaApplicationStub'
+      - '["-q"]'
+      - 'https://portswigger.net/burp/releases/download?product=community&type=macosx'
+    creates: '{{ user_app_dir }}/Burp Suite Community Edition.app'
+
+# Bartender's website won't talk to urllib2, but it will talk to Curl!  Weird!
+- name: Install Bartender 3
+  command:
+    argv: ['{{ macfit }}', -U, 'curl/7.65.1',
+           https://www.macbartender.com/Demo/Bartender%203.zip]
+    creates: '{{ user_app_dir }}/Bartender 3.app'
+
+- name: Install Hammerspoon
+  command:
+    argv: ['{{ macfit }}',
+           --scrape-html, '^https://.*/Hammerspoon-[\d.]+\.zip$',
+           'https://github.com/Hammerspoon/hammerspoon/releases/latest']
+    creates: '{{ user_app_dir }}/Hammerspoon.app'
+  register: hammerspoon
+
+- name: Start Hammerspoon
+  command:
+    argv: [open, '{{ user_app_dir }}/Hammerspoon.app']
+  when: hammerspoon is changed
+
+- name: Install Textual
+  command:
+    argv: ['{{ macfit }}', --agree-eulas,
+           -c, '{{ ansible_env.HOME }}/Downloads',
+           https://www.codeux.com/textual/downloads/Textual7.dmg]
+    creates: '{{ user_app_dir }}/Textual.app'
+
+- name: Set Textual preferences
+  x_osx_defaults:
+    domain: com.codeux.apps.textual
+    key: '{{ item.0 }}'
+    type: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - [CopyTextSelectionOnMouseUp, bool, true]
+    - [DefaultIdentity -> Nickname, string, dale]
+    - [DefaultIdentity -> Realname, string, dale]
+    - [DefaultIdentity -> Username, string, dale]
+    - [DestinationOfNonserverNotices, int, 1]
+    - [Keyboard -> Command+W Key Action, int, 1]
+    - [Keyboard -> Tab Key Completion Suffix, string, ": "]
+    - [ServerListDoubleClickConnectServer, bool, true]
+    - [SUAutomaticallyUpdate, bool, false]
+    - [SUEnableAutomaticChecks, bool, true]
+
+- name: Install Moom
+  command:
+    argv: ['{{ macfit }}', https://manytricks.com/download/moom]
+    creates: '{{ user_app_dir }}/Moom.app'
+
+# Copying a working plist wholesale because there are a shitload of
+# preferences to set otherwise, including a complicated array of
+# custom commands.
+- name: Install Moom settings
+  copy:
+    # Note: This file was produced from a working, configured install
+    # of Moom with "plutil -convert xml1" on the *binary* plist file.
+    src: com.manytricks.Moom.plist
+    dest: '{{ ansible_env.HOME }}/Library/Preferences/'
+    # Don't overwrite if the file exists.
+    force: no
