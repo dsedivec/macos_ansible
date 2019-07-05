@@ -46,3 +46,10 @@
     value: '{{ item.value | default }}'
   become: '{{ item.become | default(False) }}'
   loop: '{{ macos_prefs_set }}'
+
+- name: Set power preferences
+  pmset:
+    type: charger
+    name: sleep
+    value: '0'
+  become: yes
