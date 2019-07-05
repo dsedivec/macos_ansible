@@ -104,8 +104,8 @@ def set_value(op, key_idx, container):
     try:
         cur_value = container[key]
     except (KeyError, TypeError, IndexError):
-        is_dict = isinstance(container, dict)
-        if is_dict and not isinstance(key, basestring):
+        container_is_dict = isinstance(container, dict)
+        if container_is_dict and not isinstance(key, basestring):
             # If your key doesn't exist as its current non-string
             # type, but it does exist in its string incarnation, we'll
             # gladly use that.
@@ -113,11 +113,9 @@ def set_value(op, key_idx, container):
             if str_key in container:
                 op.key_list[key_idx] = str_key
                 return set_value(op, key_idx, container)
-        if op.state == "absent":
-            return False
         if is_last_key:
             cur_value = None
-        elif is_dict and op.dict_create:
+        elif container_is_dict and op.dict_create:
             container[key] = cur_value = {}
         else:
             raise ModuleFail(
@@ -142,9 +140,15 @@ def set_value(op, key_idx, container):
                 )
             )
         if op.state == "absent":
-            assert cur_value is not None
-            del container[key]
-            changed = True
+            # You'll never get None out of a plist **as far as I
+            # know**.  Instead, if you see None, that means we were
+            # requested to delete a top-level preference that doesn't
+            # exist.
+            if cur_value is None:
+                assert len(op.key_list) == 1
+            else:
+                del container[key]
+                changed = True
         else:
             assert op.state == "present", repr(op.state)
             if op.add_merge:
