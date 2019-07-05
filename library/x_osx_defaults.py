@@ -312,7 +312,7 @@ def run_module():
         value=dict(type="raw", required=False, default=None),
         add_merge=dict(type="bool", required=False, default=False),
         dict_create=dict(type="bool", required=False, default=False),
-        type=dict(type="str", choices=PREF_VALUE_TYPES.keys(), required=False, default=None),
+        type=dict(type="str", required=False, default=None),
         check_type=dict(type="bool", required=False, default=None),
     )
     module = AnsibleModule(argument_spec=module_args, supports_check_mode=True)
@@ -342,7 +342,14 @@ def run_module():
     result["key_list"] = key_list
 
     new_value = params["value"]
-    desired_type = params["type"]
+    desired_type = params["type"] or None
+    if desired_type is not None and desired_type not in PREF_VALUE_TYPES.keys():
+        module.fail_json(
+            msg=(
+                "Type %r invalid, must be one of: %s"
+                % (desired_type, ", ".join(PREF_VALUE_TYPES))
+            )
+        )
     check_type = params["check_type"]
     if desired_type is None:
         if check_type:
@@ -363,8 +370,14 @@ def run_module():
             except ModuleFail as ex:
                 result.update(ex.result)
                 module.fail_json(msg=ex.message, **result)
-    elif params["state"] == "absent" and new_value is not None:
-        module.fail_json(msg="Cannot provide value with state=absent", **result)
+    else:
+        assert params["state"] == "absent"
+        if new_value == "":
+            new_value = None
+        if new_value is not None:
+            module.fail_json(
+                msg="Cannot provide value with state=absent", **result
+            )
 
     top_key = str(key_list[0])
     top_value = CF.CFPreferencesCopyValue(
