@@ -67,6 +67,22 @@
     argv: ['{{ macfit }}', 'https://newyork.kapeli.com/downloads/v4/Dash.zip']
     creates: '{{ user_app_dir }}/Dash.app'
 
+# This didn't seem to work: sync is not set at startup.
+- name: Set Dash preferences
+  x_osx_defaults:
+    domain: com.kapeli.dashdoc
+    key: '{{ item.0 }}'
+    type: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - [shouldSyncGeneral, int, 1]
+    - [shouldSyncDocsets, int, 1]
+    - [shouldSyncBookmarks, int, 1]
+    - [syncFolderPath, string, '~/Dropbox/app_sync/Dash']
+    - [DHNotificationNestedResultTip, bool, true]
+    - [DHNotificationTableOfContentsTip, bool, true]
+    - [DHNotificationFindTip, bool, true]
+
 - name: Install Amphetamine
   command: mas install 937984704
   args:
