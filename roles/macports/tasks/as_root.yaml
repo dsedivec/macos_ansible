@@ -17,6 +17,7 @@
   x_macports:
     name: '{{ default_ports }}'
     state: present
+  tags: [slow]
 
 # macOS system Python has much slower PyObjC imports, for purposes of
 # my x_osx_defaults module.  Let's try and use the faster one from
