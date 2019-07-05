@@ -223,3 +223,25 @@ macos_prefs_set:
     key: DateFormat
     type: string
     value: 'EEE H:mm:ss'
+
+  # Remove clock and battery from menu bar.  (Provided instead by
+  # iStat Menus.)
+
+  - domain: com.apple.systemuiserver
+    key: "NSStatusItem Preferred Position com.apple.menuextra.clock"
+    state: absent
+
+  - domain: com.apple.systemuiserver
+    key: "NSStatusItem Visible com.apple.menuextra.battery"
+    state: absent
+
+  - domain: com.apple.systemuiserver
+    key: "NSStatusItem Visible com.apple.menuextra.clock"
+    state: absent
+
+  - domain: com.apple.systemuiserver
+    key: menuExtras
+    value:
+      - "/System/Library/CoreServices/Menu Extras/User.menu"
+      - "/System/Library/CoreServices/Menu Extras/AirPort.menu"
+      - "/System/Library/CoreServices/Menu Extras/Displays.menu"
