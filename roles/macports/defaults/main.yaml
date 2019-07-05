@@ -39,6 +39,7 @@ default_ports:
   - pv
   - python37
   - ripgrep
+  - rlwrap
   - samba3
   - sbcl
   - sleepwatcher
