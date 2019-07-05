@@ -17,3 +17,18 @@
   x_macports:
     name: '{{ default_ports }}'
     state: present
+
+# macOS system Python has much slower PyObjC imports, for purposes of
+# my x_osx_defaults module.  Let's try and use the faster one from
+# MacPorts from now on.
+
+- name: Install Python and PyObjC
+  x_macports:
+    name:
+      - python27
+      - py27-pyobjc-cocoa
+  tags: [slow]
+
+- name: Change Python interpreter to Python from MacPorts
+  set_fact:
+    ansible_python_interpreter: /opt/local/bin/python2.7

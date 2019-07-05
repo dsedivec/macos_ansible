@@ -40,8 +40,6 @@
     - [PrefsCustomFolder, string, '{{ dropbox_dir }}/app_sync/iTerm']
     - [NoSyncNeverRemindPrefsChangesLostForFile, bool, true]
     - [NoSyncNeverRemindPrefsChangesLostForFile_selection, int, 0]
-  vars:
-    ansible_python_interpreter: /opt/local/bin/python2.7
 
 - debug: var=macos_dock_items
 

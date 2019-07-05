@@ -36,27 +36,13 @@
   when: not ansible_check_mode
         and current_resolution.stdout.strip() != macos_prefs_main_resolution
 
-# The PyObjC included in Mojave is *slow*.  Install faster from MacPorts.
-
-- name: Install Python 2.7 and PyObjC from MacPorts
-  x_macports:
-    name: [python27, py27-pyobjc-cocoa]
-    state: present
-
-- name: Check for faster MacPorts Python
-  script: get_prefs_python_interpreter.sh
-  check_mode: no
-  changed_when: False
-  register: prefs_python_interpreter
-
-- name: Set preference
+- name: Set preferences
   x_osx_defaults:
+    state: '{{ item.state | default("present") }}'
     host: '{{ item.host | default }}'
     domain: '{{ item.domain | default("NSGlobalDomain") }}'
     key: '{{ item.key }}'
-    type: '{{ item.type }}'
-    value: '{{ item.value }}'
+    type: '{{ item.type | default }}'
+    value: '{{ item.value | default }}'
   become: '{{ item.become | default(False) }}'
   loop: '{{ macos_prefs_set }}'
-  vars:
-    ansible_python_interpreter: '{{ prefs_python_interpreter.stdout.strip() }}'
