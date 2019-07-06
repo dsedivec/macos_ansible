@@ -120,21 +120,21 @@ typedef enum {
 /// Options representing device-independent bits found in event modifier flags:
 typedef enum : unsigned int {
 	/// Set if Caps Lock key is pressed.
-	kCGSAlphaShiftKeyMask = 1 << 16,
+	kCGSAlphaShiftKeyMask = 1 << 16, // 0x010000
 	/// Set if Shift key is pressed.
-	kCGSShiftKeyMask      = 1 << 17,
+	kCGSShiftKeyMask      = 1 << 17, // 0x020000
 	/// Set if Control key is pressed.
-	kCGSControlKeyMask    = 1 << 18,
+	kCGSControlKeyMask    = 1 << 18, // 0x040000
 	/// Set if Option or Alternate key is pressed.
-	kCGSAlternateKeyMask  = 1 << 19,
+	kCGSAlternateKeyMask  = 1 << 19, // 0x080000
 	/// Set if Command key is pressed.
-	kCGSCommandKeyMask    = 1 << 20,
+	kCGSCommandKeyMask    = 1 << 20, // 0x100000
 	/// Set if any key in the numeric keypad is pressed.
-	kCGSNumericPadKeyMask = 1 << 21,
+	kCGSNumericPadKeyMask = 1 << 21, // 0x200000
 	/// Set if the Help key is pressed.
-	kCGSHelpKeyMask       = 1 << 22,
+	kCGSHelpKeyMask       = 1 << 22, // 0x400000
 	/// Set if any function key is pressed.
-	kCGSFunctionKeyMask   = 1 << 23,
+	kCGSFunctionKeyMask   = 1 << 23, // 0x800000
 	/// Used to retrieve only the device-independent modifier flags, allowing applications to mask
 	/// off the device-dependent modifier flags, including event coalescing information.
 	kCGSDeviceIndependentModifierFlagsMask = 0xffff0000U

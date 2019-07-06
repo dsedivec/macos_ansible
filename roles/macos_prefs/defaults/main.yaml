@@ -92,6 +92,10 @@ macos_prefs_set:
     key: TrackpadTwoFingerFromRightEdgeSwipeGesture
     type: int
     value: 0
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: HIDScrollZoomModifierMask
+    type: int
+    value: 262144
 
   - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: Clicking
@@ -121,6 +125,10 @@ macos_prefs_set:
     key: TrackpadTwoFingerFromRightEdgeSwipeGesture
     type: int
     value: 0
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: HIDScrollZoomModifierMask
+    type: int
+    value: 262144
 
   - domain: com.apple.dock
     key: showDesktopGestureEnabled
@@ -158,9 +166,10 @@ macos_prefs_set:
       path: /System/Library/Screen Savers/Flurry.saver
       type: 0
 
+  # Tons of hotkeys!  Reference CGSHotKeys.h, Events.h
+
   - domain: com.apple.symbolichotkeys
     # kCGSHotKeyExposeAllWindows
-    # key: 'AppleSymbolicHotKeys:32'
     key: [AppleSymbolicHotKeys, 32]
     type: dict
     value:
@@ -219,6 +228,462 @@ macos_prefs_set:
           - 0x820000
         type: standard
 
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusDrawer
+    key: [AppleSymbolicHotKeys, 51]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 39
+          - 50
+          - 1572864
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyDashboard
+    key: [AppleSymbolicHotKeys, 62]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 65535
+          - 111
+          - 8388608
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyDashboardSlow
+    key: [AppleSymbolicHotKeys, 63]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 65535
+          - 111
+          - 8519680
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeySpotlightWindow
+    key: [AppleSymbolicHotKeys, 65]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 49
+          - 1572864
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # UNKNOWN 179
+    key: [AppleSymbolicHotKeys, 179]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 65535
+          - 0
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeySpaceRightSlow
+    key: [AppleSymbolicHotKeys, 82]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 124
+          - 8781824
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # UNKNOWN 175
+    key: [AppleSymbolicHotKeys, 175]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 65535
+          - 65535
+          - 0
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeySpaceRight
+    key: [AppleSymbolicHotKeys, 81]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 124
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # "Switch to Desktop 1"
+    key: [AppleSymbolicHotKeys, 118]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 18
+          - 262144
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusApplicationWindow
+    key: [AppleSymbolicHotKeys, 27]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 96
+          - 50
+          - 1048576
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyScreenshot
+    key: [AppleSymbolicHotKeys, 28]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 51
+          - 20
+          - 1179648
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyScreenshotToClipboard
+    key: [AppleSymbolicHotKeys, 29]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 51
+          - 20
+          - 1441792
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # "Copy picture of the Touch Bar to the clipboard"
+    key: [AppleSymbolicHotKeys, 182]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 54
+          - 22
+          - 1441792
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # "Save picture of the Touch Bar as a file"
+    key: [AppleSymbolicHotKeys, 181]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 54
+          - 22
+          - 1179648
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeySpaceLeft
+    key: [AppleSymbolicHotKeys, 79]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 123
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # "Screenshot and recording options"
+    key: [AppleSymbolicHotKeys, 184]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 53
+          - 23
+          - 1179648
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusNextGlobalWindow
+    key: [AppleSymbolicHotKeys, 9]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 118
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusDock
+    key: [AppleSymbolicHotKeys, 8]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 99
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusMenubar
+    key: [AppleSymbolicHotKeys, 7]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 120
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyHelp
+    key: [AppleSymbolicHotKeys, 98]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 47
+          - 44
+          - 1179648
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # UNKNOWN 160
+    key: [AppleSymbolicHotKeys, 160]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 65535
+          - 0
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # "Show Accessibility controls"
+    key: [AppleSymbolicHotKeys, 162]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 96
+          # Pretty sure this is command + option + fn
+          - 9961472
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # UNKNOWN 163
+    key: [AppleSymbolicHotKeys, 163]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 65535
+          - 0
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusFloatingWindow
+    key: [AppleSymbolicHotKeys, 11]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 97
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusToolbar
+    key: [AppleSymbolicHotKeys, 10]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 96
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusNextControl
+    key: [AppleSymbolicHotKeys, 13]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 98
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyToggleFullKeyboardAccess
+    key: [AppleSymbolicHotKeys, 12]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 122
+          - 8650752
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyToggleVoiceOver
+    key: [AppleSymbolicHotKeys, 59]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 96
+          - 9437184
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeySpaceLeftSlow
+    key: [AppleSymbolicHotKeys, 80]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 123
+          - 8781824
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyScreenshotRegionToClipboard
+    key: [AppleSymbolicHotKeys, 31]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 52
+          - 21
+          - 1441792
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyScreenshotRegion
+    key: [AppleSymbolicHotKeys, 30]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 52
+          - 21
+          - 1179648
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyExposeDesktopsSlow
+    key: [AppleSymbolicHotKeys, 37]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 65535
+          - 103
+          - 8519680
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyExposeDesktop
+    key: [AppleSymbolicHotKeys, 36]
+    type: dict
+    value:
+      'enabled': true
+      'value':
+        'parameters':
+          - 65535
+          - 103
+          - 8388608
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyToggleDockAutohide
+    key: [AppleSymbolicHotKeys, 52]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 100
+          - 2
+          - 1572864
+        'type': 'standard'
+
+  - domain: com.apple.symbolichotkeys
+    # kCGSHotKeyFocusStatusItems
+    key: [AppleSymbolicHotKeys, 57]
+    type: dict
+    value:
+      'enabled': false
+      'value':
+        'parameters':
+          - 65535
+          - 100
+          - 8650752
+        'type': 'standard'
+
   - domain: com.apple.menuextra.clock
     key: DateFormat
     type: string
@@ -240,8 +705,72 @@ macos_prefs_set:
     state: absent
 
   - domain: com.apple.systemuiserver
+    key: "NSStatusItem Visible com.apple.menuextra.textinput"
+    state: present
+    type: bool
+    value: true
+
+  - domain: com.apple.systemuiserver
+    key: "NSStatusItem Visible com.apple.menuextra.bluetooth"
+    state: present
+    type: bool
+    value: true
+
+  - domain: com.apple.systemuiserver
     key: menuExtras
     value:
       - "/System/Library/CoreServices/Menu Extras/User.menu"
       - "/System/Library/CoreServices/Menu Extras/AirPort.menu"
       - "/System/Library/CoreServices/Menu Extras/Displays.menu"
+      - "/System/Library/CoreServices/Menu Extras/TextInput.menu"
+      - "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
+
+  - domain: com.apple.touchbar.agent
+    key: PresentationModeFnModes
+    type: dict
+    value:
+      appWithControlStrip: functionKeys
+
+  - domain: com.apple.touchbar.agent
+    key: PresentationModeGlobal
+    type: string
+    value: functionKeys
+
+  - key: InitialKeyRepeat
+    type: int
+    value: 15
+
+  - key: NSAutomaticCapitalizationEnabled
+    type: bool
+    value: false
+
+  - key: NSAutomaticDashSubstitutionEnabled
+    type: bool
+    value: false
+
+  - key: NSAutomaticPeriodSubstitutionEnabled
+    type: bool
+    value: false
+
+  - key: NSAutomaticQuoteSubstitutionEnabled
+    type: bool
+    value: false
+
+  - key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+
+  - key: WebAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+
+  # Turn on "full keyboard access", so you can tab through every
+  # control.  (I think that's what this does.)
+  - key: AppleKeyboardUIMode
+    type: int
+    value: 3
+
+  - domain: com.apple.Siri
+    key: LockscreenEnabled
+    type: bool
+    value: false
