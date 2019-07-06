@@ -2,10 +2,17 @@
 
 * Turning on FileVault
 * You need to log into the Mac App Store beforehand
+* Text replacements
+* iCloud, Google accounts
+* DHCP client ID on wireless
+* Go into Accessibility → Speech → System Voice → Customize and download the high quality voices
+* Double tap fn and enable dictation once to download the Enhanced Dictionary
 
 
 ## Applications
 
+* Alfred: Turn on auto-expand snippets (not synced)
+* Chrome: Sign in, disable consistency flag, set sync preferences, unlock, import extension settings (Auto Delete Cookies, Privacy Badger, uBlock, ViolentMonkey, SessionBuddy, etc.)
 * Dash: Turn on sync
 * BetterTouchTool: Start at login and set up sync (but sync seems broken as of 2019-07-04, so maybe just export/import), hide with Bartender
 * iStat Menus: Start and import settings
@@ -14,6 +21,9 @@
 * Textual: Add license, configure Freenode, including nick, auth, auto-reconnect settings, connect commands, +i on connect
 * 1Password
 * Moom: License, start at login, hide with Bartender
+* Dropbox: Start at login, login, turn off photo/video syncing
+* iTunes: Turn on wifi sync, pair with phone, turn off automatic syncing, manually sync music
+  * **Warning!** When I did this, I got a warning saying that my phone can only sync with one library.  (I don't have a library.)  Then all my audiobooks got deleted.  Should find a better way to do this.
 
 
 ### Textual
