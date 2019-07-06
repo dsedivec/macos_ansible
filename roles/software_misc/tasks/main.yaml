@@ -192,3 +192,15 @@
     dest: '{{ ansible_env.HOME }}/Library/Preferences/'
     # Don't overwrite if the file exists.
     force: no
+
+- name: Install VLC
+  command:
+    argv: ['{{ macfit }}', --scrape, '/vlc-[0-9.]+.dmg$',
+           https://download.videolan.org/pub/videolan/vlc/last/macosx/]
+    creates: '{{ user_app_dir }}/VLC.app'
+
+- name: Install fre:ac 1.1
+  command:
+    argv: ['{{ macfit }}', --scrape, '/freac-1\.1.*-macosx.dmg$',
+           https://www.freac.org/index.php/downloads-mainmenu-33]
+    creates: '{{ user_app_dir }}/freac.app'
