@@ -49,7 +49,10 @@
 
 - name: Set power preferences
   pmset:
-    type: charger
-    name: sleep
-    value: '0'
+    type: '{{ item.0 }}'
+    name: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - [charger, sleep, '0']
+    - [battery, sleep, '5']
   become: yes
