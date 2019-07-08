@@ -26,6 +26,9 @@
 * Dropbox: Start at login, login, turn off photo/video syncing
 * iTunes: Turn on wifi sync, pair with phone, turn off automatic syncing, manually sync music
   * **Warning!** When I did this, I got a warning saying that my phone can only sync with one library.  (I don't have a library.)  Then all my audiobooks got deleted.  Should find a better way to do this.
+* OneNote: Sign in
+* Little Snitch: Everything **including install which forces immediate reboot**
+* Tunnelblick: Configuration
 
 
 ### Textual

@@ -204,3 +204,26 @@
     argv: ['{{ macfit }}', --scrape, '/freac-1\.1.*-macosx.dmg$',
            https://www.freac.org/index.php/downloads-mainmenu-33]
     creates: '{{ user_app_dir }}/freac.app'
+
+- name: Install OneNote
+  command: mas install 784801555
+  args:
+    creates: /Applications/Microsoft OneNote.app
+
+# Little Snitch aggressively requires you to reboot, which is
+# inconvenient during an Ansible playbook.
+#
+# - name: Install Little Snitch
+#   command:
+#     argv: ['{{ macfit }}', '--cask', 'little-snitch',
+#            '--run-bundle', 'Little Snitch Installer.app',
+#            '--check-bundle-signature', '\(MLZF7K7B5R\)$']
+#     creates: /Applications/Little Snitch Configuration.app
+
+- name: Install Tunnelblick
+  command:
+    argv: ['{{ macfit }}', '--cask', 'tunnelblick',
+           '--check-pkg-signature', '\(Z2SG5H3HC8\)$',
+           '--check-bundle-signature', '\(Z2SG5H3HC8\)$']
+    creates: /Applications/Tunnelblick.app
+  become: yes
