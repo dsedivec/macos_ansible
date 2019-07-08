@@ -6,6 +6,8 @@ macos_prefs_display_manager_local_repo: '{{ repositories_root }}/display_manager
 macos_prefs_display_manager: '{{ macos_prefs_display_manager_local_repo }}/display_manager.py'
 macos_prefs_main_resolution: 1440x900
 
+macos_prefs_domain_mail: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist'
+
 macos_prefs_set:
   - key: NSQuitAlwaysKeepsWindows
     type: bool
@@ -60,6 +62,10 @@ macos_prefs_set:
     type: int
     value: 0
   - host: currentHost
+    key: com.apple.trackpad.fourFingerVertSwipeGesture
+    type: int
+    value: 2
+  - host: currentHost
     key: com.apple.trackpad.threeFingerVertSwipeGesture
     type: int
     value: 1
@@ -67,6 +73,10 @@ macos_prefs_set:
     key: com.apple.trackpad.twoFingerFromRightEdgeSwipeGesture
     type: int
     value: 0
+  - host: currentHost
+    key: com.apple.trackpad.momentumScroll
+    type: bool
+    value: false
 
   - domain: com.apple.AppleMultitouchTrackpad
     key: Clicking
@@ -85,6 +95,10 @@ macos_prefs_set:
     type: int
     value: 0
   - domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadFourFingerVertSwipeGesture
+    type: int
+    value: 2
+  - domain: com.apple.AppleMultitouchTrackpad
     key: TrackpadThreeFingerVertSwipeGesture
     type: int
     value: 1
@@ -96,6 +110,10 @@ macos_prefs_set:
     key: HIDScrollZoomModifierMask
     type: int
     value: 262144
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: TrackpadMomentumScroll
+    type: bool
+    value: false
 
   - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: Clicking
@@ -122,6 +140,10 @@ macos_prefs_set:
     type: int
     value: 0
   - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: TrackpadFourFingerVertSwipeGesture
+    type: int
+    value: 2
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: TrackpadTwoFingerFromRightEdgeSwipeGesture
     type: int
     value: 0
@@ -129,6 +151,10 @@ macos_prefs_set:
     key: HIDScrollZoomModifierMask
     type: int
     value: 262144
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: TrackpadMomentumScroll
+    type: bool
+    value: false
 
   - domain: com.apple.dock
     key: showDesktopGestureEnabled
@@ -141,7 +167,11 @@ macos_prefs_set:
   - domain: com.apple.dock
     key: showMissionControlGestureEnabled
     type: bool
-    value: false
+    value: true
+  - domain: com.apple.dock
+    key: showAppExposeGestureEnabled
+    type: bool
+    value: true
   - domain: com.apple.dock
     key: show-recents
     type: bool
@@ -730,11 +760,37 @@ macos_prefs_set:
     type: dict
     value:
       appWithControlStrip: functionKeys
+      fullControlStrip: functionKeys
 
   - domain: com.apple.touchbar.agent
     key: PresentationModeGlobal
     type: string
-    value: functionKeys
+    value: fullControlStrip
+
+  # Turning off text completion in the Touch Bar.
+  - key: NSAutomaticTextCompletionEnabled
+    type: bool
+    value: false
+
+  - domain: com.apple.controlstrip
+    key: FullCustomized
+    type: array
+    value:
+      - NSTouchBarItemIdentifierFlexibleSpace
+      - "com.apple.system.brightness"
+      - "com.apple.system.mission-control"
+      - "com.apple.system.show-desktop"
+      - "com.apple.system.group.media"
+      - "com.apple.system.mute"
+      - "com.apple.system.volume"
+
+  - domain: com.apple.controlstrip
+    key: MiniCustomized
+    type: array
+    value:
+      - "com.apple.system.mission-control"
+      - "com.apple.system.volume"
+      - "com.apple.system.mute"
 
   - key: InitialKeyRepeat
     type: int
@@ -774,3 +830,28 @@ macos_prefs_set:
     key: LockscreenEnabled
     type: bool
     value: false
+
+  # Disable accented key pop-up.
+  - key: ApplePressAndHoldEnabled
+    type: bool
+    value: false
+
+  - domain: com.apple.finder
+    key: FXRemoveOldTrashItems
+    type: bool
+    value: true
+
+  - domain: '{{ macos_prefs_domain_mail }}'
+    key: RichMessageList
+    type: bool
+    value: false
+
+  - domain: '{{ macos_prefs_domain_mail }}'
+    key: SwipeAction
+    type: int
+    value: 0
+
+  - domain: com.apple.mail-shared
+    key: DisableURLLoading
+    type: bool
+    value: true
