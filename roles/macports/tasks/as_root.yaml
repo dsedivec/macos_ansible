@@ -30,6 +30,14 @@
       - py27-pyobjc-cocoa
   tags: [slow]
 
-- name: Change Python interpreter to Python from MacPorts
+- name: Check for MacPorts Python 2
+  stat:
+    path: '{{ macports_python_2 }}'
+  register: macports_python_2_stat
+  tags: [always]
+
+- name: Change Python 2 interpreter to Python from MacPorts
   set_fact:
     ansible_python_interpreter: /opt/local/bin/python2.7
+  when: 'macports_python_2_stat.stat.exists'
+  tags: [always]

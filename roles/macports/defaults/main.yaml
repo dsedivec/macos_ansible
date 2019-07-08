@@ -51,3 +51,5 @@ default_ports:
   - unrar
   - watch
   - youtube-dl
+
+macports_python_2: /opt/local/bin/python2.7
