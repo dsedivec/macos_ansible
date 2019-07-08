@@ -1,5 +1,6 @@
 # Things Not Automated
 
+* Give Terminal and/or iTerm 2 "Full Disk Access" to allow it to read things like Mail.app's preferences file (solution courtesy https://github.com/mathiasbynens/dotfiles/issues/849)
 * Turning on FileVault
 * You need to log into the Mac App Store beforehand
 * Text replacements
@@ -7,6 +8,7 @@
 * DHCP client ID on wireless
 * Go into Accessibility → Speech → System Voice → Customize and download the high quality voices
 * Double tap fn and enable dictation once to download the Enhanced Dictionary
+* Set up printer
 
 
 ## Applications
