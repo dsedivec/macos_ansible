@@ -841,6 +841,55 @@ macos_prefs_set:
     type: bool
     value: true
 
+  - domain: com.apple.finder
+    key: ShowMountedServersOnDesktop
+    type: bool
+    value: true
+
+  - domain: com.apple.finder
+    key: ShowRecentTags
+    type: bool
+    value: false
+
+  # These next two together make new Finder Windows open to $HOME by
+  # default.
+
+  - domain: com.apple.finder
+    key: NewWindowTarget
+    type: string
+    value: PfHm
+
+  - domain: com.apple.finder
+    key: NewWindowTargetPath
+    type: string
+    value: "file:///Users/dale/"
+
+  # Search current folder by default in Finder, rather than searching
+  # the whole computer by default.
+  - domain: com.apple.finder
+    key: "FXDefaultSearchScope"
+    type: string
+    value: "SCcf"
+
+  # Add PATH to the toolbar.  Setting this in this way may be a bad
+  # idea.  What if Dropbox isn't installed yet?
+  - domain: com.apple.finder
+    key: ['NSToolbar Configuration Browser', 'TB Item Identifiers']
+    type: array
+    value:
+      - "com.apple.finder.BACK"
+      - "com.apple.finder.PATH"
+      - NSToolbarFlexibleSpaceItem
+      - "com.apple.finder.SWCH"
+      - "com.apple.finder.ARNG"
+      - "com.apple.finder.ACTN"
+      - "com.apple.finder.SHAR"
+      - "com.apple.finder.LABL"
+      - NSToolbarFlexibleSpaceItem
+      - NSToolbarFlexibleSpaceItem
+      - "com.getdropbox.dropbox.garcon"
+      - "com.apple.finder.SRCH"
+
   - domain: '{{ macos_prefs_domain_mail }}'
     key: RichMessageList
     type: bool
@@ -855,3 +904,13 @@ macos_prefs_set:
     key: DisableURLLoading
     type: bool
     value: true
+
+  - domain: '{{ macos_prefs_domain_mail }}'
+    key: IndexJunk
+    type: bool
+    value: true
+
+  - domain: '{{ macos_prefs_domain_mail }}'
+    key: SendFormat
+    type: string
+    value: Plain
