@@ -19,3 +19,10 @@
 - name: Set fact for list of things in the Dock
   set_fact:
     macos_dock_items: '{{ dockutil.stdout_lines | map("trim") | list }}'
+
+- name: Remove default Dock items I don't want
+  command:
+    argv: [dockutil, --remove, '{{ item }}', --no-restart]
+  when: 'item in macos_dock_items'
+  notify: Restart Dock
+  loop: '{{ dockutil_defaults_to_remove }}'

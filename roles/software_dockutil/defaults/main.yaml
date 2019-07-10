@@ -1,2 +1,18 @@
 dockutil_remote_repo: https://github.com/kcrawford/dockutil.git
 dockutil_local_repo: '{{ repositories_root }}/dockutil'
+dockutil_defaults_to_remove:
+  - Siri
+  - Launchpad
+  - Safari
+  - Contacts
+  - Calendar
+  - Notes
+  - Reminders
+  - Maps
+  - Photos
+  - Messages
+  - FaceTime
+  - News
+  - iTunes
+  - App Store
+  - System Preferences
