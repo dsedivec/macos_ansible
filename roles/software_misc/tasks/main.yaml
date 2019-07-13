@@ -4,6 +4,14 @@
            https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg]
     creates: /Applications/Google Chrome.app
   become: yes
+  register: install_chrome
+
+- name: Put Chrome on the Dock
+  command:
+    argv: [dockutil, --add, /Applications/Google Chrome.app, --no-restart]
+  when: install_chrome is changed
+  notify:
+    - Restart Dock
 
 - name: Install 1Password
   command:
