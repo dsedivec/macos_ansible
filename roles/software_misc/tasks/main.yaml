@@ -181,7 +181,7 @@
     - [DefaultIdentity -> Username, string, dale]
     - [DestinationOfNonserverNotices, int, 1]
     - [Keyboard -> Command+W Key Action, int, 1]
-    - [Keyboard -> Tab Key Completion Suffix, string, ": "]
+    - [Keyboard -> Tab Key Completion Suffix, string, ":"]
     - [ServerListDoubleClickConnectServer, bool, true]
     - [SUAutomaticallyUpdate, bool, false]
     - [SUEnableAutomaticChecks, bool, true]
