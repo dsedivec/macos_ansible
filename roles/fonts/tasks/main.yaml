@@ -17,10 +17,10 @@
     follow: true
   register: mactex_fonts
 
-- name: Hard link found fonts into ~/Library/Fonts
+- name: 'Hard link found fonts into {{ user_font_dir }}'
   file:
     state: hard
-    #src: '{{ item | relpath(ansible_env.HOME + "/Library/Fonts") }}'
+    #src: '{{ item | relpath(user_font_dir) }}'
     src: '{{ item }}'
-    dest: '{{ ansible_env.HOME }}/Library/Fonts/{{ item | basename }}'
+    dest: '{{ user_font_dir }}/{{ item | basename }}'
   loop: '{{ mactex_fonts.files | map(attribute="path") | list }}'
