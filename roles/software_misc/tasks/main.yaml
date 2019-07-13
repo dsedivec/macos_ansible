@@ -265,3 +265,22 @@
            '--check-bundle-signature', '\(Z2SG5H3HC8\)$']
     creates: /Applications/Tunnelblick.app
   become: yes
+
+- name: Install Parallels Desktop
+  command:
+    argv: ['{{ macfit }}', '--cask', 'parallels',
+           --install, 'Parallels Desktop.app',
+           --cache, '/Users/dale/Downloads/',
+           --check-bundle-signature, '\(4C6364ACXT\)$']
+    creates: /Applications/Parallels Desktop.app
+  become: yes
+  register: parallels_install
+
+- name: Initialize/correct Parallels install
+  command:
+    argv: ['{{ parallels }}/Contents/MacOS/inittool',
+           init, -b, '{{ parallels }}']
+  become: yes
+  vars:
+    parallels: '{{ system_app_dir }}/Parallels Desktop.app'
+  when: 'parallels_install is changed'

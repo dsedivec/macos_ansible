@@ -33,6 +33,7 @@
 * OneNote: Sign in
 * Little Snitch: Everything **including install which forces immediate reboot**
 * Tunnelblick: All configuration
+* Parallels: Grant various permissions at first run, install license, copy over VMs
 
 
 ### Textual
