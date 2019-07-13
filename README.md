@@ -1,11 +1,15 @@
 # Things Not Automated
 
+* Set up accounts: admin at install, then regular user after
+* Allow regular user account to sudo with file in `/etc/sudoers.d`
+* Set firmware password
+* Initial virtualenv and Ansible install
 * Give Terminal and/or iTerm 2 "Full Disk Access" to allow it to read things like Mail.app's preferences file (solution courtesy https://github.com/mathiasbynens/dotfiles/issues/849)
 * Turning on FileVault
 * You need to log into the Mac App Store beforehand
 * Text replacements
 * iCloud, Google accounts
-* DHCP client ID on wireless
+* DHCP client ID on wireless and other network interfaces
 * Go into Accessibility → Speech → System Voice → Customize and download the high quality voices
 * Double tap fn and enable dictation once to download the Enhanced Dictionary
 * Set up printer
@@ -28,7 +32,7 @@
   * **Warning!** When I did this, I got a warning saying that my phone can only sync with one library.  (I don't have a library.)  Then all my audiobooks got deleted.  Should find a better way to do this.
 * OneNote: Sign in
 * Little Snitch: Everything **including install which forces immediate reboot**
-* Tunnelblick: Configuration
+* Tunnelblick: All configuration
 
 
 ### Textual
