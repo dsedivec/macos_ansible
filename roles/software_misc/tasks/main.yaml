@@ -249,7 +249,7 @@
     - seguisym.ttf
 
 # Little Snitch aggressively requires you to reboot, which is
-# inconvenient during an Ansible playbook.
+# inconvenient in the middle of running an Ansible playbook.
 #
 # - name: Install Little Snitch
 #   command:
