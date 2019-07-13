@@ -16,7 +16,7 @@
     state: present
   become: true
 
-- name: Don't let stowing dotfiles make the bin dir a symlink
+- name: "Don't let stowing dotfiles make the bin dir a symlink"
   file:
     path: '{{ user_bin_dir }}'
     state: directory
