@@ -3,14 +3,14 @@
     paths:
       - /Library/TeX/Root/texmf-dist/fonts
     patterns:
-      - EBGaramond-*.otf
-      - FiraMono-*.otf
       - AnonymousPro-*.ttf
       - Crimson-*.otf
       - CrimsonPro-*.ttf
+      - EBGaramond-*.otf
+      - FiraMono-*.otf
       - Gentium*.ttf
-      - Lato-*.ttf
       - Inconsolata*.otf
+      - Lato-*.ttf
       - NotoSerif-*.otf
       - SourceCodePro-*.otf
     recurse: true
