@@ -745,13 +745,19 @@ macos_prefs_set:
     value: true
 
   - domain: com.apple.systemuiserver
+    key: "NSStatusItem Visible com.apple.menuextra.TimeMachine"
+    type: bool
+    value: true
+
+  - domain: com.apple.systemuiserver
     key: menuExtras
     value:
       - "/System/Library/CoreServices/Menu Extras/User.menu"
       - "/System/Library/CoreServices/Menu Extras/AirPort.menu"
-      - "/System/Library/CoreServices/Menu Extras/Displays.menu"
       - "/System/Library/CoreServices/Menu Extras/TextInput.menu"
       - "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
+      - "/System/Library/CoreServices/Menu Extras/Displays.menu"
+      - "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
 
   - domain: com.apple.touchbar.agent
     key: PresentationModeFnModes
@@ -774,13 +780,12 @@ macos_prefs_set:
     key: FullCustomized
     type: array
     value:
-      - NSTouchBarItemIdentifierFlexibleSpace
+      - "NSTouchBarItemIdentifierFlexibleSpace"
       - "com.apple.system.brightness"
-      - "com.apple.system.mission-control"
-      - "com.apple.system.show-desktop"
-      - "com.apple.system.group.media"
-      - "com.apple.system.mute"
       - "com.apple.system.volume"
+      - "com.apple.system.mute"
+      - "com.apple.system.group.media"
+      - "com.apple.system.show-desktop"
 
   - domain: com.apple.controlstrip
     key: MiniCustomized
@@ -912,3 +917,13 @@ macos_prefs_set:
     key: SendFormat
     type: string
     value: Plain
+
+  - domain: com.apple.scriptmenu
+    key: ScriptMenuEnabled
+    type: bool
+    value: true
+
+  - domain: com.apple.scriptmenu
+    key: ShowLibraryScripts
+    type: bool
+    value: false
