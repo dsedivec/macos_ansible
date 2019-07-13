@@ -16,6 +16,7 @@
     recurse: true
     follow: true
   register: mactex_fonts
+  tags: [slow]
 
 - name: 'Hard link found fonts into {{ user_font_dir }}'
   file:
@@ -24,3 +25,4 @@
     src: '{{ item }}'
     dest: '{{ user_font_dir }}/{{ item | basename }}'
   loop: '{{ mactex_fonts.files | map(attribute="path") | list }}'
+  tags: [slow]
