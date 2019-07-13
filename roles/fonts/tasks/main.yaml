@@ -26,3 +26,96 @@
     dest: '{{ user_font_dir }}/{{ item | basename }}'
   loop: '{{ mactex_fonts.files | map(attribute="path") | list }}'
   tags: [slow]
+
+- name: Download and install Google Fonts
+  get_url:
+    url: 'https://github.com/google/fonts/raw/master/{{ item.0.dir }}/{{ item.0.file_prefix }}-{{ item.1 }}.ttf'
+    dest: '{{ user_font_dir }}/{{ item.0.file_prefix }}-{{ item.1 }}.ttf'
+  vars:
+    fonts:
+      - dir: ofl/cardo
+        file_prefix: Cardo
+        variants: [Regular, Bold, Italic]
+      - dir: ofl/crimsontext
+        file_prefix: CrimsonText
+        variants: [Regular, Bold, Italic, BoldItalic, SemiBold, SemiBoldItalic]
+      - dir: ofl/sortsmillgoudy
+        file_prefix: SortsMillGoudy
+        variants: [Regular, Italic]
+      - dir: ofl/vollkorn
+        file_prefix: Vollkorn
+        variants: [Regular, Italic]
+  loop: '{{ fonts | subelements("variants") }}'
+
+# I would like to point out that I originally did this with a bunch of
+# Ansible tasks: stat, tempfile, get_url, unarchive, find, copy, file
+# (to remove the temp dir).  This script was so much easier to write,
+# so much shorter, and so much faster.
+- name: Download and install fonts from zip files at other sites
+  script: install_fonts_from_url.sh {{ item.url | quote }} {{ item.glob | quote }} {{ user_font_dir | quote }}
+  args:
+    creates: '{{ user_font_dir }}/{{ item.creates }}'
+  loop:
+    - url: 'https://input.fontbureau.com/build/?fontSelection=whole&a=0&g=0&i=0&l=0&zero=0&asterisk=0&braces=0&preset=default&line-height=1.2&accept=I+do&email='
+      glob: 'InputMono*.ttf'
+      creates: InputMono-Regular.ttf
+    - url: 'https://software.sil.org/downloads/r/charis/CharisSIL-5.000.zip'
+      glob: 'CharisSIL-*.ttf'
+      creates: CharisSIL-R.ttf
+    - url: https://use.fontawesome.com/releases/v5.9.0/fontawesome-free-5.9.0-desktop.zip
+      glob: '*.otf'
+      creates: 'Font Awesome 5 Free-Regular-400.otf'
+    - url: https://zurb.com/playground/uploads/upload/upload/288/foundation-icons.zip
+      glob: foundation-icons.ttf
+      creates: foundation-icons.ttf
+
+- name: Download and install SF Pro fonts
+  extract_dmg:
+    src: https://developer.apple.com/design/downloads/SF-Font-Pro.dmg
+    agree_eulas: true
+    dest: '{{ user_font_dir }}'
+    regexp: '(?i)/SF-Pro-.*\.otf$'
+    creates:
+      - '{{ user_font_dir }}/SF-Pro-*.otf'
+
+- name: Download and install icon fonts
+  get_url:
+    url: '{{ item }}'
+    dest: '{{ user_font_dir }}/{{ item | basename }}'
+  loop:
+    - https://github.com/ionic-team/ionicons/raw/master/docs/fonts/ionicons.ttf
+    - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/all-the-icons.ttf
+    # This is an old version of Octicons, but Octicons no longer
+    # offers font files, only SVG (see
+    # https://github.com/primer/octicons/pull/117).  Plus, I actually
+    # use this from all-the-icons.el, so it's good to stay in sync
+    # with what that package expects, so that the icons are at the
+    # expected code points.
+    #
+    # If you're ever interested in going SVG → font file, look into
+    # https://github.com/sapegin/grunt-webfont or
+    # https://github.com/jeerbl/webfonts-loader.
+    - https://github.com/domtronn/all-the-icons.el/blob/master/fonts/octicons.ttf
+    - https://github.com/google/material-design-icons/raw/master/iconfont/MaterialIcons-Regular.ttf
+
+- name: Install woff2 package
+  package:
+    state: present
+    name: woff2
+  become: yes
+
+- name: Download/create/install File Icons font
+  script: install_file_icons.sh {{ user_font_dir | quote }}
+  args:
+    creates: '{{ user_font_dir }}/file-icons.ttf'
+
+- name: Download and install Garamond No. 8
+  get_url:
+    url: 'https://garamond.org/urw/GaramondNo8-{{ item }}.ttf'
+    dest: '{{ user_font_dir }}/GaramondNo8-{{ item }}.ttf'
+  loop: [Regular, Bold, Italic, Bold-Italic]
+
+- name: Download and install Iosevka
+  script: install_fonts_from_latest_github.py be5invis/Iosevka --dre '(?i)^ttc-iosevka-[\d.]+.zip$' -d {{ user_font_dir | quote }}
+  args:
+    creates: '{{ user_font_dir }}/iosevka-regular.ttc'
