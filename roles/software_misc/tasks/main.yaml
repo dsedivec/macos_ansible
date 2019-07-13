@@ -220,6 +220,34 @@
   args:
     creates: /Applications/Microsoft OneNote.app
 
+- name: Grab some fonts from OneNote
+  copy:
+    remote_src: true
+    src: '/Applications/Microsoft OneNote.app//Contents/Resources/DFonts/{{ item }}'
+    dest: '{{ user_font_dir }}'
+    # For speed:
+    force: no
+  loop:
+    - Calibri.ttf
+    - Calibrib.ttf
+    - Calibrii.ttf
+    - Calibriz.ttf
+    - calibril.ttf
+    - calibrili.ttf
+    - Cambria.ttc
+    - Cambriab.ttf
+    - Cambriai.ttf
+    - Cambriaz.ttf
+    - Consola.ttf
+    - Consolab.ttf
+    - Consolai.ttf
+    - Consolaz.ttf
+    - GARA.ttf
+    - GARABD.ttf
+    - GARAIT.ttf
+    - seguihis.ttf
+    - seguisym.ttf
+
 # Little Snitch aggressively requires you to reboot, which is
 # inconvenient during an Ansible playbook.
 #
