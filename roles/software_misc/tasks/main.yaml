@@ -53,8 +53,10 @@
 
 - name: Put iTerm on Dock
   command:
-    argv: [dockutil, --add, '{{ user_app_dir }}/iTerm.app']
+    argv: [dockutil, --add, '{{ user_app_dir }}/iTerm.app', --no-restart]
   when: '"iTerm" not in macos_dock_items'
+  notify:
+    - Restart Dock
 
 - name: Install Alfred
   command:
