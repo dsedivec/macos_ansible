@@ -736,13 +736,11 @@ macos_prefs_set:
 
   - domain: com.apple.systemuiserver
     key: "NSStatusItem Visible com.apple.menuextra.textinput"
-    state: present
     type: bool
     value: true
 
   - domain: com.apple.systemuiserver
     key: "NSStatusItem Visible com.apple.menuextra.bluetooth"
-    state: present
     type: bool
     value: true
 
