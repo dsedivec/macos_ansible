@@ -927,3 +927,33 @@ macos_prefs_set:
     key: ShowLibraryScripts
     type: bool
     value: false
+
+  - domain: /Users/dale/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari
+    key: HomePage
+    type: string
+    value: "about:blank"
+
+  - domain: /Users/dale/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari
+    key: AutoOpenSafeDownloads
+    type: bool
+    value: false
+
+  - domain: /Users/dale/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari
+    key: IncludeDevelopMenu
+    type: bool
+    value: true
+
+  - domain: /Users/dale/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari
+    key: WebKitDeveloperExtrasEnabledPreferenceKey
+    type: bool
+    value: true
+
+  - domain: /Users/dale/Library/Containers/com.apple.Safari/Data/Library/Preferences/com.apple.Safari
+    key: WebKitPreferences.developerExtrasEnabled
+    type: bool
+    value: true
+
+  - domain: com.apple.Safari.SandboxBroker
+    key: ShowDevelopMenu
+    type: bool
+    value: true

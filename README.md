@@ -34,6 +34,11 @@
 * Little Snitch: Everything **including install which forces immediate reboot**
 * Tunnelblick: All configuration
 * Parallels: Grant various permissions at first run, install license, copy over VMs
+* Firefox: Sync, Little Snitch private rule, extensions
+* Safari: Install extensions (AdGuard and sVim currently)
+* Mail.app: Enable mail bundles (can't find any plist where these are enabled)
+* Amphetamine: Set to run at login
+* GPGMail: Enable, license, set preferences
 
 
 ### Textual
