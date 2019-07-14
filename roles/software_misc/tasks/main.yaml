@@ -254,14 +254,13 @@
 #   command:
 #     argv: ['{{ macfit }}', '--cask', 'little-snitch',
 #            '--run-bundle', 'Little Snitch Installer.app',
-#            '--check-bundle-signature', '\(MLZF7K7B5R\)$']
+#            '--check-bundle-signature', 'id:MLZF7K7B5R']
 #     creates: /Applications/Little Snitch Configuration.app
 
 - name: Install Tunnelblick
   command:
     argv: ['{{ macfit }}', '--cask', 'tunnelblick',
-           '--check-pkg-signature', '\(Z2SG5H3HC8\)$',
-           '--check-bundle-signature', '\(Z2SG5H3HC8\)$']
+           '--check-signature', 'id:Z2SG5H3HC8']
     creates: /Applications/Tunnelblick.app
   become: yes
 
@@ -269,8 +268,7 @@
   command:
     argv: ['{{ macfit }}', '--cask', 'parallels',
            --install, 'Parallels Desktop.app',
-           --cache, '/Users/dale/Downloads/',
-           --check-bundle-signature, '\(4C6364ACXT\)$']
+           --check-bundle-signature, 'id:4C6364ACXT']
     creates: /Applications/Parallels Desktop.app
   become: yes
   register: parallels_install
