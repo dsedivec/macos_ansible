@@ -957,3 +957,8 @@ macos_prefs_set:
     key: ShowDevelopMenu
     type: bool
     value: true
+
+  - domain: com.apple.iCal
+    key: TimeZone support enabled
+    type: bool
+    value: true
