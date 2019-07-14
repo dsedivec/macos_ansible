@@ -24,8 +24,10 @@ fi
 du -csh "$temp_dir"
 echo "Watching, kill to compare"
 change_log=$temp_dir/changed
-fswatch -rEI --include '(^|/)Preferences/.*plist$' --exclude '.*' ~/Library \
-	| tee "$change_log"
+# This shows all files changing, not just plists, so the user can be
+# informed if "preferences" are being kept somewhere other than
+# **/Preferences/**.plist.
+fswatch -r ~/Library | tee "$change_log"
 diff=$(mktemp)
 while read -r file; do
 	echo
@@ -42,7 +44,7 @@ while read -r file; do
 		echo diff "$file" >> "$diff"
 		diff -u "$temp_dir/before" "$temp_dir/after" >> "$diff"
 	fi
-done < <(sort -u "$change_log")
+done < <(egrep '(^|/)Preferences/.*\.plist$' "$change_log" | sort -u)
 
 echo
 echo
