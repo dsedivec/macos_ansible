@@ -6,11 +6,6 @@
 
 set -uo pipefail
 
-PREFS_DIRS=(
-	~/Library/Preferences
-	~/Library/Containers
-	~/Library/Group\ Containers
-)
 PRINT_PLIST="$(dirname "$0")"/printplist.py
 
 temp_dir=$(mktemp -d)
@@ -20,21 +15,16 @@ rm_temp_dir() {
 }
 trap rm_temp_dir EXIT
 
-excludes=$temp_dir/exclude
-cat > "$excludes" <<EOF
-com.apple.AddressBook.plist
-com.apple.homed.plist
-com.apple.homed.notbackedup.plist
-EOF
-
-rsync -a --exclude-from="$excludes" "${PREFS_DIRS[@]}"  "$temp_dir"/
+rsync -av --include=**/ --include=Preferences/**.plist --exclude=* \
+      --prune-empty-dirs ~/Library/ "$temp_dir/"
 if [[ $? != 0 && $? != 23 ]]; then
 	echo "rsync failed, exiting" >&2
 	exit 1
 fi
+du -csh "$temp_dir"
 echo "Watching, kill to compare"
 change_log=$temp_dir/changed
-fswatch -r "${PREFS_DIRS[@]}" -E --exclude '\.plist.[a-zA-Z0-9]+$' \
+fswatch -rEI --include '(^|/)Preferences/.*plist$' --exclude '.*' ~/Library \
 	| tee "$change_log"
 diff=$(mktemp)
 while read -r file; do
