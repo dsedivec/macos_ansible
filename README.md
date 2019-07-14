@@ -38,7 +38,8 @@
 * Safari: Install extensions (AdGuard and sVim currently)
 * Mail.app: Enable mail bundles (can't find any plist where these are enabled)
 * Amphetamine: Set to run at login
-* GPGMail: Enable, license, set preferences
+* GPGMail (mail plug-in): License, set preferences
+* QuoteFix (mail plug-in): Set preferences
 
 
 ### Textual
