@@ -164,7 +164,6 @@
 - name: Install Textual
   command:
     argv: ['{{ macfit }}', --agree-eulas,
-           -c, '{{ ansible_env.HOME }}/Downloads',
            https://www.codeux.com/textual/downloads/Textual7.dmg]
     creates: '{{ user_app_dir }}/Textual.app'
 
