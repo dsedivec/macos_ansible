@@ -387,3 +387,26 @@
     argv: ['{{ macfit }}', --cask, grandperspective
            --check-bundle-signature, 'id:3Z75QZGN66']
     creates: '{{ user_app_dir }}/GrandPerspective.app'
+
+- name: Install f.lux
+  command:
+    argv: ['{{ macfit }}', --cask, flux,
+           --check-bundle-signature, 'id:VZKSA7H9J9']
+    creates: '{{ user_app_dir }}/Flux.app'
+
+- name: Set f.lux preferences
+  x_osx_defaults:
+    domain: org.herf.Flux
+    key: '{{ item.0 }}'
+    type: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - [sleepLate, int, 1]
+    - [wakeTime, int, 390]
+    - [wakeNotifyDisable, int, 1]
+
+- name: Install The Unarchiver
+  command:
+    argv: ['{{ macfit }}', --cask, the-unarchiver,
+           --check-bundle-signature, 'id:S8EX82NJP6']
+    creates: '{{ user_app_dir }}/The Unarchiver.app'
