@@ -26,3 +26,11 @@
   when: 'item in macos_dock_items'
   notify: Restart Dock
   loop: '{{ dockutil_defaults_to_remove }}'
+
+- name: Put Activity Monitor on the Dock
+  command:
+    argv: [dockutil,
+           --add, '/Applications/Utilities/Activity Monitor.app',
+           --no-restart]
+  when: '"Activity Monitor" not in macos_dock_items'
+  notify: Restart Dock
