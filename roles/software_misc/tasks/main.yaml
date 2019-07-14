@@ -384,5 +384,6 @@
 
 - name: Install GrandPerspective
   command:
-    argv: ['{{ macfit }}', --cask, grandperspective]
+    argv: ['{{ macfit }}', --cask, grandperspective
+           --check-bundle-signature, 'id:3Z75QZGN66']
     creates: '{{ user_app_dir }}/GrandPerspective.app'
