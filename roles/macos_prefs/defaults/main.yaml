@@ -908,6 +908,12 @@ macos_prefs_set:
     type: bool
     value: true
 
+  # Turn off "smart addresses"?  I want to see the email addresses, please.
+  - domain: com.apple.mail-shared
+    key: AddressDisplayMode
+    type: int
+    value: 3
+
   - domain: '{{ macos_prefs_domain_mail }}'
     key: IndexJunk
     type: bool
