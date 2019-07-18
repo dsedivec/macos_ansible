@@ -40,6 +40,7 @@
 * Amphetamine: Set to run at login
 * GPGMail (mail plug-in): License, set preferences
 * QuoteFix (mail plug-in): Set preferences
+* Signal: Link to phone
 
 
 ### Textual

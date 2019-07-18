@@ -410,3 +410,20 @@
     argv: ['{{ macfit }}', --cask, the-unarchiver,
            --check-bundle-signature, 'id:S8EX82NJP6']
     creates: '{{ user_app_dir }}/The Unarchiver.app'
+
+- name: Install Affinity Photo
+  #    824183456  Affinity Photo                                 (1.7.1)
+  command: mas install 824183456
+  args:
+    creates: /Applications/Affinity Photo.app
+
+- name: Install Airfoil
+  command:
+    argv: ['{{ macfit }}', --cask, airfoil,
+           --check-bundle-signature, 'id:7266XEXAPM']
+    creates: '{{ user_app_dir }}/Airfoil.app'
+
+- name: Install Signal
+  command:
+    argv: ['{{ macfit }}', --cask, signal]
+    creates: '{{ user_app_dir }}/Signal.app'
