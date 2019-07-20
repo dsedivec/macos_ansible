@@ -2,10 +2,8 @@
   roles:
     - {role: pkg_facts, tags: [always]}
     - {role: macos_system, tags: [macos_system]}
-    - {role: software_mas, tags: [software_mas]}
     - {role: software_xcode, tags: [software_xcode]}
     - {role: macports, tags: [macports]}
-    - {role: software_macfit, tags: [software_macfit]}
     - {role: software_mactex, tags: [software_mactex]}
     - {role: fonts, tags: [fonts]}
     - {role: macos_prefs, tags: [macos_prefs]}
@@ -15,7 +13,6 @@
     - {role: software_dropbox, tags: [software_dropbox]}
     - {role: user_venvs, tags: [user_venvs]}
     - {role: software_python_dev, tags: [software_python_dev]}
-    - {role: software_dockutil, tags: [software_dockutil]}
     - {role: software_misc, tags: [software_misc]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'
