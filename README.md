@@ -17,30 +17,31 @@
 
 ## Applications
 
+* 1Password
 * Alfred: Turn on auto-expand snippets (not synced)
+* Amphetamine: Set to run at login
+* Bartender: License, start at login, position menu items
+* BetterTouchTool: Start at login and set up sync (but sync seems broken as of 2019-07-04, so maybe just export/import), hide with Bartender
 * Chrome: Sign in, disable consistency flag, set sync preferences, unlock, import extension settings (Auto Delete Cookies, Privacy Badger, uBlock, ViolentMonkey, SessionBuddy, etc.)
 * Dash: Turn on sync
-* BetterTouchTool: Start at login and set up sync (but sync seems broken as of 2019-07-04, so maybe just export/import), hide with Bartender
-* iStat Menus: Start and import settings
-* Bartender: License, start at login, position menu items
-* Hammerspoon: Start at login, grant accessibility, hide with Bartender
-* Textual: Add license, configure Freenode, including nick, auth, auto-reconnect settings, connect commands, +i on connect
-* 1Password
-* Moom: License, start at login, hide with Bartender
 * Dropbox: Start at login, login, turn off photo/video syncing
+* Firefox: Sync, Little Snitch private rule, extensions
+* GPGMail (mail plug-in): License, set preferences
+* Hammerspoon: Start at login, grant accessibility, hide with Bartender
+* iStat Menus: Start and import settings
 * iTunes: Turn on wifi sync, pair with phone, turn off automatic syncing, manually sync music
   * **Warning!** When I did this, I got a warning saying that my phone can only sync with one library.  (I don't have a library.)  Then all my audiobooks got deleted.  Should find a better way to do this.
-* OneNote: Sign in
-* Little Snitch: Everything **including install which forces immediate reboot**
-* Tunnelblick: All configuration
-* Parallels: Grant various permissions at first run, install license, copy over VMs
-* Firefox: Sync, Little Snitch private rule, extensions
-* Safari: Install extensions (AdGuard and sVim currently)
+* Little Snitch: Not even installed, do it all yourself---**installer will force reboot**
 * Mail.app: Enable mail bundles (can't find any plist where these are enabled)
-* Amphetamine: Set to run at login
-* GPGMail (mail plug-in): License, set preferences
+* Moom: License, start at login, hide with Bartender
+* OneNote: Sign in
+* Parallels: Grant various permissions at first run, install license, copy over VMs
 * QuoteFix (mail plug-in): Set preferences
+* Safari: Install extensions (AdGuard and sVim currently)
 * Signal: Link to phone
+* Textual: Add license, configure Freenode, including nick, auth, auto-reconnect settings, connect commands, +i on connect
+* Tunnelblick: All configuration
+* Witch: Enable, license
 
 
 ### Textual
