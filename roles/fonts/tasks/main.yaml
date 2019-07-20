@@ -99,7 +99,7 @@
     - https://github.com/google/material-design-icons/raw/master/iconfont/MaterialIcons-Regular.ttf
 
 - name: Install woff2 package
-  package:
+  macports:
     state: present
     name: woff2
   become: yes

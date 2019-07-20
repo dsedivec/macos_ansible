@@ -1,2 +1,3 @@
 dependencies:
   - role: software_mactex
+  - role: macports
