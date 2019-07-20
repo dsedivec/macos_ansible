@@ -1,0 +1,59 @@
+- name: Install system-wide casks
+  homebrew_cask:
+    name: '{{ other_software_system_casks }}'
+    state: present
+    path: '{{ homebrew_sudo_wrapper | dirname }}'
+  become: yes
+  environment:
+    # Necessary so our wrapper script can find the real "brew".
+    PATH: '{{ homebrew_bin }}:{{ ansible_env.PATH }}'
+  tags: [slow]
+
+- name: Install casks in home directory
+  homebrew_cask:
+    name: '{{ other_software_user_casks }}'
+    state: present
+    path: '{{ homebrew_bin }}'
+    install_options: 'appdir={{ user_app_dir }}'
+  tags: [slow]
+
+- name: Install software from Mac App Store
+  command: mas install {{ item.0 }}
+  args:
+    creates: '{{ item.1 }}'
+  loop: '{{ other_software_mac_app_store }}'
+
+- name: Set preferences for software we just installed
+  x_osx_defaults:
+    domain: '{{ item.domain | expanduser }}'
+    key: '{{ item.key }}'
+    type: '{{ item.type }}'
+    value: '{{ item.value }}'
+  loop: '{{
+      other_software_preferences
+      | dict_product
+      | map("flatten", levels=1)
+      | named_list(["domain", "key", "type", "value"])
+      | list
+  }}'
+
+# Copying a working plist wholesale because there are a shitload of
+# preferences to set otherwise, including a complicated array of
+# custom commands.
+- name: Install Moom settings
+  copy:
+    # Note: This file was produced from a working, configured install
+    # of Moom with "plutil -convert xml1" on the *binary* plist file.
+    src: com.manytricks.Moom.plist
+    dest: '{{ ansible_env.HOME }}/Library/Preferences/'
+    # Don't overwrite if the file exists.
+    force: no
+
+- name: Put software on the Dock
+  command:
+    argv: [dockutil, --add, '{{ item }}', --no-restart]
+  when: '(item|basename|splitext).0 not in macos_dock_items'
+  loop: '{{ other_software_add_dock }}'
+  notify:
+    - Restart Dock
+

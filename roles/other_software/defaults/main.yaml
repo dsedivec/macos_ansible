@@ -1,0 +1,132 @@
+other_software_system_casks:
+  # Could MAS this, but 1Pass might get updates directly from
+  # AgileBits a little faster than MAS.  Otherwise, should be no
+  # difference.  AgileBits says in their forums that the version
+  # direct from them is sandboxed just like the MAS version.
+  - 1password
+  # Burp has its own installer that installs to /Applications.
+  - burp-suite
+  - homebrew/cask-versions/firefox-developer-edition
+  - google-chrome
+  - gpg-suite
+  - istat-menus
+  - parallels
+  - tunnelblick
+
+other_software_user_casks:
+  - airfoil
+  - alfred
+  - appcleaner
+  - audio-hijack
+  - bartender
+  - bettertouchtool
+  - dash
+  - flux
+  - freac
+  - grandperspective
+  - hammerspoon
+  - iterm2
+  - libreoffice
+  - moom
+  - nvidia-geforce-now
+  - plex-media-player
+  - signal
+  - textual
+  - the-unarchiver
+  - vlc
+  - witch
+
+other_software_mac_app_store:
+  - [1440147259, /Applications/AdGuard for Safari.app]
+  - [824183456, /Applications/Affinity Photo.app]
+  - [937984704, /Applications/Amphetamine.app]
+  - [784801555, /Applications/Microsoft OneNote.app]
+
+other_software_preferences:
+  com.adguard.safari.AdGuard:
+    - [NSFullScreenMenuItemEverywhere, bool, false]
+
+  com.runningwithcrayons.Alfred-Preferences:
+    - [syncfolder, string, '~/Dropbox']
+
+  ~/Library/Containers/com.if.Amphetamine/Data/Library/Preferences/com.if.Amphetamine:
+    - ["Default Duration", int, 14]
+    - ["End Session On Low Battery", int, 1]
+    - ["Hide Dock Icon", int, 1]
+    - ["Icon Style", int, 5]
+    - ["Ignore Battery on AC", int, 1]
+    - ["Lower Icon Opacity", int, 1]
+    - ["Session End Time Calcuation", int, 1]
+    - ["Show Welcome Window", int, 0]
+
+  # I don't *think* this should be necessary if I'm
+  # importing/exporting configuration?  But maybe it is?
+  # com.hegenberg.BetterTouchTool:
+  #   - [windowSnappingEnabled, bool, false]
+
+  com.kapeli.dashdoc:
+    - [shouldSyncGeneral, int, 1]
+    - [shouldSyncDocsets, int, 1]
+    - [shouldSyncBookmarks, int, 1]
+    # Seems like sync is not getting set up.
+    - [syncFolderPath, string, '~/Dropbox/app_sync/Dash']
+    - [DHNotificationNestedResultTip, bool, true]
+    - [DHNotificationTableOfContentsTip, bool, true]
+    - [DHNotificationFindTip, bool, true]
+
+  org.herf.Flux:
+    - [sleepLate, int, 1]
+    - [wakeTime, int, 390]
+    - [wakeNotifyDisable, int, 1]
+
+  com.googlecode.iterm2:
+    - [LoadPrefsFromCustomFolder, int, 1]
+    - [PrefsCustomFolder, string, '{{ dropbox_dir }}/app_sync/iTerm']
+    - [NoSyncNeverRemindPrefsChangesLostForFile, bool, true]
+    - [NoSyncNeverRemindPrefsChangesLostForFile_selection, int, 0]
+
+  com.codeux.apps.textual:
+    - [CopyTextSelectionOnMouseUp, bool, true]
+    - [DefaultIdentity -> Nickname, string, dale]
+    - [DefaultIdentity -> Realname, string, dale]
+    - [DefaultIdentity -> Username, string, dale]
+    - [DestinationOfNonserverNotices, int, 1]
+    - [Keyboard -> Command+W Key Action, int, 1]
+    - [Keyboard -> Tab Key Completion Suffix, string, ":"]
+    - [ServerListDoubleClickConnectServer, bool, true]
+    - [SUAutomaticallyUpdate, bool, false]
+    - [SUEnableAutomaticChecks, bool, true]
+
+  ~/Library/Application Support/Witch/Settings.plist:
+    - [AXAPI Timeout, int, 100]
+    # Going to whack the whole Action Configurations key here, which
+    # is an array of dicts.  The changes are too invasive to do within
+    # Action Configurations.
+    - [
+        Action Configurations,
+        array,
+        [
+          {
+            "Action Type": 0,
+            "Hot Key: Reverse": {
+              "Key Code": 48,
+              Modifiers: 655682,
+              "Visual Representation": "\\U2325\\U21e7\\U21e5",
+            },
+            "Hot Key: Standard": {
+              "Key Code": 48,
+              Modifiers: 524288,
+              "Visual Representation": "\\U2325\\U21e5",
+            },
+            Orientation: 0,
+            "Sort Order": 3,
+            "Sort Order: Invert": 0,
+            Spaces: 1,
+            Tabs: 0,
+          }
+        ]
+      ]
+
+other_software_add_dock:
+  - /Applications/Google Chrome.app
+  - ~/Applications/iTerm.app

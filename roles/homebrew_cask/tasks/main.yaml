@@ -1,0 +1,35 @@
+- name: Clone Homebrew
+  git:
+    repo: https://github.com/Homebrew/brew.git
+    dest: '{{ homebrew_dir }}'
+    update: no
+
+# Some brew commands may take a long time (ex. downloading large
+# files), and then expect to get an sudo password.  Little Python
+# wrapper script keeps sudo alive while brew is running.
+
+- name: Make brew-sudo-keep-alive bin dir
+  file:
+    state: directory
+    path: '{{ homebrew_sudo_wrapper | dirname }}'
+
+- name: Install brew-sudo-keep-alive wrapper
+  copy:
+    src: brew-sudo-keep-alive
+    dest: '{{ homebrew_sudo_wrapper }}'
+    mode: u+x,go-w
+
+- name: Update Brew
+  homebrew:
+    update_homebrew: yes
+    path: '{{ homebrew_bin }}'
+  tags: [slow]
+
+# - name: List installed casks
+#   command: '{{ homebrew_bin }}/brew cask list -1'
+#   register: casks
+#   changed_when: false
+#
+# - name: Add fact for installed casks
+#   set_fact:
+#     homebrew_casks: '{{ casks.stdout_lines }}'

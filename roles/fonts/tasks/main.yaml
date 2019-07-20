@@ -119,3 +119,31 @@
   script: install_fonts_from_latest_github.py be5invis/Iosevka --dre '(?i)^ttc-iosevka-[\d.]+.zip$' -d {{ user_font_dir | quote }}
   args:
     creates: '{{ user_font_dir }}/iosevka-regular.ttc'
+
+- name: Grab some fonts from OneNote
+  copy:
+    remote_src: true
+    src: '/Applications/Microsoft OneNote.app//Contents/Resources/DFonts/{{ item }}'
+    dest: '{{ user_font_dir }}'
+    # For speed:
+    force: no
+  loop:
+    - Calibri.ttf
+    - Calibrib.ttf
+    - Calibrii.ttf
+    - Calibriz.ttf
+    - calibril.ttf
+    - calibrili.ttf
+    - Cambria.ttc
+    - Cambriab.ttf
+    - Cambriai.ttf
+    - Cambriaz.ttf
+    - Consola.ttf
+    - Consolab.ttf
+    - Consolai.ttf
+    - Consolaz.ttf
+    - GARA.ttf
+    - GARABD.ttf
+    - GARAIT.ttf
+    - seguihis.ttf
+    - seguisym.ttf

@@ -1,0 +1,70 @@
+- name: Enable Mail Bundles
+  x_osx_defaults:
+    domain: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail'
+    key: '{{ item.0 }}'
+    type: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - [EnableBundles, bool, true]
+    - [BundleCompatibilityVersion, int, 4]
+
+- name: Install MailFollowUp
+  command:
+    argv: ['{{ macfit }}', --dest, '{{ user_mail_bundle_dir }}',
+           --scrape, '/MailFollowUp_[\d.]+\.dmg\.zip$',
+           http://www.cs.unc.edu/~welch/MailFollowup/]
+    creates: '{{ user_mail_bundle_dir }}/MailFollowUp.mailbundle'
+
+- name: Install QuoteFix
+  command:
+    argv: ['{{ macfit }}', --dest, '{{ user_mail_bundle_dir }}',
+           --github, '^QuoteFix-.*\.zip$', robertklep/quotefixformac]
+    creates: '{{ user_mail_bundle_dir }}/QuoteFix.mailbundle'
+
+- name: Set QuoteFix preferences
+  x_osx_defaults:
+    domain: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail'
+    key: '{{ item.0 }}'
+    type: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - ["QuoteFixCheckUpdateInterval",int ,1]
+    - ["QuoteFixKeepSenderSignature",bool ,true]
+    - ["QuoteFixMoveCursorToTop",bool ,true]
+    - ["QuoteFixRemoveSignatureFromLastMatch",bool ,true]
+    - ["QuoteFixUseCustomSignatureMatcher",bool ,true]
+    - ["QuoteFixCustomSignatureMatcher", string,
+       '^(?i)-{2,}(?:&nbsp;|\\s+|\\xa0)*$']
+
+- name: Install MsgFiler
+  #    418778021  MsgFiler (3.1.4)
+  command: mas install 418778021
+  args:
+    creates: /Applications/MsgFiler.app
+
+- name: Install MsgFiler Engine
+  command:
+    argv: ['{{ macfit }}', --dest, '{{ user_mail_bundle_dir }}',
+           # Really hoping the first link on the page is to the latest
+           # version.
+           --scrape, '(^|/)msgfilerengine-\d+-dmg.zip',
+           https://msgfiler.com/support/engine/]
+    creates: '{{ user_mail_bundle_dir }}/MsgFilerEngine.mailbundle'
+
+- name: Set MsgFiler preferences
+  x_osx_defaults:
+    domain: '{{ ansible_env.HOME }}/Library/Containers/com.atow.msgfiler/Data/Library/Preferences/com.atow.msgfiler.plist'
+    key: '{{ item.0 }}'
+    type: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - [MsgFilerHideDockIcon, int, 1]
+    - [MsgFilerKeepOpen, int, 0]
+    - [MsgFilerMatchMailboxNameOnly, int, 1]
+    - [
+        MsgFilerShortcut, dict, {
+          characters: "",
+          keyCode: 25,
+          modifierFlags: 262144,
+        }
+      ]

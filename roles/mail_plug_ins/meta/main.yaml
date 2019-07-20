@@ -1,0 +1,3 @@
+dependencies:
+  - role: software_macfit
+  - role: software_mas

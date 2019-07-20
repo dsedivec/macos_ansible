@@ -1,1 +1,0 @@
-witch_prefpane: '{{ ansible_env.HOME }}/Library/PreferencePanes/Witch.prefPane'

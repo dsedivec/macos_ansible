@@ -13,6 +13,7 @@
     - {role: software_dropbox, tags: [software_dropbox]}
     - {role: user_venvs, tags: [user_venvs]}
     - {role: software_python_dev, tags: [software_python_dev]}
-    - {role: software_misc, tags: [software_misc]}
+    - {role: other_software, tags: [other_software]}
+    - {role: mail_plug_ins, tags: [mail_plug_ins]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'
