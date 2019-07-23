@@ -31,13 +31,13 @@
 
 - name: Install dotfiles
   command:
-    argv:
-      - stow
-      - -d
-      - '{{ dotfiles_local_repo }}'
-      - -t
-      - '{{ ansible_env.HOME }}'
-      - common
+    argv: [
+      stow, -v, -d, '{{ dotfiles_local_repo }}',
+            -t, '{{ ansible_env.HOME }}',
+            common
+    ]
+  register: stow
+  changed_when: '"LINK" in stow.stderr'
 
 - name: Clone dotfiles-private repository
   git:
@@ -47,13 +47,13 @@
 
 - name: Install dotfiles-private
   command:
-    argv:
-      - stow
-      - -d
-      - '{{ dotfiles_private_local_repo }}'
-      - -t
-      - '{{ ansible_env.HOME }}'
-      - '{{ dotfiles_private_which }}'
+    argv: [
+      stow, -v, -d, '{{ dotfiles_private_local_repo }}',
+            -t, '{{ ansible_env.HOME }}',
+            '{{ dotfiles_private_which }}'
+    ]
+  register: stow
+  changed_when: '"LINK" in stow.stderr'
 
 - name: Fix permissions on ~/.ssh
   file:
