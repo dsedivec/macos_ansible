@@ -4,3 +4,4 @@ dependencies:
   # Lots of the software being installed is configured to look to
   # files in my Dropbox account.
   - role: software_dropbox
+  - role: software_macsigcheck

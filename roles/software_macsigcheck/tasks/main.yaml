@@ -1,0 +1,11 @@
+- name: Clone macsigcheck repo
+  git:
+    repo: '{{ macsigcheck_remote_repo }}'
+    dest: '{{ macsigcheck_local_repo }}'
+    update: no
+
+- name: Symlink macsigcheck into bin dir
+  file:
+    state: link
+    src: '{{ macsigcheck_local_repo | relpath(user_bin_dir) }}/macsigcheck'
+    dest: '{{ macsigcheck }}'

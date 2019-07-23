@@ -8,6 +8,8 @@
     # Necessary so our wrapper script can find the real "brew".
     PATH: '{{ homebrew_bin }}:{{ ansible_env.PATH }}'
   tags: [slow]
+  notify:
+    - Run macsigcheck
 
 - name: Install casks in home directory
   homebrew_cask:
@@ -16,12 +18,16 @@
     path: '{{ homebrew_bin }}'
     install_options: 'appdir={{ user_app_dir }}'
   tags: [slow]
+  notify:
+    - Run macsigcheck
 
 - name: Install software from Mac App Store
   command: mas install {{ item.0 }}
   args:
     creates: '{{ item.1 }}'
   loop: '{{ other_software_mac_app_store }}'
+  notify:
+    - Run macsigcheck
 
 - name: Set preferences for software we just installed
   x_osx_defaults:
