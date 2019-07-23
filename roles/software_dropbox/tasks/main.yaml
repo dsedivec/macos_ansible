@@ -3,6 +3,7 @@
 - name: Install Dropbox
   command:
     argv: ['{{ macfit }}', --owner, '{{ ansible_user }}', --dest-system,
-           'https://www.dropbox.com/download?plat=mac&full=1']
+           'https://www.dropbox.com/download?plat=mac&full=1',
+           --check-signature, 'id:G7HH3F8CAK']
     creates: /Applications/Dropbox.app
   become: yes

@@ -3,6 +3,8 @@
     argv:
       - '{{ macfit }}'
       - http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg
+      - --check-pkg-signature
+      - 'id:RBGCY5RJWM'
       - --owner
       - '{{ ansible_user }}'
       - --cache-dir
