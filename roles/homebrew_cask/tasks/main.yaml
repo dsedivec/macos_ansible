@@ -19,12 +19,6 @@
     dest: '{{ homebrew_sudo_wrapper }}'
     mode: u+x,go-w
 
-- name: Update Brew
-  homebrew:
-    update_homebrew: yes
-    path: '{{ homebrew_bin }}'
-  tags: [slow]
-
 # - name: List installed casks
 #   command: '{{ homebrew_bin }}/brew cask list -1'
 #   register: casks
