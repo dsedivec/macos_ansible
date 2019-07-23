@@ -16,21 +16,28 @@ other_software_system_casks:
 other_software_user_casks:
   - airfoil
   - alfred
+  - anki
   - appcleaner
   - audio-hijack
   - bartender
   - bettertouchtool
   - dash
+  - epic-games
   - flux
   - freac
   - grandperspective
   - hammerspoon
+  - insomnia
   - iterm2
   - libreoffice
+  - marshallofsound-google-play-music-player
   - moom
   - nvidia-geforce-now
   - plex-media-player
+  - screenflow
   - signal
+  - simple-comic
+  - steam
   - textual
   - the-unarchiver
   - vlc

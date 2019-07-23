@@ -26,6 +26,7 @@
 * Dash: Turn on sync
 * Dropbox: Start at login, login, turn off photo/video syncing
 * Firefox: Sync, Little Snitch private rule, extensions
+* Google Play Music: Log in
 * GPGMail (mail plug-in): License, set preferences
 * Hammerspoon: Start at login, grant accessibility, hide with Bartender
 * iStat Menus: Start and import settings
@@ -38,7 +39,9 @@
 * Parallels: Grant various permissions at first run, install license, copy over VMs
 * QuoteFix (mail plug-in): Set preferences
 * Safari: Install extensions (AdGuard and sVim currently)
+* ScreenFlow: License
 * Signal: Link to phone
+* Steam: Log in, set not to start at login
 * Textual: Add license, configure Freenode, including nick, auth, auto-reconnect settings, connect commands, +i on connect
 * Tunnelblick: All configuration
 * Witch: Enable, license
