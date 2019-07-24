@@ -62,4 +62,3 @@
   loop: '{{ other_software_add_dock }}'
   notify:
     - Restart Dock
-
