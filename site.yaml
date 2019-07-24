@@ -11,8 +11,8 @@
     - {role: dotfiles, tags: [dotfiles]}
     - {role: software_vim, tags: [software_vim]}
     - {role: software_dropbox, tags: [software_dropbox]}
-    - {role: user_venvs, tags: [user_venvs]}
-    - {role: software_python_dev, tags: [software_python_dev]}
+    - {role: python_venvs, tags: [python_venvs]}
+    - {role: software_dev_python, tags: [software_dev_python]}
     - {role: other_software, tags: [other_software]}
     - {role: mail_plug_ins, tags: [mail_plug_ins]}
   environment:
