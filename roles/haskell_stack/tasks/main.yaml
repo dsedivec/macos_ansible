@@ -1,0 +1,10 @@
+- name: Install jq
+  x_macports:
+    state: present
+    name: jq
+
+- name: Download and install Stack
+  script: install_stack.sh '{{ user_bin_dir | quote }}'
+  args:
+    creates: '{{ stack }}'
+

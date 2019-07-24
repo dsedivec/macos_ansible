@@ -1,0 +1,10 @@
+- name: Install software with Stack
+  command:
+    argv: ['{{ stack }}', install, '{{ item }}']
+    creates: '{{ stack_bin_dir }}/{{ item }}'
+  loop:
+    - hasktags
+    - hindent
+    - hlint
+    - hoogle
+    - stylish-haskell

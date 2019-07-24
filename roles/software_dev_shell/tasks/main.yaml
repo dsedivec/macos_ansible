@@ -1,0 +1,4 @@
+- name: Install ShellCheck
+  command:
+    argv: ['{{ stack }}', install, ShellCheck]
+    creates: '{{ stack_bin_dir }}/shellcheck'
