@@ -7,6 +7,7 @@ other_software_system_casks:
   # Burp has its own installer that installs to /Applications.
   - burp-suite
   - homebrew/cask-versions/firefox-developer-edition
+  - intel-power-gadget
   - google-chrome
   - gpg-suite
   - istat-menus
@@ -48,6 +49,7 @@ other_software_mac_app_store:
   - [824183456, /Applications/Affinity Photo.app]
   - [937984704, /Applications/Amphetamine.app]
   - [784801555, /Applications/Microsoft OneNote.app]
+  - [1193539993, '/Applications/Brother iPrint&Scan.app']
 
 other_software_preferences:
   com.adguard.safari.AdGuard:
