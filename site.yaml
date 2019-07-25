@@ -14,7 +14,9 @@
     - {role: software_dev_haskell, tags: [software_dev_haskell]}
     - {role: software_dev_lisp, tags: [software_dev_lisp]}
     - {role: software_dev_python, tags: [software_dev_python]}
+    - {role: software_dev_ruby, tags: [software_dev_ruby]}
     - {role: software_dev_shell, tags: [software_dev_shell]}
+    - {role: software_dev_sql, tags: [software_dev_sql]}
     - {role: software_dev_web, tags: [software_dev_web]}
     - {role: other_software, tags: [other_software]}
     - {role: mail_plug_ins, tags: [mail_plug_ins]}

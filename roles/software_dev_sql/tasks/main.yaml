@@ -1,0 +1,4 @@
+- name: Install sqlint
+  gem:
+    state: present
+    name: sqlint

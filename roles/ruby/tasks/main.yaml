@@ -1,0 +1,22 @@
+- name: Install Ruby 2.6
+  x_macports:
+    state: present
+    name: ruby26
+  become: true
+
+- name: Check MacPorts default Ruby
+  stat:
+    path: /opt/local/bin/ruby
+  register: macports_ruby
+  changed_when: false
+
+- name: Set MacPorts default Ruby to ruby26
+  command: /opt/local/bin/port select --set ruby ruby26
+  when: '
+    not (
+      macports_ruby.stat.exists
+      and macports_ruby.stat.islnk
+      and macports_ruby.stat.lnk_source.endswith("/ruby2.6")
+    )
+  '
+  become: true

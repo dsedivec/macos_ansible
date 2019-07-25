@@ -1,0 +1,4 @@
+- name: Install rufo
+  gem:
+    state: present
+    name: rufo
