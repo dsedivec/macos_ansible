@@ -2,6 +2,7 @@
   x_macports:
     state: present
     name: jq
+  become: yes
 
 - name: Download and install Stack
   script: install_stack.sh '{{ user_bin_dir | quote }}'
