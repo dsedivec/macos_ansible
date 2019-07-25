@@ -1,3 +1,9 @@
+- name: Install MacPorts packages for shell work
+  x_macports:
+    state: present
+    name: '{{ dev_shell_macports_packages }}'
+  become: yes
+
 - name: Install ShellCheck
   command:
     argv: ['{{ stack }}', install, ShellCheck]

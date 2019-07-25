@@ -6,7 +6,6 @@ default_ports:
   - colordiff
   - coreutils
   - ctags
-  - dash
   - emacs-app
   - fasd
   - fd
