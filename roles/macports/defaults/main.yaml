@@ -28,7 +28,6 @@ default_ports:
   - mtr
   - neomutt
   - nmap
-  - npm6
   - openjdk11
   - openssh +gsskex
   - p7zip

@@ -1,0 +1,12 @@
+- name: Install Node.js and NPM
+  x_macports:
+    state: present
+    name: npm6
+  become: yes
+
+- name: Install web development packages from NPM
+  npm:
+    state: present
+    global: yes
+    name: '{{ item }}'
+  loop: [csslint, js-beautify, eslint, tern]
