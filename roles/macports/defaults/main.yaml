@@ -35,7 +35,6 @@ default_ports:
   - patchutils
   - pstree
   - pv
-  - python37
   - ripgrep
   - rlwrap
   - samba3
