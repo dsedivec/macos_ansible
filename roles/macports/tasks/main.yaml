@@ -40,7 +40,7 @@
   register: macports_python_2_stat
   tags: [always]
 
-- name: Change Python 2 interpreter to Python from MacPorts
+- name: Change Ansible's Python 2 interpreter to Python from MacPorts
   set_fact:
     ansible_python_interpreter: /opt/local/bin/python2.7
   when: 'macports_python_2_stat.stat.exists'
