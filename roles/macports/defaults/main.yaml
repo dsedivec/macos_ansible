@@ -41,7 +41,6 @@ default_ports:
   - ripgrep
   - rlwrap
   - samba3
-  - sbcl
   - sleepwatcher
   - socat
   - sox

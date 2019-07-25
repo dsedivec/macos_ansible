@@ -1,0 +1,5 @@
+- name: Install SBCL
+  x_macports:
+    state: present
+    name: sbcl
+  become: yes
