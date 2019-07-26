@@ -5,6 +5,17 @@
   become: true
   tags: [slow]
 
+- name: Check if sleepwatcher is running
+  command: pgrep sleepwatcher
+  register: pgrep
+  failed_when: 'pgrep.rc > 1'
+  changed_when: false
+
+- name: Start sleepwatcher
+  command: port load sleepwatcher
+  become: true
+  when: 'pgrep.rc != 0'
+
 - name: Install system-wide casks
   homebrew_cask:
     name: '{{ other_software_system_casks }}'
