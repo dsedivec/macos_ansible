@@ -16,6 +16,15 @@
   become: true
   when: 'pgrep.rc != 0'
 
+# I don't want to install this from Homebrew because it builds it from
+# source, since my Homebrew installation isn't in /usr/local, and that
+# takes forever.
+- name: Install Pandoc
+  command:
+    argv: ['{{ macfit }}', --github, '^pandoc-[0-9.]+-macOS.pkg$', jgm/pandoc]
+    creates: /usr/local/bin/pandoc
+  become: yes
+
 - name: Install system-wide casks
   homebrew_cask:
     name: '{{ other_software_system_casks }}'
@@ -46,15 +55,6 @@
   loop: '{{ other_software_mac_app_store }}'
   notify:
     - Run macsigcheck
-
-# I don't want to install this from Homebrew because it builds it from
-# source, since my Homebrew installation isn't in /usr/local, and that
-# takes forever.
-- name: Install Pandoc
-  command:
-    argv: ['{{ macfit }}', --github, '^pandoc-[0-9.]+-macOS.pkg$', jgm/pandoc]
-    creates: /usr/local/bin/pandoc
-  become: yes
 
 - name: Set preferences for software we just installed
   x_osx_defaults:
