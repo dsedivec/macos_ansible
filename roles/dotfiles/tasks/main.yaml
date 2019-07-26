@@ -1,19 +1,14 @@
-- name: Install Bash
-  package:
-    state: installed
-    name: bash
+- name: Install Bash and Stow
+  x_macports:
+    state: present
+    name: [bash, stow]
+  become: true
 
 - name: Change user's shell to MacPorts Bash
   user:
     name: '{{ ansible_user }}'
     shell: /opt/local/bin/bash
     create_home: no
-  become: true
-
-- name: Install Stow
-  package:
-    name: stow
-    state: present
   become: true
 
 - name: "Don't let stowing dotfiles make the bin dir a symlink"
