@@ -1,4 +1,5 @@
 dependencies:
+  - role: macports
   - role: homebrew_cask
   - role: software_dockutil
   # Lots of the software being installed is configured to look to

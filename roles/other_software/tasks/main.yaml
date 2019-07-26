@@ -1,3 +1,10 @@
+- name: Install packages from MacPorts
+  x_macports:
+    name: '{{ other_software_macports }}'
+    state: present
+  become: true
+  tags: [slow]
+
 - name: Install system-wide casks
   homebrew_cask:
     name: '{{ other_software_system_casks }}'
