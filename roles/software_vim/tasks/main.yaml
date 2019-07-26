@@ -1,5 +1,5 @@
 - name: Install Vim
-  package:
+  x_macports:
     name: vim
     state: present
   become: true
