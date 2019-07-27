@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+"""Output a dot digraph of Ansible role dependencies."""
+
+import argparse
+import glob
+import os.path
+import pathlib
+import sys
+
+import yaml
+
+
+def main(argv):
+    parser = argparse.ArgumentParser(prog=argv[0])
+    parser.add_argument("--roles-dir", "-d", default="roles")
+    parser.add_argument("--output", "-o")
+    args = parser.parse_args(argv[1:])
+    if args.output:
+        output = open(args.output, "w")
+    else:
+        output = sys.stdout
+    output.write(
+        """\
+digraph role_dependencies {
+\tgraph [concentrate=true; overlap=scale;]
+
+"""
+    )
+    for role_path in pathlib.Path(args.roles_dir).iterdir():
+        if not role_path.is_dir():
+            continue
+        meta_path = role_path / "meta" / "main.yaml"
+        if not meta_path.exists():
+            continue
+        with open(meta_path, "r") as meta_file_obj:
+            meta = yaml.safe_load(meta_file_obj)
+        try:
+            dependencies = meta["dependencies"]
+        except KeyError:
+            continue
+        role_name = role_path.stem
+        for dep in dependencies:
+            try:
+                dependency_name = dep["role"]
+            except KeyError:
+                continue
+            output.write(f"\t{role_name} -> {dependency_name};\n")
+    output.write("}\n")
+    if args.output:
+        output.close()
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv) or 0)
