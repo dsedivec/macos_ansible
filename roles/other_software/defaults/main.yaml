@@ -67,6 +67,7 @@ other_software_system_casks:
   - istat-menus
   - parallels
   - tunnelblick
+  - wireshark
   # Nice side effect of XQuartz: DISPLAY environment variable gets
   # set.  This is necessary for OpenSSH to even think about calling
   # ssh-askpass, which is necessary if you want it to prompt you for

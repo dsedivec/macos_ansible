@@ -38,6 +38,15 @@
   notify:
     - Run macsigcheck
 
+- name: Remove user from access_bpf group
+  # because it is whack that my every day user account has access to
+  # the BPF devices.  Wireshark does this.
+  osx_group_member:
+    group: access_bpf
+    user: '{{ ansible_user }}'
+    state: absent
+  become: true
+
 - name: Install casks in home directory
   homebrew_cask:
     name: '{{ other_software_user_casks }}'
