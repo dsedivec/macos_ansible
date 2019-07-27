@@ -1,3 +1,29 @@
+---
+title: Ansible Automated Setup of macOS
+---
+
+# Introduction
+
+This is my somewhat untested, haphazard, but hopefully useful automated setup of some of my macOS software and settings.
+
+As a general principle, I prefer using MacPorts to Homebrew.  I have, however, decided to use Homebrew Cask to install lots of binary/GUI packages, because it is very convenient and none (or almost none) of these packages can be installed via MacPorts.
+
+Documentation here is very far from complete.
+
+
+# Use of Roles
+
+The division of what action(s) go into which role(s) is probably not super-consistent.  I have tried to make some logical and/or useful divisions.
+
+Role `other_software` tends to be for software that I want to use as a "normal user" rather than a developer, per se.  Lots of my GUI packages get stuffed in here.  Truth be told, it may have become somewhat of a dumping group after realizing that I dread making lots and lots of fine-grained roles for software installation.  At least I've broken the things to be installed out into some variables.  This may all get refined later.
+
+`software_dev_*` roles tend to be for "development" in particular languages/activities.
+
+Other `software_*` roles tend to be for specific software that other role(s) will need to depend on.  For example, lots of stuff needs MacPorts installed first, so MacPorts gets it own `software_macports` role that others can depend on.
+
+Additionally, some software has been broken out into its own roles to get me software that I need to actually work on this Ansible setup first.  For example, Emacs and/or Vim get installed early on so that I have good editors with good configurations to start editing YAML or Python if need be.
+
+
 # Things Not Automated
 
 * Set up accounts: admin at install, then regular user after
@@ -60,4 +86,4 @@ Connect commands:
 
 # Notes
 
-* A reboot (or maybe just log out and back in, but reboot to be on the safe side) will be necessary after many of the changes here, particularly the changes in the `macos_system` and `macos_prefs` roles.  I *suspect* that not rebooting **promptly** after some of these changes can cause them to be reverted, especially if you go noodling about in preferences dialogs or System Preferences between Ansible's changes and when you reboot.
+* A reboot (or maybe just log out and back in, but reboot to be on the safe side) will be necessary after many of the changes here, particularly the changes in the `macos_system` and `macos_prefs` roles.  I *suspect* that not rebooting **promptly** after some of these changes are made will result in said changes being reverted, especially if you go noodling about in preferences dialogs or System Preferences between Ansible's changes and when you reboot.
