@@ -1,7 +1,7 @@
-- name: Install Node.js and NPM
+- name: Install Node.js, NPM, Hugo
   x_macports:
     state: present
-    name: npm6
+    name: [npm6, hugo +extended]
   become: yes
 
 - name: Install web development packages from NPM
@@ -9,4 +9,4 @@
     state: present
     global: yes
     name: '{{ item }}'
-  loop: [csslint, js-beautify, eslint, tern]
+  loop: [csslint, js-beautify, eslint, tern, netlify]

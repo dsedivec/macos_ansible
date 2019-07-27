@@ -89,3 +89,15 @@
   loop: '{{ other_software_add_dock }}'
   notify:
     - Restart Dock
+
+- name: Install onkyo utility
+  pip:
+    virtualenv: '{{ user_py3_venv_dir }}'
+    name: onkyo-eiscp
+    state: present
+
+- name: Symlink onkyo into {{ user_bin_dir }}
+  file:
+    state: link
+    src: '{{ user_py3_venv_bin | relpath(user_bin_dir) }}/onkyo'
+    path: '{{ user_bin_dir }}/onkyo'
