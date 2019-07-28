@@ -110,3 +110,10 @@
     state: link
     src: '{{ user_py3_venv_bin | relpath(user_bin_dir) }}/onkyo'
     path: '{{ user_bin_dir }}/onkyo'
+
+- name: Install SilentKnight
+  command:
+    argv: ['{{ macfit }}', --check-bundle-signature, QWY4LRW926,
+           --scrape-html, '(?i)/silentknight\d.*\.zip$',
+           https://eclecticlight.co/lockrattler-systhist/]
+    creates: '{{ user_app_dir }}/SilentKnight.app'
