@@ -57,6 +57,21 @@
   notify:
     - Run macsigcheck
 
+- name: Check if PMP Helper is running
+  command:
+    argv: [pgrep, PMP Helper]
+  register: pgrep
+  failed_when: 'pgrep.rc > 1'
+  changed_when: False
+
+- name: Disable Plex's mysterious PMP Helper
+  command:
+    argv: [
+      launchctl, unload, -w,
+      '{{ ansible_env.HOME }}/Library/LaunchAgents/tv.plex.player-helper.plist',
+    ]
+  when: 'pgrep.rc == 0'
+
 - name: Install software from Mac App Store
   command: mas install {{ item.0 }}
   args:
