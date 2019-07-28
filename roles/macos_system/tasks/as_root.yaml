@@ -22,3 +22,11 @@
   when: >
     "firewall is enabled" not in (firewall_state.stdout | default("")).lower()
   become: yes
+
+# Suggested by http://docs.hardentheworld.org/OS/MacOS_10.12_Sierra/index.html
+- name: Enable "Require an administrator password to access system-wide preferences"
+  osx_auth_policy_db:
+    key: shared
+    type: bool
+    value: false
+  become: yes
