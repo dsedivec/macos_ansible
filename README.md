@@ -26,9 +26,9 @@ Additionally, some software has been broken out into its own roles to get me sof
 
 # Things Not Automated
 
+* Set firmware password
 * Set up accounts: admin at install, then regular user after
 * Allow regular user account to sudo with file in `/etc/sudoers.d`
-* Set firmware password
 * Initial virtualenv and Ansible install
 * Give Terminal and/or iTerm 2 "Full Disk Access" to allow it to read things like Mail.app's preferences file (solution courtesy https://github.com/mathiasbynens/dotfiles/issues/849)
 * Turning on FileVault
@@ -39,6 +39,13 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Go into Accessibility → Speech → System Voice → Customize and download the high quality voices
 * Double tap fn and enable dictation once to download the Enhanced Dictionary
 * Set up printer
+
+
+## Hardening
+
+From https://blog.bejarano.io/hardening-macos.html:
+
+* Turn off "Spotlight Suggestions" and "Allow Spotlight Suggestions in Look Up", because the preference for the former is a big complicated array that I don't want to script, and I'm not at all sure I know what the preference for the second even is.
 
 
 ## Applications
@@ -87,3 +94,13 @@ Connect commands:
 # Notes
 
 * A reboot (or maybe just log out and back in, but reboot to be on the safe side) will be necessary after many of the changes here, particularly the changes in the `macos_system` and `macos_prefs` roles.  I *suspect* that not rebooting **promptly** after some of these changes are made will result in said changes being reverted, especially if you go noodling about in preferences dialogs or System Preferences between Ansible's changes and when you reboot.
+
+
+# Hardening Guides I Liked
+
+* https://github.com/ernw/hardening/blob/master/operating_system/osx/10.14/ERNW_Hardening_OS_X_Mojave.md
+* https://github.com/drduh/macOS-Security-and-Privacy-Guide
+* https://blog.bejarano.io/hardening-macos.html
+* http://docs.hardentheworld.org/OS/MacOS_10.12_Sierra/index.html
+
+There are also some interesting utilities available at <https://eclecticlight.co/downloads/> and <https://objective-see.com/>.
