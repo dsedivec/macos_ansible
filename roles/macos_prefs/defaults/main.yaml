@@ -834,6 +834,16 @@ macos_prefs_set:
     type: bool
     value: false
 
+  - domain: com.apple.Siri
+    key: VoiceTriggerUserEnabled
+    type: bool
+    value: false
+
+  - domain: com.apple.voicetrigger
+    key: VoiceTrigger Enabled
+    type: bool
+    value: false
+
   # Disable accented key pop-up.
   - key: ApplePressAndHoldEnabled
     type: bool
