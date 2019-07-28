@@ -132,3 +132,14 @@
            --scrape-html, '(?i)/silentknight\d.*\.zip$',
            https://eclecticlight.co/lockrattler-systhist/]
     creates: '{{ user_app_dir }}/SilentKnight.app'
+
+- name: Install Go
+  x_macports:
+    name: go
+    state: present
+  become: yes
+
+- name: Install gocryptfs
+  script: install_gocryptfs.py {{ user_bin_dir | quote }}
+  args:
+    creates: '{{ user_bin_dir }}/gocryptfs'
