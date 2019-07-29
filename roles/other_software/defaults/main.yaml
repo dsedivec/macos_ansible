@@ -65,6 +65,7 @@ other_software_system_casks:
   - google-chrome
   - gpg-suite
   - istat-menus
+  - osxfuse
   - parallels
   - tunnelblick
   - wireshark
@@ -112,6 +113,7 @@ other_software_mac_app_store:
   - [937984704, /Applications/Amphetamine.app]
   - [784801555, /Applications/Microsoft OneNote.app]
   - [1193539993, '/Applications/Brother iPrint&Scan.app']
+  - [515886877, /Applications/Joystick Show.app]
 
 other_software_preferences:
   com.adguard.safari.AdGuard:
