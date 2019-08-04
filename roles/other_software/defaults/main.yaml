@@ -48,6 +48,7 @@ other_software_macports:
   - sshfs
   - tidy
   - tmux
+  - tree
   - unrar
   - watch
   - youtube-dl
