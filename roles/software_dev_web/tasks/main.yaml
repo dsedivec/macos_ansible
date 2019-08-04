@@ -1,7 +1,13 @@
-- name: Install Node.js, NPM, Hugo
+- name: Install web and blog development MacPorts packages
   x_macports:
     state: present
-    name: [npm6, hugo +extended]
+    name: [npm6, hugo +extended, py37-pygments]
+  become: yes
+
+- name: Make "pygments" run py37-pygments in MacPorts
+  command: port select --set pygments py37-pygments
+  args:
+    creates: /opt/local/bin/pygmentize
   become: yes
 
 - name: Install web development packages from NPM
@@ -9,4 +15,4 @@
     state: present
     global: yes
     name: '{{ item }}'
-  loop: [csslint, js-beautify, eslint, tern, netlify]
+  loop: [csslint, js-beautify, eslint, tern, netlify-cli]
