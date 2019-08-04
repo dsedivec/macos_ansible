@@ -1,7 +1,7 @@
-- name: Install Bash and Stow
+- name: Install Bash
   x_macports:
     state: present
-    name: [bash, stow]
+    name: bash
   become: true
 
 - name: Change user's shell to MacPorts Bash
@@ -11,28 +11,37 @@
     create_home: no
   become: true
 
-- name: "Don't let stowing dotfiles make the bin dir a symlink"
+- name: Clone lnmgr repository
+  git:
+    repo: '{{ lnmgr_remote_repo }}'
+    dest: '{{ lnmgr_local_repo }}'
+    # update=yes will "git reset --hard", which could lose local
+    # changes, which could be bad.
+    update: no
+
+- name: Link lnmgr into {{ user_bin_dir }}
   file:
-    path: '{{ user_bin_dir }}'
-    state: directory
+    state: link
+    src: '{{ lnmgr_local_repo | relpath(user_bin_dir) }}/lnmgr'
+    dest: '{{ user_bin_dir }}/lnmgr'
 
 - name: Clone dotfiles repository
   git:
     repo: '{{ dotfiles_remote_repo }}'
     dest: '{{ dotfiles_local_repo }}'
-    # update=yes will "git reset --hard", which could lose local
-    # changes, which could be bad.
     update: no
 
 - name: Install dotfiles
   command:
     argv: [
-      stow, -v, -d, '{{ dotfiles_local_repo }}',
-            -t, '{{ ansible_env.HOME }}',
-            common
+      lnmgr, -d, '{{ dotfiles_local_repo }}',
+             -t, '{{ ansible_env.HOME }}',
+             --if-changed, '101',
+             common
     ]
-  register: stow
-  changed_when: '"LINK" in stow.stderr'
+  register: lnmgr
+  failed_when: 'lnmgr.rc not in (0, 101)'
+  changed_when: 'lnmgr.rc == 101'
 
 - name: Clone dotfiles-private repository
   git:
@@ -43,16 +52,11 @@
 - name: Install dotfiles-private
   command:
     argv: [
-      stow, -v, -d, '{{ dotfiles_private_local_repo }}',
-            -t, '{{ ansible_env.HOME }}',
-            '{{ dotfiles_private_which }}'
+      lnmgr, -d, '{{ dotfiles_private_local_repo }}',
+             -t, '{{ ansible_env.HOME }}',
+             --if-changed, '101',
+             '{{ dotfiles_private_which }}'
     ]
-  register: stow
-  changed_when: '"LINK" in stow.stderr'
-
-- name: Fix permissions on ~/.ssh
-  file:
-    state: directory
-    path: '{{ ansible_env.HOME }}/.ssh'
-    mode: u=rwX,go=
-    recurse: true
+  register: lnmgr
+  failed_when: 'lnmgr.rc not in (0, 101)'
+  changed_when: 'lnmgr.rc == 101'
