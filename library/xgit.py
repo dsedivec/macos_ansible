@@ -86,6 +86,13 @@ options:
         type: bool
         default: 'no'
         version_added: "0.7"
+    fast_forward:
+        description:
+            - If C(yes), branches will only be reset if they are a subset
+              of the remote branch.  No effect when entering a detached head.
+        type: bool
+        default: 'yes'
+        version_added: "local"
     depth:
         description:
             - Create a shallow clone with a history truncated to the specified
@@ -515,6 +522,21 @@ def has_local_mods(module, git_path, dest, bare):
     return len(lines) > 0
 
 
+def ensure_fast_forward(module, git_path, dest, remote, branch):
+    rc, _, _ = module.run_command(
+        [
+            git_path,
+            'merge-base',
+            '--is-ancestor',
+            'HEAD',
+            '%s/%s' % (remote, branch),
+        ],
+        cwd=dest,
+    )
+    if rc != 0:
+        module.fail_json(msg="Cannot fast forward %s" % (branch,))
+
+
 def reset(git_path, module, dest):
     '''
     Resets the index and working tree to HEAD.
@@ -874,7 +896,16 @@ def set_remote_branch(git_path, module, dest, remote, version, depth):
         module.fail_json(msg="Failed to fetch branch from remote: %s" % version, stdout=out, stderr=err, rc=rc)
 
 
-def switch_version(git_path, module, dest, remote, version, verify_commit, depth):
+def switch_version(
+    git_path,
+    module,
+    dest,
+    remote,
+    version,
+    fast_forward,
+    verify_commit,
+    depth,
+):
     cmd = ''
     if version == 'HEAD':
         branch = get_head_branch(git_path, module, dest, remote)
@@ -882,6 +913,8 @@ def switch_version(git_path, module, dest, remote, version, verify_commit, depth
         if rc != 0:
             module.fail_json(msg="Failed to checkout branch %s" % branch,
                              stdout=out, stderr=err, rc=rc)
+        if fast_forward:
+            ensure_fast_forward(module, git_path, dest, remote, branch)
         cmd = "%s reset --hard %s/%s --" % (git_path, remote, branch)
     else:
         # FIXME check for local_branch first, should have been fetched already
@@ -897,6 +930,8 @@ def switch_version(git_path, module, dest, remote, version, verify_commit, depth
                 (rc, out, err) = module.run_command("%s checkout --force %s" % (git_path, version), cwd=dest)
                 if rc != 0:
                     module.fail_json(msg="Failed to checkout branch %s" % version, stdout=out, stderr=err, rc=rc)
+                if fast_forward:
+                    ensure_fast_forward(module, git_path, dest, remote, version)
                 cmd = "%s reset --hard %s/%s" % (git_path, remote, version)
         else:
             cmd = "%s checkout --force %s" % (git_path, version)
@@ -1014,6 +1049,7 @@ def main():
             refspec=dict(default=None),
             reference=dict(default=None),
             force=dict(default='no', type='bool'),
+            fast_forward=dict(default='yes', type='bool'),
             depth=dict(default=None, type='int'),
             clone=dict(default='yes', type='bool'),
             update=dict(default='yes', type='bool'),
@@ -1039,6 +1075,7 @@ def main():
     remote = module.params['remote']
     refspec = module.params['refspec']
     force = module.params['force']
+    fast_forward = module.params['fast_forward']
     depth = module.params['depth']
     update = module.params['update']
     allow_clone = module.params['clone']
@@ -1194,7 +1231,16 @@ def main():
     # switch to version specified regardless of whether
     # we got new revisions from the repository
     if not bare:
-        switch_version(git_path, module, dest, remote, version, verify_commit, depth)
+        switch_version(
+            git_path,
+            module,
+            dest,
+            remote,
+            version,
+            fast_forward,
+            verify_commit,
+            depth,
+        )
 
     # Deal with submodules
     submodules_updated = False
