@@ -1,11 +1,10 @@
 - name: Clone Emacs Git repo
-  git:
+  xgit:
     repo: https://git.savannah.gnu.org/git/emacs.git
     dest: '{{ emacs_src_dir }}'
-    # update=yes will "git reset --hard", which could lose local commits.
-    # Also, if Emacs.app already exists, maybe it's annoying to rebuild Emacs
-    # too frequently.
-    update: '{{ software_emacs_update_git }}'
+    # Make this conditional, since I usually want to control when I
+    # rebuild Emacs.
+    update: '{{ software_emacs_git_update }}'
   register: git_clone_emacs
 
 - name: Install Emacs dependencies
@@ -50,17 +49,29 @@
     src: '{{ (user_app_dir + "/Emacs.app/Contents/MacOS/bin/emacsclient") | relpath(user_bin_dir) }}'
 
 - name: Clone dot-emacs-d repository
-  git:
+  xgit:
     repo: '{{ dot_emacs_d_remote_repo }}'
     dest: '{{ dot_emacs_d_local_repo }}'
-    update: no
 
 - name: Clone org-mode repository
-  git:
+  xgit:
     repo: '{{ org_mode_remote_repo }}'
     dest: '{{ org_mode_local_repo }}'
-    update: no
+    # This is conditional for the same reason Emacs itself is: this
+    # repo sees lots of commits and I want to control when I update
+    # org-mode, rather than potentially rebuilding it multiple times
+    # per day.
+    update: '{{ software_emacs_git_update }}'
   register: git_org_mode
+
+- name: Rebase my org-mode changes atop upstream
+  script: rebase_org_mode.sh
+  args:
+    chdir: '{{ org_mode_local_repo }}'
+  register: org_rebase
+  failed_when: 'org_rebase.rc not in (0, 111)'
+  changed_when: 'org_rebase.rc == 111'
+  when: 'software_emacs_git_update | bool'
 
 - name: Check for org-mode package and metadata
   find:
@@ -76,10 +87,13 @@
   command: ./build-emacs-package.sh
   args:
     chdir: '{{ org_mode_local_repo }}'
-  when: git_org_mode is changed or not (
-            'archive-contents' in (org_package_files.files | map(attribute='path') | map('basename') | list)
-            and org_package_files.matched >= 2
-        )
+  when: >
+    git_org_mode is changed
+    or org_rebase is changed
+    or not (
+        'archive-contents' in (org_package_files.files | map(attribute='path') | map('basename') | list)
+        and org_package_files.matched >= 2
+    )
 
 - name: Put Emacs in the Dock
   command:
