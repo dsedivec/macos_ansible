@@ -51,6 +51,7 @@ From https://blog.bejarano.io/hardening-macos.html:
 ## Applications
 
 * 1Password
+* Adium: Set up account
 * Alfred: Turn on auto-expand snippets (not synced)
 * Amphetamine: Set to run at login
 * Bartender: License, start at login, position menu items
@@ -71,6 +72,7 @@ From https://blog.bejarano.io/hardening-macos.html:
 * Moom: License, start at login, hide with Bartender
 * OneNote: Sign in
 * Parallels: Grant various permissions at first run, install license, copy over VMs
+* PDFPenPro: License
 * QuoteFix (mail plug-in): Set preferences
 * Safari: Install extensions (AdGuard and sVim currently)
 * ScreenFlow: License
