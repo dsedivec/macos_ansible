@@ -39,6 +39,7 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Go into Accessibility → Speech → System Voice → Customize and download the high quality voices
 * Double tap fn and enable dictation once to download the Enhanced Dictionary
 * Set up printer
+* Turn a bunch of notifications to "show content only when unlocked"
 
 
 ## Hardening
