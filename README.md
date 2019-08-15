@@ -40,13 +40,7 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Double tap fn and enable dictation once to download the Enhanced Dictionary
 * Set up printer
 * Turn a bunch of notifications to "show content only when unlocked"
-
-
-## Hardening
-
-From https://blog.bejarano.io/hardening-macos.html:
-
-* Turn off "Spotlight Suggestions" and "Allow Spotlight Suggestions in Look Up", because the preference for the former is a big complicated array that I don't want to script, and I'm not at all sure I know what the preference for the second even is.
+* Turn off "Spotlight Suggestions" and "Allow Spotlight Suggestions in Look Up", because the preference for the former is a big complicated array that I don't want to script, and I'm not at all sure I know what the preference for the second even is
 
 
 ## Applications
