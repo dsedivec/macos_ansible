@@ -1,5 +1,5 @@
 - name: Clone Emacs Git repo
-  xgit:
+  x_git:
     repo: https://git.savannah.gnu.org/git/emacs.git
     dest: '{{ emacs_src_dir }}'
     # Make this conditional, since I usually want to control when I
@@ -49,12 +49,12 @@
     src: '{{ (user_app_dir + "/Emacs.app/Contents/MacOS/bin/emacsclient") | relpath(user_bin_dir) }}'
 
 - name: Clone dot-emacs-d repository
-  xgit:
+  x_git:
     repo: '{{ dot_emacs_d_remote_repo }}'
     dest: '{{ dot_emacs_d_local_repo }}'
 
 - name: Clone org-mode repository
-  xgit:
+  x_git:
     repo: '{{ org_mode_remote_repo }}'
     dest: '{{ org_mode_local_repo }}'
     # This is conditional for the same reason Emacs itself is: this
@@ -62,6 +62,10 @@
     # org-mode, rather than potentially rebuilding it multiple times
     # per day.
     update: '{{ software_emacs_git_update }}'
+    # We must allow non-fast-forward updates, as I'm maintaining
+    # patches atop upstream.  This may lose local commits that I
+    # forget to push---value your reflog!  I should make this better.
+    fast_forward: no
   register: git_org_mode
 
 - name: Rebase my org-mode changes atop upstream
