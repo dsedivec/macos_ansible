@@ -41,6 +41,7 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Set up printer
 * Turn a bunch of notifications to "show content only when unlocked"
 * Turn off "Spotlight Suggestions" and "Allow Spotlight Suggestions in Look Up", because the preference for the former is a big complicated array that I don't want to script, and I'm not at all sure I know what the preference for the second even is
+* Add Unicode and my Russian input methods (this is in `com.apple.HIToolbox` but I didn't feel confident about setting it due to crazy `KeyboardLayout ID` value that I couldn't identify)
 
 
 ## Applications
