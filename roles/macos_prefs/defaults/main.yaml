@@ -17,6 +17,10 @@ macos_prefs_set:
     type: bool
     value: true
 
+  - key: AppleShowScrollBars
+    type: string
+    value: WhenScrolling
+
   # Most/all of these seem to be necessary to set trackpad "Swipe
   # between pages" to "Swipe with three fingers".  First one
   # *disables* two finger swipe.  Most/all of the rest seem to be
