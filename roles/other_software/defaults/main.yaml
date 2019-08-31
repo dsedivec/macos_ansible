@@ -211,4 +211,4 @@ other_software_preferences:
 other_software_add_dock:
   - /Applications/Google Chrome.app
   - ~/Applications/iTerm.app
-  - ~/Applications/Adium.app
+  - ~/Applications/Signal.app
