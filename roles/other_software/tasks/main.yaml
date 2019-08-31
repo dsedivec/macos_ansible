@@ -72,6 +72,17 @@
     ]
   when: 'pgrep.rc == 0'
 
+- name: Set VLC preferences
+  ini_file:
+    path: '{{ ansible_env.HOME }}/Library/Preferences/org.videolan.vlc/vlcrc'
+    state: present
+    section: '{{ item.0 }}'
+    option: '{{ item.1 }}'
+    value: '{{ item.2 }}'
+  loop:
+    - [macosx, macosx-statusicon, 0]
+    - [core, audio-replay-gain-mode, album]
+
 - name: Install software from Mac App Store
   command: mas install {{ item.0 }}
   args:
