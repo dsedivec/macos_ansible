@@ -14,9 +14,14 @@
     name:
       - autoconf
       - automake
-      - librsvg
-      - ImageMagick
       - jansson
+      - cairo
+      - xpm
+      - libpng
+      - jpeg
+      - tiff
+      - giflib
+      - librsvg
       - gnutls
       - libxml2
       - ccache

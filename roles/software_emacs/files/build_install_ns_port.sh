@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Packages you will need:
-# rsvg, ImageMagick, libxml2, gnutls, Jansson
-
 set -euo pipefail
 
 extra_config=''
@@ -29,9 +26,10 @@ fi
 
 git clean -Xdf
 ./autogen.sh
-./configure --with-ns \
-            --with-modules --with-rsvg --with-imagemagick \
-            --with-xml2 --with-gnutls --with-json --without-x $extra_config
+./configure --with-ns --without-x --with-modules \
+            --with-xml2 --with-json --with-cairo --with-gnutls \
+            --with-{xpm,jpeg,tiff,gif,png,rsvg} \
+            $extra_config
 # Must "make" before "make install", otherwise you don't get man and
 # info installed in the app bundle.
 make
