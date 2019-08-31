@@ -276,6 +276,19 @@ macos_prefs_set:
         'type': 'standard'
 
   - domain: com.apple.symbolichotkeys
+    # kCGSHotKeySelectNextInputSource
+    key: [AppleSymbolicHotKeys, 61]
+    type: dict
+    value:
+      enabled: true
+      value:
+        parameters:
+          - 92
+          - 42
+          - 1048576
+        type: standard
+
+  - domain: com.apple.symbolichotkeys
     # kCGSHotKeyDashboard
     key: [AppleSymbolicHotKeys, 62]
     type: dict
