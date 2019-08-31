@@ -53,6 +53,7 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Bartender: License, start at login, position menu items
 * BetterTouchTool: Start at login and set up sync (but sync seems broken as of 2019-07-04, so maybe just export/import), hide with Bartender
 * Brother iPrint&Scan: Add scanner, make workflow (turn off high compression but leave PDF at normal/middle for compression, turn on smart page size detection and searchable PDF)
+* Calibre: Point at library
 * Chrome: Sign in, disable consistency flag, set sync preferences, unlock, import extension settings (Auto Delete Cookies, Privacy Badger, uBlock, ViolentMonkey, SessionBuddy, etc.)
 * Dash: Turn on sync
 * Dropbox: Start at login, login, turn off photo/video syncing
