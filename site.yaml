@@ -1,6 +1,6 @@
 - hosts: all
   roles:
-    - {role: pkg_facts, tags: [always]}
+    - {role: macos_facts, tags: [always]}
     - {role: macos_system, tags: [macos_system]}
     - {role: software_mactex, tags: [software_mactex]}
     - {role: fonts, tags: [fonts]}

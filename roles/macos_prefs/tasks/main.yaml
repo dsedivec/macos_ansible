@@ -45,6 +45,7 @@
     type: '{{ item.type | default }}'
     value: '{{ item.value | default }}'
   become: '{{ item.become | default(False) }}'
+  when: '{{ item.when | default(True) }}'
   loop: '{{ macos_prefs_set }}'
 
 - name: Set power preferences

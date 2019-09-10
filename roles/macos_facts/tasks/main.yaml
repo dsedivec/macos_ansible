@@ -7,3 +7,9 @@
 - name: Set macos_installed_pkgs fact
   set_fact:
     macos_installed_pkgs: '{{ pkgutil_output.stdout_lines | default }}'
+
+- name: Set ansible_distribution_minor_version for macOS
+  set_fact:
+    ansible_distribution_minor_version: >-
+      {{ ansible_distribution_version.split(".")[1] }}
+  when: 'ansible_distribution == "MacOSX"'
