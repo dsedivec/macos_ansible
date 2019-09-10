@@ -67,6 +67,13 @@ def run_module():
         is_in_group = True
     elif checkmember_rc == os.EX_NOUSER:
         is_in_group = False
+    elif checkmember_rc == os.EX_USAGE:
+        module.fail_json(
+            msg=(
+                "dseditgroup says group %r does not exist (exited %r)"
+                % (module.params["group"], checkmember_rc)
+            )
+        )
     else:
         module.fail_json(
             msg="dseditgroup -o checkmember exited %r" % (checkmember_rc,)
