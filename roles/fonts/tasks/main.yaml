@@ -24,6 +24,7 @@
     #src: '{{ item | relpath(user_font_dir) }}'
     src: '{{ item }}'
     dest: '{{ user_font_dir }}/{{ item | basename }}'
+    force: '{{ fonts_force_links }}'
   loop: '{{ mactex_fonts.files | map(attribute="path") | list }}'
   tags: [slow]
 
