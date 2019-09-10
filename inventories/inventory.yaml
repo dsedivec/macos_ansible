@@ -1,6 +1,6 @@
 all:
   hosts:
-    dale_work:
+    dale-work:
       ansible_connection: local
       computer_name: Dale's Work Machine
 
