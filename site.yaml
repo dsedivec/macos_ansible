@@ -3,7 +3,6 @@
     - {role: macos_facts, tags: [always]}
     - {role: macos_system, tags: [macos_system]}
     - {role: software_mactex, tags: [software_mactex]}
-    - {role: fonts, tags: [fonts]}
     - {role: macos_prefs, tags: [macos_prefs]}
     - {role: software_emacs, tags: [software_emacs]}
     - {role: dotfiles, tags: [dotfiles]}
@@ -18,5 +17,6 @@
     - {role: software_dev_web, tags: [software_dev_web]}
     - {role: other_software, tags: [other_software]}
     - {role: mail_plug_ins, tags: [mail_plug_ins]}
+    - {role: fonts, tags: [fonts]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'
