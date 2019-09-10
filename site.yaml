@@ -3,6 +3,10 @@
     - {role: macos_facts, tags: [always]}
     - {role: macos_system, tags: [macos_system]}
     - {role: software_mactex, tags: [software_mactex]}
+    # Force install of MacPorts before macos_prefs so we get the fast
+    # PyObjC.  See roles/macports/tasks/main.yaml for more
+    # information.
+    - {role: macports, tags: [macports]}
     - {role: macos_prefs, tags: [macos_prefs]}
     - {role: software_emacs, tags: [software_emacs]}
     - {role: dotfiles, tags: [dotfiles]}
