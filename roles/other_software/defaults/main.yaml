@@ -27,6 +27,7 @@ other_software_macports:
   - mercurial
   - mp3splt
   - mtr
+  - ncdu
   - neomutt
   - nmap
   - openjdk11
@@ -95,6 +96,7 @@ other_software_user_casks:
   - freac
   - grandperspective
   - hammerspoon
+  - handbrake
   - insomnia
   - iterm2
   - knockknock
