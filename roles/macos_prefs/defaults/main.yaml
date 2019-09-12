@@ -770,6 +770,11 @@ macos_prefs_set:
     value: true
 
   - domain: com.apple.systemuiserver
+    key: "NSStatusItem Visible com.apple.scriptmenu"
+    type: bool
+    value: true
+
+  - domain: com.apple.systemuiserver
     key: menuExtras
     value:
       - "/System/Library/CoreServices/Menu Extras/User.menu"
@@ -778,6 +783,7 @@ macos_prefs_set:
       - "/System/Library/CoreServices/Menu Extras/Bluetooth.menu"
       - "/System/Library/CoreServices/Menu Extras/Displays.menu"
       - "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
+      - "/System/Library/CoreServices/Menu Extras/Script Menu.menu"
 
   - domain: com.apple.touchbar.agent
     key: PresentationModeFnModes
