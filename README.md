@@ -57,7 +57,7 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Chrome: Sign in, disable consistency flag, set sync preferences, unlock, import extension settings (Auto Delete Cookies, Privacy Badger, uBlock, ViolentMonkey, SessionBuddy, etc.)
 * Dash: Turn on sync
 * Dropbox: Start at login, login, turn off photo/video syncing
-* Firefox: Sync, Little Snitch private rule, extensions
+* Firefox: Sync, Little Snitch private rule, extensions, `userChrome.css` (checked in here)
 * Google Play Music: Log in
 * GPGMail (mail plug-in): License, set preferences
 * Hammerspoon: Start at login, grant accessibility, hide with Bartender
@@ -78,6 +78,8 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Textual: Add license, configure Freenode, including nick, auth, auto-reconnect settings, connect commands, +i on connect
 * Tunnelblick: All configuration
 * Witch: Enable, license
+
+Special shout out to the Mozilla Firefox team who make a great browser but who don't give me any sane way to figure out what the default user profile directory is, if any.  *Super* frustrating day, that was.
 
 
 ### Textual
