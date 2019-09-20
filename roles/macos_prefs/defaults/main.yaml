@@ -734,6 +734,24 @@ macos_prefs_set:
           - 8650752
         'type': 'standard'
 
+  # I added Unicode to this list.
+  - domain: com.apple.CharacterPaletteIM
+    key: CVActiveCategories
+    type: array
+    value:
+      - "Category-Emoji"
+      - "Category-Arrows"
+      - "Category-Bullets"
+      - "Category-CurrencySymbols"
+      - "Category-Latin"
+      - "Category-LetterlikeSymbols"
+      - "Category-MathematicalSymbols"
+      - "Category-Parentheses"
+      - "Category-Pictographs"
+      - "Category-Punctuation"
+      - "Category-Unicode"
+
+
   - domain: com.apple.menuextra.clock
     key: DateFormat
     type: string
