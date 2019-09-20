@@ -34,7 +34,6 @@
   environment:
     # Necessary so our wrapper script can find the real "brew".
     PATH: '{{ homebrew_bin }}:{{ ansible_env.PATH }}'
-  tags: [slow]
   tags: [slow, homebrew_casks]
   notify:
     - Run macsigcheck
@@ -54,7 +53,6 @@
     state: present
     path: '{{ homebrew_bin }}'
     install_options: 'appdir={{ user_app_dir }}'
-  tags: [slow]
   tags: [slow, homebrew_casks]
   notify:
     - Run macsigcheck
