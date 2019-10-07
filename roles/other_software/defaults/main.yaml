@@ -159,7 +159,7 @@ other_software_preferences:
 
   org.herf.Flux:
     - [sleepLate, int, 1]
-    - [wakeTime, int, 390]
+    - [wakeTime, int, 480]
     - [wakeNotifyDisable, int, 1]
 
   com.googlecode.iterm2:
