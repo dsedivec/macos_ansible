@@ -211,6 +211,6 @@ other_software_preferences:
       ]
 
 other_software_add_dock:
-  - /Applications/Google Chrome.app
+  - /Applications/Firefox Developer Edition.app
   - ~/Applications/iTerm.app
   - ~/Applications/Signal.app
