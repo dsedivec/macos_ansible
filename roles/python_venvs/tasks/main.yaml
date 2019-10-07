@@ -4,6 +4,12 @@
     name: [python27, py27-virtualenv, python37]
   become: yes
 
+- name: Select a "python3" executable
+  command: port select --set python3 python37
+  args:
+    creates: /opt/local/bin/python3
+  become: yes
+
 - name: Build Python 2.7 virtualenv
   command:
     argv: [/opt/local/bin/virtualenv-2.7, '{{ user_py2_venv_dir }}']
