@@ -1,5 +1,11 @@
-- name: Install SBCL
+- name: Install SBCL (and OpenSSL)
+  # OpenSSL is used by install_quicklisp.sh.
   x_macports:
     state: present
-    name: sbcl
+    name: [sbcl, openssl]
   become: yes
+
+- name: Install Quicklisp
+  script: install_quicklisp.sh
+  args:
+    creates: '{{ ansible_env.HOME }}/quicklisp'
