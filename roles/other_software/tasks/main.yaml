@@ -131,11 +131,18 @@
     name: onkyo-eiscp
     state: present
 
-- name: Symlink onkyo into {{ user_bin_dir }}
+- name: Install VisiData
+  pip:
+    virtualenv: '{{ user_py3_venv_dir }}'
+    name: [visidata, openpyxl, xlrd, lxml]
+    state: present
+
+- name: Symlink Python software into {{ user_bin_dir }}
   file:
     state: link
-    src: '{{ user_py3_venv_bin | relpath(user_bin_dir) }}/onkyo'
-    path: '{{ user_bin_dir }}/onkyo'
+    src: '{{ user_py3_venv_bin | relpath(user_bin_dir) }}/{{ item }}'
+    path: '{{ user_bin_dir }}/{{ item }}'
+  loop: [onkyo, vd]
 
 - name: Install SilentKnight
   command:
