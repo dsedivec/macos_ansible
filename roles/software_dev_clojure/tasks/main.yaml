@@ -1,0 +1,10 @@
+- name: Install Leiningen
+  get_url:
+    url: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    dest: '{{ user_bin_dir }}/lein'
+    mode: 0755
+
+- name: Install clj-kondo
+  script: install_clj_kondo.sh {{ user_bin_dir | quote }}
+  args:
+    creates: '{{ user_bin_dir }}/clj-kondo'
