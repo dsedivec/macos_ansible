@@ -42,7 +42,7 @@ other_software_macports:
   # Note that python27 is explicitly installed in another task, for
   # Ansible's benefit.  python27 and python37 are also installed by
   # software_dev_python.
-  - ripgrep
+  - ripgrep +pcre
   - rlwrap
   - samba3
   - sleepwatcher
