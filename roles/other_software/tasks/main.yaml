@@ -128,16 +128,10 @@
   notify:
     - Restart Dock
 
-- name: Install onkyo utility
+- name: Install Python 3 software in {{ user_py3_venv_dir }}
   pip:
     virtualenv: '{{ user_py3_venv_dir }}'
-    name: onkyo-eiscp
-    state: present
-
-- name: Install VisiData
-  pip:
-    virtualenv: '{{ user_py3_venv_dir }}'
-    name: [visidata, openpyxl, xlrd, lxml]
+    name: '{{ other_software_py3_venv }}'
     state: present
 
 - name: Symlink Python software into {{ user_bin_dir }}
@@ -145,7 +139,8 @@
     state: link
     src: '{{ user_py3_venv_bin | relpath(user_bin_dir) }}/{{ item }}'
     path: '{{ user_bin_dir }}/{{ item }}'
-  loop: [onkyo, vd]
+  loop: [onkyo, vd, proselint, ydiff]
+  ignore_errors: '{{ ansible_check_mode }}'
 
 - name: Install SilentKnight
   command:

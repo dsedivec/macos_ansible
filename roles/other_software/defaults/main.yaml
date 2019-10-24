@@ -126,6 +126,16 @@ other_software_mac_app_store:
   - [1193539993, '/Applications/Brother iPrint&Scan.app']
   - [515886877, /Applications/Joystick Show.app]
 
+other_software_py3_venv:
+  - onkyo-eiscp
+  - visidata
+  # These three are requirements to enable features of VisiData.
+  - openpyxl
+  - xlrd
+  - lxml
+  - proselint
+  - ydiff
+
 other_software_preferences:
   com.adguard.safari.AdGuard:
     - [NSFullScreenMenuItemEverywhere, bool, false]
