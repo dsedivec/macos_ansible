@@ -89,7 +89,8 @@ other_software_user_casks:
   - audio-hijack
   - bartender
   - bettertouchtool
-  - calibre
+  # Calibre 4 requires Mojave or later.
+  - [calibre, "14"]
   - dash
   - epic-games
   - flux
