@@ -1,4 +1,4 @@
 user_py2_venv_dir: '{{ ansible_env.HOME }}/.vpy/2.7'
 user_py2_venv_bin: '{{ user_py2_venv_dir }}/bin'
-user_py3_venv_dir: '{{ ansible_env.HOME }}/.vpy/3.7'
+user_py3_venv_dir: '{{ ansible_env.HOME }}/.vpy/3.8'
 user_py3_venv_bin: '{{ user_py3_venv_dir }}/bin'

@@ -32,7 +32,7 @@
 # GNU readline + MacPorts + Python = still a pain in the ass
 #
 # This is approximately how MacPorts handles this problematic
-# combination in its own py37-gnureadline port.  Using easy_install so
+# combination in its own py38-gnureadline port.  Using easy_install so
 # that gnureadline gets installed in a subdirectory of site-packages,
 # a subdirectory which we can then insert into the path before the
 # MacPorts lib-dynload path.  (MacPorts modifies setup.py to use
@@ -52,10 +52,10 @@
 - name: Install readline_path.py
   copy:
     src: readline_path.py
-    dest: '{{ user_py3_venv_dir }}/lib/python3.7/site-packages/'
+    dest: '{{ user_py3_venv_dir }}/lib/python3.8/site-packages/'
 
 - name: Install readline_path.pth
   copy:
     content: |
       import readline_path
-    dest: '{{ user_py3_venv_dir }}/lib/python3.7/site-packages/readline_path.pth'
+    dest: '{{ user_py3_venv_dir }}/lib/python3.8/site-packages/readline_path.pth'

@@ -1,11 +1,11 @@
 - name: Install web and blog development MacPorts packages
   x_macports:
     state: present
-    name: [npm6, hugo +extended, py37-pygments]
+    name: [npm6, hugo +extended, py38-pygments]
   become: yes
 
-- name: Make "pygments" run py37-pygments in MacPorts
-  command: port select --set pygments py37-pygments
+- name: Make "pygments" run py38-pygments in MacPorts
+  command: port select --set pygments py38-pygments
   args:
     creates: /opt/local/bin/pygmentize
   become: yes
