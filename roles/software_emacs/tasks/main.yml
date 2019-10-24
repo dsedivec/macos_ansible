@@ -54,9 +54,10 @@
     src: '{{ (user_app_dir + "/Emacs.app/Contents/MacOS/bin/emacsclient") | relpath(user_bin_dir) }}'
 
 - name: Clone dot-emacs-d repository
-  x_git:
+  x_git_update:
     repo: '{{ dot_emacs_d_remote_repo }}'
     dest: '{{ dot_emacs_d_local_repo }}'
+    update_mode: rebase-autostash
 
 - name: Clone org-mode repository
   x_git:
