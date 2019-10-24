@@ -1,7 +1,9 @@
 - name: Install web and blog development MacPorts packages
   x_macports:
     state: present
-    name: [npm6, hugo +extended, py38-pygments]
+    # Explicitly install latest nodejs12, needed for Tide (Emacs
+    # TypeScript development).  Otherwise I guess you get nodejs10?
+    name: [nodejs12, npm6, hugo +extended, py38-pygments]
   become: yes
 
 - name: Make "pygments" run py38-pygments in MacPorts
