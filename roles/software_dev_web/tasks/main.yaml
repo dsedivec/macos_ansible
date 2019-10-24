@@ -15,4 +15,34 @@
     state: present
     global: yes
     name: '{{ item }}'
-  loop: [csslint, js-beautify, eslint, tern, netlify-cli]
+  loop:
+    - csslint
+    - js-beautify
+    - tern
+    - netlify-cli
+
+- name: Make home directory for ESLint
+  file:
+    state: directory
+    path: '{{ software_dev_web_eslint_dir }}'
+
+# Note: package.json lists dependencies rather than devDependencies
+# because otherwise Ansible installs nothing.  See:
+# https://github.com/ansible/ansible/issues/50550
+# https://github.com/ansible/ansible/issues/29234
+# https://github.com/ansible/ansible/issues/49049
+# https://github.com/ansible/ansible/issues/44346
+- name: Install package.json for ESLint installation
+  copy:
+    src: eslint_package.json
+    dest: '{{ software_dev_web_eslint_dir }}/package.json'
+
+- name: Install ESLint
+  npm:
+    path: '{{ software_dev_web_eslint_dir }}'
+
+- name: Install eslint wrapper to {{ user_bin_dir }}
+  copy:
+    src: eslint_wrapper
+    dest: '{{ user_bin_dir }}/eslint'
+    mode: 0755

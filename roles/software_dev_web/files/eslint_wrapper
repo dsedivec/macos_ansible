@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+shopt -s nullglob
+
+eslint_dir=$HOME/.eslint
+eslint=$eslint_dir/node_modules/.bin/eslint
+eslint_config=$eslint_dir/.eslintrc.js
+
+if [ ! -x "$eslint" ]; then
+	echo "$eslint doesn't exist or is not executable" >&2
+	exit 1
+fi
+
+use_home_dir_config=1
+orig_pwd=$PWD
+while [ "$PWD" != "$HOME" ]; do
+	configs=(.eslintrc.*)
+	if [[ ${#configs[*]} -gt 0 || -e .eslintrc ]] \
+		   || grep -qw eslintConfig package.json 2>/dev/null; then
+		use_home_dir_config=0
+		break
+	fi
+	last_pwd="$PWD"
+	cd ..
+	if [ "$PWD" = "$last_pwd" ]; then
+		break
+	fi
+done
+cd "$orig_pwd"
+
+cmd=("$eslint")
+if [ $use_home_dir_config -eq 1 ]; then
+	cmd+=(--config "$eslint_config" --resolve-plugins-relative-to "$eslint_dir")
+fi
+
+exec "${cmd[@]}" "$@"
