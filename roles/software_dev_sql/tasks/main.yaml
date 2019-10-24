@@ -2,3 +2,15 @@
   gem:
     state: present
     name: sqlint
+
+- name: Install pgcli
+  pip:
+    virtualenv: '{{ user_py3_venv_dir }}'
+    name: pgcli
+    state: present
+
+- name: Symlink pgcli into {{ user_bin_dir }}
+  file:
+    state: link
+    src: '{{ user_py3_venv_bin }}/pgcli'
+    dest: '{{ user_bin_dir }}/pgcli'
