@@ -3,8 +3,3 @@
     state: present
     name: '{{ dev_shell_macports_packages }}'
   become: yes
-
-- name: Install ShellCheck
-  command:
-    argv: ['{{ stack }}', install, ShellCheck]
-    creates: '{{ stack_bin_dir }}/shellcheck'
