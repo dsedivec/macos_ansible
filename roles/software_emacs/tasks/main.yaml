@@ -5,6 +5,7 @@
     # Make this conditional, since I usually want to control when I
     # rebuild Emacs.
     update: '{{ software_emacs_git_update }}'
+    version: master
   register: git_clone_emacs
 
 - name: Install Emacs dependencies
@@ -40,7 +41,10 @@
   script: build_install_ns_port.sh
   args:
     chdir: '{{ emacs_src_dir }}'
-  when: git_clone_emacs is changed or not emacs_app_stat.stat.exists
+  when: >
+    git_clone_emacs is changed
+    or not emacs_app_stat.stat.exists
+    or software_emacs_force_build_emacs
 
 - name: Make bin directory
   file:
