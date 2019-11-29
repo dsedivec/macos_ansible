@@ -1,4 +1,5 @@
 emacs_src_dir: '{{ repositories_root }}/emacs'
+software_emacs_force_build_emacs: false
 software_emacs_git_update: false
 dot_emacs_d_remote_repo: git@github.com:dsedivec/dot-emacs-d.git
 dot_emacs_d_local_repo: '{{ ansible_env.HOME }}/.emacs.d'
