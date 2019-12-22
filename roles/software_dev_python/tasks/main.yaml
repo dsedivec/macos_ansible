@@ -77,3 +77,16 @@
     content: |
       import readline_path
     dest: '{{ user_py3_venv_dir }}/lib/python3.8/site-packages/readline_path.pth'
+
+# Elpy needs "virtualenv".
+- name: Install py38-virtualenv
+  x_macports:
+    name: py38-virtualenv
+    state: installed
+  become: true
+
+- name: Select py38-virtualenv as "virtualenv"
+  command:
+    argv: [port, select, --set, virtualenv, virtualenv38]
+    creates: /opt/local/bin/virtualenv
+  become: true
