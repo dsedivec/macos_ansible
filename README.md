@@ -65,6 +65,7 @@ Additionally, some software has been broken out into its own roles to get me sof
 * iTunes: Turn on wifi sync, pair with phone, turn off automatic syncing, manually sync music
   * **Warning!** When I did this, I got a warning saying that my phone can only sync with one library.  (I don't have a library.)  Then all my audiobooks got deleted.  Should find a better way to do this.
 * Little Snitch: Not even installed, do it all yourself---**installer will force reboot**
+* Loopback: Add license
 * Mail.app: Enable mail bundles (can't find any plist where these are enabled)
 * Moom: License, start at login, hide with Bartender
 * OneNote: Sign in
