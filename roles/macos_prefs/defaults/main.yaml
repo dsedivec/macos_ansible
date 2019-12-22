@@ -56,7 +56,7 @@ macos_prefs_set:
   - host: currentHost
     key: com.apple.trackpad.fiveFingerPinchSwipeGesture
     type: int
-    value: 0
+    value: 2
   - host: currentHost
     key: com.apple.trackpad.fourFingerHorizSwipeGesture
     type: int
@@ -64,7 +64,7 @@ macos_prefs_set:
   - host: currentHost
     key: com.apple.trackpad.fourFingerPinchSwipeGesture
     type: int
-    value: 0
+    value: 2
   - host: currentHost
     key: com.apple.trackpad.fourFingerVertSwipeGesture
     type: int
@@ -89,7 +89,7 @@ macos_prefs_set:
   - domain: com.apple.AppleMultitouchTrackpad
     key: TrackpadFiveFingerPinchGesture
     type: int
-    value: 0
+    value: 2
   - domain: com.apple.AppleMultitouchTrackpad
     key: TrackpadFourFingerHorizSwipeGesture
     type: int
@@ -97,7 +97,7 @@ macos_prefs_set:
   - domain: com.apple.AppleMultitouchTrackpad
     key: TrackpadFourFingerPinchGesture
     type: int
-    value: 0
+    value: 2
   - domain: com.apple.AppleMultitouchTrackpad
     key: TrackpadFourFingerVertSwipeGesture
     type: int
@@ -134,7 +134,7 @@ macos_prefs_set:
   - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: TrackpadFiveFingerPinchGesture
     type: int
-    value: 0
+    value: 2
   - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: TrackpadFourFingerHorizSwipeGesture
     type: int
@@ -142,7 +142,7 @@ macos_prefs_set:
   - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: TrackpadFourFingerPinchGesture
     type: int
-    value: 0
+    value: 2
   - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: TrackpadFourFingerVertSwipeGesture
     type: int
@@ -163,7 +163,7 @@ macos_prefs_set:
   - domain: com.apple.dock
     key: showDesktopGestureEnabled
     type: bool
-    value: false
+    value: true
   - domain: com.apple.dock
     key: showLaunchpadGestureEnabled
     type: bool
