@@ -26,6 +26,8 @@
       bins: [black]
     - package: isort
       bins: [isort]
+    - package: mypy
+      bins: [mypy]
   vars:
     virtualenv: '{{ user_py3_venv_dir }}'
 
