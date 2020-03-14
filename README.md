@@ -50,6 +50,7 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Adium: Set up account
 * Alfred: Turn on auto-expand snippets (not synced)
 * Amphetamine: Set to run at login
+* Audio Hijack: Add license
 * Bartender: License, start at login, position menu items
 * BetterTouchTool: Start at login and set up sync (but sync seems broken as of 2019-07-04, so maybe just export/import), hide with Bartender
 * Brother iPrint&Scan: Add scanner, make workflow (turn off high compression but leave PDF at normal/middle for compression, turn on smart page size detection and searchable PDF)
