@@ -26,10 +26,31 @@ fi
 
 git clean -Xdf
 ./autogen.sh
-./configure --with-ns --without-x --with-modules \
-            --with-xml2 --with-json --with-cairo --with-gnutls \
-            --with-{xpm,jpeg,tiff,gif,png,rsvg} \
-            $extra_config
+
+if ./configure --help | grep -q -- --with-mac; then
+	# Unofficial Mac port
+	build_dir=$PWD/build
+	app_contents=$build_dir/Emacs.app/Contents
+	app_res_dir=$app_contents/Resources
+	configure_args=(--with-mac
+	                "--enable-mac-app=$build_dir"
+	                "--prefix=$app_res_dir"
+	                "--exec-prefix=$app_contents/MacOS")
+else
+	# NS port
+	build_dir=$PWD/nextstep
+	configure_args=(--with-ns)
+fi
+
+configure_args+=(--without-x
+                 --with-modules
+                 --with-xml2
+                 --with-json
+                 --with-cairo
+                 --with-gnutls
+                 --with-{xpm,jpeg,tiff,gif,png,rsvg})
+./configure "${configure_args[@]}" $extra_config
+
 # Must "make" before "make install", otherwise you don't get man and
 # info installed in the app bundle.
 make
@@ -41,4 +62,4 @@ if [ -e "$dest" ]; then
 	rm -rf "$old"
 	mv "$dest" "$old"
 fi
-mv nextstep/Emacs.app "$dest"
+mv "$build_dir/Emacs.app" "$dest"
