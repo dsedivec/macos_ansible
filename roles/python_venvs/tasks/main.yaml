@@ -4,11 +4,17 @@
     name: [python27, py27-virtualenv, python38]
   become: yes
 
-- name: Select a "python3" executable
+- name: Check "python3" executable
+  stat:
+    path: /opt/local/bin/python3
+  register: python3_stat
+
+- name: Make "python3" point at latest Python 3 version
   command: port select --set python3 python38
-  args:
-    creates: /opt/local/bin/python3
   become: yes
+  when: >
+    not python3_stat.stat.islnk
+    or python3_stat.stat.lnk_source != "/opt/local/bin/python3.8"
 
 - name: Build Python 2.7 virtualenv
   command:
