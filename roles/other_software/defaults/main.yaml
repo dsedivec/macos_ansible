@@ -30,7 +30,7 @@ other_software_macports:
   - ncdu
   - neomutt
   - nmap
-  - openjdk11
+  - openjdk14
   - openssh +gsskex
   - p7zip
   - parallel
@@ -109,7 +109,7 @@ other_software_user_casks:
   - moom
   - nvidia-geforce-now
   - pdfpenpro
-  - plex-media-player
+  - plex
   - screenflow
   - signal
   - simple-comic
