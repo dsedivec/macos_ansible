@@ -9,7 +9,7 @@
       # --cached download is owned by our user.
       - --owner
       - '{{ ansible_user }}'
-      - --cache-dir
+      - --cache
       - '{{ ansible_env.HOME }}/Downloads'
   become: true
   when: ('org.tug.mactex.texlive2019' not in macos_installed_pkgs)
