@@ -827,10 +827,17 @@ macos_prefs_set:
       appWithControlStrip: functionKeys
       fullControlStrip: functionKeys
 
+  # Function keys always on Touch Bar.
   - domain: com.apple.touchbar.agent
     key: PresentationModeGlobal
     type: string
-    value: fullControlStrip
+    value: functionKeys
+
+  # Control Strip always on Touch Bar.
+  # - domain: com.apple.touchbar.agent
+  #   key: PresentationModeGlobal
+  #   type: string
+  #   value: fullControlStrip
 
   # Turning off text completion in the Touch Bar.
   - key: NSAutomaticTextCompletionEnabled
