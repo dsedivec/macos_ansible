@@ -115,7 +115,7 @@ def mount_dmg(module, path, agree_eulas=None):
     )
     match = re.search(r"^<\?xml", stdout, re.M)
     plist_xml = stdout[match.start() :]
-    plist = plistlib.readPlistFromString(plist_xml)
+    plist = plistlib.loads(plist_xml)
     any_device = None
     mount_point = None
     for entity in plist["system-entities"]:
@@ -171,7 +171,7 @@ def run_module():
         regexp_path_group = regexp.groupindex.get("path")
         for dir_path, dir_names, file_names in os.walk(mount_point):
             for coll, is_dir in ((dir_names, True), (file_names, False)):
-                for idx in reversed(xrange(len(coll))):
+                for idx in reversed(range(len(coll))):
                     name = coll[idx]
                     abs_path = os.path.join(dir_path, name)
                     rel_path = os.path.relpath(abs_path, mount_point)

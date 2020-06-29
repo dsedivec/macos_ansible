@@ -67,7 +67,7 @@ class ModuleFail(Exception):
 def maybe_convert_key_to_string(key):
     if isinstance(key, bool):
         key = int(key)
-    if isinstance(key, (float, int, long)):
+    if isinstance(key, (float, int)):
         key = str(key)
     return key
 
@@ -96,17 +96,13 @@ Operation = collections.namedtuple(
 def set_value(op, key_idx, container):
     key = op.key_list[key_idx]
     is_last_key = key_idx == (len(op.key_list) - 1)
-    if (
-        isinstance(container, list)
-        and isinstance(key, basestring)
-        and key.isdigit()
-    ):
+    if isinstance(container, list) and isinstance(key, str) and key.isdigit():
         op.key_list[key_idx] = key = int(key)
     try:
         cur_value = container[key]
     except (KeyError, TypeError, IndexError):
         container_is_dict = isinstance(container, dict)
-        if container_is_dict and not isinstance(key, basestring):
+        if container_is_dict and not isinstance(key, str):
             # If your key doesn't exist as its current non-string
             # type, but it does exist in its string incarnation, we'll
             # gladly use that.
@@ -271,9 +267,9 @@ def coerce_to_type(value, cls):
     if isinstance(value, cls):
         return value
     if cls == bool:
-        if isinstance(value, (int, long, float)):
+        if isinstance(value, (int, float)):
             return bool(value)
-        elif isinstance(value, basestring):
+        elif isinstance(value, str):
             value = value.lower()
             if value in ("y", "yes", "t", "true", "on"):
                 return True
@@ -392,16 +388,10 @@ def run_module():
     result["old_value"] = copy.deepcopy(top_value)
 
     container = {top_key: top_value}
-    if desired_type in (int, long):
-        desired_types = (int, long)
-    elif desired_type in (str, unicode):
-        desired_types = (basestring,)
-    else:
-        desired_types = (desired_type,)
     op = Operation(
         state=params["state"],
         key_list=key_list,
-        types=desired_types,
+        types=(desired_type,),
         new_value=new_value,
         check_type=check_type,
         add_merge=params["add_merge"],

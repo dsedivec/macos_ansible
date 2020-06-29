@@ -68,7 +68,7 @@ def run_module():
     desired_value = module.params["value"]
     desired_value_type = module.params.get("type")
     if desired_value_type in ("string", "str"):
-        if not isinstance(desired_value, basestring):
+        if not isinstance(desired_value, str):
             desired_value = str(desired_value)
     elif desired_value_type in ("boolean", "bool"):
         desired_value = module.boolean(desired_value)
@@ -79,7 +79,7 @@ def run_module():
     plist_xml = subprocess.check_output(
         ["security", "authorizationdb", "read", module.params["right"]]
     )
-    plist = plistlib.readPlistFromString(plist_xml)
+    plist = plistlib.loads(plist_xml)
     key = module.params["key"]
     try:
         current_value = plist[key]
@@ -98,7 +98,7 @@ def run_module():
             ["security", "authorizationdb", "write", module.params["right"]],
             stdin=subprocess.PIPE,
         )
-        security.communicate(plistlib.writePlistToString(plist))
+        security.communicate(plistlib.dumps(plist))
         if security.returncode != 0:
             module.fail_json(
                 msg=(

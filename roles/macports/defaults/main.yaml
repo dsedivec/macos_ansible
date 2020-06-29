@@ -1,1 +1,2 @@
-macports_python_2: /opt/local/bin/python2.7
+macports_python_3_version: '3.8'
+macports_python_3: '/opt/local/bin/python{{ macports_python_3_version }}'

@@ -15,7 +15,7 @@ import urllib
 def main(argv):
     logging.basicConfig(level=logging.INFO)
     logging.info("Fetching macOS version")
-    output = subprocess.check_output(["sw_vers", "-productVersion"])
+    output = subprocess.check_output(["sw_vers", "-productVersion"], text=True)
     match = re.search(r"^\d+\.\d+", output)
     macos_version = match.group(0)
     logging.info("macOS version is %r", macos_version)

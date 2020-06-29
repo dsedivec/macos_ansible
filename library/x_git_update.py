@@ -57,6 +57,7 @@ def run_git(module, args, check=(0,)):
         cwd=module.params["dest"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
+        text=True,
     )
     stdout, stderr = git.communicate()
     if check and not isinstance(check, collections.Container):

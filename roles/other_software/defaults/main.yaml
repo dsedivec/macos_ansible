@@ -40,7 +40,7 @@ other_software_macports:
   - pstree
   - pv
   - qrencode
-  # Note that python27 is explicitly installed in another task, for
+  # Note that python38 is explicitly installed in another task, for
   # Ansible's benefit.  python27 and python38 are also installed by
   # software_dev_python.
   - ripgrep +pcre

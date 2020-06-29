@@ -62,12 +62,19 @@ def run_module():
     module = AnsibleModule(argument_spec=module_args, supports_check_mode=True)
     current_settings = {"battery": {}, "charger": {}}
     reading_type = None
-    for line in subprocess.check_output(["pmset", "-g", "custom"]).splitlines():
+    for line in subprocess.check_output(
+        ["pmset", "-g", "custom"], text=True
+    ).splitlines():
         line = line.strip()
         if line == "Battery Power:":
             reading_type = "battery"
         elif line == "AC Power:":
             reading_type = "charger"
+        elif reading_type is None:
+            module.fail_json(
+                msg=f"Got line={line!r} before reading power source line",
+                **result,
+            )
         else:
             setting, value = line.split(None, 1)
             current_settings[reading_type][setting] = value

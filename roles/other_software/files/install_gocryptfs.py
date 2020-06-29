@@ -11,7 +11,9 @@ def main(argv):
     parser = argparse.ArgumentParser(prog=argv[0])
     parser.add_argument("dest_dir")
     args = parser.parse_args(argv[1:])
-    go_dir = subprocess.check_output("go env GOPATH".split()).rstrip("\r\n")
+    go_dir = subprocess.check_output("go env GOPATH".split(), text=True).rstrip(
+        "\r\n"
+    )
     subprocess.check_call("go get -d github.com/rfjakob/gocryptfs".split())
     gocryptfs_src_dir = os.path.join(go_dir, "src/github.com/rfjakob/gocryptfs")
     subprocess.check_call("git pull --ff-only".split(), cwd=gocryptfs_src_dir)
