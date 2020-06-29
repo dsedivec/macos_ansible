@@ -4,7 +4,11 @@ macos_prefs_change_modifiers_local_repo: '{{ repositories_root }}/change_modifie
 macos_prefs_display_manager_remote_repo: https://github.com/univ-of-utah-marriott-library-apple/display_manager
 macos_prefs_display_manager_local_repo: '{{ repositories_root }}/display_manager'
 macos_prefs_display_manager: '{{ macos_prefs_display_manager_local_repo }}/display_manager.py'
-macos_prefs_main_resolution: 1440x900
+macos_prefs_desired_resolutions:
+  # 2019 15" MBP
+  '1680x1050': '1440x900'
+  # 2020 16" MBP
+  '1792x1120': '1536x960'
 
 macos_prefs_domain_mail: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist'
 

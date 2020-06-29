@@ -22,6 +22,32 @@
     dest: '{{ macos_prefs_display_manager_local_repo }}'
     update: no
 
+- name: Get Apple's default resolution for the main display
+  command:
+    argv:
+      - /usr/bin/python
+      - '{{ macos_prefs_display_manager }}'
+      - show
+      - default
+      - main
+  register: default_resolution
+  changed_when: false
+
+- name: Set default resolution fact
+  set_fact:
+    macos_prefs_this_mac_default_resolution: >-
+        {{ default_resolution.stdout
+           | regex_replace("(?s)^.*resolution:\s*(\d+x\d+).*$", "\1") }}
+
+- name: Set desired resolution fact
+  set_fact:
+    macos_prefs_this_mac_desired_resolution: >-
+        {{
+            macos_prefs_desired_resolutions[
+                macos_prefs_this_mac_default_resolution
+            ]
+        }}
+
 - name: Get current resolution
   shell: /usr/bin/python '{{ macos_prefs_display_manager | quote }}'
          show current main | awk '/^resolution:/{print $2}'
@@ -31,10 +57,15 @@
 - name: Set resolution
   command:
     argv: [/usr/bin/python, '{{ macos_prefs_display_manager }}',
-           res, '{{ macos_prefs_main_resolution|replace("x", " ") }}',
+           res,
+           '{{ macos_prefs_this_mac_desired_resolution | replace("x", " ") }}',
            0, only-hidpi, main]
-  when: not ansible_check_mode
-        and current_resolution.stdout.strip() != macos_prefs_main_resolution
+  when: >-
+      not ansible_check_mode
+      and (
+          current_resolution.stdout.strip()
+          != macos_prefs_this_mac_desired_resolution
+      )
 
 - name: Set preferences
   x_osx_defaults:
