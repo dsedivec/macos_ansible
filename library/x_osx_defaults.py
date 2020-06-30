@@ -64,11 +64,13 @@ class ModuleFail(Exception):
         self.result = kwargs
 
 
-def maybe_convert_key_to_string(key):
+def ensure_key_is_str(key):
     if isinstance(key, bool):
         key = int(key)
     if isinstance(key, (float, int)):
         key = str(key)
+    if not isinstance(key, str):
+        raise Exception(f"Cannot convert key {key!r} to string")
     return key
 
 
@@ -78,6 +80,7 @@ SENTINEL = object()
 def merge_dicts(src, dst):
     changed = False
     for key, dst_value in src.iteritems():
+        key = ensure_key_is_str(key)
         src_value = src.get(key, SENTINEL)
         if isinstance(dst_value, dict) and isinstance(src_value, dict):
             changed = merge_dicts(src_value, dst_value) or changed
@@ -97,19 +100,16 @@ def set_value(op, key_idx, container):
     key = op.key_list[key_idx]
     is_last_key = key_idx == (len(op.key_list) - 1)
     if isinstance(container, list) and isinstance(key, str) and key.isdigit():
-        op.key_list[key_idx] = key = int(key)
+        key = int(key)
+    else:
+        assert isinstance(container, dict), repr(container)
+        key = ensure_key_is_str(key)
+    # In case we changed the type of the key.
+    op.key_list[key_idx] = key
     try:
         cur_value = container[key]
     except (KeyError, TypeError, IndexError):
         container_is_dict = isinstance(container, dict)
-        if container_is_dict and not isinstance(key, str):
-            # If your key doesn't exist as its current non-string
-            # type, but it does exist in its string incarnation, we'll
-            # gladly use that.
-            str_key = maybe_convert_key_to_string(key)
-            if str_key in container:
-                op.key_list[key_idx] = str_key
-                return set_value(op, key_idx, container)
         if is_last_key:
             cur_value = None
         elif container_is_dict and op.dict_create:
@@ -380,7 +380,7 @@ def run_module():
                 msg="Cannot provide value with state=absent", **result
             )
 
-    top_key = str(key_list[0])
+    top_key = ensure_key_is_str(key_list[0])
     top_value = CF.CFPreferencesCopyValue(
         top_key, params["domain"], params["user"], params["host"]
     )
