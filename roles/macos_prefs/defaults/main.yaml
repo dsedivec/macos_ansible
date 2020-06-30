@@ -956,6 +956,7 @@ macos_prefs_set:
   # idea.  What if Dropbox isn't installed yet?
   - domain: com.apple.finder
     key: ['NSToolbar Configuration Browser', 'TB Item Identifiers']
+    container_types: [dict]
     type: array
     value:
       - "com.apple.finder.BACK"

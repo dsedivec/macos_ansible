@@ -58,12 +58,6 @@ from ansible.module_utils.basic import AnsibleModule
 # fmt: on
 
 
-class ModuleFail(Exception):
-    def __init__(self, msg, **kwargs):
-        Exception.__init__(self, msg)
-        self.result = kwargs
-
-
 def ensure_key_is_str(key):
     if isinstance(key, bool):
         key = int(key)
@@ -88,79 +82,6 @@ def merge_dicts(src, dst):
             src[key] = dst_value
             changed = True
     return changed
-
-
-Operation = collections.namedtuple(
-    "Operation",
-    "state key_list types new_value check_type add_merge dict_create",
-)
-
-
-def set_value(op, key_idx, container):
-    key = op.key_list[key_idx]
-    is_last_key = key_idx == (len(op.key_list) - 1)
-    if isinstance(container, list) and isinstance(key, str) and key.isdigit():
-        key = int(key)
-    else:
-        assert isinstance(container, dict), repr(container)
-        key = ensure_key_is_str(key)
-    # In case we changed the type of the key.
-    op.key_list[key_idx] = key
-    try:
-        cur_value = container[key]
-    except (KeyError, TypeError, IndexError):
-        container_is_dict = isinstance(container, dict)
-        if is_last_key:
-            cur_value = None
-        elif container_is_dict and op.dict_create:
-            container[key] = cur_value = {}
-        else:
-            raise ModuleFail(
-                "Cannot find key %r" % (op.key_list[: key_idx + 1],)
-            )
-    if not is_last_key:
-        return set_value(op, key_idx + 1, cur_value)
-    else:
-        changed = False
-        if (
-            cur_value is not None
-            and op.check_type
-            and not isinstance(cur_value, op.types)
-        ):
-            raise ModuleFail(
-                (
-                    "Expected one of types (%s) but found %r instead"
-                    % (
-                        ", ".join(cls.__name__ for cls in op.types),
-                        type(cur_value).__name__,
-                    )
-                )
-            )
-        if op.state == "absent":
-            # You'll never get None out of a plist **as far as I
-            # know**.  Instead, if you see None, that means we were
-            # requested to delete a top-level preference that doesn't
-            # exist.
-            if cur_value is None:
-                assert len(op.key_list) == 1
-            else:
-                del container[key]
-                changed = True
-        else:
-            assert op.state == "present", repr(op.state)
-            if op.add_merge:
-                if isinstance(container, list):
-                    if op.new_value not in container:
-                        container.append(op.new_value)
-                        changed = True
-                elif isinstance(container, dict):
-                    if not isinstance(op.new_value, dict):
-                        raise ModuleFail("Cannot merge provided non-dict value")
-                    changed = merge_dicts(op.new_value, container)
-            elif cur_value != op.new_value:
-                container[key] = op.new_value
-                changed = True
-        return changed
 
 
 PREF_VALUE_TYPES = {
@@ -263,6 +184,13 @@ def parse_time_stamp(time_stamp_str):
         raise Exception("Cannot parse %r as time stamp" % (time_stamp_str,))
 
 
+class ModuleFail(Exception):
+    def __init__(self, message, **kwargs):
+        Exception.__init__(self, message)
+        self.message = message
+        self.result = kwargs
+
+
 def coerce_to_type(value, cls):
     if isinstance(value, cls):
         return value
@@ -310,11 +238,10 @@ def run_module():
         ),
         domain=dict(type="str", required=False, default="NSGlobalDomain"),
         key=dict(type="raw", required=True),
+        container_types=dict(type="raw", required=False, default=None),
         value=dict(type="raw", required=False, default=None),
-        add_merge=dict(type="bool", required=False, default=False),
-        dict_create=dict(type="bool", required=False, default=False),
-        type=dict(type="str", required=False, default=None),
-        check_type=dict(type="bool", required=False, default=None),
+        value_type=dict(type="str", required=False, default=None),
+        merge_value=dict(type="bool", required=False, default=False),
     )
     module = AnsibleModule(argument_spec=module_args, supports_check_mode=True)
 
@@ -328,11 +255,37 @@ def run_module():
         params["user"] = CF.kCFPreferencesCurrentUser
     if params["domain"] == "NSGlobalDomain":
         params["domain"] = CF.kCFPreferencesAnyApplication
+
+    def fail(msg):
+        module.fail_json(msg=msg, **result)
+
     key_list = params["key"]
     if type(key_list) != list:
         key_list = [key_list]
     elif len(key_list) < 1:
-        module.fail_json(msg="key cannot be an empty list", **result)
+        fail("key cannot be an empty list")
+
+    container_types = params["container_types"]
+    if container_types is None:
+        container_types = [None] * (len(key_list) - 1)
+    else:
+        if not isinstance(container_types, list):
+            container_types = [container_types]
+        elif len(container_types) != (len(key_list) - 1):
+            fail(
+                "container_types must have elements" " for all but the last key"
+            )
+        CONTAINER_TYPE_STR_TO_CLS = {"list": list, "dict": dict}
+        # Ansible doesn't like it if you put things that can't be serialized
+        # into JSON into the data structures that it owns, and which it will
+        # eventually try to put into the response.  Make a copy.
+        container_types = container_types[:]
+        for idx, container_type in enumerate(container_types):
+            try:
+                container_types[idx] = CONTAINER_TYPE_STR_TO_CLS[container_type]
+            except KeyError:
+                fail(f"Unknown container type {container_type}")
+
     # Copying these into the result to ease debugging.  Note that
     # these may be different than some of the info Ansible prints/puts
     # into the result for you, since it'll be filling in the module's
@@ -343,42 +296,39 @@ def run_module():
     result["key_list"] = key_list
 
     new_value = params["value"]
-    desired_type = params["type"] or None
-    if desired_type is not None and desired_type not in PREF_VALUE_TYPES.keys():
-        module.fail_json(
-            msg=(
+    if new_value is None:
+        fail("Cannot handle new value of None")
+    value_type = params["value_type"] or None
+    if value_type is not None:
+        try:
+            value_type = PREF_VALUE_TYPES[value_type]
+        except KeyError:
+            fail(
                 "Type %r invalid, must be one of: %s"
-                % (desired_type, ", ".join(PREF_VALUE_TYPES))
+                % (value_type, ", ".join(PREF_VALUE_TYPES))
             )
-        )
-    check_type = params["check_type"]
-    if desired_type is None:
-        if check_type:
-            module.fail_json(
-                msg="Cannot give check_type=true without providing a type",
-                **result
-            )
-    else:
-        desired_type = PREF_VALUE_TYPES[desired_type]
-        if check_type is None:
-            check_type = True
+    merge_value = params["merge_value"]
+    if merge_value:
+        if params["state"] == "absent":
+            fail("Cannot use merge_value with state=absent")
+        if not isinstance(new_value, (dict, list)):
+            fail("merge_value can only be used with dict or list values")
+
     if params["state"] == "present":
         if new_value is None:
-            module.fail_json(msg="Must give value with state=present", **result)
-        if desired_type:
+            fail("Must give value with state=present")
+        if value_type:
             try:
-                new_value = coerce_to_type(new_value, desired_type)
+                new_value = coerce_to_type(new_value, value_type)
             except ModuleFail as ex:
                 result.update(ex.result)
-                module.fail_json(msg=ex.message, **result)
+                fail(ex.message)
     else:
         assert params["state"] == "absent"
         if new_value == "":
             new_value = None
         if new_value is not None:
-            module.fail_json(
-                msg="Cannot provide value with state=absent", **result
-            )
+            fail("Cannot provide value with state=absent")
 
     top_key = ensure_key_is_str(key_list[0])
     top_value = CF.CFPreferencesCopyValue(
@@ -387,38 +337,110 @@ def run_module():
     top_value = Conversion.pythonCollectionFromPropertyList(top_value)
     result["old_value"] = copy.deepcopy(top_value)
 
+    # Drill down to the container we need to modify.
     container = {top_key: top_value}
-    op = Operation(
-        state=params["state"],
-        key_list=key_list,
-        types=(desired_type,),
-        new_value=new_value,
-        check_type=check_type,
-        add_merge=params["add_merge"],
-        dict_create=params["dict_create"],
-    )
-    try:
-        result["changed"] = set_value(op, 0, container)
-    except ModuleFail as ex:
-        result.update(ex.result)
-        module.fail_json(msg=ex.message, **result)
-    if len(container) == 0:
-        top_value = None
-    elif len(container) > 1 or top_key not in container:
-        module.fail_json(
-            msg="Invalid attempt to change %r" % (top_key,), **result
-        )
+    for key_idx, key in enumerate(key_list[:-1]):
+        next_container_type = container_types[key_idx]
+        if type(container) == dict:
+            key = ensure_key_is_str(key)
+            if key not in container or container[key] is None:
+                if next_container_type:
+                    container[key] = next_container_type()
+                else:
+                    fail(f"No container at {key_list[key_idx:]!r}")
+        elif type(container) == list:
+            key = int(key)
+            if key == len(container):
+                container.append(None)
+            if container[key] is None:
+                if next_container_type:
+                    container.append(next_container_type)
+                else:
+                    fail(f"No container at {key_list[key_idx:]!r}")
+            else:
+                assert key > len(container), repr((key, container))
+                fail(
+                    f"Key index {key} is longer"
+                    f" than the list at {key_list[:key_idx]}"
+                )
+        else:
+            raise Exception("Should never get here")
+        container = container[key]
+        if next_container_type and type(container) != next_container_type:
+            fail(
+                (
+                    "Expected container type {0} at {1!r}"
+                    " but found type {2} instead"
+                ).format(
+                    next_container_type.__class__.__name__,
+                    key_list[: key_idx + 1],
+                    type(container).__class__.__name__,
+                )
+            )
+        if key_idx == 0 and container is not top_value:
+            top_value = container
+
+    # Do the modification on the leaf container.
+    changed = False
+    last_key = key_list[-1]
+    if type(container) == dict:
+        last_key = ensure_key_is_str(last_key)
+    elif type(container) == list:
+        last_key = int(key)
+    if params["state"] == "absent":
+        if type(container) == dict:
+            if last_key in container:
+                del container[last_key]
+                changed = True
+        elif type(container) == list:
+            if last_key < len(container):
+                del container[last_key]
+                changed = True
     else:
-        top_value = container[top_key]
+        assert params["state"] == "present", repr(params["state"])
+        if type(container) == dict:
+            old_value = container.get(last_key)
+        elif type(container) == list:
+            last_key = int(last_key)
+            if last_key < len(container):
+                old_value = container[last_key]
+            elif last_key == len(container):
+                assert new_value is not None
+                old_value = None
+                container.append(old_value)
+            else:
+                fail(
+                    f"Key index {last_key} is longer"
+                    " than the list at {key_list}"
+                )
+        if old_value is None:
+            container[last_key] = new_value
+            changed = True
+        elif merge_value:
+            if type(old_value) != type(new_value):
+                module.fail_json(
+                    msg="Cannot merge {} and {}".format(
+                        type(old_value).__name__, type(new_value).__name__
+                    )
+                )
+            elif type(old_value) == list:
+                old_value.extend(new_value)
+                changed = True
+            elif type(old_value) == dict:
+                changed = merge_dicts(new_value, old_value)
+        elif old_value != new_value:
+            container[last_key] = new_value
+            changed = True
 
     result["new_value"] = top_value
-    if result["changed"] and not module.check_mode:
+    if changed and not module.check_mode:
         CF.CFPreferencesSetValue(
             top_key, top_value, params["domain"], params["user"], params["host"]
         )
         CF.CFPreferencesSynchronize(
             params["domain"], params["user"], params["host"]
         )
+        result["changed"] = True
 
     # in the event of a successful module execution, you will want to
     # simple AnsibleModule.exit_json(), passing the key/value results

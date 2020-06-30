@@ -159,3 +159,13 @@
   script: install_gocryptfs.py {{ user_bin_dir | quote }}
   args:
     creates: '{{ user_bin_dir }}/gocryptfs'
+
+# This lets me print envelopes correctly.  Not 100% convinced I need
+# this for printing envelopes from LibreOffice.
+#
+# - name: Install Brother printer drivers
+#   command:
+#     argv: ['{{ macfit }}', '--check-signature', 'id:5HCL85FLGW',
+#            'https://download.brother.com/welcome/dlf104419/Brother_PrinterDrivers_MonochromeLaser_1_3_0.dmg']
+#   become: true
+#   when: '"com.Brother.Brotherdriver.Brother_PrinterDrivers_MonochromeLaser" not in macos_installed_pkgs'
