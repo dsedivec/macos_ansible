@@ -39,6 +39,7 @@ RETURN = """TBD"""
 
 import collections
 import os.path
+import pathlib
 import subprocess
 
 from ansible.module_utils.basic import AnsibleModule
@@ -49,12 +50,12 @@ from ansible.module_utils.basic import AnsibleModule
 GitResult = collections.namedtuple("GitResult", "return_code stdout stderr")
 
 
-def run_git(module, args, check=(0,)):
+def run_git(module, cwd, args, check=(0,)):
     cmd = [module.params["executable"]]
     cmd.extend(args)
     git = subprocess.Popen(
         cmd,
-        cwd=module.params["dest"],
+        cwd=cwd,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
@@ -98,14 +99,15 @@ def run_module():
 
     dest_is_dir = os.path.isdir(dest)
     if dest_is_dir:
-        git_result = run_git(module, ["rev-parse", "--is-inside-work-tree"])
+        git_result = run_git(module, dest, ["rev-parse", "--is-inside-work-tree"])
         if git_result.stdout != "true":
             module.fail_json(
                 msg="%r is not a Git working tree" % (dest,), **result
             )
-        result["before"] = run_git(module, ["rev-parse", "HEAD"]).stdout
+        result["before"] = run_git(module, dest, ["rev-parse", "HEAD"]).stdout
         git_config = run_git(
             module,
+            dest,
             ["config", "--get", "remote.%s.url" % (remote,)],
             check=(0, 1),
         )
@@ -113,16 +115,17 @@ def run_module():
             # Remote doesn't exist.
             result["changed"] = True
             if not module.check_mode:
-                run_git(module, ["remote", "add", remote, repo])
+                run_git(module, dest, ["remote", "add", remote, repo])
         elif git_config.stdout != repo:
             result["changed"] = True
             if not module.check_mode:
-                run_git(module, ["remote", "set-url", remote, repo])
+                run_git(module, dest, ["remote", "set-url", remote, repo])
     else:
         result["before"] = None
         result["changed"] = True
         if not module.check_mode:
-            run_git(module, ["clone", repo, dest])
+            parent_dir = pathlib.Path(dest).parent
+            run_git(module, parent_dir, ["clone", repo, dest])
             dest_is_dir = True
 
     if dest_is_dir and branch:
@@ -139,10 +142,10 @@ def run_module():
             args.extend(("--rebase", "--autostash"))
         else:
             args.append("--%s" % (module.params["update_mode"],))
-        run_git(module, args)
+        run_git(module, dest, args)
 
     if dest_is_dir:
-        result["after"] = run_git(module, ["rev-parse", "HEAD"]).stdout
+        result["after"] = run_git(module, dest, ["rev-parse", "HEAD"]).stdout
     else:
         result["after"] = None
     result["changed"] = result["changed"] or (
