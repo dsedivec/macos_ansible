@@ -34,14 +34,14 @@
 - name: Install dotfiles
   command:
     argv: [
-      lnmgr, -d, '{{ dotfiles_local_repo }}',
-             -t, '{{ ansible_env.HOME }}',
-             --if-changed, '101',
-             common
+      '{{ lnmgr }}', -d, '{{ dotfiles_local_repo }}',
+                     -t, '{{ ansible_env.HOME }}',
+                     --if-changed, '101',
+                     common
     ]
-  register: lnmgr
-  failed_when: 'lnmgr.rc not in (0, 101)'
-  changed_when: 'lnmgr.rc == 101'
+  register: lnmgr_res
+  failed_when: 'lnmgr_res.rc not in (0, 101)'
+  changed_when: 'lnmgr_res.rc == 101'
 
 - name: Clone dotfiles-private repository
   git:
@@ -52,11 +52,11 @@
 - name: Install dotfiles-private
   command:
     argv: [
-      lnmgr, -d, '{{ dotfiles_private_local_repo }}',
-             -t, '{{ ansible_env.HOME }}',
-             --if-changed, '101',
-             '{{ dotfiles_private_which }}'
+      '{{ lnmgr }}', -d, '{{ dotfiles_private_local_repo }}',
+                     -t, '{{ ansible_env.HOME }}',
+                     --if-changed, '101',
+                     '{{ dotfiles_private_which }}'
     ]
-  register: lnmgr
-  failed_when: 'lnmgr.rc not in (0, 101)'
-  changed_when: 'lnmgr.rc == 101'
+  register: lnmgr_res
+  failed_when: 'lnmgr_res.rc not in (0, 101)'
+  changed_when: 'lnmgr_res.rc == 101'
