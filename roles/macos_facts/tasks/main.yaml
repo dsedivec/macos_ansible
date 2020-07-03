@@ -12,4 +12,3 @@
   set_fact:
     ansible_distribution_minor_version: >-
       {{ ansible_distribution_version.split(".")[1] }}
-  when: 'ansible_distribution == "MacOSX"'
