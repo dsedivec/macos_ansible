@@ -50,7 +50,6 @@ other_software_macports:
   - sleepwatcher
   - socat
   - sox
-  - sshfs
   - tidy
   - tmux
   - tree

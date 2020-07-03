@@ -160,6 +160,43 @@
   args:
     creates: '{{ user_bin_dir }}/gocryptfs'
 
+- name: Clone sshfs
+  git:
+    repo: https://github.com/libfuse/sshfs.git
+    dest: '{{ repositories_root }}/sshfs'
+    # sshfs > 2 needs FUSE > 3, but osxfuse is only up to 2.9x, or
+    # something like that.
+    version: sshfs_2.x
+    update: no
+
+- name: Install dependencies for sshfs
+  x_macports:
+    name: [meson, ninja]
+    state: installed
+  become: yes
+
+- name: Build sshfs
+  shell: |
+    install -d build
+    cd build
+    meson ..
+    ninja
+  args:
+    chdir: '{{ repositories_root }}/sshfs'
+    creates: '{{ repositories_root }}/sshfs/build/sshfs'
+  environment:
+    PKG_CONFIG_PATH: /usr/local/lib/pkgconfig
+
+- name: Install sshfs
+  copy:
+    remote_src: yes
+    src: '{{ repositories_root }}/sshfs/build/sshfs'
+    dest: /usr/local/bin/sshfs
+    owner: root
+    group: wheel
+    mode: 0755
+  become: yes
+
 # This lets me print envelopes correctly.  Not 100% convinced I need
 # this for printing envelopes from LibreOffice.
 #
