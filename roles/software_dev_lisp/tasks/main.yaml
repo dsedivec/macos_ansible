@@ -1,8 +1,9 @@
-- name: Install SBCL (and OpenSSL)
+- name: Install SBCL and some other dependencies
   # OpenSSL is used by install_quicklisp.sh.
+  # macOS curl is too old to talk to beta.quicklisp.org.
   x_macports:
     state: present
-    name: [sbcl, openssl]
+    name: [sbcl, openssl, curl]
   become: yes
 
 - name: Install Quicklisp
