@@ -25,9 +25,9 @@
     - {role: software_dev_sql, tags: [software_dev_sql]}
     - {role: software_dev_web, tags: [software_dev_web]}
     - {role: other_software, tags: [other_software]}
-    - {role: mail_plug_ins, tags: [mail_plug_ins]}
     - {role: software_mactex, tags: [software_mactex]}
     - {role: software_sketch, tags: [software_sketch]}
+    - {role: mail_plug_ins, tags: [mail_plug_ins]}
     - {role: fonts, tags: [fonts]}
   environment:
     PATH: '/opt/local/bin:{{ ansible_env.PATH }}'
