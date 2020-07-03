@@ -122,7 +122,7 @@
 
 - name: Put software on the Dock
   command:
-    argv: [dockutil, --add, '{{ item }}', --no-restart]
+    argv: ['{{ dockutil }}', --add, '{{ item }}', --no-restart]
   when: '(item|basename|splitext).0 not in macos_dock_items'
   loop: '{{ other_software_add_dock }}'
   notify:

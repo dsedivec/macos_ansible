@@ -118,7 +118,9 @@
 
 - name: Put Emacs in the Dock
   command:
-    argv: [dockutil, --add, '{{ user_app_dir }}/Emacs.app', --no-restart]
+    argv: [
+      '{{ dockutil }}', --add, '{{ user_app_dir }}/Emacs.app', --no-restart
+    ]
   when: not emacs_app_stat.stat.exists
   notify:
     - Restart Dock
