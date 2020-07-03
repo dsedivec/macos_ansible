@@ -1,3 +1,3 @@
-macsigcheck_remote_repo: 'git@github.com:dsedivec/macsigcheck'
+macsigcheck_remote_repo: '{{ dsedivec_github_prefix }}/macsigcheck'
 macsigcheck_local_repo: '{{ repositories_root }}/macsigcheck'
 macsigcheck: '{{ user_bin_dir }}/macsigcheck'

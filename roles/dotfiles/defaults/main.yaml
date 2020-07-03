@@ -1,7 +1,7 @@
-lnmgr_remote_repo: git@github.com:dsedivec/lnmgr.git
+lnmgr_remote_repo: '{{ dsedivec_github_prefix }}/lnmgr.git'
 lnmgr_local_repo: '{{ repositories_root }}/lnmgr'
 lnmgr: '{{ user_bin_dir }}/lnmgr'
-dotfiles_remote_repo: git@github.com:dsedivec/dotfiles.git
+dotfiles_remote_repo: '{{ dsedivec_github_prefix }}/dotfiles.git'
 dotfiles_local_repo: '{{ repositories_root }}/dotfiles'
 dotfiles_private_remote_repo: dale@dale-work:repositories/dotfiles-private.git
 dotfiles_private_local_repo: '{{ repositories_root }}/dotfiles-private'

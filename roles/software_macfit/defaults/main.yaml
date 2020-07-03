@@ -1,3 +1,3 @@
-macfit_remote_repo: git@github.com:dsedivec/macfit.git
+macfit_remote_repo: '{{ dsedivec_github_prefix }}/macfit.git'
 macfit_local_repo: '{{ repositories_root }}/macfit'
 macfit: '{{ user_bin_dir }}/macfit'

@@ -1,5 +1,7 @@
-macos_prefs_change_modifiers_remote_repo: git@github.com:dsedivec/change_modifiers.git
-macos_prefs_change_modifiers_local_repo: '{{ repositories_root }}/change_modifiers'
+macos_prefs_change_modifiers_remote_repo: >-
+  {{ dsedivec_github_prefix }}/change_modifiers.git
+macos_prefs_change_modifiers_local_repo: >-
+  {{ repositories_root }}/change_modifiers
 
 macos_prefs_display_manager_remote_repo: https://github.com/univ-of-utah-marriott-library-apple/display_manager
 macos_prefs_display_manager_local_repo: '{{ repositories_root }}/display_manager'
