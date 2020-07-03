@@ -12,6 +12,10 @@
     - {role: software_vim, tags: [software_vim]}
     - {role: software_tmux, tags: [software_tmux]}
     - {role: software_dropbox, tags: [software_dropbox]}
+    # Arguably I don't directly care about dockutil being installed,
+    # but I do directly care about the fact that it cleans most of the
+    # default macOS icons off my dock.
+    - {role: software_dockutil, tags: [software_dockutil]}
     - {role: software_dev_clojure, tags: [software_dev_clojure]}
     - {role: software_dev_haskell, tags: [software_dev_haskell]}
     - {role: software_dev_lisp, tags: [software_dev_lisp]}
