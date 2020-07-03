@@ -140,6 +140,13 @@ other_software_py3_venv:
   - proselint
   - ydiff
 
+other_software_py3_bins:
+  - onkyo
+  - proselint
+  - vd
+  - wormhole
+  - ydiff
+
 other_software_preferences:
   com.adguard.safari.AdGuard:
     - [NSFullScreenMenuItemEverywhere, bool, false]

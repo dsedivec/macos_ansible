@@ -139,7 +139,7 @@
     state: link
     src: '{{ user_py3_venv_bin | relpath(user_bin_dir) }}/{{ item }}'
     path: '{{ user_bin_dir }}/{{ item }}'
-  loop: [onkyo, vd, proselint, ydiff]
+  loop: '{{ other_software_py3_bins }}'
   ignore_errors: '{{ ansible_check_mode }}'
 
 - name: Install Go
