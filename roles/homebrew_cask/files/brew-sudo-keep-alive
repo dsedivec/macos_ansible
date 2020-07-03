@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from __future__ import (
     absolute_import,
@@ -54,7 +54,7 @@ def main(argv):
 
     def sigchld_handler(_signal, _frame):
         logging.debug("handling SIGCHLD")
-        os.write(wr, "\0")
+        os.write(wr, b"\0")
 
     signal.signal(signal.SIGCHLD, sigchld_handler)
     # Don't let SIGCHLD interrupt waitpid, particularly the one

@@ -73,7 +73,7 @@ SENTINEL = object()
 
 def merge_dicts(src, dst):
     changed = False
-    for key, dst_value in src.iteritems():
+    for key, dst_value in src.items():
         key = ensure_key_is_str(key)
         src_value = src.get(key, SENTINEL)
         if isinstance(dst_value, dict) and isinstance(src_value, dict):

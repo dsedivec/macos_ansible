@@ -4,7 +4,7 @@ from __future__ import print_function, unicode_literals
 
 def dict_product(a_dict):
     """Returns pairs (k, v_n) for every key and each of that key's values."""
-    for k, vs in a_dict.iteritems():
+    for k, vs in a_dict.items():
         for v in vs:
             yield (k, v)
 

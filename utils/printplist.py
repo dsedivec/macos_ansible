@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from __future__ import (
     absolute_import,
@@ -29,10 +29,8 @@ def main(argv):
     parser = argparse.ArgumentParser(prog=argv[0])
     parser.add_argument("plist_file")
     args = parser.parse_args(argv[1:])
-    plist_xml = subprocess.check_output(
-        ["/usr/libexec/PlistBuddy", "-x", "-c", "Print", args.plist_file]
-    )
-    plist = plistlib.readPlistFromString(plist_xml)
+    with open(args.plist_file, "rb") as plist_stream:
+        plist = plistlib.load(plist_stream)
     json.dump(
         plist,
         sys.stdout,

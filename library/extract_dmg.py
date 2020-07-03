@@ -115,7 +115,7 @@ def mount_dmg(module, path, agree_eulas=None):
     )
     match = re.search(r"^<\?xml", stdout, re.M)
     plist_xml = stdout[match.start() :]
-    plist = plistlib.loads(plist_xml)
+    plist = plistlib.loads(plist_xml.encode("utf-8"))
     any_device = None
     mount_point = None
     for entity in plist["system-entities"]:

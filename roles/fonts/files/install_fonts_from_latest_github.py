@@ -11,7 +11,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import urllib2
+import urllib.request
 
 ARCHIVE_REGEXP = r"(?i)\.(zip|tar(\.(gz|bz2))?|t(gz|bz2))$"
 
@@ -35,7 +35,7 @@ def main(argv):
         logger.setLevel(_logging.DEBUG)
     logger.info("Fetching %s release information from GitHub", args.repo)
     release_info = json.load(
-        urllib2.urlopen(
+        urllib.request.urlopen(
             "https://api.github.com/repos/%s/releases/latest" % (args.repo,)
         )
     )
@@ -51,7 +51,7 @@ def main(argv):
         )
     logger.info("Found release %r", asset["name"])
     local_file_name = re.sub(r"[^\w.-]", "_", asset["name"])
-    remote_file = urllib2.urlopen(asset["browser_download_url"])
+    remote_file = urllib.request.urlopen(asset["browser_download_url"])
     download_dir = tempfile.mkdtemp()
     try:
         local_file_path = os.path.join(download_dir, local_file_name)
