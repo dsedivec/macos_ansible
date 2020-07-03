@@ -150,22 +150,13 @@ def upgrade(module, port_path):
 def query_port(module, port_path, name, state="present"):
     """ Returns whether a port is installed or not. """
 
-    if state == "present":
-
-        rc, out, err = module.run_command("%s installed | grep -q ^.*%s" % (shlex_quote(port_path), shlex_quote(name)), use_unsafe_shell=True)
-        if rc == 0:
-            return True
-
-        return False
-
-    elif state == "active":
-
-        rc, out, err = module.run_command("%s installed %s | grep -q active" % (shlex_quote(port_path), shlex_quote(name)), use_unsafe_shell=True)
-
-        if rc == 0:
-            return True
-
-        return False
+    rc, out, err = module.run_command([port_path, "installed", name])
+    if rc != 0:
+        module.fail_json(msg="port command failed", stdout=out, stderr=err)
+    regexp = r"^\s*%s\s" % (re.escape(name),)
+    if state == "active":
+        regexp += r'.*\(active\)\s*$'
+    return bool(re.search(regexp, out, re.M))
 
 
 def remove_ports(module, port_path, ports):
