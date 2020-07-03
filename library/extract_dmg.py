@@ -166,7 +166,6 @@ def run_module():
             dmg_path = module.params["src"]
         mount_point = mount_dmg(module, dmg_path, module.params["agree_eulas"])
         to_copy = []
-        result_copied = []
         regexp = re.compile(module.params["regexp"])
         regexp_path_group = regexp.groupindex.get("path")
         for dir_path, dir_names, file_names in os.walk(mount_point):
@@ -186,18 +185,22 @@ def run_module():
                                     msg=(
                                         "path group in regexp is an"
                                         " absolute path, not allowed"
-                                    )
+                                    ),
+                                    **result
                                 )
                         dst_path = os.path.join(
                             module.params["dest"], match_path
                         )
-                        to_copy.append((abs_path, dst_path, is_dir))
-                        result_copied.append((rel_path, dst_path))
+                        to_copy.append((rel_path, abs_path, dst_path, is_dir))
                         if is_dir:
                             del coll[idx]
-        result = dict(changed=bool(to_copy), files_copied=result_copied)
-        if not module.check_mode:
-            for src_path, dst_path, is_dir in to_copy:
+        files_copied = []
+        result["files_copied"] = files_copied
+        if module.check_mode:
+            for rel_path, _, dst_path, _ in to_copy:
+                files_copied.append((rel_path, dst_path))
+        else:
+            for src_rel_path, src_abs_path, dst_path, is_dir in to_copy:
                 if os.path.exists(dst_path):
                     if not module.params["force"]:
                         continue
@@ -206,9 +209,11 @@ def run_module():
                     else:
                         os.unlink(dst_path)
                 if is_dir:
-                    shutil.copytree(src_path, dst_path)
+                    shutil.copytree(src_abs_path, dst_path)
                 else:
-                    shutil.copy(src_path, dst_path)
+                    shutil.copy(src_abs_path, dst_path)
+                files_copied.append((src_rel_path, dst_path))
+            result["changed"] = bool(files_copied)
     # in the event of a successful module execution, you will want to
     # simple AnsibleModule.exit_json(), passing the key/value results
     module.exit_json(**result)
