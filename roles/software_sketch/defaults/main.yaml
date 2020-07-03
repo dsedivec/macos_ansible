@@ -1,0 +1,4 @@
+software_sketch_app_support_dir: >-
+  {{ ansible_env.HOME }}/Library/Application Support/com.bohemiancoding.sketch3
+software_sketch_plugin_dir: '{{ software_sketch_app_support_dir }}/Plugins'
+software_sketch_library_dir: '{{ software_sketch_app_support_dir }}/Libraries'

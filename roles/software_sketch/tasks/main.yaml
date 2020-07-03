@@ -1,0 +1,69 @@
+- name: Install Sketch
+  homebrew_cask:
+    name: sketch
+    state: present
+    install_options: 'appdir={{ user_app_dir }}'
+
+- name: Make Sketch dirs
+  file:
+    path: '{{ item }}'
+    state: directory
+  loop:
+    - '{{ software_sketch_plugin_dir }}'
+    - '{{ software_sketch_library_dir }}'
+
+- name: Install Sketch Runner Pro
+  unarchive:
+    remote_src: yes
+    src: https://sketchrunner.com/Runner-sketchplugin.zip
+    dest: '{{ software_sketch_plugin_dir }}'
+    creates: '{{ software_sketch_plugin_dir }}/Runner.sketchplugin'
+
+- name: Check if Anima Toolkit for Sketch is installed
+  stat:
+    path: '{{ software_sketch_plugin_dir }}/AnimaToolkitPlugin.sketchplugin'
+  register: anima_toolkit_stat
+
+- name: Find the URL to download Anima Toolkit for Sketch
+  scrape_urls:
+    url: https://www.animaapp.com/changelog
+    url_regexp: '(?i)(?:/|%2F)AnimaToolkitPlugin-[\d.]+\.zip\b'
+  register: anima_urls
+  when: 'not anima_toolkit_stat.stat.exists'
+  failed_when: 'anima_urls.urls is not defined or not anima_urls.urls'
+
+- name: Install Anima Toolkit for Sketch
+  unarchive:
+    remote_src: yes
+    src: '{{ anima_urls.urls[0] | extract_url_param("url") }}'
+    dest: '{{ software_sketch_plugin_dir }}'
+  when: 'not anima_toolkit_stat.stat.exists'
+
+- name: Install other Sketch plug-ins
+  command:
+    argv: ['{{ macfit }}', '{{ item.url }}']
+    creates: '{{ software_sketch_plugin_dir }}/{{ item.creates }}.sketchplugin'
+  loop:
+    - url: https://github.com/Ashung/Automate-Sketch/archive/master.zip
+      creates: automate-sketch
+    - url: https://github.com/alexkaessner/custom-zoom-sketch/releases/latest/download/custom-zoom-sketch.sketchplugin.zip
+      creates: custom-zoom-sketch
+    - url: https://github.com/turbobabr/duplicator/releases/download/v2.0.3/Duplicator.sketchplugin.zip
+      creates: Duplicator
+    - url: https://github.com/swiadek/pixel-perfecter-sketch-plugin/archive/master.zip
+      creates: pixel-perfecter
+    - url: https://github.com/stark-contrast/stark-sketch-plugin/archive/main.zip
+      creates: Stark
+    - url: https://github.com/sonburn/symbol-organizer/archive/master.zip
+      creates: Symbol Organizer
+
+# This doesn't work, Sketch doesn't see the library.  You'll need to
+# install it by hand.
+
+# - name: Install macOS library for Sketch
+#   extract_dmg:
+#     src: https://developer.apple.com/design/downloads/Apple-macOS-10.15-Sketch-Library.dmg
+#     agree_eulas: true
+#     dest: '{{ software_sketch_library_dir }}'
+#     regexp: '(?i)\.sketch$'
+#     creates: '{{ software_sketch_library_dir }}/Apple macOS UI.sketch'

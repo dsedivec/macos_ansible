@@ -16,6 +16,15 @@ def dict_product(a_dict):
             yield (k, v)
 
 
+def extract_url_param(url, param):
+    query = urllib.parse.urlsplit(url).query
+    params = urllib.parse.parse_qs(query)
+    value = params.get(param)
+    if isinstance(value, list) and len(value) == 1:
+        value = value[0]
+    return value
+
+
 def filter_casks_by_os_version(cask_list, mac_os_minor_version):
     """cask_list can be \"cask\" or [\"cask\", min_os_minor_version]."""
     mac_os_minor_version = int(mac_os_minor_version)
@@ -49,6 +58,7 @@ class FilterModule(object):
     def filters(self):
         return {
             "dict_product": dict_product,
+            "extract_url_param": extract_url_param,
             "filter_casks_by_os_version": filter_casks_by_os_version,
             "make_dropbox_url_dl": make_dropbox_url_dl,
             "named_list": named_list,
