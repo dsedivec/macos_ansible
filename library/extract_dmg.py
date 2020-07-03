@@ -152,7 +152,7 @@ def run_module():
         src=dict(type="str", required=True),
         dest=dict(type="path", required=True),
         regexp=dict(type="str", required=True),
-        creates=dict(type="list", required=False, default=()),
+        creates=dict(type="list", required=False, default=[]),
         agree_eulas=dict(type="bool", required=False, default=False),
         force=dict(type="bool", required=False, default=False),
     )
