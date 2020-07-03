@@ -15,3 +15,8 @@
     # want to be consistent.
     ansible_distribution_minor_version: >-
       {{ ansible_distribution_version.split(".")[1] }}
+
+- name: Set macos_major_minor_version fact
+  set_fact:
+    macos_major_minor_version: >-
+      {{ ansible_distribution_major_version }}.{{ ansible_distribution_minor_version }}
