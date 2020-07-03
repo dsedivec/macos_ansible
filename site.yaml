@@ -10,6 +10,7 @@
     - {role: software_emacs, tags: [software_emacs]}
     - {role: dotfiles, tags: [dotfiles]}
     - {role: software_vim, tags: [software_vim]}
+    - {role: software_tmux, tags: [software_tmux]}
     - {role: software_dropbox, tags: [software_dropbox]}
     - {role: software_dev_clojure, tags: [software_dev_clojure]}
     - {role: software_dev_haskell, tags: [software_dev_haskell]}

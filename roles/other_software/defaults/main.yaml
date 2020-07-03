@@ -51,7 +51,6 @@ other_software_macports:
   - socat
   - sox
   - tidy
-  - tmux
   - tree
   - unrar
   - watch

@@ -1,0 +1,22 @@
+- name: Install tmux
+  x_macports:
+    name: tmux
+    state: present
+  become: true
+
+- name: Make tmux plugins directory
+  file:
+    path: '{{ user_tmux_dir }}/plugins'
+    state: directory
+
+- name: Clone tpm
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: '{{ user_tmux_dir }}/plugins/tpm'
+
+- name: Install tmux plugins
+  script:
+    cmd: install_tmux_plugins.sh
+  register: result
+  failed_when: '"ANSIBLE_OK" not in result.stdout_lines'
+  changed_when: '"ANSIBLE_CHANGED" in result.stdout_lines'

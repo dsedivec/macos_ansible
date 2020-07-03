@@ -1,0 +1,1 @@
+user_tmux_dir: '{{ ansible_env.HOME }}/.tmux'
