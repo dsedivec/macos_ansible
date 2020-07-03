@@ -48,6 +48,7 @@
     repo: '{{ dotfiles_private_remote_repo }}'
     dest: '{{ dotfiles_private_local_repo }}'
     update: no
+  tags: [dotfiles-private]
 
 - name: Install dotfiles-private
   command:
@@ -60,3 +61,4 @@
   register: lnmgr_res
   failed_when: 'lnmgr_res.rc not in (0, 101)'
   changed_when: 'lnmgr_res.rc == 101'
+  tags: [dotfiles-private]
