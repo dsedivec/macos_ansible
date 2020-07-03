@@ -47,7 +47,7 @@
     argv: ['{{ macfit }}', --dest, '{{ user_mail_bundle_dir }}',
            # Really hoping the first link on the page is to the latest
            # version.
-           --scrape, '(^|/)msgfilerengine-\d+-dmg.zip',
+           --scrape, '(?i)MsgFiler.*?Engine.*?[\d.]+\.dmg',
            https://msgfiler.com/support/engine/]
     creates: '{{ user_mail_bundle_dir }}/MsgFilerEngine.mailbundle'
 
