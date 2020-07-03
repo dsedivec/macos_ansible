@@ -142,13 +142,6 @@
   loop: [onkyo, vd, proselint, ydiff]
   ignore_errors: '{{ ansible_check_mode }}'
 
-- name: Install SilentKnight
-  command:
-    argv: ['{{ macfit }}', --check-bundle-signature, QWY4LRW926,
-           --scrape-html, '(?i)/silentknight\d.*\.zip$',
-           https://eclecticlight.co/lockrattler-systhist/]
-    creates: '{{ user_app_dir }}/SilentKnight.app'
-
 - name: Install Go
   x_macports:
     name: go
