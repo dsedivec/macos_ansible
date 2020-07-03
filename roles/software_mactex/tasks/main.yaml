@@ -1,16 +1,6 @@
 - name: Install MacTeX
-  command:
-    argv:
-      - '{{ macfit }}'
-      - http://mirror.ctan.org/systems/mac/mactex/MacTeX.pkg
-      - --check-pkg-signature
-      - 'id:RBGCY5RJWM'
-      # --owner can't affect the pkg here, but it can make sure the
-      # --cached download is owned by our user.
-      - --owner
-      - '{{ ansible_user }}'
-      - --cache
-      - '{{ ansible_env.HOME }}/Downloads'
-  become: true
-  when: ('org.tug.mactex.texlive2019' not in macos_installed_pkgs)
-        or ('org.tug.mactex.gui2019' not in macos_installed_pkgs)
+  homebrew_cask:
+    state: installed
+    name: mactex
+    path: '{{ homebrew_sudo_wrapper | dirname }}'
+  become: yes
