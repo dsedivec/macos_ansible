@@ -338,7 +338,7 @@ def run_module():
     result["old_value"] = copy.deepcopy(top_value)
 
     # Drill down to the container we need to modify.
-    container = {top_key: top_value}
+    top_container = container = {top_key: top_value}
     for key_idx, key in enumerate(key_list[:-1]):
         next_container_type = container_types[key_idx]
         if type(container) == dict:
@@ -432,10 +432,18 @@ def run_module():
             container[last_key] = new_value
             changed = True
 
-    result["new_value"] = top_value
+    # Note that setting a preference to None (NULL) is the same as
+    # deleting the preference, so getting None here just means we
+    # deleted the preference entirely (state=absent).
+    new_value = top_container.get(top_key)
+    result["new_value"] = new_value
     if changed and not module.check_mode:
         CF.CFPreferencesSetValue(
-            top_key, top_value, params["domain"], params["user"], params["host"]
+            top_key,
+            new_value,
+            params["domain"],
+            params["user"],
+            params["host"],
         )
         CF.CFPreferencesSynchronize(
             params["domain"], params["user"], params["host"]
