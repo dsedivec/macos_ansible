@@ -72,13 +72,13 @@
       creates: foundation-icons.ttf
 
 - name: Download and install SF Pro fonts
-  extract_dmg:
-    src: https://developer.apple.com/design/downloads/SF-Font-Pro.dmg
-    agree_eulas: true
-    dest: '{{ user_font_dir }}'
-    regexp: '(?i)/SF-Pro-.*\.otf$'
-    creates:
-      - '{{ user_font_dir }}/SF-Pro-*.otf'
+  command:
+    argv:
+      - '{{ macfit }}'
+      - --agree-eulas
+      - https://developer.apple.com/design/downloads/SF-Font-Pro.dmg
+    creates: /Library/Fonts/SF-Pro.ttf
+  become: yes
 
 - name: Download and install icon fonts
   get_url:
