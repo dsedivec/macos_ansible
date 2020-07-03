@@ -148,6 +148,37 @@ other_software_py3_bins:
   - ydiff
 
 other_software_preferences:
+  com.agilebits.onepassword7:
+    - [
+        "ShortcutRecorder BrowserActivation",
+        dict,
+        {
+            "keyCode": -1,
+            "modifierFlags": 0,
+            "modifiers": 0,
+        }
+      ]
+    - [
+        "ShortcutRecorder GlobalActivation",
+        dict,
+        {
+            "keyChars": "1",
+            "keyCharsIgnoringModifiers": "!",
+            "keyCode": 18,
+            "modifierFlags": 393216,
+            "modifiers": 4608,
+        }
+      ]
+    - [
+        "ShortcutRecorder GlobalLock",
+        dict,
+        {
+            "keyCode": -1,
+            "modifierFlags": 0,
+            "modifiers": 0,
+        }
+      ]
+
   com.adguard.safari.AdGuard:
     - [NSFullScreenMenuItemEverywhere, bool, false]
 
@@ -181,7 +212,7 @@ other_software_preferences:
 
   org.herf.Flux:
     - [sleepLate, int, 1]
-    - [wakeTime, int, 480]
+    - [wakeTime, int, 555]
     - [wakeNotifyDisable, int, 1]
 
   com.googlecode.iterm2:
@@ -199,6 +230,7 @@ other_software_preferences:
     - [Keyboard -> Command+W Key Action, int, 1]
     - [Keyboard -> Tab Key Completion Suffix, string, ":"]
     - [ServerListDoubleClickConnectServer, bool, true]
+    - [ServerListDoubleClickJoinChannel, bool, true]
     - [SUAutomaticallyUpdate, bool, false]
     - [SUEnableAutomaticChecks, bool, true]
 
