@@ -214,6 +214,8 @@ def run_module():
                     shutil.copy(src_abs_path, dst_path)
                 files_copied.append((src_rel_path, dst_path))
             result["changed"] = bool(files_copied)
+        if not files_copied:
+            module.fail_json(msg="No files found to install", **result)
     # in the event of a successful module execution, you will want to
     # simple AnsibleModule.exit_json(), passing the key/value results
     module.exit_json(**result)
