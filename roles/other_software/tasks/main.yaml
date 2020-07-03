@@ -98,7 +98,7 @@
   x_osx_defaults:
     domain: '{{ item.domain | expanduser }}'
     key: '{{ item.key }}'
-    type: '{{ item.type }}'
+    value_type: '{{ item.type }}'
     value: '{{ item.value }}'
   loop: '{{
       other_software_preferences

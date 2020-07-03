@@ -2,7 +2,7 @@
   x_osx_defaults:
     domain: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail'
     key: '{{ item.0 }}'
-    type: '{{ item.1 }}'
+    value_type: '{{ item.1 }}'
     value: '{{ item.2 }}'
   loop:
     - [EnableBundles, bool, true]
@@ -25,7 +25,7 @@
   x_osx_defaults:
     domain: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail'
     key: '{{ item.0 }}'
-    type: '{{ item.1 }}'
+    value_type: '{{ item.1 }}'
     value: '{{ item.2 }}'
   loop:
     - ["QuoteFixCheckUpdateInterval",int ,1]
@@ -55,7 +55,7 @@
   x_osx_defaults:
     domain: '{{ ansible_env.HOME }}/Library/Containers/com.atow.msgfiler/Data/Library/Preferences/com.atow.msgfiler.plist'
     key: '{{ item.0 }}'
-    type: '{{ item.1 }}'
+    value_type: '{{ item.1 }}'
     value: '{{ item.2 }}'
   loop:
     - [MsgFilerHideDockIcon, int, 1]
