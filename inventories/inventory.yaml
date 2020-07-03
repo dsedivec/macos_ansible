@@ -3,6 +3,8 @@ all:
     dale-work:
       ansible_connection: local
       computer_name: Dale's Work Machine
+      dotfiles_private_remote_repo: >-
+        {{ repositories_root }}/dotfiles-private.git
 
     dale:
       ansible_connection: local
