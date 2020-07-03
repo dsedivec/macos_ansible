@@ -31,32 +31,32 @@ Create admin account at install time.  **Do not set up iCloud.**  In fact, opt o
 
 ## With the Admin Account
 
-#. Flip modifiers before you go crazy.
-#. Change scroll direction and turn on tap to click.
-#. Check all software updates, go ahead and reboot if you need to.
-#. Change host name, probably needs to match what's in your Ansible inventory.
-#. Create regular user account.
-#. Give new user account sudo access via `/etc/sudoers.d/dale`.  Make sure to run `visudo -c` afterwards to make sure you didn't botch it.
+1. Flip modifiers before you go crazy.
+2. Change scroll direction and turn on tap to click.
+3. Check all software updates, go ahead and reboot if you need to.
+4. Change host name, probably needs to match what's in your Ansible inventory.
+5. Create regular user account.
+6. Give new user account sudo access via `/etc/sudoers.d/dale`.  Make sure to run `visudo -c` afterwards to make sure you didn't botch it.
 
 Now you can log out and log in as your new account.
 
 
 ## With Your User Account
 
-#. Go ahead and sign into iCloud on first login.  You will at least get the chance to tell it not to sync all of your documents, downloads, photos and such.
-#. Flip modifiers before you go crazy.
-#. Change scroll direction and turn on tap to click.
-#. Give Terminal "Full Disk Access".
-#. Open Terminal.
-#. Run `python3 -V` and let Xcode command line tools install.
-#. Run `python3 -m venv ~/.vpy/system-ansible` to install a virtual environment.
-#. Activate that virtual environment and `pip install ansible`.
-#. `ssh-keygen -t ed25519 -C ...` and follow the prompts.
-#. `ssh-add`
-#. Upload new key to GitHub.
-#. Clone this repo (`macos_ansible`).
-#. Make sure you're logged in to the Mac App Store.  You probably are, if you enabled iCloud during first login.
-#. Run this repo, e.g.:
+1. Go ahead and sign into iCloud on first login.  You will at least get the chance to tell it not to sync all of your documents, downloads, photos and such.
+2. Flip modifiers before you go crazy.
+3. Change scroll direction and turn on tap to click.
+4. Give Terminal "Full Disk Access".
+5. Open Terminal.
+6. Run `python3 -V` and let Xcode command line tools install.
+7. Run `python3 -m venv ~/.vpy/system-ansible` to install a virtual environment.
+8. Activate that virtual environment and `pip install ansible`.
+9. `ssh-keygen -t ed25519 -C ...` and follow the prompts.
+10. `ssh-add`
+11. Upload new key to GitHub.
+12. Clone this repo (`macos_ansible`).
+13. Make sure you're logged in to the Mac App Store.  You probably are, if you enabled iCloud during first login.
+14. Run this repo, e.g.:
 
         ansible-playbook site.yaml -l dale -K
 
