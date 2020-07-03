@@ -268,3 +268,7 @@ other_software_add_dock:
   - /Applications/Firefox Developer Edition.app
   - ~/Applications/iTerm.app
   - ~/Applications/Signal.app
+
+other_software_system_audio_units_dir: /Library/Audio/Plug-Ins/Components
+other_software_user_audio_units_dir: >-
+  {{ ansible_env.HOME }}/Library/Audio/Plug-Ins/Components

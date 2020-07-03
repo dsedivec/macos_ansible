@@ -1,0 +1,5 @@
+# https://www.gearslutz.com/board/apple-logic-pro/1238020-workaround-enables-logic-see-new-plugins-without-restarting.html
+- name: Recognize new Audio Units
+  command:
+    argv: [killall, "-9", AudioComponentRegistrar]
+  become: yes
