@@ -15,5 +15,11 @@ dockutil_defaults_to_remove:
   - FaceTime
   - News
   - iTunes
+  - Music
+  - Podcasts
+  - TV
   - App Store
   - System Preferences
+  - Numbers
+  - Keynote
+  - Pages
