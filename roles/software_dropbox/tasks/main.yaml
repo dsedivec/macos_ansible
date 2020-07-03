@@ -1,9 +1,8 @@
 # I am not at all confident that Dropbox will tolerate being installed to
 # ~/Applications, so put it in /Applications.
 - name: Install Dropbox
-  command:
-    argv: ['{{ macfit }}', --owner, '{{ ansible_user }}', --dest-system,
-           'https://www.dropbox.com/download?plat=mac&full=1',
-           --check-signature, 'id:G7HH3F8CAK']
-    creates: /Applications/Dropbox.app
+  homebrew_cask:
+    state: installed
+    name: dropbox
+    path: '{{ homebrew_sudo_wrapper | dirname }}'
   become: yes

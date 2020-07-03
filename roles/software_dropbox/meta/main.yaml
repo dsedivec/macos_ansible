@@ -1,2 +1,2 @@
 dependencies:
-  - role: software_macfit
+  - role: homebrew_cask
