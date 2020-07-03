@@ -78,6 +78,13 @@
     fast_forward: no
   register: git_org_mode
 
+- name: Add org-mode upstream remote
+  git_remote:
+    repo: https://code.orgmode.org/bzg/org-mode
+    dest: '{{ org_mode_local_repo }}'
+    name: upstream
+    state: present
+
 - name: Rebase my org-mode changes atop upstream
   script: rebase_org_mode.sh
   args:
