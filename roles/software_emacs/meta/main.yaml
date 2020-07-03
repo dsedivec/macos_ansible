@@ -1,3 +1,5 @@
 dependencies:
   - role: macports
+  # org-mode needs TeX to build.
+  - role: software_mactex
   - role: software_dockutil
