@@ -122,6 +122,22 @@ macos_prefs_set:
     key: TrackpadMomentumScroll
     type: bool
     value: false
+  # These two are for disabling "Force Click" on the trackpad.
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: ActuateDetents
+    type: int
+    value: 0
+  - domain: com.apple.AppleMultitouchTrackpad
+    key: ForceSuppressed
+    type: bool
+    value: true
+
+  # You *might* also need this for Force Click, but for now I'm hoping
+  # you don't.
+  # - domain: com.apple.preference.trackpad
+  #   key: ForceClickSavedState
+  #   type: bool
+  #   value: true
 
   - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
     key: Clicking
@@ -997,6 +1013,16 @@ macos_prefs_set:
     key: IndexJunk
     type: bool
     value: true
+
+  - domain: '{{ macos_prefs_domain_mail }}'
+    key: junkMailTrustHeaders
+    type: bool
+    value: false
+
+  - domain: '{{ macos_prefs_domain_mail }}'
+    key: junkMailEvaluationAfterRules
+    type: bool
+    value: false
 
   - domain: '{{ macos_prefs_domain_mail }}'
     key: SendFormat
