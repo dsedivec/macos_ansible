@@ -30,4 +30,4 @@
     - {role: mail_plug_ins, tags: [mail_plug_ins]}
     - {role: fonts, tags: [fonts]}
   environment:
-    PATH: '/opt/local/bin:{{ ansible_env.PATH }}'
+    PATH: '/opt/local/bin:{{ ansible_env.HOME }}/.brew/bin:/Library/TeX/texbin:{{ ansible_env.PATH }}'
