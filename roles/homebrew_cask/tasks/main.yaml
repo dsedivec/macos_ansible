@@ -4,6 +4,32 @@
     dest: '{{ homebrew_dir }}'
     update: no
 
+# The docs don't say it, but apparently you need to create
+# the following directories, or "brew" basically doesn't work?
+# Weird?
+#
+# List from
+# https://github.com/Homebrew/install/blob/master/install.sh#L383-L386.
+- name: Make {{ item }} directory for Homebrew
+  file:
+    path: '{{ homebrew_dir }}/{{ item }}'
+    state: directory
+  loop:
+    - bin
+    - etc
+    - include
+    - lib
+    - sbin
+    - share
+    - var
+    - opt
+    - share/zsh/site-functions
+    - var/homebrew/linked
+    - Cellar
+    - Caskroom
+    - Homebrew
+    - Frameworks
+
 # Some brew commands may take a long time (ex. downloading large
 # files), and then expect to get an sudo password.  Little Python
 # wrapper script keeps sudo alive while brew is running.
