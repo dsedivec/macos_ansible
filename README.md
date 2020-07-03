@@ -24,6 +24,43 @@ Other `software_*` roles tend to be for specific software that other role(s) wil
 Additionally, some software has been broken out into its own roles to get me software that I need to actually work on this Ansible setup first.  For example, Emacs and/or Vim get installed early on so that I have good editors with good configurations to start editing YAML or Python if need be.
 
 
+# Notes to Self: Bootstrapping
+
+Create admin account at install time.  **Do not set up iCloud.**  In fact, opt out of basically everything during install.
+
+
+## With the Admin Account
+
+#. Flip modifiers before you go crazy.
+#. Change scroll direction and turn on tap to click.
+#. Check all software updates, go ahead and reboot if you need to.
+#. Change host name, probably needs to match what's in your Ansible inventory.
+#. Create regular user account.
+#. Give new user account sudo access via `/etc/sudoers.d/dale`.  Make sure to run `visudo -c` afterwards to make sure you didn't botch it.
+
+Now you can log out and log in as your new account.
+
+
+## With Your User Account
+
+#. Go ahead and sign into iCloud on first login.  You will at least get the chance to tell it not to sync all of your documents, downloads, photos and such.
+#. Flip modifiers before you go crazy.
+#. Change scroll direction and turn on tap to click.
+#. Give Terminal "Full Disk Access".
+#. Open Terminal.
+#. Run `python3 -V` and let Xcode command line tools install.
+#. Run `python3 -m venv ~/.vpy/system-ansible` to install a virtual environment.
+#. Activate that virtual environment and `pip install ansible`.
+#. `ssh-keygen -t ed25519 -C ...` and follow the prompts.
+#. `ssh-add`
+#. Upload new key to GitHub.
+#. Clone this repo (`macos_ansible`).
+#. Make sure you're logged in to the Mac App Store.  You probably are, if you enabled iCloud during first login.
+#. Run this repo, e.g.:
+
+        ansible-playbook site.yaml -l dale -K
+
+
 # Things Not Automated
 
 * Set firmware password
