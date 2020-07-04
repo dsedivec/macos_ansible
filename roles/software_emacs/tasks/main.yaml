@@ -82,7 +82,7 @@
   git_remote:
     repo: https://code.orgmode.org/bzg/org-mode
     dest: '{{ org_mode_local_repo }}'
-    name: upstream
+    remote: upstream
     state: present
 
 - name: Rebase my org-mode changes atop upstream
