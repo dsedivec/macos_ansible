@@ -5,15 +5,30 @@
   shell: scutil --set LocalHostName {{ inventory_hostname | quote }}
 
 - name: Check firewall status
-  command: /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
+  command: '{{ socketfilterfw }} --getglobalstate'
   changed_when: false
   register: firewall_state
 
 - name: Enable the firewall
-  command: /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+  command: '{{ socketfilterfw }} --setglobalstate on'
   when: >
     "firewall is enabled" not in (firewall_state.stdout | default("")).lower()
   become: yes
+
+- name: Check firewall incoming connection settings
+  command: '{{ socketfilterfw }} --getallowsigned'
+  changed_when: false
+  register: incoming_state
+
+- name: Disable always allow incoming connections for built-in apps
+  command: '{{ socketfilterfw }} --setallowsigned off'
+  when: >-
+    incoming_state.stdout is search("(?m)^.*signed built-in software ENABLED\s*$")
+
+- name: Disable always allow incoming connections for other signed apps
+  command: '{{ socketfilterfw }} --setallowsignedapp off'
+  when: >-
+    incoming_state.stdout is search("(?m)^.*downloaded signed software ENABLED\s*$")
 
 # Suggested by http://docs.hardentheworld.org/OS/MacOS_10.12_Sierra/index.html
 - name: Enable "Require an administrator password to access system-wide preferences"
