@@ -1,1 +1,10 @@
 dotfiles_private_which: work
+
+other_software_user_casks_work_machine:
+  - adium
+
+other_software_user_casks: >-
+  {{
+      other_software_user_casks_common
+      | union(other_software_user_casks_work_machine)
+  }}

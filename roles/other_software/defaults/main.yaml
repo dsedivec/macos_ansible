@@ -1,4 +1,4 @@
-other_software_macports:
+other_software_macports_common:
   - aspell
   - aspell-dict-en
   - bash-completion
@@ -26,7 +26,6 @@ other_software_macports:
   - lftp
   - lnav
   - mercurial
-  - mp3splt
   - mtr
   - ncdu
   - neomutt
@@ -57,21 +56,25 @@ other_software_macports:
   - xsv
   - youtube-dl
 
-other_software_system_casks:
+other_software_macports: '{{ other_software_macports_common }}'
+
+other_software_system_casks_common:
   # Could MAS this, but 1Pass might get updates directly from
   # AgileBits a little faster than MAS.  Otherwise, should be no
   # difference.  AgileBits says in their forums that the version
   # direct from them is sandboxed just like the MAS version.
   - 1password
   # Burp has its own installer that installs to /Applications.
-  - burp-suite
+  # 2020-06-30: Breaks under quarantine
+  # https://forum.portswigger.net/thread/install-macos-catalina-344b229e78f65
+  #- burp-suite
   - homebrew/cask-versions/firefox-developer-edition
   - intel-power-gadget
   - google-chrome
   - gpg-suite
   - istat-menus
   - osxfuse
-  - parallels
+  #XXX - parallels
   - tunnelblick
   - wireshark
   # Nice side effect of XQuartz: DISPLAY environment variable gets
@@ -80,11 +83,12 @@ other_software_system_casks:
   # things like "should I add this key to ssh-agent?"
   - xquartz
 
-other_software_user_casks:
+other_software_system_casks: '{{ other_software_system_casks_common }}'
+
+other_software_user_casks_common:
   - adium
   - airfoil
   - alfred
-  - anki
   - appcleaner
   - audio-hijack
   - bartender
@@ -92,9 +96,7 @@ other_software_user_casks:
   # Calibre 4 requires Mojave or later.
   - [calibre, "14"]
   - dash
-  - epic-games
   - flux
-  - freac
   - grandperspective
   - hammerspoon
   - handbrake
@@ -103,35 +105,30 @@ other_software_user_casks:
   - knockknock
   - libreoffice
   - loopback
-  - marshallofsound-google-play-music-player
   - micro-snitch
   - moom
-  - nvidia-geforce-now
   - pdfpenpro
   - plex
   - screenflow
-  - signal
-  - simple-comic
   - silentknight
-  - sketch
-  - steam
   - textual
   - the-unarchiver
   - tor-browser
   - vlc
   - witch
 
-other_software_mac_app_store:
+other_software_user_casks: '{{ other_software_user_casks_common }}'
+
+other_software_mac_app_store_common:
   - [1440147259, /Applications/AdGuard for Safari.app]
   - [824183456, /Applications/Affinity Photo.app]
   - [937984704, /Applications/Amphetamine.app]
   - [784801555, /Applications/Microsoft OneNote.app]
-  - [1193539993, '/Applications/Brother iPrint&Scan.app']
-  - [515886877, /Applications/Joystick Show.app]
 
-other_software_py3_venv:
+other_software_mac_app_store: '{{ other_software_mac_app_store_common}}'
+
+other_software_py3_venv_common:
   - magic-wormhole
-  - onkyo-eiscp
   - visidata
   # These three are requirements to enable features of VisiData.
   - openpyxl
@@ -140,14 +137,17 @@ other_software_py3_venv:
   - proselint
   - ydiff
 
-other_software_py3_bins:
-  - onkyo
+other_software_py3_venv: '{{ other_software_py3_venv_common }}'
+
+other_software_py3_bins_common:
   - proselint
   - vd
   - wormhole
   - ydiff
 
-other_software_preferences:
+other_software_py3_bins: '{{ other_software_py3_bins_common }}'
+
+other_software_preferences_common:
   com.agilebits.onepassword7:
     - [
         "ShortcutRecorder BrowserActivation",
@@ -264,10 +264,20 @@ other_software_preferences:
         ]
       ]
 
-other_software_add_dock:
+  ~/Library/Containers/com.microsoft.Outlook/Data/Library/Preferences/com.microsoft.Outlook.plist:
+    - [CalendarGridSecondTimeZoneID, int, 4]
+    - [CalendarGridShowSecondTimeZone, bool, true]
+    - [Compose_messages_in_HTML_by_default, bool, false]
+    - [MarkItemsAsReadPreferencesKey, int, 0]
+    - [Reply_to_selected_text, bool, true]
+
+other_software_preferences: '{{ other_software_preferences_common }}'
+
+other_software_add_dock_common:
   - /Applications/Firefox Developer Edition.app
   - ~/Applications/iTerm.app
-  - ~/Applications/Signal.app
+
+other_software_add_dock: '{{ other_software_add_dock_common }}'
 
 other_software_system_audio_units_dir: /Library/Audio/Plug-Ins/Components
 other_software_user_audio_units_dir: >-

@@ -1,1 +1,61 @@
 dotfiles_private_which: personal
+
+other_software_macports_personal_machine:
+  - mp3splt
+
+other_software_macports: >-
+  {{
+      other_software_macports_common
+      | union(other_software_macports_personal_machine)
+  }}
+
+other_software_user_casks_personal_machine:
+  - anki
+  - epic-games
+  - freac
+  - signal
+  - simple-comic
+  - steam
+
+other_software_user_casks: >-
+  {{
+      other_software_user_casks_common
+      | union(other_software_user_casks_personal_machine)
+  }}
+
+other_software_mac_app_store_personal_machine:
+  - [1193539993, '/Applications/Brother iPrint&Scan.app']
+  - [515886877, /Applications/Joystick Show.app]
+
+other_software_mac_app_store: >-
+  {{
+      other_software_mac_app_store_common
+      | union(other_software_mac_app_store_personal_machine)
+  }}
+
+other_software_py3_venv_personal_machine:
+  - onkyo-eiscp
+
+other_software_py3_venv: >-
+  {{
+      other_software_py3_venv_common
+      | union(other_software_py3_venv_personal_machine)
+  }}
+
+other_software_py3_bins_personal_machine:
+  - onkyo
+
+other_software_py3_bins: >-
+  {{
+      other_software_py3_bins_common
+      | union(other_software_py3_bins_personal_machine)
+  }}
+
+other_software_add_dock_personal_machine:
+  - ~/Applications/Signal.app
+
+other_software_add_dock: >-
+  {{
+      other_software_add_dock_common
+      | union(other_software_add_dock_personal_machine)
+  }}
