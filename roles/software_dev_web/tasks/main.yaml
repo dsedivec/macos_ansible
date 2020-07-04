@@ -1,15 +1,9 @@
-- name: Install web and blog development MacPorts packages
+- name: Install web development MacPorts packages
   x_macports:
     state: present
-    # Explicitly install latest nodejs13, needed for Tide (Emacs
-    # TypeScript development).  Otherwise I guess you get nodejs10?
-    name: [nodejs13, npm6, hugo +extended, py38-pygments]
-  become: yes
-
-- name: Make "pygments" run py38-pygments in MacPorts
-  command: port select --set pygments py38-pygments
-  args:
-    creates: /opt/local/bin/pygmentize
+    # Explicitly install latest Node.js, needed for Tide (Emacs
+    # TypeScript development).
+    name: [nodejs14]
   become: yes
 
 - name: Install web development packages from NPM
@@ -21,7 +15,6 @@
     - csslint
     - js-beautify
     - tern
-    - netlify-cli
 
 - name: Make home directory for ESLint
   file:

@@ -1,0 +1,19 @@
+- name: Install PostgreSQL
+  x_macports:
+    name:
+      - 'postgresql{{ software_postgresql_version }}'
+      - 'postgresql{{ software_postgresql_version }}-server'
+    state: present
+  become: true
+  tags: [slow]
+
+- name: Select PostgreSQL {{ software_postgresql_version }}
+  command:
+    argv:
+      - port
+      - select
+      - --set
+      - postgresql
+      - 'postgresql{{ software_postgresql_version}}'
+    creates: /opt/local/bin/pg_config
+  become: yes

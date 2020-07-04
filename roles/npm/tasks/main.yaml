@@ -1,0 +1,5 @@
+- name: Install NPM
+  x_macports:
+    state: present
+    name: npm6
+  become: yes

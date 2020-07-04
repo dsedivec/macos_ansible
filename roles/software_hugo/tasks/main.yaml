@@ -1,0 +1,19 @@
+- name: Install MacPorts packages needed for my blog
+  x_macports:
+    state: present
+    name: [hugo +extended, py38-pygments]
+  become: yes
+
+- name: Make "pygments" run py38-pygments in MacPorts
+  command: port select --set pygments py38-pygments
+  args:
+    creates: /opt/local/bin/pygmentize
+  become: yes
+
+- name: Install web development packages from NPM
+  npm:
+    state: present
+    global: yes
+    name: '{{ item }}'
+  loop:
+    - netlify-cli
