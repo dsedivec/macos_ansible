@@ -86,6 +86,12 @@
     - [macosx, macosx-statusicon, 0]
     - [core, audio-replay-gain-mode, album]
 
+# NOTE: If you get "redownloading" errors, you should try initiating
+# an install through the App Store GUI.  I had to do this for MS
+# Office apps.  I had to click *each one* and enter my Apple ID
+# password *for each one*, for some reason.  Once the download started
+# there, I was able to cancel it, then re-run this task, and it worked
+# fine.
 - name: Install software from Mac App Store
   command: mas install {{ item.0 }}
   args:

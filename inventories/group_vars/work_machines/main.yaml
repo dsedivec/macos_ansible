@@ -1,10 +1,46 @@
 dotfiles_private_which: work
 
+other_software_system_casks_work_machine:
+  - microsoft-teams
+  - ringcentral-meetings
+
+other_software_system_casks: >-
+  {{
+      other_software_system_casks_common
+      | union(other_software_system_casks_work_machine)
+  }}
+
 other_software_user_casks_work_machine:
   - adium
+  - ringcentral-phone
 
 other_software_user_casks: >-
   {{
       other_software_user_casks_common
       | union(other_software_user_casks_work_machine)
+  }}
+
+other_software_mac_app_store_work_machine:
+  # NOTE: For reasons I cannot fathom, I had to start the download on
+  # each of these in the App Store, then type in my password *for each
+  # one*, and only then could mas download them.
+  - [462054704, /Applications/Microsoft Word.app]
+  - [462058435, /Applications/Microsoft Excel.app]
+  - [462062816, /Applications/Microsoft PowerPoint.app]
+
+other_software_mac_app_store: >-
+  {{
+      other_software_mac_app_store_common
+      | union(other_software_mac_app_store_work_machine)
+  }}
+
+other_software_add_dock_work_machine:
+  - /Applications/Microsoft Teams.app
+  - ~/Applications/Adium.app
+  - ~/Applications/RingCentral Phone.app
+
+other_software_add_dock: >-
+  {{
+      other_software_add_dock_common
+      | union(other_software_add_dock_work_machine)
   }}
