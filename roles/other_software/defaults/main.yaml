@@ -234,6 +234,9 @@ other_software_preferences_common:
     - [SUAutomaticallyUpdate, bool, false]
     - [SUEnableAutomaticChecks, bool, true]
 
+  net.tunnelblick.tunnelblick:
+    - [keyboardShortcutIndex, int, 0]
+
   ~/Library/Application Support/Witch/Settings.plist:
     - [AXAPI Timeout, int, 100]
     # Going to whack the whole Action Configurations key here, which
