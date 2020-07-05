@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import json
 import logging
@@ -9,7 +9,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import urllib
+import urllib.request
 
 
 def main(argv):
@@ -21,7 +21,7 @@ def main(argv):
     logging.info("macOS version is %r", macos_version)
     logging.info("Fetching MacPorts release information from GitHub")
     release_info = json.load(
-        urllib.urlopen(
+        urllib.request.urlopen(
             "https://api.github.com/repos/macports/macports-base/releases/latest"
         )
     )
@@ -38,19 +38,18 @@ def main(argv):
     logging.info("Found MacPorts release %r", pkg_file_name)
     if "/" in pkg_file_name:
         raise Exception("Illegal file name %r" % (pkg_file_name))
-    remote_pkg = urllib.urlopen(asset["browser_download_url"])
-    download_dir = tempfile.mkdtemp()
-    local_pkg_path = os.path.join(download_dir, pkg_file_name)
-    with open(local_pkg_path, "wb") as local_pkg:
-        shutil.copyfileobj(remote_pkg, local_pkg)
-    remote_pkg.close()
-    logging.info("Downloaded MacPorts pkg")
-    cmd = ["installer", "-pkg", local_pkg_path, "-target", "/"]
-    if os.getuid() != 0:
-        cmd.insert(0, "sudo")
-    logging.info("Running: %r" % (cmd,))
-    subprocess.check_call(cmd)
-    shutil.rmtree(download_dir)
+    remote_pkg = urllib.request.urlopen(asset["browser_download_url"])
+    with tempfile.TemporaryDirectory() as download_dir:
+        local_pkg_path = os.path.join(download_dir, pkg_file_name)
+        with open(local_pkg_path, "wb") as local_pkg:
+            shutil.copyfileobj(remote_pkg, local_pkg)
+        remote_pkg.close()
+        logging.info("Downloaded MacPorts pkg")
+        cmd = ["installer", "-pkg", local_pkg_path, "-target", "/"]
+        if os.getuid() != 0:
+            cmd.insert(0, "sudo")
+        logging.info("Running: %r" % (cmd,))
+        subprocess.check_call(cmd)
 
 
 if __name__ == "__main__":
