@@ -424,8 +424,10 @@ def run_module():
                     )
                 )
             elif type(old_value) == list:
-                old_value.extend(new_value)
-                changed = True
+                for elem in new_value:
+                    if elem not in old_value:
+                        old_value.append(elem)
+                        changed = True
             elif type(old_value) == dict:
                 changed = merge_dicts(new_value, old_value)
         elif old_value != new_value:
