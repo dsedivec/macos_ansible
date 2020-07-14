@@ -1045,6 +1045,17 @@ macos_prefs_set:
     type: string
     value: Plain
 
+  - domain: '{{ macos_prefs_domain_mail }}'
+    key: AutoReplyFormat
+    type: bool
+    value: true
+
+  # I believe this is "use fixed width font when composing plain text".
+  - domain: '{{ macos_prefs_domain_mail }}'
+    key: AutoSelectFont
+    type: bool
+    value: true
+
   - domain: com.apple.scriptmenu
     key: ScriptMenuEnabled
     type: bool
