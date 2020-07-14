@@ -194,10 +194,8 @@ other_software_preferences_common:
     - ["Session End Time Calcuation", int, 1]
     - ["Show Welcome Window", int, 0]
 
-  # I don't *think* this should be necessary if I'm
-  # importing/exporting configuration?  But maybe it is?
-  # com.hegenberg.BetterTouchTool:
-  #   - [windowSnappingEnabled, bool, false]
+  com.hegenberg.BetterTouchTool:
+    - [windowSnappingEnabled, bool, false]
 
   com.kapeli.dashdoc:
     - [shouldSyncGeneral, int, 1]
