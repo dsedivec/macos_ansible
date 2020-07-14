@@ -75,6 +75,7 @@
     key: '{{ item.key }}'
     value: '{{ item.value | default }}'
     value_type: '{{ item.type | default }}'
+    merge_value: '{{ item.merge_value | default(False)}}'
   become: '{{ item.become | default(False) }}'
   when: 'item.when | default(True)'
   loop: '{{ macos_prefs_set }}'

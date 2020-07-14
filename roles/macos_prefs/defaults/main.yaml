@@ -913,6 +913,16 @@ macos_prefs_set:
     type: bool
     value: false
 
+  # Add on-screen keyboard option to the language drop-down on the
+  # menu bar.
+  - domain: com.apple.HIToolbox
+    key: AppleEnabledInputSources
+    type: array
+    value:
+      - Bundle ID: com.apple.CharacterPaletteIM
+        InputSourceKind: Non Keyboard Input Method
+    merge_value: true
+
   # Turn on "full keyboard access", so you can tab through every
   # control.  (I think that's what this does.)
   - key: AppleKeyboardUIMode
