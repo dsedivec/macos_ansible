@@ -159,7 +159,8 @@ def run_module():
     module_args.update(urls.url_argument_spec())
     module = AnsibleModule(argument_spec=module_args, supports_check_mode=True)
     result = dict(changed=False)
-    if not all(glob.glob(pat) for pat in module.params["creates"]):
+    creates = module.params["creates"]
+    if not creates or not all(glob.glob(pat) for pat in creates):
         if is_url(module.params["src"]):
             dmg_path = urls.fetch_file(module, module.params["src"])
         else:
