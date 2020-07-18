@@ -264,13 +264,6 @@ other_software_preferences_common:
         ]
       ]
 
-  ~/Library/Containers/com.microsoft.Outlook/Data/Library/Preferences/com.microsoft.Outlook.plist:
-    - [CalendarGridSecondTimeZoneID, int, 4]
-    - [CalendarGridShowSecondTimeZone, bool, true]
-    - [Compose_messages_in_HTML_by_default, bool, false]
-    - [MarkItemsAsReadPreferencesKey, int, 0]
-    - [Reply_to_selected_text, bool, true]
-
 other_software_preferences: '{{ other_software_preferences_common }}'
 
 other_software_add_dock_common:
