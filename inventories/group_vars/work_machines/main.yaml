@@ -3,6 +3,7 @@ dotfiles_private_which: work
 other_software_system_casks_work_machine:
   - microsoft-teams
   - ringcentral-meetings
+  - tableau
 
 other_software_system_casks: >-
   {{
@@ -27,6 +28,7 @@ other_software_mac_app_store_work_machine:
   - [462054704, /Applications/Microsoft Word.app]
   - [462058435, /Applications/Microsoft Excel.app]
   - [462062816, /Applications/Microsoft PowerPoint.app]
+  - [1295203466, /Applications/Microsoft Remote Desktop.app]
 
 other_software_mac_app_store: >-
   {{
