@@ -68,3 +68,9 @@
           modifierFlags: 262144,
         }
       ]
+
+- name: Make all mail bundles compatible with the installed version of Mail.app
+  script: update_mail_bundle_uuids.py
+  register: update_bundle_uuids
+  changed_when: >-
+    update_bundle_uuids.stdout_lines[-1] | regex_search('^Updated [1-9]')
