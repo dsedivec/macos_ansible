@@ -25,10 +25,10 @@ other_software_mac_app_store_work_machine:
   # NOTE: For reasons I cannot fathom, I had to start the download on
   # each of these in the App Store, then type in my password *for each
   # one*, and only then could mas download them.
-  - [462054704, /Applications/Microsoft Word.app]
   - [462058435, /Applications/Microsoft Excel.app]
   - [462062816, /Applications/Microsoft PowerPoint.app]
   - [1295203466, /Applications/Microsoft Remote Desktop.app]
+  - [462054704, /Applications/Microsoft Word.app]
 
 other_software_mac_app_store: >-
   {{
