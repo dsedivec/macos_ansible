@@ -41,3 +41,8 @@
     src: eslint_wrapper
     dest: '{{ user_bin_dir }}/eslint'
     mode: 0755
+
+- name: Install devd
+  command:
+    argv: [go, get, github.com/cortesi/devd/cmd/devd]
+    creates: '{{ go_bin_dir }}/devd'

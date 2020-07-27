@@ -1,5 +1,7 @@
 dependencies:
   - role: macports
   - role: npm
-  # For .eslint/.eslintrc.js.
+  # For devd
+  - role: go
+  # For .eslint/.eslintrc.js
   - role: dotfiles
