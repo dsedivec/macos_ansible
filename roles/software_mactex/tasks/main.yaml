@@ -4,3 +4,22 @@
     name: mactex
     path: '{{ homebrew_sudo_wrapper | dirname }}'
   become: yes
+
+# Homebrew (annoyingly) disables installing Ghostscript with MacTeX,
+# so you have to tell LaTeXiT where to find Ghostscript and ps2pdf.
+- name: Tell LaTeXiT where to find Homebrew's Ghostscript
+  x_osx_defaults:
+    domain: fr.chachatelier.pierre.LaTeXiT
+    key:
+      - CompositionConfigurations
+      - 0
+      - additionalProcessingScripts
+      - '{{ item.key }}'
+    container_types: [dict, array, dict]
+    value_type: string
+    value: '{{ item.value }}'
+  loop:
+    - key: gsPath
+      value: '{{ homebrew_bin }}/gs'
+    - key: psToPdfPath
+      value: '{{ homebrew_bin }}/ps2pdf'
