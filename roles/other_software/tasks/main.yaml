@@ -148,17 +148,6 @@
   loop: '{{ other_software_py3_bins }}'
   ignore_errors: '{{ ansible_check_mode }}'
 
-- name: Install Go
-  x_macports:
-    name: go
-    state: present
-  become: yes
-
-- name: Install gocryptfs
-  script: install_gocryptfs.py {{ user_bin_dir | quote }}
-  args:
-    creates: '{{ user_bin_dir }}/gocryptfs'
-
 - name: Clone sshfs
   git:
     repo: https://github.com/libfuse/sshfs.git

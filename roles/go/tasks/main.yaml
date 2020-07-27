@@ -1,0 +1,19 @@
+- name: Install Go
+  x_macports:
+    state: installed
+    name: go
+
+- name: Get value of GOENV
+  command:
+    argv: [go, env, GOENV]
+  register: go_env_result
+  changed_when: false
+  check_mode: no
+
+- name: Set GOPATH
+  copy:
+    # In my testing, Go doesn't need this value quoted.  It was more
+    # than happy to take a value with space in it, at least.
+    content: |
+      GOPATH={{ go_GOPATH }}
+    dest: '{{ go_env_result.stdout_lines[0] }}'

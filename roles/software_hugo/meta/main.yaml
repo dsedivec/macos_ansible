@@ -1,3 +1,4 @@
 dependencies:
   - macports
+  - go
   - npm

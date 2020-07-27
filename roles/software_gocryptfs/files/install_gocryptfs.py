@@ -14,6 +14,8 @@ def main(argv):
     go_dir = subprocess.check_output("go env GOPATH".split(), text=True).rstrip(
         "\r\n"
     )
+    if not go_dir:
+        raise Exception("Can't read GOPATH")
     subprocess.check_call("go get -d github.com/rfjakob/gocryptfs".split())
     gocryptfs_src_dir = os.path.join(go_dir, "src/github.com/rfjakob/gocryptfs")
     subprocess.check_call("git pull --ff-only".split(), cwd=gocryptfs_src_dir)

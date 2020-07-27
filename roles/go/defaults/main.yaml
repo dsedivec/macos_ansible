@@ -1,0 +1,2 @@
+go_GOPATH: '{{ ansible_env.HOME }}/.go'
+go_bin_dir: '{{ go_GOPATH }}/bin'
