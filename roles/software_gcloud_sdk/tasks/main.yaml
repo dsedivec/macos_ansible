@@ -1,0 +1,18 @@
+- name: Install Google Cloud SDK and kubectl
+  x_macports:
+    state: present
+    name:
+      - gcloud
+      - 'kubectl-{{ software_gcloud_sdk_kubectl_version }}'
+  become: yes
+
+- name: Select default kubectl version
+  command:
+    argv:
+      - port
+      - select
+      - '--set'
+      - kubectl
+      - 'kubectl{{ software_gcloud_sdk_kubectl_version }}'
+    creates: '{{ macports_bin }}/kubectl'
+  become: yes

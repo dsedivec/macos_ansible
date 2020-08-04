@@ -37,3 +37,7 @@
     - {role: software_postgresql, tags: [software_postgresql]}
     - {role: software_gocryptfs, tags: [software_gocryptfs]}
     - {role: software_hugo, tags: [software_hugo]}
+
+- hosts: work_machines
+  roles:
+    - {role: software_gcloud_sdk, tags: [software_gcloud_sdk]}
