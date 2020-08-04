@@ -1,6 +1,6 @@
 - name: Install tmux
   x_macports:
-    name: tmux
+    name: tmux-devel
     state: present
   become: true
 
