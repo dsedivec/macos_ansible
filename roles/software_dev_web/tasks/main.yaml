@@ -46,3 +46,10 @@
   command:
     argv: [go, get, github.com/cortesi/devd/cmd/devd]
     creates: '{{ go_bin_dir }}/devd'
+
+- name: Install Colour Contrast Analyser (CCA)
+  command:
+    argv: [
+      '{{ macfit }}', '--github', '^CCA-[\d.]+\.dmg$', ThePacielloGroup/CCAe
+    ]
+    creates: '{{ user_app_dir }}/Colour Contrast Analyser (CCA).app'
