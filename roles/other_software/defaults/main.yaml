@@ -9,7 +9,6 @@ other_software_macports_common:
   - ctags
   - dsh
   - emacs-app
-  - fasd
   - fd
   - ffmpeg +nonfree
   - figlet
@@ -56,6 +55,7 @@ other_software_macports_common:
   - watch
   - xsv
   - youtube-dl
+  - zoxide
 
 other_software_macports: '{{ other_software_macports_common }}'
 
