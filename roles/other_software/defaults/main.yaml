@@ -130,13 +130,16 @@ other_software_mac_app_store: '{{ other_software_mac_app_store_common}}'
 
 other_software_py3_venv_common:
   - magic-wormhole
+  - proselint
   - visidata
-  # These three are requirements to enable features of VisiData.
+  - ydiff
+  # My ~/bin/html2email script uses these.  (VisiData also wants lxml
+  # for some features.)
+  - lxml
+  - premailer
+  # These last two are requirements to enable features of VisiData.
   - openpyxl
   - xlrd
-  - lxml
-  - proselint
-  - ydiff
 
 other_software_py3_venv: '{{ other_software_py3_venv_common }}'
 
