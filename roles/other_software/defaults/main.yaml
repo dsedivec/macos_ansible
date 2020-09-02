@@ -17,6 +17,7 @@ other_software_macports_common:
   - fswatch
   - fzf
   - git
+  - gnuplot
   - graphviz +rsvg
   - grep
   - gunits
