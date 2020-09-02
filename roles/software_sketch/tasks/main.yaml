@@ -52,8 +52,8 @@
       creates: Duplicator
     - url: https://github.com/swiadek/pixel-perfecter-sketch-plugin/archive/master.zip
       creates: pixel-perfecter
-    - url: https://github.com/stark-contrast/stark-sketch-plugin/archive/main.zip
-      creates: Stark
+    - url: https://github.com/ygev/cluse/releases/latest/download/Cluse.sketchplugin.zip
+      creates: Cluse
     - url: https://github.com/sonburn/symbol-organizer/archive/master.zip
       creates: Symbol Organizer
 
