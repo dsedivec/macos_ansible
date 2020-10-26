@@ -1,0 +1,2 @@
+software_hugo_pygments_port_name: >-
+  'py{{ macports_python_3_version_no_dots }}-pygments'

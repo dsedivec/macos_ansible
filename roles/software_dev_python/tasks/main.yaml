@@ -70,23 +70,28 @@
 - name: Install readline_path.py
   template:
     src: readline_path.py
-    dest: '{{ user_py3_venv_dir }}/lib/python3.8/site-packages/'
+    dest: '{{ user_py3_venv_site_packages }}/'
 
 - name: Install readline_path.pth
   copy:
     content: |
       import readline_path
-    dest: '{{ user_py3_venv_dir }}/lib/python3.8/site-packages/readline_path.pth'
+    dest: '{{ user_py3_venv_site_packages }}/readline_path.pth'
 
 # Elpy needs "virtualenv".
-- name: Install py38-virtualenv
+- name: 'Install {{ software_dev_python_py3_virtualenv_port_name }}'
   x_macports:
-    name: py38-virtualenv
+    name: '{{ software_dev_python_py3_virtualenv_port_name }}'
     state: installed
   become: true
 
-- name: Select py38-virtualenv as "virtualenv"
+- name: 'Select {{ software_dev_python_py3_virtualenv_port_name }} as "virtualenv"'
   command:
-    argv: [port, select, --set, virtualenv, virtualenv38]
+    argv:
+      - port
+      - select
+      - '--set'
+      - virtualenv
+      - '{{ software_dev_python_py3_virtualenv_port_select_name }}'
     creates: /opt/local/bin/virtualenv
   become: true

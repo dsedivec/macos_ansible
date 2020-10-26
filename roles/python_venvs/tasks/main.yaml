@@ -1,7 +1,7 @@
 - name: Install Pythons
   macports:
     state: present
-    name: [python27, py27-virtualenv, python38]
+    name: [python27, py27-virtualenv, '{{ user_py3_venv_python_port_name }}']
   become: yes
 
 - name: Check "python3" executable
@@ -9,13 +9,13 @@
     path: /opt/local/bin/python3
   register: python3_stat
 
-- name: Make "python3" point at latest Python 3 version
-  command: port select --set python3 python38
+- name: 'Make "python3" point at latest Python {{ user_py3_venv_python_version }}'
+  command: port select --set python3 {{ user_py3_venv_python_port_name | quote }}
   become: yes
   when: >
     python3_stat.stat.islnk is not defined
     or not python3_stat.stat.islnk
-    or python3_stat.stat.lnk_target != "/opt/local/bin/python3.8"
+    or python3_stat.stat.lnk_target != user_py3_venv_python_bin
 
 - name: Build Python 2.7 virtualenv
   command:
@@ -28,13 +28,15 @@
     argv: ['{{ user_py2_venv_bin }}/pip', 'install', '--upgrade', 'pip']
   when: virtualenv is changed
 
-- name: Build Python 3.8 virtualenv
+- name: 'Build Python {{ user_py3_venv_python_version }} virtualenv'
   command:
-    argv: [/opt/local/bin/python3.8, '-m', venv, '{{ user_py3_venv_dir }}']
+    argv: [
+      '{{ user_py3_venv_python_bin }}', '-m', venv, '{{ user_py3_venv_dir }}'
+    ]
     creates: '{{ user_py3_venv_bin }}/activate'
   register: virtualenv
 
-- name: Upgrade pip in 3.8 virtualenv
+- name: 'Upgrade pip in {{ user_py3_venv_python_version }} virtualenv'
   command:
     argv: ['{{ user_py3_venv_bin }}/pip', 'install', '--upgrade', 'pip']
   when: virtualenv is changed

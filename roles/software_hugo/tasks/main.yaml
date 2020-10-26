@@ -1,11 +1,11 @@
 - name: Install MacPorts packages needed for my blog
   x_macports:
     state: present
-    name: [hugo +extended, py38-pygments]
+    name: [hugo +extended, '{{ software_hugo_pygments_port_name }}']
   become: yes
 
-- name: Make "pygments" run py38-pygments in MacPorts
-  command: port select --set pygments py38-pygments
+- name: 'Make "pygments" run {{ software_hugo_pygments_port_name }} in MacPorts'
+  command: port select --set pygments {{ software_hugo_pygments_port_name | quote }}
   args:
     creates: /opt/local/bin/pygmentize
   become: yes

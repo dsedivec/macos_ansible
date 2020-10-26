@@ -26,10 +26,8 @@
 - name: Install Python and PyObjC
   x_macports:
     name:
-      - 'python{{ py_version }}'
-      - 'py{{ py_version }}-pyobjc'
-  vars:
-    py_version: '{{ macports_python_3_version.replace(".", "") }}'
+      - 'python{{ macports_python_3_version_no_dots }}'
+      - 'py{{ macports_python_3_version_no_dots }}-pyobjc'
   become: true
   tags: [slow]
 
