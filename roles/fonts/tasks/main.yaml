@@ -98,7 +98,7 @@
     # https://github.com/sapegin/grunt-webfont or
     # https://github.com/jeerbl/webfonts-loader.
     - https://github.com/domtronn/all-the-icons.el/blob/master/fonts/octicons.ttf
-    - https://github.com/google/material-design-icons/raw/master/iconfont/MaterialIcons-Regular.ttf
+    - https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf
 
 - name: Install woff2 package
   macports:
