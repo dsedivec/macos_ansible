@@ -268,16 +268,15 @@ def run_module():
     elif len(key_list) < 1:
         fail("key cannot be an empty list")
 
+    # The first container type is always a dict (AFAIK that's how
+    # preferences work), so you don't need to include that.
+    num_container_types_needed = len(key_list) - 1
     container_types = params["container_types"]
     if container_types is None:
-        container_types = [None] * (len(key_list) - 1)
+        container_types = [None] * num_container_types_needed
     else:
         if not isinstance(container_types, list):
             container_types = [container_types]
-        elif len(container_types) != (len(key_list) - 1):
-            fail(
-                "container_types must have elements" " for all but the last key"
-            )
         CONTAINER_TYPE_STR_TO_CLS = {"list": list, "dict": dict, "array": list}
         # Ansible doesn't like it if you put things that can't be serialized
         # into JSON into the data structures that it owns, and which it will
@@ -288,6 +287,24 @@ def run_module():
                 container_types[idx] = CONTAINER_TYPE_STR_TO_CLS[container_type]
             except KeyError:
                 fail(f"Unknown container type {container_type}")
+        if len(container_types) == (num_container_types_needed + 1):
+            # Allow user to tell us that the first container is a
+            # dict, which it always is in preferences, AFAIK.  (See
+            # also my comment above where I introduce
+            # num_container_types_needed.)
+            if container_types[0] != dict:
+                fail(
+                    f"If you want to pass {num_container_types_needed + 1}"
+                    f" value(s) in container_types (rather than"
+                    f" {num_container_types_needed} value(s), which is/are"
+                    f' all that are required), the first element must be "dict"'
+                )
+            del container_types[0]
+        elif len(container_types) != num_container_types_needed:
+            fail(
+                f"container_types must have {num_container_types_needed}"
+                " element(s)"
+            )
 
     # Copying these into the result to ease debugging.  Note that
     # these may be different than some of the info Ansible prints/puts
