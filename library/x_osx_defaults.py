@@ -278,7 +278,7 @@ def run_module():
             fail(
                 "container_types must have elements" " for all but the last key"
             )
-        CONTAINER_TYPE_STR_TO_CLS = {"list": list, "dict": dict}
+        CONTAINER_TYPE_STR_TO_CLS = {"list": list, "dict": dict, "array": list}
         # Ansible doesn't like it if you put things that can't be serialized
         # into JSON into the data structures that it owns, and which it will
         # eventually try to put into the response.  Make a copy.
