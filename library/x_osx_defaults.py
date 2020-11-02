@@ -355,17 +355,13 @@ def run_module():
             key = int(key)
             if key == len(container):
                 container.append(None)
-            if container[key] is None:
-                if next_container_type:
-                    container.append(next_container_type)
-                else:
-                    fail(f"No container at {key_list[key_idx:]!r}")
-            else:
-                assert key > len(container), repr((key, container))
+            elif key > len(container):
                 fail(
                     f"Index {key} is longer"
                     f" than the list at key(s)) {key_list[:key_idx]}"
                 )
+            elif next_container_type and container[key] is None:
+                container.append(next_container_type())
         else:
             raise Exception("Should never get here")
         container = container[key]
