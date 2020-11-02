@@ -36,6 +36,8 @@ other_software_macports_common:
   - p7zip
   - parallel
   - patchutils
+  # Poppler has pdfunite to combine PDF files
+  - poppler
   - proselint
   - pspg
   - pstree
