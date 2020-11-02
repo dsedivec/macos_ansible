@@ -24,7 +24,6 @@
     key:
       - CompositionConfigurations
       - 0
-      - additionalProcessingScripts
       - '{{ item.key }}'
     container_types: [dict, array, dict]
     value_type: string
