@@ -237,6 +237,8 @@ def run_module():
         ),
         domain=dict(type="str", required=False, default="NSGlobalDomain"),
         key=dict(type="raw", required=True),
+        # container_types is necessary if you want to be able to
+        # create entirely missing keys (past the top-level key).
         container_types=dict(type="raw", required=False, default=None),
         value=dict(type="raw", required=False, default=None),
         value_type=dict(type="str", required=False, default=None),
