@@ -48,8 +48,8 @@ Now you can log out and log in as your new account.
 3. Change scroll direction and turn on tap to click.
 4. Give Terminal "Full Disk Access".
 5. Open Terminal.
-6. Run `python3 -V` and let Xcode command line tools install.
-7. Run `python3 -m venv ~/.vpy/system-ansible` to install a virtual environment.
+6. Run `/usr/bin/python3 -V` and let Xcode command line tools install.
+7. Run `/usr/bin/python3 -m venv ~/.vpy/system-ansible` to install a virtual environment.
 8. Activate that virtual environment and `pip install ansible`.
 9. `ssh-keygen -t ed25519 -C ...` and follow the prompts.
 10. `ssh-add`
