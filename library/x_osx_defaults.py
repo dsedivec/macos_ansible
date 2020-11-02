@@ -46,7 +46,6 @@ TBD
 
 # fmt: off
 
-import collections
 import copy
 import datetime
 import re
