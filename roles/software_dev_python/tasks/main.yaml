@@ -38,34 +38,51 @@
 # lib-dynload, where Python will find the readline module built
 # against libedit.
 #
-# So we:
+# So we do something like:
 #
-# 1. Abuse setup.py --install-lib to put python-gnureadline somewhere
-#    entirely outside Python's normal lib path
-#    ($VIRTUAL_ENV/lib/pythonX.Y).
+# 1. Use pip install --target to put gnureadline somewhere entirely
+#    outside Python's normal lib path (which is
+#    $VIRTUAL_ENV/lib/pythonX.Y).
 #
 # 2. Drop a readline_path.pth file into the site-packages dir that
 #    *executes* at Python startup...
 #
 # 3. ...a readline_path.py script we have also dropped into
-#    site-packages that forcibly inserts our install-lib directory
-#    from step 1 onto sys.path *before* the system directories.
+#    site-packages that forcibly inserts our directory from step 1
+#    onto sys.path *before* the system directories.
+#
+# 4. Symlink the egg-info directory into the normal Python
+#    site-packages directory so that pip things gnureadline is
+#    installed.
 #
 # I used to use easy_install, which conveniently installed into a
 # subdirectory anyway, but easy_install is all but abandoned.  Its
 # Ansible module actually fails nowadays because easy_install
 # --dry-run breaks installing python-gnureadline.
 #
+# "pip --install-options='--install-lib=/some/other/lib'" used to work
+# but stopped at some point between Python 3.8 and 3.9, I think.
+#
 # If I used actual virtualenv instead of the built-in venv, I think I
 # could use the same fix I use for Python 2, above.  But I'm stubborn.
 
-- name: Install gnureadline for Python 3 with easy_install
+- name: Check if gnureadline is already installed for Python 3
+  find:
+    paths: ['{{ software_dev_python_py3_gnureadline_dir }}']
+    patterns: ['readline.py']
+    file_type: file
+    recurse: no
+    use_regex: no
+  register: py3_readline_find
+
+- name: Install gnureadline for Python 3
   pip:
     virtualenv: '{{ user_py3_venv_dir }}'
     name: gnureadline
     # Argh (no pun intended), why doesn't extra_args take a list?
-    extra_args: "--install-option --install-lib={{ software_dev_python_py3_gnureadline_dir | quote }}"
+    extra_args: "--target={{ software_dev_python_py3_gnureadline_dir | quote }}"
     state: present
+  when: 'py3_readline_find.matched < 1'
 
 - name: Install readline_path.py
   template:
@@ -77,6 +94,25 @@
     content: |
       import readline_path
     dest: '{{ user_py3_venv_site_packages }}/readline_path.pth'
+
+- name: Get name of gnureadline .egg-info directory for Python 3
+  find:
+    paths: ['{{ software_dev_python_py3_gnureadline_dir }}']
+    patterns: ['gnureadline-*-py{{ user_py3_venv_python_version }}.egg-info']
+    file_type: directory
+    recurse: no
+    use_regex: no
+  register: py3_readline_egg_info
+  # We're going to go ahead and fail if you have >1 directories
+  # matching here, since I don't want to figure out which egg-info
+  # directory is the current one.
+  failed_when: 'py3_readline_egg_info.matched != 1'
+
+- name: Tell pip that gnureadline is installed for Python 3
+  file:
+    state: link
+    src: '{{ py3_readline_egg_info.files[0].path | relpath(user_py3_venv_site_packages) }}'
+    dest: '{{ user_py3_venv_site_packages }}/{{ py3_readline_egg_info.files[0].path | basename }}'
 
 # Elpy needs "virtualenv".
 - name: 'Install {{ software_dev_python_py3_virtualenv_port_name }}'
