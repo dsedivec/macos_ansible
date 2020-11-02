@@ -114,13 +114,6 @@
     src: '{{ py3_readline_egg_info.files[0].path | relpath(user_py3_venv_site_packages) }}'
     dest: '{{ user_py3_venv_site_packages }}/{{ py3_readline_egg_info.files[0].path | basename }}'
 
-# Elpy needs "virtualenv".
-- name: 'Install {{ software_dev_python_py3_virtualenv_port_name }}'
-  x_macports:
-    name: '{{ software_dev_python_py3_virtualenv_port_name }}'
-    state: installed
-  become: true
-
 - name: 'Select {{ software_dev_python_py3_virtualenv_port_name }} as "virtualenv"'
   command:
     argv:
