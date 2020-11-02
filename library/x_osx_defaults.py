@@ -261,7 +261,9 @@ def run_module():
         module.fail_json(msg=msg, **result)
 
     key_list = params["key"]
-    if type(key_list) != list:
+    if not key_list:
+        fail("key cannot be empty")
+    elif type(key_list) != list:
         key_list = [key_list]
     elif len(key_list) < 1:
         fail("key cannot be an empty list")
