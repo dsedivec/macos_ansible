@@ -441,6 +441,8 @@ def run_module():
                         changed = True
             elif type(old_value) == dict:
                 changed = merge_dicts(new_value, old_value)
+            else:
+                raise Exception("Should never get here")
         elif old_value != new_value:
             container[last_key] = new_value
             changed = True
