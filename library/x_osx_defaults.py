@@ -363,22 +363,17 @@ def run_module():
             else:
                 assert key > len(container), repr((key, container))
                 fail(
-                    f"Key index {key} is longer"
-                    f" than the list at {key_list[:key_idx]}"
+                    f"Index {key} is longer"
+                    f" than the list at key(s)) {key_list[:key_idx]}"
                 )
         else:
             raise Exception("Should never get here")
         container = container[key]
         if next_container_type and type(container) != next_container_type:
             fail(
-                (
-                    "Expected container type {0} at {1!r}"
-                    " but found type {2} instead"
-                ).format(
-                    next_container_type.__class__.__name__,
-                    key_list[: key_idx + 1],
-                    type(container).__class__.__name__,
-                )
+                f"Expected container type {next_container_type.__name__}"
+                f" (key_idx={key_idx}) at {key_list[: key_idx + 1]!r}"
+                f" but found type {type(container).__name__} instead"
             )
         if key_idx == 0 and container is not top_value:
             top_value = container
