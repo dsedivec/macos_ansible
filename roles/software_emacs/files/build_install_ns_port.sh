@@ -24,6 +24,7 @@ configure_args=(
 )
 
 native_comp=0
+install_emacs=1
 
 make_args=("-j$(getconf _NPROCESSORS_ONLN)")
 
@@ -57,8 +58,13 @@ while [ $# -gt 0 ]; do
 			shift 1
 			;;
 
+		--no-install)
+			install_emacs=0
+			shift 1
+			;;
+
 		*)
-			echo "Usage: $(basename "$0") [--debug-build] [--native-comp]" >&2
+			echo "Usage: $(basename "$0") [--debug-build] [--native-comp] [--no-install]" >&2
 			exit 1
 			;;
 	esac
@@ -99,18 +105,23 @@ fi
 # info installed in the app bundle.
 make "${make_args[@]}"
 make install
-install -d ~/Applications
-dest=$HOME/Applications/Emacs.app
-if [ -e "$dest" ]; then
-	old=$HOME/Applications/Emacs\ Old.app
-	rm -rf "$old"
-	mv "$dest" "$old"
-fi
-mv "$build_dir/Emacs.app" "$dest"
+
+new_emacs=$build_dir/Emacs.app
 
 if [ $native_comp -eq 1 ]; then
 	emacs_version=$(perl -ne '
 		if (/^#define\s+PACKAGE_VERSION\s+"([^"]+)"/) { print "$1\n"; exit }
 	' src/config.h)
-	ln -s "MacOS/lib/emacs/${emacs_version}/native-lisp" "$dest/Contents/"
+	ln -s "MacOS/lib/emacs/${emacs_version}/native-lisp" "$new_emacs/Contents/"
+fi
+
+if [ $install_emacs -eq 1 ]; then
+	install -d ~/Applications
+	dest=$HOME/Applications/Emacs.app
+	if [ -e "$dest" ]; then
+		old=$HOME/Applications/Emacs\ Old.app
+		rm -rf "$old"
+		mv "$dest" "$old"
+	fi
+	mv "$new_emacs" "$dest"
 fi
