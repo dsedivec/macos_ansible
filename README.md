@@ -24,6 +24,25 @@ Other `software_*` roles tend to be for specific software that other role(s) wil
 Additionally, some software has been broken out into its own roles to get me software that I need to actually work on this Ansible setup first.  For example, Emacs and/or Vim get installed early on so that I have good editors with good configurations to start editing YAML or Python if need be.
 
 
+
+# Notes to Self: Before Reinstall
+
+* Export some browser extension settings, since they're not in the cloud (WTF) and they can be hard to find and/or re-import from the browser profile directory:
+  * uBlock Origin
+  * Privacy Badger
+  * HTTPS Everywhere
+  * Cookie Auto-delete
+  * CanvasBlocker
+  * Dark Reader
+  * RES
+  * Tree Style Tabs
+  * Vimium
+  * GreaseMonkey?  Not sure if this is necessary
+* Maybe check that you have all your repositories committed up, like dotfiles and dot-emacs-d
+* Save off `port echo requested`, `brew list`, and `mas list`
+* Make CCC backup
+
+
 # Notes to Self: Bootstrapping
 
 Create admin account at install time.  **Do not set up iCloud.**  In fact, opt out of basically everything during install.
