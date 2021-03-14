@@ -10,6 +10,11 @@
   changed_when: false
   check_mode: no
 
+- name: Ensure GOENV's parent directories exist
+  file:
+    state: directory
+    path: '{{ go_env_result.stdout_lines[0] | dirname }}'
+
 - name: Set GOPATH
   copy:
     # In my testing, Go doesn't need this value quoted.  It was more
