@@ -31,7 +31,7 @@ other_software_macports_common:
   - ncdu
   - neomutt
   - nmap
-  - openjdk14
+  - openjdk15
   - openssh +gsskex
   - p7zip
   - parallel
@@ -48,7 +48,7 @@ other_software_macports_common:
   # software_dev_python.
   - ripgrep +pcre
   - rlwrap
-  - samba3
+  - samba4
   - sleepwatcher
   - socat
   - sox
@@ -71,7 +71,7 @@ other_software_system_casks_common:
   # Burp has its own installer that installs to /Applications.
   # 2020-06-30: Breaks under quarantine
   # https://forum.portswigger.net/thread/install-macos-catalina-344b229e78f65
-  #- burp-suite
+  - burp-suite
   - homebrew/cask-versions/firefox-developer-edition
   - intel-power-gadget
   - google-chrome
@@ -90,9 +90,9 @@ other_software_system_casks_common:
 other_software_system_casks: '{{ other_software_system_casks_common }}'
 
 other_software_user_casks_common:
-  - adium
   - airfoil
   - alfred
+  - alt-tab
   - appcleaner
   - audio-hijack
   - bartender
@@ -101,6 +101,7 @@ other_software_user_casks_common:
   - [calibre, "14"]
   - dash
   - flux
+  - ghidra
   - grandperspective
   - hammerspoon
   - handbrake
@@ -119,15 +120,18 @@ other_software_user_casks_common:
   - the-unarchiver
   - tor-browser
   - vlc
-  - witch
+  # - witch
 
 other_software_user_casks: '{{ other_software_user_casks_common }}'
 
+# MsgFiler is installed elsewhere.  Presumably Xcode is also installed
+# elsewhere.
 other_software_mac_app_store_common:
   - [1440147259, /Applications/AdGuard for Safari.app]
   - [824183456, /Applications/Affinity Photo.app]
   - [937984704, /Applications/Amphetamine.app]
   - [784801555, /Applications/Microsoft OneNote.app]
+  - [1480933944, /Applications/Vimari.app]
 
 other_software_mac_app_store: '{{ other_software_mac_app_store_common}}'
 

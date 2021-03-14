@@ -22,10 +22,13 @@ other_software_user_casks_personal_machine:
   - anki
   - epic-games
   - freac
+  - moonlight
+  - parsec
   - screenflow
   - signal
   - simple-comic
   - steam
+  - subsync
 
 other_software_user_casks: >-
   {{
