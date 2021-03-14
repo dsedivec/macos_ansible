@@ -9,6 +9,15 @@ other_software_macports: >-
       | union(other_software_macports_personal_machine)
   }}
 
+other_software_system_casks_personal_machine:
+  - gog-galaxy
+
+other_software_system_casks: >-
+  {{
+      other_software_system_casks_common
+      | union(other_software_system_casks_personal_machine)
+  }}
+
 other_software_user_casks_personal_machine:
   - anki
   - epic-games
