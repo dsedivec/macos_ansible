@@ -1,0 +1,6 @@
+- name: Install gopls (Go LSP server)
+  command:
+    argv: [go, get, 'golang.org/x/tools/gopls@latest']
+    creates: '{{ go_bin_dir }}/gopls'
+  environment:
+    GO111MODULE: 'on'
