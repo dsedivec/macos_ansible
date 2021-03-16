@@ -2,6 +2,7 @@
   x_macports:
     state: installed
     name: go
+  become: yes
 
 - name: Get value of GOENV
   command:
