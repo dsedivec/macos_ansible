@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 if [ $# -ne 1 ]; then
 	echo "Usage: $(basename "$0") <dest>" >&2
 	exit 1
