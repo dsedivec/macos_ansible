@@ -30,7 +30,7 @@
 
 - name: Download and install Google Fonts
   get_url:
-    url: 'https://github.com/google/fonts/raw/master/{{ item.0.dir }}/{{ item.0.file_prefix }}{% if item.1 %}-{{ item.1 }}{% endif %}{{ item.0.suffix | default("") }}.ttf'
+    url: 'https://github.com/google/fonts/raw/main/{{ item.0.dir }}/{{ item.0.file_prefix }}{% if item.1 %}-{{ item.1 }}{% endif %}{{ item.0.suffix | default("") }}.ttf'
     dest: '{{ user_font_dir }}/{{ item.0.file_prefix }}-{{ item.1 }}.ttf'
   vars:
     fonts:
