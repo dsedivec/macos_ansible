@@ -6,7 +6,7 @@
 
 - name: Change user's shell to MacPorts Bash
   user:
-    name: '{{ ansible_user }}'
+    name: '{{ ansible_user_id }}'
     shell: /opt/local/bin/bash
     create_home: no
   become: true

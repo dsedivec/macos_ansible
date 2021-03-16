@@ -43,7 +43,7 @@
   # the BPF devices.  Wireshark does this.
   osx_group_member:
     group: access_bpf
-    user: '{{ ansible_user }}'
+    user: '{{ ansible_user_id }}'
     state: absent
   become: true
 
