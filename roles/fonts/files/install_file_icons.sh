@@ -13,7 +13,7 @@ rm_temp_dir() {
 trap rm_temp_dir EXIT
 
 cd "$temp_dir"
-curl -o file-icons.woff2 \
+curl -Lo file-icons.woff2 \
      'https://github.com/file-icons/atom/raw/master/fonts/file-icons.woff2'
 
 woff2_decompress file-icons.woff2
