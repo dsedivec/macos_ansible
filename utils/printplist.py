@@ -17,9 +17,7 @@ import sys
 
 class PlistJSONEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, plistlib.Data):
-            return "<Plist data>"
-        elif isinstance(obj, bytes):
+        if isinstance(obj, bytes):
             return "<bytes>"
         elif isinstance(obj, datetime.datetime):
             return str(obj)
