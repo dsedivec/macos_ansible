@@ -1,2 +1,2 @@
 - name: Run macsigcheck
-  command: macsigcheck
+  command: '{{ macsigcheck }}'
