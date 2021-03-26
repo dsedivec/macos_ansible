@@ -9,7 +9,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
-import urllib
+import urllib.request
 import argparse
 
 
@@ -21,7 +21,7 @@ def main(argv):
     args = parser.parse_args(argv[1:])
     logging.info("Fetching %s release information from GitHub", args.repo)
     release_info = json.load(
-        urllib.urlopen(
+        urllib.request.urlopen(
             "https://api.github.com/repos/%s/releases/latest" % (args.repo,)
         )
     )
@@ -37,7 +37,7 @@ def main(argv):
         )
     logging.info("Found release %r", asset["name"])
     pkg_file_name = re.sub(r"[^\w.-]", "_", asset["name"])
-    remote_pkg = urllib.urlopen(asset["browser_download_url"])
+    remote_pkg = urllib.request.urlopen(asset["browser_download_url"])
     download_dir = tempfile.mkdtemp()
     try:
         local_pkg_path = os.path.join(download_dir, pkg_file_name)
