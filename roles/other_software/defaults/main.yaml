@@ -226,6 +226,7 @@ other_software_preferences_common:
     - [sleepLate, int, 1]
     - [wakeTime, int, 555]
     - [wakeNotifyDisable, int, 1]
+    - [lateColorTemp, float, 2300.0]
 
   com.googlecode.iterm2:
     - [LoadPrefsFromCustomFolder, int, 1]
