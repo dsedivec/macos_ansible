@@ -14,6 +14,6 @@
       - select
       - --set
       - postgresql
-      - 'postgresql{{ software_postgresql_version}}'
+      - 'postgresql{{ software_postgresql_version }}'
     creates: /opt/local/bin/pg_config
   become: yes
