@@ -949,10 +949,20 @@ macos_prefs_set:
     type: bool
     value: false
 
+  - key: AppleShowAllExtensions
+    type: bool
+    value: true
+
   - domain: com.apple.finder
     key: FXRemoveOldTrashItems
     type: bool
     value: true
+
+  # Hopefully sets Finder for list view by default.
+  - domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
+    value: Nlsv
 
   - domain: com.apple.finder
     key: ShowMountedServersOnDesktop
