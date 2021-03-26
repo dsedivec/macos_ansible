@@ -16,7 +16,13 @@ def main(argv):
     )
     if not go_dir:
         raise Exception("Can't read GOPATH")
-    subprocess.check_call("go get -d github.com/rfjakob/gocryptfs".split())
+    environ = os.environ.copy()
+    # Not sure if this is right.  See
+    # https://github.com/rfjakob/gocryptfs/issues/553.
+    environ["GO111MODULE"] = "auto"
+    subprocess.check_call(
+        "go get -d github.com/rfjakob/gocryptfs".split(), env=environ
+    )
     gocryptfs_src_dir = os.path.join(go_dir, "src/github.com/rfjakob/gocryptfs")
     subprocess.check_call("git pull --ff-only".split(), cwd=gocryptfs_src_dir)
     subprocess.check_call("./build.bash", cwd=gocryptfs_src_dir)
