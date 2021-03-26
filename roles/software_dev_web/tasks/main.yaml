@@ -3,7 +3,7 @@
     state: present
     # Explicitly install latest Node.js, needed for Tide (Emacs
     # TypeScript development).
-    name: [nodejs14]
+    name: [nodejs15]
   become: yes
 
 - name: Install web development packages from NPM
