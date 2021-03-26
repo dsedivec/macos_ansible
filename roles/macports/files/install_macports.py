@@ -18,6 +18,11 @@ def main(argv):
     output = subprocess.check_output(["sw_vers", "-productVersion"], text=True)
     match = re.search(r"^\d+\.\d+", output)
     macos_version = match.group(0)
+    macos_major = int(macos_version.split('.', 1)[0])
+    if macos_major >= 11:
+        # macOS is just 11, 12, etc. starting with Big Sur.
+        # At least, according to MacPorts it is.
+        macos_version = str(macos_major)
     logging.info("macOS version is %r", macos_version)
     logging.info("Fetching MacPorts release information from GitHub")
     release_info = json.load(
