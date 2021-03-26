@@ -33,13 +33,13 @@ while read -r file; do
 	echo
 	echo "########## $file"
 	echo
-	"$PRINT_PLIST" "$file" > "$temp_dir/after" || exit 1
+	"$PRINT_PLIST" "$file" > "$temp_dir/after" || continue
 	old_file=$temp_dir/${file#$HOME/Library/}
 	if [ ! -e "$old_file" ]; then
 		echo "$file is new:"
 		cat "$temp_dir/after"
 	else
-		"$PRINT_PLIST" "$old_file" > "$temp_dir/before" || exit 1
+		"$PRINT_PLIST" "$old_file" > "$temp_dir/before" || continue
 		colordiff -y -W 200 "$temp_dir/before" "$temp_dir/after"
 		echo diff "$file" >> "$diff"
 		diff -u "$temp_dir/before" "$temp_dir/after" >> "$diff"
