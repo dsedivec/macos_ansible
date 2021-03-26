@@ -15,6 +15,27 @@
     - '+bash_completion'
   become: true
 
+- name: Install Git
+  x_macports:
+    name: git
+  become: true
+
+- name: Clone macports-ports repository
+  x_git_update:
+    repo: '{{ macports_ports_remote_repo }}'
+    dest: '{{ macports_ports_local_repo }}'
+    update_mode: rebase-autostash
+
+- name: Install MacPorts sources.list with local ports repo
+  ansible.builtin.template:
+    src: sources.conf
+    dest: /opt/local/etc/macports/sources.conf
+    backup: true
+    mode: 0644
+    owner: root
+    group: wheel
+  become: yes
+
 # macOS system Python has much slower PyObjC imports, for purposes of
 # my x_osx_defaults module.  Let's try and use the faster one from
 # MacPorts from now on.
