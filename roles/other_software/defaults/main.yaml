@@ -280,6 +280,15 @@ other_software_preferences_common:
         ]
       ]
 
+  com.surteesstudios.Bartender:
+    - [HideItemsWhenShowingOthers, bool, true]
+    - [ReduceMenuItemSpacing, int, 1]
+    - [ReduceUpdateCheckFrequencyWhenOnBattery, bool, true]
+
+  com.lwouis.alt-tab-macos:
+    - [windowDisplayDelay, int, 70]
+    - [nextWindowShortcut2, string, ""]
+
 other_software_preferences: '{{ other_software_preferences_common }}'
 
 other_software_add_dock_common:
