@@ -37,7 +37,10 @@ Additionally, some software has been broken out into its own roles to get me sof
   * RES
   * Tree Style Tabs
   * Vimium
+  * Temporary Containers
+  * Auto Tab Discard
   * GreaseMonkey?  Not sure if this is necessary
+* Export your iStat Menus configuration
 * Maybe check that you have all your repositories committed up, like dotfiles and dot-emacs-d
 * Save off `port echo requested`, `brew list`, and `mas list`
 * Make CCC backup
@@ -94,9 +97,10 @@ Now you can log out and log in as your new account.
 * DHCP client ID on wireless and other network interfaces
 * Set up printer
 * Turn a bunch of notifications to "show content only when unlocked"
-* Turn off "Spotlight Suggestions" and "Allow Spotlight Suggestions in Look Up", because the preference for the former is a big complicated array that I don't want to script, and I'm not at all sure I know what the preference for the second even is
+* Turn off "Siri Suggestions" in Spotlight preferences, because I don't know where this preference is
 * Add Unicode and my Russian input methods (this is in `com.apple.HIToolbox` but I didn't feel confident about setting it due to crazy `KeyboardLayout ID` value that I couldn't identify)
 * Audacity: They really don't want you automating downloads, so needs to be installed by hand
+* Probably restore a bunch files, documents, desktop, etc.
 
 
 ## Applications
