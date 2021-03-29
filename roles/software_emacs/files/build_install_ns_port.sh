@@ -41,7 +41,7 @@ while [ $# -gt 0 ]; do
 
 		--native-comp|--native)
 			native_comp=1
-			configure_args+=(--with-nativecomp)
+			configure_args+=(--with-native-compilation)
 			set_cflags '-O2 -I/opt/local/include/gcc10'
 			export LDFLAGS=-L/opt/local/lib/gcc10
 			# Leaving this on breaks the build:
