@@ -75,10 +75,6 @@ other_software_system_casks_common:
   - homebrew/cask-versions/firefox-developer-edition
   - intel-power-gadget
   - google-chrome
-  # Mainly want this for its pinentry-mac.  (Though I guess I want the
-  # other tools too, since I could install pinentry-mac separately via
-  # Homebrew.)
-  - gpg-suite-no-mail
   - istat-menus
   - osxfuse
   #XXX - parallels
