@@ -142,6 +142,7 @@ other_software_mac_app_store: '{{ other_software_mac_app_store_common}}'
 other_software_py3_venv_common:
   - magic-wormhole
   - proselint
+  - remarshal
   - visidata
   - ydiff
   # My ~/bin/html2email script uses these.  (VisiData also wants lxml
@@ -156,6 +157,7 @@ other_software_py3_venv: '{{ other_software_py3_venv_common }}'
 
 other_software_py3_bins_common:
   - proselint
+  - remarshal
   - vd
   - wormhole
   - ydiff
