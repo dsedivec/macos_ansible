@@ -126,7 +126,7 @@ Now you can log out and log in as your new account.
   * **Warning!** When I did this, I got a warning saying that my phone can only sync with one library.  (I don't have a library.)  Then all my audiobooks got deleted.  Should find a better way to do this.
 * Little Snitch: Not even installed, do it all yourself---**installer will force reboot**
 * Loopback: Add license
-* Mail.app: Enable mail bundles (can't find any plist where these are enabled)
+* Mail.app: Enable accounts, enable mail bundles (can't find any plist where these are enabled), set up junk mail (done by rules, mostly), enable mail rules (they come with if you imported a Mail.app directory from another machine), copy any mail over
 * Moom: License, start at login, hide with Bartender
 * OneNote: Sign in
 * Parallels: Grant various permissions at first run, install license, copy over VMs
@@ -134,6 +134,7 @@ Now you can log out and log in as your new account.
 * QuoteFix (mail plug-in): Set preferences
 * Safari: Install extensions (AdGuard and sVim currently)
 * ScreenFlow: License
+* Sketch: License, install [macOS library][sketch_macos]
 * Signal: Link to phone
 * Steam: Log in, set not to start at login
 * Textual: Add license, configure Freenode, including nick, auth, auto-reconnect settings, connect commands, +i on connect
