@@ -32,7 +32,7 @@ other_software_macports_common:
   - neomutt
   - nmap
   - openjdk15
-  - openssh +gsskex
+  - openssh
   - p7zip
   - parallel
   - patchutils
