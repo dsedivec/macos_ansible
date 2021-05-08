@@ -1,6 +1,10 @@
-- name: Install gopls (Go LSP server)
+- name: Install Go development tools
   command:
-    argv: [go, get, 'golang.org/x/tools/gopls@latest']
-    creates: '{{ go_bin_dir }}/gopls'
+    argv: [go, install, '{{ item }}']
+    creates: >-
+      {{ go_bin_dir }}/{{ regex_replace("^.+/([^@]+)(?:@.*)?$", "\\1") }}
   environment:
     GO111MODULE: 'on'
+  loop:
+    - 'golang.org/x/tools/gopls@latest'
+    - 'mvdan.cc/gofumpt@master'
