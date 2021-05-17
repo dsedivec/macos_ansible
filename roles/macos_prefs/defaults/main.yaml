@@ -790,11 +790,20 @@ macos_prefs_set:
       - "Category-Punctuation"
       - "Category-Unicode"
 
-
+  # In Big Sur, the clock opens the Notification Center, so you can't
+  # take it out of the menu bar without losing access to the
+  # Notification Center.  I'm still setting the format the way I like
+  # it, but then I'm turning into an analog clock icon.  I depend on
+  # iStat Menus for my clock.
   - domain: com.apple.menuextra.clock
     key: DateFormat
     type: string
     value: 'EEE H:mm:ss'
+
+  - domain: com.apple.menuextra.clock
+    key: IsAnalog
+    type: bool
+    value: true
 
   # Remove clock and battery from menu bar.  (Provided instead by
   # iStat Menus.)
