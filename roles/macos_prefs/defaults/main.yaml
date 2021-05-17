@@ -826,11 +826,6 @@ macos_prefs_set:
     value: true
 
   - domain: com.apple.systemuiserver
-    key: "NSStatusItem Visible com.apple.menuextra.bluetooth"
-    type: bool
-    value: true
-
-  - domain: com.apple.systemuiserver
     key: "NSStatusItem Visible com.apple.menuextra.TimeMachine"
     type: bool
     value: true
