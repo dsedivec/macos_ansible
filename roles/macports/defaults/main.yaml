@@ -1,5 +1,5 @@
 macports_ports_remote_repo: https://github.com/macports/macports-ports.git
 macports_ports_local_repo: '{{ repositories_root }}/macports-ports'
-macports_python_3_version: '3.9'
+macports_python_3_version: '3.10'
 macports_python_3_version_no_dots: '{{ macports_python_3_version.replace(".", "") }}'
 macports_python_3: '/opt/local/bin/python{{ macports_python_3_version }}'

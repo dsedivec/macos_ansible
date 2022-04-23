@@ -2,8 +2,9 @@
   x_macports:
     state: present
     # Explicitly install latest Node.js, needed for Tide (Emacs
-    # TypeScript development).
-    name: [nodejs15]
+    # TypeScript development).  Not using latest version as of this
+    # writing because npm8 port wants nodejs15.
+    name: [nodejs16]
   become: yes
 
 - name: Install web development packages from NPM

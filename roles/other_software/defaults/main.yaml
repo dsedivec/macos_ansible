@@ -7,6 +7,7 @@ other_software_macports_common:
   - colordiff
   - coreutils
   - ctags
+  - direnv
   - dsh
   - emacs-app
   - fd
@@ -17,6 +18,7 @@ other_software_macports_common:
   - fswatch
   - fzf
   - git
+  - gnupg2
   - gnuplot
   - graphviz +rsvg
   - grep
@@ -31,11 +33,21 @@ other_software_macports_common:
   - ncdu
   - neomutt
   - nmap
-  - openjdk15
-  - openssh
+  # I officially hate picking a JDK build now.  My top choices from
+  # what MacPorts offers are going to be, in descending order of
+  # confidence:
+  # * Azul Zulu Community (Azul has been involved in JDK for a long time)
+  # * Temurin (AKA Adoptium, née AdoptOpenJDK)
+  # * Oracle (actually open OpenJDK only supported for last release or
+  #   something?? otherwise you get audited up the ass)
+  # * SAP (major contributor to JDK, but why do they ship their own CA??)
+  # * Anything else
+  - openjdk18-zulu
+  - openssh +gsskex
   - p7zip
   - parallel
   - patchutils
+  - pinentry-mac
   # Poppler has pdfunite to combine PDF files
   - poppler
   - proselint
@@ -56,6 +68,12 @@ other_software_macports_common:
   - tree
   - unrar
   - watch
+  # 2021-03-29: perl5 ports were being built with macOS SDK version
+  # hard-coded.  See
+  # https://github.com/macports/macports-ports/pull/10181 for example.
+  # I fixed this by rebuilding the appropriate perl5* port from
+  # source.
+  - weechat +aspell+python39+scheme+perl+lua+tls
   - xsv
   - youtube-dl
   - zoxide

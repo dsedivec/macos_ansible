@@ -42,8 +42,8 @@ while [ $# -gt 0 ]; do
 		--native-comp|--native)
 			native_comp=1
 			configure_args+=(--with-native-compilation)
-			set_cflags '-O2 -I/opt/local/include/gcc10'
-			export LDFLAGS=-L/opt/local/lib/gcc10
+			set_cflags '-O2 -I/opt/local/include/gcc11'
+			export LDFLAGS=-L/opt/local/lib/gcc11
 			# Leaving this on breaks the build:
 			#
 			#      ELC+ELN   progmodes/js.elc

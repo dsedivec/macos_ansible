@@ -2,6 +2,7 @@ dotfiles_private_which: personal
 
 other_software_macports_personal_machine:
   - mp3splt
+  - mp4v2
 
 other_software_macports: >-
   {{
@@ -29,6 +30,7 @@ other_software_user_casks_personal_machine:
   - simple-comic
   - steam
   - subsync
+  - vmware-fusion
 
 other_software_user_casks: >-
   {{
