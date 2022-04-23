@@ -107,9 +107,10 @@ Now you can log out and log in as your new account.
 
 ## Applications
 
-* 1Password
+* 1Password: Add vaults
 * Adium: Set up account
 * Alfred: Turn on auto-expand snippets (not synced)
+* AltTab: Start at boot, give permissions
 * Amphetamine: Set to run at login
 * Audio Hijack: Add license
 * Bartender: License, start at login, position menu items
@@ -119,9 +120,8 @@ Now you can log out and log in as your new account.
 * Chrome: Sign in, disable consistency flag, set sync preferences, unlock, import extension settings (Auto Delete Cookies, Privacy Badger, uBlock, ViolentMonkey, SessionBuddy, etc.)
 * Dash: Turn on sync
 * Dropbox: Start at login, login, turn off photo/video syncing
-* Firefox: Sync, Little Snitch private rule, extensions, `userChrome.css` (checked in here)
+* Firefox: Sync, Little Snitch private rule, extensions, `userChrome.css` (checked in here), open up the container extension and tell it to start syncing, tell RES to start syncing/backing up to Dropbox
 * Google Play Music: Log in
-* GPGMail (mail plug-in): License, set preferences
 * Hammerspoon: Start at login, grant accessibility, hide with Bartender
 * iStat Menus: Start and import settings
 * iTunes: Turn on wifi sync, pair with phone, turn off automatic syncing, manually sync music
@@ -133,7 +133,6 @@ Now you can log out and log in as your new account.
 * OneNote: Sign in
 * Parallels: Grant various permissions at first run, install license, copy over VMs
 * PDFPenPro: License
-* QuoteFix (mail plug-in): Set preferences
 * Safari: Install extensions (AdGuard and sVim currently)
 * ScreenFlow: License
 * Sketch: License, install [macOS library][sketch_macos]
@@ -141,7 +140,6 @@ Now you can log out and log in as your new account.
 * Steam: Log in, set not to start at login
 * Textual: Add license, configure Freenode, including nick, auth, auto-reconnect settings, connect commands, +i on connect
 * Tunnelblick: All configuration
-* Witch: Enable, license
 
 Special shout out to the Mozilla Firefox team who make a great browser but who don't give me any sane way to figure out what the default user profile directory is, if any.  *Super* frustrating day, that was.
 
