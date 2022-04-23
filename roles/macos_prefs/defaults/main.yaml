@@ -805,6 +805,9 @@ macos_prefs_set:
     type: bool
     value: true
 
+  # NOTE: com.apple.systemuiserver in Mojave and Catalina →
+  # com.apple.controlcenter in Big Sur.
+
   # Remove clock and battery from menu bar.  (Provided instead by
   # iStat Menus.)
 

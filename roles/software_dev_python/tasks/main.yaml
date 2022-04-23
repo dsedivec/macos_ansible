@@ -52,7 +52,7 @@
 #    onto sys.path *before* the system directories.
 #
 # 4. Symlink the egg-info directory into the normal Python
-#    site-packages directory so that pip things gnureadline is
+#    site-packages directory so that pip thinks gnureadline is
 #    installed.
 #
 # I used to use easy_install, which conveniently installed into a
