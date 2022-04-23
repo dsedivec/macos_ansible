@@ -55,8 +55,8 @@ other_software_macports_common:
   - pstree
   - pv
   - qrencode
-  # Note that python39 is explicitly installed in another task, for
-  # Ansible's benefit.  python27 and python39 are also installed by
+  # Note that Python is explicitly installed in another task, for
+  # Ansible's benefit.  Python 2 and 3 are also installed by role
   # software_dev_python.
   - ripgrep +pcre
   - rlwrap
@@ -73,7 +73,7 @@ other_software_macports_common:
   # https://github.com/macports/macports-ports/pull/10181 for example.
   # I fixed this by rebuilding the appropriate perl5* port from
   # source.
-  - weechat +aspell+python39+scheme+perl+lua+tls
+  - weechat +aspell+python310+scheme+perl+lua+tls
   - xsv
   - youtube-dl
   - zoxide
