@@ -72,13 +72,15 @@ Now you can log out and log in as your new account.
 5. Open Terminal.
 6. Run `/usr/bin/python3 -V` and let Xcode command line tools install.
 7. Run `/usr/bin/python3 -m venv ~/.vpy/system-ansible` to install a virtual environment.
-8. Activate that virtual environment and `pip install ansible`.
-9. `ssh-keygen -t ed25519 -C ...` and follow the prompts.
-10. `ssh-add`
-11. Upload new key to GitHub.
-12. Clone this repo (`macos_ansible`).
-13. Make sure you're logged in to the Mac App Store.  You probably are, if you enabled iCloud during first login.
-14. Run this repo, e.g.:
+8. Activate that virtual environment
+9. `pip install --upgrade pip`
+10. `pip install ansible`
+11. `ssh-keygen -t ed25519 -C ...` and follow the prompts.
+12. `ssh-add`
+13. Upload new key to GitHub.
+14. Clone this repo (`macos_ansible`).
+15. Make sure you're logged in to the Mac App Store.  You probably are, if you enabled iCloud during first login.
+16. Run this repo, e.g.:
 
         ansible-playbook site.yaml -l dale -K
 
