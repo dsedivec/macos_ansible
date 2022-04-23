@@ -70,6 +70,12 @@ while [ $# -gt 0 ]; do
 	esac
 done
 
+# Always make sure MacPorts is on my PATH before Homebrew, so its
+# pkg-config, etc. get picked up in preferfer to Homebrew's.
+if [ -d /opt/local/etc/macports ]; then
+	PATH=/opt/local/bin:/opt/local/sbin:$PATH
+fi
+
 export CC="ccache clang"
 
 if [ ! -f src/emacs.c ]; then
