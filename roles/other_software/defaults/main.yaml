@@ -298,7 +298,9 @@ other_software_preferences_common:
       ]
 
   com.surteesstudios.Bartender:
-    - [HideItemsWhenShowingOthers, bool, true]
+    - [HideItemsWhenShowingOthers, bool, false]
+    - [ClickingMenuBarTogglesBartender, bool, false]
+    - [MouseOverMenuBarTogglesBartender, bool, false]
     - [ReduceMenuItemSpacing, int, 1]
     - [ReduceUpdateCheckFrequencyWhenOnBattery, bool, true]
 
