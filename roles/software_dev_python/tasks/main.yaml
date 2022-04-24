@@ -106,7 +106,7 @@
   # We're going to go ahead and fail if you have >1 directories
   # matching here, since I don't want to figure out which egg-info
   # directory is the current one.
-  failed_when: 'py3_readline_egg_info.matched != 1'
+  failed_when: '(not ansible_check_mode) and py3_readline_egg_info.matched != 1'
 
 - name: Tell pip that gnureadline is installed for Python 3
   file:

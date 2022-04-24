@@ -18,5 +18,5 @@
   script:
     cmd: install_tmux_plugins.sh
   register: result
-  failed_when: '"ANSIBLE_OK" not in result.stdout_lines'
-  changed_when: '"ANSIBLE_CHANGED" in result.stdout_lines'
+  failed_when: '(not ansible_check_mode) and "ANSIBLE_OK" not in result.stdout_lines'
+  changed_when: '(not ansible_check_mode) and "ANSIBLE_CHANGED" in result.stdout_lines'

@@ -9,6 +9,10 @@
     state: link
     src: '{{ (virtualenv + "/bin") | relpath(user_bin_dir) }}/{{ bin }}'
     path: '{{ user_bin_dir }}/{{ bin }}'
+    # Using force=yes in check mode so that non-existent files (which
+    # would have been created with previous step) don't cause spurious
+    # failure here.  This is suboptimal.
+    force: '{{ ansible_check_mode }}'
   loop: '{{ item.bins | default([]) }}'
   loop_control:
     loop_var: bin
