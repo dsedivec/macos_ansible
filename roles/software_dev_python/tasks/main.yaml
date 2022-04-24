@@ -113,6 +113,7 @@
     state: link
     src: '{{ py3_readline_egg_info.files[0].path | relpath(user_py3_venv_site_packages) }}'
     dest: '{{ user_py3_venv_site_packages }}/{{ py3_readline_egg_info.files[0].path | basename }}'
+  when: 'not ansible_check_mode'
 
 - name: 'Select {{ software_dev_python_py3_virtualenv_port_name }} as "virtualenv"'
   command:
