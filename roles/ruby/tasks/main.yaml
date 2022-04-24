@@ -1,5 +1,5 @@
 - name: Install Ruby 2.6
-  x_macports:
+  dsedivec.ansible_dlc.x_macports:
     state: present
     name: ruby26
   become: true

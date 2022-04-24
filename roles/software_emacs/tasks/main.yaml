@@ -1,5 +1,5 @@
 - name: Clone Emacs Git repo
-  x_git:
+  dsedivec.ansible_dlc.x_git:
     repo: https://git.savannah.gnu.org/git/emacs.git
     dest: '{{ emacs_src_dir }}'
     # Make this conditional, since I usually want to control when I
@@ -60,13 +60,13 @@
     src: '{{ (user_app_dir + "/Emacs.app/Contents/MacOS/bin/emacsclient") | relpath(user_bin_dir) }}'
 
 - name: Clone dot-emacs-d repository
-  x_git_update:
+  dsedivec.ansible_dlc.x_git_update:
     repo: '{{ dot_emacs_d_remote_repo }}'
     dest: '{{ dot_emacs_d_local_repo }}'
     update_mode: rebase-autostash
 
 - name: Clone org-mode repository
-  x_git:
+  dsedivec.ansible_dlc.x_git:
     repo: '{{ org_mode_remote_repo }}'
     dest: '{{ org_mode_local_repo }}'
     # This is conditional for the same reason Emacs itself is: this
@@ -81,7 +81,7 @@
   register: git_org_mode
 
 - name: Add org-mode upstream remote
-  git_remote:
+  dsedivec.ansible_dlc.git_remote:
     repo: https://code.orgmode.org/bzg/org-mode
     dest: '{{ org_mode_local_repo }}'
     remote: upstream

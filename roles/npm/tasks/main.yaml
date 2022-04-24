@@ -1,5 +1,5 @@
 - name: Install NPM
-  x_macports:
+  dsedivec.ansible_dlc.x_macports:
     state: present
     name: npm8
   become: yes

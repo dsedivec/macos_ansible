@@ -68,7 +68,7 @@
       )
 
 - name: Set preferences
-  x_osx_defaults:
+  dsedivec.ansible_dlc.x_osx_defaults:
     state: '{{ item.state | default("present") }}'
     host: '{{ item.host | default }}'
     domain: '{{ item.domain | default("NSGlobalDomain") }}'
@@ -81,7 +81,7 @@
   loop: '{{ macos_prefs_set }}'
 
 - name: Set power preferences
-  pmset:
+  dsedivec.ansible_dlc.pmset:
     type: '{{ item.0 }}'
     name: '{{ item.1 }}'
     value: '{{ item.2 }}'

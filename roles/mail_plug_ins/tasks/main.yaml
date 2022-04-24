@@ -1,5 +1,5 @@
 - name: Enable Mail Bundles
-  x_osx_defaults:
+  dsedivec.ansible_dlc.x_osx_defaults:
     domain: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail'
     key: '{{ item.0 }}'
     value_type: '{{ item.1 }}'
@@ -22,7 +22,7 @@
     creates: '{{ user_mail_bundle_dir }}/QuoteFix.mailbundle'
 
 - name: Set QuoteFix preferences
-  x_osx_defaults:
+  dsedivec.ansible_dlc.x_osx_defaults:
     domain: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail'
     key: '{{ item.0 }}'
     value_type: '{{ item.1 }}'
@@ -52,7 +52,7 @@
     creates: '{{ user_mail_bundle_dir }}/MsgFilerEngine.mailbundle'
 
 - name: Set MsgFiler preferences
-  x_osx_defaults:
+  dsedivec.ansible_dlc.x_osx_defaults:
     domain: '{{ ansible_env.HOME }}/Library/Containers/com.atow.msgfiler/Data/Library/Preferences/com.atow.msgfiler.plist'
     key: '{{ item.0 }}'
     value_type: '{{ item.1 }}'

@@ -19,7 +19,7 @@
 # so you have to tell LaTeXiT where to find Homebrew's Ghostscript and
 # ps2pdf.
 - name: Tell LaTeXiT where to find Homebrew's Ghostscript
-  x_osx_defaults:
+  dsedivec.ansible_dlc.x_osx_defaults:
     domain: fr.chachatelier.pierre.LaTeXiT
     key:
       - CompositionConfigurations

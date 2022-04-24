@@ -16,12 +16,12 @@
   become: true
 
 - name: Install Git
-  x_macports:
+  dsedivec.ansible_dlc.x_macports:
     name: git
   become: true
 
 - name: Clone macports-ports repository
-  x_git_update:
+  dsedivec.ansible_dlc.x_git_update:
     repo: '{{ macports_ports_remote_repo }}'
     dest: '{{ macports_ports_local_repo }}'
     update_mode: rebase-autostash
@@ -45,7 +45,7 @@
 #     python -c 'import PyObjCTools.Conversion'
 
 - name: Install Python and PyObjC
-  x_macports:
+  dsedivec.ansible_dlc.x_macports:
     name:
       - 'python{{ macports_python_3_version_no_dots }}'
       - 'py{{ macports_python_3_version_no_dots }}-pyobjc'

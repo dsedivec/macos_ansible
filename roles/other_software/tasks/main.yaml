@@ -1,5 +1,5 @@
 - name: Install packages from MacPorts
-  x_macports:
+  dsedivec.ansible_dlc.x_macports:
     name: '{{ other_software_macports }}'
     state: present
   become: true
@@ -41,7 +41,7 @@
 - name: Remove user from access_bpf group
   # because it is whack that my every day user account has access to
   # the BPF devices.  Wireshark does this.
-  osx_group_member:
+  dsedivec.ansible_dlc.osx_group_member:
     group: access_bpf
     user: '{{ ansible_user_id }}'
     state: absent
@@ -101,7 +101,7 @@
     - Run macsigcheck
 
 - name: Set preferences for software we just installed
-  x_osx_defaults:
+  dsedivec.ansible_dlc.x_osx_defaults:
     domain: '{{ item.domain | expanduser }}'
     key: '{{ item.key }}'
     value_type: '{{ item.type }}'
@@ -158,7 +158,7 @@
     update: no
 
 - name: Install dependencies for sshfs
-  x_macports:
+  dsedivec.ansible_dlc.x_macports:
     name: [meson, ninja]
     state: installed
   become: yes
@@ -193,7 +193,7 @@
   register: voxengo_span_dir
 
 - name: Scrape download URL for Voxengo SPAN
-  scrape_urls:
+  dsedivec.ansible_dlc.scrape_urls:
     url: https://www.voxengo.com/product/span/
     url_regexp: '(?i)https://www\.voxengo\.com/files/VoxengoSPAN_[\d.]+_Mac_AU_AAX_setup.dmg'
   register: voxengo_span_urls
@@ -201,7 +201,7 @@
   failed_when: 'not voxengo_span_urls.urls'
 
 - name: Install Voxengo SPAN
-  extract_dmg:
+  dsedivec.ansible_dlc.extract_dmg:
     src: '{{ voxengo_span_urls.urls[0] }}'
     dest: '{{ other_software_system_audio_units_dir }}/'
     regexp: '(?i)^SPAN\.component$'
@@ -216,7 +216,7 @@
   register: loudmax_dir
 
 - name: Scrape URL for LoudMax
-  scrape_urls:
+  dsedivec.ansible_dlc.scrape_urls:
     url: https://loudmax.blogspot.com/
     url_regexp: '(?i)\bLoudMax_.*_MAC_Catalina.zip\b'
   register: loudmax_urls
@@ -224,7 +224,7 @@
   failed_when: 'not loudmax_urls.urls'
 
 - name: Install LoudMax
-  dl_and_extract:
+  dsedivec.ansible_dlc.dl_and_extract:
     url: '{{ loudmax_urls.urls[0] | make_dropbox_url_dl }}'
     dest: '{{ other_software_user_audio_units_dir }}'
     regexp: '(?ix) (?: ^|/ ) (?P<dest> loudmax\.component ) $'

@@ -1,5 +1,5 @@
 - name: Install tmux
-  x_macports:
+  dsedivec.ansible_dlc.x_macports:
     name: tmux-devel
     state: present
   become: true

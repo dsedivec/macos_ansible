@@ -25,7 +25,7 @@
   register: anima_toolkit_stat
 
 - name: Find the URL to download Anima Toolkit for Sketch
-  scrape_urls:
+  dsedivec.ansible_dlc.scrape_urls:
     url: https://www.animaapp.com/changelog
     url_regexp: '(?i)(?:/|%2F)AnimaToolkitPlugin-[\d.]+\.zip\b'
   register: anima_urls
