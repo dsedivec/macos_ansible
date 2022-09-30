@@ -7,3 +7,4 @@ dependencies:
   # files in my Dropbox account.
   - role: software_dropbox
   - role: software_macsigcheck
+  - role: software_macfit
