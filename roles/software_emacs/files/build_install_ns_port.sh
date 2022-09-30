@@ -42,17 +42,8 @@ while [ $# -gt 0 ]; do
 		--native-comp|--native)
 			native_comp=1
 			configure_args+=(--with-native-compilation)
-			set_cflags '-O2 -I/opt/local/include/gcc11'
-			export LDFLAGS=-L/opt/local/lib/gcc11
-			# Leaving this on breaks the build:
-			#
-			#      ELC+ELN   progmodes/js.elc
-			#     Symbol’s function definition is void: cc-bytecomp-is-compiling
-			#     make[2]: *** [progmodes/js.elc] Error 255
-			#     make[1]: *** [compile-main] Error 2
-			#     make: *** [lisp] Error 2
-			#
-			#export NATIVE_FULL_AOT=1
+			export LDFLAGS="-Wl,-rpath /opt/local/lib/gcc12"
+			export NATIVE_FULL_AOT=1
 			# native-comp author recommends against comp-speed 3.
 			#make_args+=('BYTE_COMPILE_EXTRA_FLAGS=--eval "(setq comp-speed 3)"')
 			shift 1

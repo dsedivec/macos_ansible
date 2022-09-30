@@ -30,7 +30,7 @@
       # org-mode needs this to build.
       - gnutar
       # native-comp
-      - gcc11
+      - gcc12
   become: true
   tags: [slow]
 
