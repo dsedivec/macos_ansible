@@ -14,6 +14,9 @@ configure_args=(
 	--without-x
 	--with-modules
 	--with-threads
+	# Supposedly important on macOS to get around 1024 file descriptor
+	# limit.
+	--with-poll
 	--with-xwidgets
 	--with-zlib
 	--with-xml2
@@ -21,6 +24,9 @@ configure_args=(
 	--with-cairo
 	--with-gnutls
 	--with-{xpm,jpeg,tiff,gif,png,rsvg}
+	--with-tree-sitter
+	# Explicitly turn off ImageMagick because sure it's full of holes.
+	--without-imagemagick
 )
 
 native_comp=0
@@ -42,8 +48,11 @@ while [ $# -gt 0 ]; do
 		--native-comp|--native)
 			native_comp=1
 			configure_args+=(--with-native-compilation)
-			export LDFLAGS="-Wl,-rpath /opt/local/lib/gcc12"
 			export NATIVE_FULL_AOT=1
+			if [ -d /opt/local/etc/macports ]; then
+				# MacPorts needs this.  Homebrew Just Works™.
+				export LDFLAGS="-Wl,-rpath /opt/local/lib/gcc12"
+			fi
 			# native-comp author recommends against comp-speed 3.
 			#make_args+=('BYTE_COMPILE_EXTRA_FLAGS=--eval "(setq comp-speed 3)"')
 			shift 1
@@ -68,6 +77,16 @@ if [ -d /opt/local/etc/macports ]; then
 fi
 
 export CC="ccache clang"
+
+# Too many open files?  You need the better select!
+# Courtesy https://gitlab.kitware.com/utils/kwsys/-/merge_requests/249/diffs
+# and more other bugs than I can possibly imagine.
+#
+# God I need to switch to Linux.
+#
+# Note: 10240 comes from grepping for OPEN_MAX in system headers.
+CFLAGS="${CFLAGS:-} -D_DARWIN_UNLIMITED_SELECT=1 -DFD_SETSIZE=10240"
+export CFLAGS
 
 if [ ! -f src/emacs.c ]; then
 	echo "Can't find src/emacs.c, wrong PWD?" 2>&1

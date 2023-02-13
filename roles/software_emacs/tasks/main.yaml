@@ -27,12 +27,42 @@
       - libxml2
       - ccache
       - texinfo
-      # org-mode needs this to build.
-      - gnutar
       # native-comp
       - gcc12
+      # org-mode needs this to build.
+      - gnutar
+      - tree-sitter
   become: true
   tags: [slow]
+  when: 'preferred_pkg_mgr == "macports"'
+
+- name: Install Emacs dependencies
+  homebrew:
+    state: present
+    update_homebrew: true
+    name:
+      - autoconf
+      - automake
+      - jansson
+      - cairo
+      - libxpm
+      - libpng
+      - jpeg
+      - libtiff
+      - giflib
+      - librsvg
+      - gnutls
+      - libxml2
+      - ccache
+      - texinfo
+      # native-comp
+      - gcc
+      - libgccjit
+      # org-mode needs this to build.
+      - gnu-tar
+      - tree-sitter
+  tags: [slow]
+  when: 'preferred_pkg_mgr == "homebrew"'
 
 - name: Check for Emacs.app installed
   stat:
@@ -95,30 +125,6 @@
   failed_when: 'org_rebase.rc not in (0, 111)'
   changed_when: 'org_rebase.rc == 111'
   when: 'software_emacs_git_update | bool'
-
-- name: Check for org-mode package and metadata
-  find:
-    paths:
-      - '{{ org_mode_local_repo }}'
-    use_regex: true
-    patterns:
-      - '^archive-contents$'
-      - '^org-plus-contrib-20\d{6}.tar$'
-  register: org_package_files
-
-- name: Build org-mode package
-  command: ./build-emacs-package.sh
-  args:
-    chdir: '{{ org_mode_local_repo }}'
-  when: >
-    git_org_mode is changed
-    or org_rebase is changed
-    or not (
-        'archive-contents' in (org_package_files.files | map(attribute='path') | map('basename') | list)
-        and org_package_files.matched >= 2
-    )
-  environment:
-    EMACS: '{{ user_app_dir }}/Emacs.app/Contents/MacOS/Emacs'
 
 - name: Put Emacs in the Dock
   command:

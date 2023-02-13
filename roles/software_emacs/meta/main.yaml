@@ -1,5 +1,4 @@
 dependencies:
-  - role: macports
-  # org-mode needs TeX to build.
-  - role: software_mactex
+  - {role: macports, when: 'preferred_pkg_mgr == "macports"'}
+  - {role: homebrew, when: 'preferred_pkg_mgr == "homebrew"'}
   - role: software_dockutil

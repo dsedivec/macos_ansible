@@ -3,6 +3,3 @@ software_emacs_force_build_emacs: false
 software_emacs_git_update: false
 dot_emacs_d_remote_repo: '{{ dsedivec_github_prefix }}/dot-emacs-d.git'
 dot_emacs_d_local_repo: '{{ ansible_env.HOME }}/.emacs.d'
-org_mode_remote_repo: '{{ dsedivec_github_prefix }}/org-mode.git'
-# Note: this path is hard coded in my .emacs.d/init.el.
-org_mode_local_repo: '{{ repositories_root }}/org-mode'
