@@ -108,7 +108,6 @@ Now you can log out and log in as your new account.
 ## Applications
 
 * 1Password: Add vaults
-* Adium: Set up account
 * Alfred: Turn on auto-expand snippets (not synced)
 * AltTab: Start at boot, give permissions
 * Amphetamine: Set to run at login
@@ -121,37 +120,18 @@ Now you can log out and log in as your new account.
 * Dash: Turn on sync
 * Dropbox: Start at login, login, turn off photo/video syncing
 * Firefox: Sync, Little Snitch private rule, extensions, `userChrome.css` (checked in here), open up the container extension and tell it to start syncing, tell RES to start syncing/backing up to Dropbox
-* Google Play Music: Log in
 * Hammerspoon: Start at login, grant accessibility, hide with Bartender
 * iStat Menus: Start and import settings
-* iTunes: Turn on wifi sync, pair with phone, turn off automatic syncing, manually sync music
-  * **Warning!** When I did this, I got a warning saying that my phone can only sync with one library.  (I don't have a library.)  Then all my audiobooks got deleted.  Should find a better way to do this.
 * Little Snitch: Not even installed, do it all yourself---**installer will force reboot**
 * Loopback: Add license
 * Mail.app: Enable accounts, enable mail bundles (can't find any plist where these are enabled), set up junk mail (done by rules, mostly), enable mail rules (they come with if you imported a Mail.app directory from another machine), copy any mail over
-* Moom: License, start at login, hide with Bartender
 * OneNote: Sign in
-* Parallels: Grant various permissions at first run, install license, copy over VMs
-* PDFPenPro: License
 * Safari: Install extensions (AdGuard and sVim currently)
-* ScreenFlow: License
-* Sketch: License, install [macOS library][sketch_macos]
 * Signal: Link to phone
 * Steam: Log in, set not to start at login
-* Textual: Add license, configure Freenode, including nick, auth, auto-reconnect settings, connect commands, +i on connect
 * Tunnelblick: All configuration
 
 Special shout out to the Mozilla Firefox team who make a great browser but who don't give me any sane way to figure out what the default user profile directory is, if any.  *Super* frustrating day, that was.
-
-
-### Textual
-
-Connect commands:
-
-```
-/timer 20 1 /quote nickserv ghost dale
-/timer 25 1 /nick dale
-```
 
 
 # Notes
