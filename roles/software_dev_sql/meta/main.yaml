@@ -5,4 +5,3 @@ dependencies:
   # Gem bin dir under ~/.gem, so make sure everyone is using the newer
   # MacPorts Ruby.
   - role: ruby
-  - role: python_venvs

@@ -117,7 +117,6 @@ other_software_user_casks_common:
   # Calibre 4 requires Mojave or later.
   - [calibre, "14"]
   - dash
-  - flux
   - ghidra
   - grandperspective
   - hammerspoon
@@ -128,17 +127,12 @@ other_software_user_casks_common:
   - libreoffice
   - loopback
   - micro-snitch
-  - moom
-  - omnigraffle
-  - pdfpenpro
   - plex
   - silentknight
   - soundsource
-  - textual
   - the-unarchiver
   - tor-browser
   - vlc
-  # - witch
 
 other_software_user_casks: '{{ other_software_user_casks_common }}'
 
@@ -156,7 +150,6 @@ other_software_mac_app_store: '{{ other_software_mac_app_store_common}}'
 other_software_py3_venv_common:
   - magic-wormhole
   - proselint
-  - remarshal
   - visidata
   - ydiff
   # My ~/bin/html2email script uses these.  (VisiData also wants lxml
@@ -239,63 +232,14 @@ other_software_preferences_common:
     - [DHNotificationTableOfContentsTip, bool, true]
     - [DHNotificationFindTip, bool, true]
 
-  org.herf.Flux:
-    - [sleepLate, int, 1]
-    - [wakeTime, int, 555]
-    - [wakeNotifyDisable, int, 1]
-    - [lateColorTemp, float, 2300.0]
-
   com.googlecode.iterm2:
     - [LoadPrefsFromCustomFolder, int, 1]
     - [PrefsCustomFolder, string, '{{ dropbox_dir }}/app_sync/iTerm']
     - [NoSyncNeverRemindPrefsChangesLostForFile, bool, true]
     - [NoSyncNeverRemindPrefsChangesLostForFile_selection, int, 0]
 
-  com.codeux.apps.textual:
-    - [CopyTextSelectionOnMouseUp, bool, true]
-    - [DefaultIdentity -> Nickname, string, dale]
-    - [DefaultIdentity -> Realname, string, dale]
-    - [DefaultIdentity -> Username, string, dale]
-    - [DestinationOfNonserverNotices, int, 1]
-    - [Keyboard -> Command+W Key Action, int, 1]
-    - [Keyboard -> Tab Key Completion Suffix, string, ":"]
-    - [ServerListDoubleClickConnectServer, bool, true]
-    - [ServerListDoubleClickJoinChannel, bool, true]
-    - [SUAutomaticallyUpdate, bool, false]
-    - [SUEnableAutomaticChecks, bool, true]
-
   net.tunnelblick.tunnelblick:
     - [keyboardShortcutIndex, int, 0]
-
-  ~/Library/Application Support/Witch/Settings.plist:
-    - [AXAPI Timeout, int, 100]
-    # Going to whack the whole Action Configurations key here, which
-    # is an array of dicts.  The changes are too invasive to do within
-    # Action Configurations.
-    - [
-        Action Configurations,
-        array,
-        [
-          {
-            "Action Type": 0,
-            "Hot Key: Reverse": {
-              "Key Code": 48,
-              Modifiers: 655682,
-              "Visual Representation": "\\U2325\\U21e7\\U21e5",
-            },
-            "Hot Key: Standard": {
-              "Key Code": 48,
-              Modifiers: 524288,
-              "Visual Representation": "\\U2325\\U21e5",
-            },
-            Orientation: 0,
-            "Sort Order": 3,
-            "Sort Order: Invert": 0,
-            Spaces: 1,
-            Tabs: 0,
-          }
-        ]
-      ]
 
   com.surteesstudios.Bartender:
     - [HideItemsWhenShowingOthers, bool, false]

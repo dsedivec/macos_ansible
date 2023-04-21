@@ -24,7 +24,6 @@
     - {role: software_dev_web, tags: [software_dev_web]}
     - {role: other_software, tags: [other_software]}
     - {role: software_mactex, tags: [software_mactex]}
-    - {role: software_sketch, tags: [software_sketch]}
     - {role: mail_plug_ins, tags: [mail_plug_ins]}
     - {role: fonts, tags: [fonts]}
   environment:
