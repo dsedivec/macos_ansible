@@ -12,6 +12,7 @@ other_software_macports: >-
 
 other_software_system_casks_personal_machine:
   - gog-galaxy
+  - parsec
 
 other_software_system_casks: >-
   {{
@@ -24,7 +25,6 @@ other_software_user_casks_personal_machine:
   - epic-games
   - freac
   - moonlight
-  - parsec
   - screenflow
   - signal
   - simple-comic
