@@ -1,5 +1,7 @@
 emacs_src_dir: '{{ repositories_root }}/emacs'
 software_emacs_force_build_emacs: false
 software_emacs_git_update: false
+org_mode_remote_repo: '{{ dsedivec_github_prefix }}/org-mode.git'
+org_mode_local_repo: '{{ repositories_root }}/org-mode'
 dot_emacs_d_remote_repo: '{{ dsedivec_github_prefix }}/dot-emacs-d.git'
 dot_emacs_d_local_repo: '{{ ansible_env.HOME }}/.emacs.d'
