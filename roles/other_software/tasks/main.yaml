@@ -25,18 +25,29 @@
     creates: /usr/local/bin/pandoc
   become: yes
 
-- name: Install system-wide casks
-  homebrew_cask:
-    name: '{{ other_software_system_casks }}'
-    state: present
-    path: '{{ homebrew_sudo_wrapper | dirname }}'
+- block:
+  - name: Install system-wide casks
+    homebrew_cask:
+      name: '{{ other_software_system_casks }}'
+      state: present
+      path: '{{ homebrew_sudo_wrapper | dirname }}'
+    notify:
+      - Run macsigcheck
+
+  - name: Install intel-power-gadget on Intel machines
+    homebrew_cask:
+      name: intel-power-gadget
+      state: present
+      path: '{{ homebrew_sudo_wrapper | dirname }}'
+    when: 'ansible_machine == "x86_64"'
+    notify:
+      - Run macsigcheck
+
   become: yes
   environment:
     # Necessary so our wrapper script can find the real "brew".
     PATH: '{{ homebrew_bin }}:{{ ansible_env.PATH }}'
   tags: [slow, homebrew_casks]
-  notify:
-    - Run macsigcheck
 
 - name: Remove user from access_bpf group
   # because it is whack that my every day user account has access to

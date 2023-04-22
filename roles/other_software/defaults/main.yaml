@@ -92,7 +92,6 @@ other_software_system_casks_common:
   # https://forum.portswigger.net/thread/install-macos-catalina-344b229e78f65
   - burp-suite
   - homebrew/cask-versions/firefox-developer-edition
-  - intel-power-gadget
   - google-chrome
   - istat-menus
   - osxfuse
