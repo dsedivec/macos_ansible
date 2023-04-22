@@ -11,6 +11,8 @@ macos_prefs_desired_resolutions:
   '1680x1050': '1440x900'
   # 2020 16" MBP
   '1792x1120': '1536x960'
+  # 2023 16" MBP (default is already 2x scaling)
+  '1728x1117': '1728x1117'
 
 macos_prefs_domain_mail: '{{ ansible_env.HOME }}/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist'
 
