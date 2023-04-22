@@ -144,7 +144,7 @@ other_software_mac_app_store_common:
   - [784801555, /Applications/Microsoft OneNote.app]
   - [1480933944, /Applications/Vimari.app]
 
-other_software_mac_app_store: '{{ other_software_mac_app_store_common}}'
+other_software_mac_app_store: '{{ other_software_mac_app_store_common }}'
 
 other_software_pipx_python: '{{ macports_python_3 }}'
 
