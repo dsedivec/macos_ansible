@@ -71,6 +71,7 @@
       sys.exit(0)
   register: macports_python_3_check
   failed_when: 'macports_python_3_check.rc not in (0, 101)'
+  ignore_errors: yes
   changed_when: False
   tags: [always]
 
