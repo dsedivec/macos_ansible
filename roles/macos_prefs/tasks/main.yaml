@@ -7,7 +7,7 @@
 - name: Remap modifier keys
   command:
     argv:
-      - python2.7
+      - python
       - '{{ macos_prefs_change_modifiers_local_repo }}/change_modifiers.py'
       - set
       - caps_lock,control

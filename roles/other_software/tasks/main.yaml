@@ -134,20 +134,6 @@
   notify:
     - Restart Dock
 
-- name: Install Python 3 software in {{ user_py3_venv_dir }}
-  pip:
-    virtualenv: '{{ user_py3_venv_dir }}'
-    name: '{{ other_software_py3_venv }}'
-    state: present
-
-- name: Symlink Python software into {{ user_bin_dir }}
-  file:
-    state: link
-    src: '{{ user_py3_venv_bin | relpath(user_bin_dir) }}/{{ item }}'
-    path: '{{ user_bin_dir }}/{{ item }}'
-  loop: '{{ other_software_py3_bins }}'
-  ignore_errors: '{{ ansible_check_mode }}'
-
 - name: Clone sshfs
   git:
     repo: https://github.com/libfuse/sshfs.git
@@ -231,6 +217,33 @@
   when: 'not loudmax_dir.stat.exists'
   notify:
     - Recognize new Audio Units
+
+- name: Install pipx
+  dsedivec.ansible_dlc.x_macports:
+    name: pipx
+    state: installed
+
+- name: Install software via pipx
+  community.general.pipx:
+    name: '{{ item }}'
+    state: present
+    python: '{{ other_software_pipx_python }}'
+  loop: '{{ other_software_pipx }}'
+
+- name: Install VisiData optional packages
+  community.general.pipx:
+    name: visidata
+    state: inject
+    inject_packages:
+      - openpyxl
+      - xlrd
+
+- name: Install html2email
+  community.general.pipx:
+    name: html2email
+    source: git+https://github.com/dsedivec/html2email.git
+    state: present
+    python: '{{ macports_python_3 }}'
 
 # This lets me print envelopes correctly.  Not 100% convinced I need
 # this for printing envelopes from LibreOffice.

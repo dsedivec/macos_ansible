@@ -1,2 +1,2 @@
 dependencies:
-  - role: python_venvs
+  - role: macports

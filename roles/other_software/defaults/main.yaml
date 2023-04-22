@@ -147,29 +147,15 @@ other_software_mac_app_store_common:
 
 other_software_mac_app_store: '{{ other_software_mac_app_store_common}}'
 
-other_software_py3_venv_common:
+other_software_pipx_python: '{{ macports_python_3 }}'
+
+other_software_pipx_common:
   - magic-wormhole
   - proselint
   - visidata
   - ydiff
-  # My ~/bin/html2email script uses these.  (VisiData also wants lxml
-  # for some features.)
-  - lxml
-  - premailer
-  # These last two are requirements to enable features of VisiData.
-  - openpyxl
-  - xlrd
 
-other_software_py3_venv: '{{ other_software_py3_venv_common }}'
-
-other_software_py3_bins_common:
-  - proselint
-  - remarshal
-  - vd
-  - wormhole
-  - ydiff
-
-other_software_py3_bins: '{{ other_software_py3_bins_common }}'
+other_software_pipx: '{{ other_software_pipx_common }}'
 
 other_software_preferences_common:
   com.agilebits.onepassword7:

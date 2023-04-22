@@ -1,127 +1,19 @@
-- name: Install Python 2 development tools
-  include_tasks: install_python_dev_tool.yaml
-  loop:
-    - package: flake8
-    - package: pylint
-    - package: ipython
-    - package: jedi
-    - package: gnureadline
-  vars:
-    virtualenv: '{{ user_py2_venv_dir }}'
-
-- name: Fix gnureadline in Python 2
-  file:
-    state: link
-    src: site-packages/readline.py
-    dest: '{{ user_py2_venv_dir }}/lib/python2.7/readline.py'
+- name: Install pipx
+  dsedivec.ansible_dlc.x_macports:
+    state: present
+    name: pipx
+  become: yes
 
 - name: Install Python 3 development tools
-  include_tasks: install_python_dev_tool.yaml
+  community.general.pipx:
+    name: '{{ item }}'
+    state: '{{ software_dev_python_pipx_state }}'
+    python: '{{ macports_python_3 }}'
   loop:
-    - package: flake8
-    - package: pylint
-    - package: ipython
-    - package: jedi
-    - package: black
-      bins: [black]
-    - package: isort
-      bins: [isort]
-    - package: mypy
-      bins: [mypy]
-  vars:
-    virtualenv: '{{ user_py3_venv_dir }}'
-
-# GNU readline + macOS + Python = still a pain in the ass
-#
-# The trick is that we need python-gnureadline to get installed into a
-# directory that we can put on sys.path *before* the built-in
-# lib-dynload, where Python will find the readline module built
-# against libedit.
-#
-# So we do something like:
-#
-# 1. Use pip install --target to put gnureadline somewhere entirely
-#    outside Python's normal lib path (which is
-#    $VIRTUAL_ENV/lib/pythonX.Y).
-#
-# 2. Drop a readline_path.pth file into the site-packages dir that
-#    *executes* at Python startup...
-#
-# 3. ...a readline_path.py script we have also dropped into
-#    site-packages that forcibly inserts our directory from step 1
-#    onto sys.path *before* the system directories.
-#
-# 4. Symlink the egg-info directory into the normal Python
-#    site-packages directory so that pip thinks gnureadline is
-#    installed.
-#
-# I used to use easy_install, which conveniently installed into a
-# subdirectory anyway, but easy_install is all but abandoned.  Its
-# Ansible module actually fails nowadays because easy_install
-# --dry-run breaks installing python-gnureadline.
-#
-# "pip --install-options='--install-lib=/some/other/lib'" used to work
-# but stopped at some point between Python 3.8 and 3.9, I think.
-#
-# If I used actual virtualenv instead of the built-in venv, I think I
-# could use the same fix I use for Python 2, above.  But I'm stubborn.
-
-- name: Check if gnureadline is already installed for Python 3
-  find:
-    paths: ['{{ software_dev_python_py3_gnureadline_dir }}']
-    patterns: ['readline.py']
-    file_type: file
-    recurse: no
-    use_regex: no
-  register: py3_readline_find
-
-- name: Install gnureadline for Python 3
-  pip:
-    virtualenv: '{{ user_py3_venv_dir }}'
-    name: gnureadline
-    # Argh (no pun intended), why doesn't extra_args take a list?
-    extra_args: "--target={{ software_dev_python_py3_gnureadline_dir | quote }}"
-    state: present
-  when: 'py3_readline_find.matched < 1'
-
-- name: Install readline_path.py
-  template:
-    src: readline_path.py
-    dest: '{{ user_py3_venv_site_packages }}/'
-
-- name: Install readline_path.pth
-  copy:
-    content: |
-      import readline_path
-    dest: '{{ user_py3_venv_site_packages }}/readline_path.pth'
-
-- name: Get name of gnureadline .egg-info directory for Python 3
-  find:
-    paths: ['{{ software_dev_python_py3_gnureadline_dir }}']
-    patterns: ['gnureadline-*-py{{ user_py3_venv_python_version }}.egg-info']
-    file_type: directory
-    recurse: no
-    use_regex: no
-  register: py3_readline_egg_info
-  # We're going to go ahead and fail if you have >1 directories
-  # matching here, since I don't want to figure out which egg-info
-  # directory is the current one.
-  failed_when: '(not ansible_check_mode) and py3_readline_egg_info.matched != 1'
-
-- name: Tell pip that gnureadline is installed for Python 3
-  file:
-    state: link
-    src: '{{ py3_readline_egg_info.files[0].path | relpath(user_py3_venv_site_packages) }}'
-    dest: '{{ user_py3_venv_site_packages }}/{{ py3_readline_egg_info.files[0].path | basename }}'
-  when: 'not ansible_check_mode'
-
-- name: 'Select {{ software_dev_python_py3_virtualenv_port_name }} as "virtualenv"'
-  command:
-    argv:
-      - port
-      - select
-      - '--set'
-      - virtualenv
-      - '{{ software_dev_python_py3_virtualenv_port_select_name }}'
-    creates: /opt/local/bin/virtualenv
-  become: true
+    - flake8
+    - pylint
+    - ipython
+    - isort
+    - black
+    - 'darker[isort]'
+    - mypy

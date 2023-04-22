@@ -47,22 +47,13 @@ other_software_mac_app_store: >-
       | union(other_software_mac_app_store_personal_machine)
   }}
 
-other_software_py3_venv_personal_machine:
+other_software_pipx_personal_machine:
   - onkyo-eiscp
 
-other_software_py3_venv: >-
+other_software_pipx: >-
   {{
-      other_software_py3_venv_common
-      | union(other_software_py3_venv_personal_machine)
-  }}
-
-other_software_py3_bins_personal_machine:
-  - onkyo
-
-other_software_py3_bins: >-
-  {{
-      other_software_py3_bins_common
-      | union(other_software_py3_bins_personal_machine)
+      other_software_pipx_common
+      | union(other_software_pipx_personal_machine)
   }}
 
 other_software_add_dock_personal_machine:
