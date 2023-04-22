@@ -94,7 +94,7 @@ other_software_system_casks_common:
   - homebrew/cask-versions/firefox-developer-edition
   - google-chrome
   - istat-menus
-  - osxfuse
+  - macfuse
   #XXX - parallels
   - tunnelblick
   - wireshark

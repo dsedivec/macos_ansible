@@ -160,6 +160,13 @@
     state: installed
   become: yes
 
+# https://github.com/osxfuse/osxfuse/issues/751
+- name: Symlink fuse_darwin.h so sshfs 2.x will build
+  file:
+    state: link
+    src: fuse.h
+    path: /usr/local/include/fuse_darwin.h
+
 - name: Build sshfs
   shell: |
     install -d build
