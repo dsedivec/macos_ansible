@@ -3,12 +3,25 @@
     repo: '{{ dockutil_remote_repo }}'
     dest: '{{ dockutil_local_repo }}'
     update: no
+  register: dockutil_clone
 
-- name: Symlink dockutil into '{{ user_bin_dir }}'
-  file:
-    state: link
-    src: '{{ (dockutil_local_repo + "/scripts") | relpath(user_bin_dir) }}/dockutil'
+- name: Check if dockutil is installed
+  ansible.builtin.stat:
+    path: '{{ user_bin_dir }}/dockutil'
+  register: dockutil_stat
+  when: 'dockutil_clone is not changed'
+
+- name: Build dockutil
+  command:
+    argv: ['./build.sh']
+    chdir: '{{ dockutil_local_repo }}'
+  when: 'dockutil_clone is changed or (dockutil_stat is defined and not dockutil_stat.stat.exists)'
+
+- name: Install dockutil into '{{ user_bin_dir }}'
+  ansible.builtin.copy:
+    src: '{{ dockutil_local_repo }}/.build/release/dockutil'
     dest: '{{ user_bin_dir }}/dockutil'
+    mode: 0755
 
 - name: Read list of things in the Dock
   shell: '{{ dockutil | quote }} --list | cut -f1'
