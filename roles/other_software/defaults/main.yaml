@@ -37,12 +37,13 @@ other_software_macports_common:
   # what MacPorts offers are going to be, in descending order of
   # confidence:
   # * Azul Zulu Community (Azul has been involved in JDK for a long time)
+  # * Amazon Corretto
   # * Temurin (AKA Adoptium, née AdoptOpenJDK)
   # * Oracle (actually open OpenJDK only supported for last release or
   #   something?? otherwise you get audited up the ass)
   # * SAP (major contributor to JDK, but why do they ship their own CA??)
   # * Anything else
-  - openjdk18-zulu
+  - openjdk20-zulu
   - openssh +gsskex
   - p7zip
   - parallel
