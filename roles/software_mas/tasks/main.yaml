@@ -1,3 +1,11 @@
+- name: Install Rosetta 2 (MAS binary is still Intel, 2023-04-19)
+  command: softwareupdate --install-rosetta --agree-to-license
+  # Other possible options for testing if Rosetta is installed:
+  # * Test exit status of "arch -x86_64 /usr/bin/true"
+  # * Look for some "oahd" running
+  # * /usr/libexec/rosetta directory exists?
+  when: 'ansible_machine == "arm64" and "com.apple.pkg.RosettaUpdateAuto" not in macos_installed_pkgs'
+
 - name: Install mas, Mac App Store CLI
   script: utils/install_latest_pkg_from_github.py mas-cli/mas
   args:
