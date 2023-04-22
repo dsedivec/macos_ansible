@@ -25,7 +25,7 @@
 - name: Get Apple's default resolution for the main display
   command:
     argv:
-      - /usr/bin/python
+      - '{{ macports_python_3 }}'
       - '{{ macos_prefs_display_manager }}'
       - show
       - default
@@ -51,14 +51,16 @@
         }}
 
 - name: Get current resolution
-  shell: /usr/bin/python '{{ macos_prefs_display_manager | quote }}'
-         show current main | awk '/^resolution:/{print $2}'
+  shell: >-
+    '{{ macports_python_3 | quote }}'
+    '{{ macos_prefs_display_manager | quote }}'
+    show current main | awk '/^resolution:/{print $2}'
   register: current_resolution
   changed_when: False
 
 - name: Set resolution
   command:
-    argv: [/usr/bin/python, '{{ macos_prefs_display_manager }}',
+    argv: ['{{ macports_python_3 }}', '{{ macos_prefs_display_manager }}',
            res,
            '{{ macos_prefs_this_mac_desired_resolution | replace("x", " ") }}',
            0, only-hidpi, main]
