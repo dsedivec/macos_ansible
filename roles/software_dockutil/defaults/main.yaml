@@ -23,3 +23,4 @@ dockutil_defaults_to_remove:
   - Numbers
   - Keynote
   - Pages
+  - Freeform
