@@ -35,6 +35,12 @@
     owner: root
     group: wheel
   become: yes
+  register: install_local_repo
+
+- name: Check that local ports repo has been indexed
+  ansible.builtin.stat:
+    path: '{{ macports_ports_local_repo }}/PortIndex'
+  register: macports_ports_local_index
 
 # macOS system Python has much slower PyObjC imports, for purposes of
 # my x_osx_defaults module.  Let's try and use the faster one from
@@ -46,6 +52,7 @@
 
 - name: Install Python and PyObjC
   dsedivec.ansible_dlc.x_macports:
+    selfupdate: '{{ False if macports_ports_local_index.stat.exists else True }}'
     name:
       - 'python{{ macports_python_3_version_no_dots }}'
       - 'py{{ macports_python_3_version_no_dots }}-pyobjc'
