@@ -21,7 +21,7 @@
 # takes forever.
 - name: Install Pandoc
   command:
-    argv: ['{{ macfit }}', --github, '^pandoc-[0-9.]+-macOS.pkg$', jgm/pandoc]
+    argv: ['{{ macfit }}', --github, '^pandoc-[0-9.]+-{{ ansible_machine }}-macOS.pkg$', jgm/pandoc]
     creates: /usr/local/bin/pandoc
   become: yes
 
@@ -203,8 +203,8 @@
 
 - name: Scrape URL for LoudMax
   dsedivec.ansible_dlc.scrape_urls:
-    url: https://loudmax.blogspot.com/
-    url_regexp: '(?i)\bLoudMax_.*_MAC_Catalina.zip\b'
+    url: https://pluginguru.net/loudmax-for-mac/
+    url_regexp: '(?i)\bLoudMax_v[0-9]+_[0-9]+_Mac_Notarized.zip\b'
   register: loudmax_urls
   when: 'not loudmax_dir.stat.exists'
   failed_when: 'not loudmax_urls.urls'

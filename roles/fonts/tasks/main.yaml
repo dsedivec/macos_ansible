@@ -58,7 +58,7 @@
   args:
     creates: '{{ user_font_dir }}/{{ item.creates }}'
   loop:
-    - url: 'https://input.fontbureau.com/build/?fontSelection=whole&a=0&g=0&i=0&l=0&zero=0&asterisk=0&braces=0&preset=default&line-height=1.2&accept=I+do&email='
+    - url: 'https://input.djr.com/build/?fontSelection=whole&a=0&g=0&i=0&l=0&zero=0&asterisk=0&braces=0&preset=default&line-height=1.2&accept=I+do&email='
       glob: 'InputMono*.ttf'
       creates: InputMono-Regular.ttf
     - url: 'https://software.sil.org/downloads/r/charis/CharisSIL-5.000.zip'
@@ -76,7 +76,7 @@
     argv:
       - '{{ macfit }}'
       - --agree-eulas
-      - https://developer.apple.com/design/downloads/SF-Font-Pro.dmg
+      - https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg
     creates: /Library/Fonts/SF-Pro.ttf
   become: yes
 
