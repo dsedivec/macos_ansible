@@ -861,6 +861,11 @@ macos_prefs_set:
     type: string
     value: functionKeys
 
+  # Function keys are normal function keys.
+  - key: com.apple.keyboard.fnState
+    type: bool
+    value: true
+
   # Control Strip always on Touch Bar.
   # - domain: com.apple.touchbar.agent
   #   key: PresentationModeGlobal
