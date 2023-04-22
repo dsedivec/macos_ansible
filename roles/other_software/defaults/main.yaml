@@ -157,37 +157,6 @@ other_software_pipx_common:
 other_software_pipx: '{{ other_software_pipx_common }}'
 
 other_software_preferences_common:
-  com.agilebits.onepassword7:
-    - [
-        "ShortcutRecorder BrowserActivation",
-        dict,
-        {
-            "keyCode": -1,
-            "modifierFlags": 0,
-            "modifiers": 0,
-        }
-      ]
-    - [
-        "ShortcutRecorder GlobalActivation",
-        dict,
-        {
-            "keyChars": "1",
-            "keyCharsIgnoringModifiers": "!",
-            "keyCode": 18,
-            "modifierFlags": 393216,
-            "modifiers": 4608,
-        }
-      ]
-    - [
-        "ShortcutRecorder GlobalLock",
-        dict,
-        {
-            "keyCode": -1,
-            "modifierFlags": 0,
-            "modifiers": 0,
-        }
-      ]
-
   com.adguard.safari.AdGuard:
     - [NSFullScreenMenuItemEverywhere, bool, false]
 
