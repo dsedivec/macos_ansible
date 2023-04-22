@@ -85,7 +85,6 @@
     url: '{{ item }}'
     dest: '{{ user_font_dir }}/{{ item | basename }}'
   loop:
-    - https://github.com/ionic-team/ionicons/raw/master/docs/fonts/ionicons.ttf
     - https://github.com/domtronn/all-the-icons.el/raw/master/fonts/all-the-icons.ttf
     # This is an old version of Octicons, but Octicons no longer
     # offers font files, only SVG (see
