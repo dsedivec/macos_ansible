@@ -31,7 +31,7 @@
   command:
     argv: ['{{ dockutil }}',
            --add,
-           '{{ dockutil_activity_monitor_path[macos_major_minor_version] }}',
+           '/System/Applications/Utilities/Activity Monitor.app',
            --no-restart]
   when: '"Activity Monitor" not in macos_dock_items'
   notify: Restart Dock

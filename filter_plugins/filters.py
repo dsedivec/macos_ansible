@@ -25,15 +25,19 @@ def extract_url_param(url, param):
     return value
 
 
-def filter_casks_by_os_version(cask_list, mac_os_minor_version):
-    """cask_list can be \"cask\" or [\"cask\", min_os_minor_version]."""
-    mac_os_minor_version = int(mac_os_minor_version)
+def filter_casks_by_os_version(cask_list, mac_os_version):
+    """cask_list can be \"cask\" or [\"cask\", min_os_version].
+
+    mac_os_version is currently major version number only.
+
+    """
+    mac_os_version = int(mac_os_version)
     for cask in cask_list:
         if not isinstance(cask, list):
             yield cask
         else:
             cask, min_version = cask
-            if mac_os_minor_version >= int(min_version):
+            if mac_os_version >= int(min_version):
                 yield cask
 
 

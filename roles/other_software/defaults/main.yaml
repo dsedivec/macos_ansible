@@ -114,8 +114,7 @@ other_software_user_casks_common:
   - audio-hijack
   - bartender
   - bettertouchtool
-  # Calibre 4 requires Mojave or later.
-  - [calibre, "14"]
+  - calibre
   - dash
   - ghidra
   - grandperspective

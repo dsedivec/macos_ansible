@@ -7,26 +7,3 @@
 - name: Set macos_installed_pkgs fact
   set_fact:
     macos_installed_pkgs: '{{ pkgutil_output.stdout_lines | default }}'
-
-# macOS major releases uses to be 10.x.  Catalina was 10.15 The
-# release following that, Big Sur, was numbered 11.
-
-- name: Set ansible_distribution_minor_version for macOS
-  set_fact:
-    # I'm leaving this as a string because
-    # ansible_distribution_major_version is already a string, and I
-    # want to be consistent.
-    ansible_distribution_minor_version: >-
-      {{ ansible_distribution_version.split(".")[1] }}
-
-- name: Set macos_major_minor_version fact
-  set_fact:
-    macos_major_minor_version: >-
-      {{
-          ".".join([
-              ansible_distribution_major_version,
-              ansible_distribution_minor_version,
-          ])
-          if ansible_distribution_major_version|int < 11
-          else ansible_distribution_major_version
-      }}

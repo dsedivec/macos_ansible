@@ -23,7 +23,3 @@ dockutil_defaults_to_remove:
   - Numbers
   - Keynote
   - Pages
-dockutil_activity_monitor_path:
-  '10.14': '/Applications/Utilities/Activity Monitor.app'
-  '10.15': '/System/Applications/Utilities/Activity Monitor.app'
-  '11': '/System/Applications/Utilities/Activity Monitor.app'
