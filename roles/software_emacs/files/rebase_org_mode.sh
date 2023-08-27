@@ -4,7 +4,7 @@ set -euo pipefail
 
 UPSTREAM_REMOTE=upstream
 UPSTREAM_BRANCH=master
-UPSTREAM_URL=https://code.orgmode.org/bzg/org-mode.git
+UPSTREAM_URL=https://git.savannah.gnu.org/git/emacs/org-mode.git
 
 if remote_url=$(git config remote."$UPSTREAM_REMOTE".url); then
 	if [ "$remote_url" != "$UPSTREAM_URL" ]; then

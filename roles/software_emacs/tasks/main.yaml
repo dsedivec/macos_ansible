@@ -112,7 +112,7 @@
 
 - name: Add org-mode upstream remote
   dsedivec.ansible_dlc.git_remote:
-    repo: https://code.orgmode.org/bzg/org-mode
+    repo: https://git.savannah.gnu.org/git/emacs/org-mode.git
     dest: '{{ org_mode_local_repo }}'
     remote: upstream
     state: present
