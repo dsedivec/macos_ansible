@@ -121,7 +121,9 @@ other_software_user_casks_common:
   - hammerspoon
   - handbrake
   - insomnia
-  - iterm2
+  # Using beta because (1) has 1Password support, and (2) 3.5 has been
+  # in beta since 2021, apparently.
+  - iterm2-beta
   - knockknock
   - libreoffice
   - loopback
