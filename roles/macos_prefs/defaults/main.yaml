@@ -213,6 +213,16 @@ macos_prefs_set:
     type: bool
     value: true
 
+  # Hot corner shit turned on in Ventura, kill it with fire.
+  - {domain: com.apple.dock, key: wvous-tl-corner, type: int, value: 1}
+  - {domain: com.apple.dock, key: wvous-tl-modifier, type: int, value: 0}
+  - {domain: com.apple.dock, key: wvous-tr-corner, type: int, value: 1}
+  - {domain: com.apple.dock, key: wvous-tr-modifier, type: int, value: 0}
+  - {domain: com.apple.dock, key: wvous-bl-corner, type: int, value: 1}
+  - {domain: com.apple.dock, key: wvous-bl-modifier, type: int, value: 0}
+  - {domain: com.apple.dock, key: wvous-br-corner, type: int, value: 1}
+  - {domain: com.apple.dock, key: wvous-br-modifier, type: int, value: 0}
+
   - host: currentHost
     domain: com.apple.screensaver
     key: idleTime
