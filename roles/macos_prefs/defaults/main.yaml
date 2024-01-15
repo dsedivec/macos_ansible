@@ -234,8 +234,8 @@ macos_prefs_set:
     key: moduleDict
     type: dict
     value:
-      moduleName: Flurry
-      path: /System/Library/Screen Savers/Flurry.saver
+      moduleName: Ventura
+      path: /System/Library/Frameworks/ScreenSaver.framework/PlugIns/Ventura.appex
       type: 0
 
   # Tons of hotkeys!  Reference CGSHotKeys.h, Events.h
