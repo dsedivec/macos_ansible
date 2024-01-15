@@ -43,7 +43,7 @@ other_software_macports_common:
   #   something?? otherwise you get audited up the ass)
   # * SAP (major contributor to JDK, but why do they ship their own CA??)
   # * Anything else
-  - openjdk20-zulu
+  - openjdk21-zulu
   - openssh +gsskex
   - p7zip
   - parallel
