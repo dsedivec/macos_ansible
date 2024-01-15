@@ -88,6 +88,7 @@ Now you can log out and log in as your new account.
 # Things Not Automated
 
 * Set firmware password
+* Screen saver lock timeout: You can set this with `sysadminctl`, but it requires the user's password on stdin, which seems a bit problematic, so I haven't bothered to automate it
 * Set up accounts: admin at install, then regular user after
 * Allow regular user account to sudo with file in `/etc/sudoers.d`
 * Initial virtualenv and Ansible install
