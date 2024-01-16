@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 import argparse
 import json
 import logging as _logging
@@ -23,9 +22,7 @@ def main(argv):
     parser = argparse.ArgumentParser(prog=argv[0])
     parser.add_argument("--debug", action="store_true", default=False)
     parser.add_argument("--download-regexp", "--dre", default=ARCHIVE_REGEXP)
-    parser.add_argument(
-        "--font-regexp", "--fre", default=r"(?i)\.(tt[cf]|otf)$"
-    )
+    parser.add_argument("--font-regexp", "--fre", default=r"(?i)\.(tt[cf]|otf)$")
     parser.add_argument(
         "--dest-dir", "-d", default=os.path.expanduser("~/Library/Fonts")
     )
@@ -61,18 +58,14 @@ def main(argv):
         logger.info("Downloaded to %s", local_file_path)
         match = re.search(ARCHIVE_REGEXP, asset["name"])
         if not match:
-            raise Exception(
-                "Cannot determine archive type for %r" % (asset["name"],)
-            )
+            raise Exception("Cannot determine archive type for %r" % (asset["name"],))
         extract_dir = os.path.join(download_dir, "extract")
         os.mkdir(extract_dir)
         ext = match.group(1).lower()
         if ext.startswith("z"):
             subprocess.check_call(["unzip", "-d", extract_dir, local_file_path])
         elif ext.startswith("t"):
-            subprocess.check_call(
-                ["tar", "-C", extract_dir, "-xf", local_file_path]
-            )
+            subprocess.check_call(["tar", "-C", extract_dir, "-xf", local_file_path])
         else:
             raise Exception("No extract command for extension %r" % (ext,))
         installed = False
