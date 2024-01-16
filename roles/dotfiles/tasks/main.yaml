@@ -1,13 +1,13 @@
 - name: Install Bash
-  dsedivec.ansible_dlc.x_macports:
-    state: present
+  homebrew:
+    update_homebrew: true
     name: bash
-  become: true
+    state: present
 
-- name: Change user's shell to MacPorts Bash
+- name: Change user's shell to Homebrew Bash
   user:
     name: '{{ ansible_user_id }}'
-    shell: /opt/local/bin/bash
+    shell: '{{ homebrew_bin }}/bash'
     create_home: no
   become: true
 

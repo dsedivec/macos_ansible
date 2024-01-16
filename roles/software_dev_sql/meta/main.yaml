@@ -1,7 +1,2 @@
 dependencies:
-  # This role could actually run with system Ruby, but rufo (installed
-  # in software_dev_ruby) needs newer Ruby than what comes with macOS
-  # 10.14 (Ruby 2.3), and my .bashrc only handles one Ruby version's
-  # Gem bin dir under ~/.gem, so make sure everyone is using the newer
-  # MacPorts Ruby.
   - role: ruby

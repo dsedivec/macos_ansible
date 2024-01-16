@@ -1,0 +1,19 @@
+- name: Install Homebrew
+  command:
+    argv: ['{{ macfit }}', '--github', '^Homebrew.*\.pkg$', 'Homebrew/brew', '--check-signature', 'valid']
+  when: '"sh.brew.Homebrew" not in macos_installed_pkgs'
+
+# Some brew commands may take a long time (ex. downloading large
+# files), and then expect to get an sudo password.  Little Python
+# wrapper script keeps sudo alive while brew is running.
+
+- name: Make brew-sudo-keep-alive bin dir
+  file:
+    state: directory
+    path: '{{ homebrew_sudo_wrapper | dirname }}'
+
+- name: Install brew-sudo-keep-alive wrapper
+  copy:
+    src: brew-sudo-keep-alive
+    dest: '{{ homebrew_sudo_wrapper }}'
+    mode: u+x,go-w

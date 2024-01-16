@@ -100,10 +100,9 @@
     - https://github.com/google/material-design-icons/raw/master/font/MaterialIcons-Regular.ttf
 
 - name: Install woff2 package
-  macports:
+  homebrew:
     state: present
     name: woff2
-  become: yes
 
 - name: Download/create/install File Icons font
   script: install_file_icons.sh {{ user_font_dir | quote }}

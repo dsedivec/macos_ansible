@@ -1,0 +1,2 @@
+- import_tasks: tasks/as_root.yaml
+  become: true

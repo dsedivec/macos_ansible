@@ -1,5 +1,5 @@
 dependencies:
   - role: software_mactex
-  - role: macports
+  - role: homebrew
   # This installs OneNote, which has some fonts I want.
   - role: other_software

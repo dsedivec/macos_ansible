@@ -1,6 +1,5 @@
-other_software_macports_common:
+other_software_homebrew_common:
   - aspell
-  - aspell-dict-en
   - bash-completion
   - bat
   - ccache
@@ -9,33 +8,33 @@ other_software_macports_common:
   - ctags
   - direnv
   - dsh
-  - emacs-app
+#  - emacs-app
   - fd
-  - ffmpeg +nonfree
   - figlet
-  - file
+  - file-formula
   - fping
   - fswatch
   - fzf
   - git
-  - gnupg2
+  - gnupg
   - gnuplot
-  - graphviz +rsvg
+  - graphviz
   - grep
-  - gunits
+  - gnu-units
   - iperf3
   - jq
   - less
   - lftp
   - lnav
   - mercurial
+  - miller
   - mtr
   - ncdu
   - neomutt
   - nmap
-  # I officially hate picking a JDK build now.  My top choices from
-  # what MacPorts offers are going to be, in descending order of
-  # confidence:
+  # I officially hate picking a JDK build now.  My top choices in
+  # descending order of confidence:
+  #
   # * Azul Zulu Community (Azul has been involved in JDK for a long time)
   # * Amazon Corretto
   # * Temurin (AKA Adoptium, née AdoptOpenJDK)
@@ -43,8 +42,8 @@ other_software_macports_common:
   #   something?? otherwise you get audited up the ass)
   # * SAP (major contributor to JDK, but why do they ship their own CA??)
   # * Anything else
-  - openjdk21-zulu
-  - openssh +gsskex
+  - homebrew/cask-versions/zulu21
+  - openssh
   - p7zip
   - parallel
   - patchutils
@@ -56,30 +55,20 @@ other_software_macports_common:
   - pstree
   - pv
   - qrencode
-  # Note that Python is explicitly installed in another task, for
-  # Ansible's benefit.  Python 2 and 3 are also installed by role
-  # software_dev_python.
-  - ripgrep +pcre
+  - ripgrep
   - rlwrap
-  - samba4
+  - samba
   - sleepwatcher
   - socat
   - sox
-  - tidy
+  - tidy-html5
   - tree
-  - unrar
   - watch
-  # 2021-03-29: perl5 ports were being built with macOS SDK version
-  # hard-coded.  See
-  # https://github.com/macports/macports-ports/pull/10181 for example.
-  # I fixed this by rebuilding the appropriate perl5* port from
-  # source.
-  - weechat +aspell+python310+scheme+perl+lua+tls
+  - weechat
   - xsv
-  - youtube-dl
   - zoxide
 
-other_software_macports: '{{ other_software_macports_common }}'
+other_software_homebrew: '{{ other_software_homebrew_common }}'
 
 other_software_system_casks_common:
   # Could MAS this, but 1Pass might get updates directly from
@@ -95,8 +84,6 @@ other_software_system_casks_common:
   - google-chrome
   - istat-menus
   - macfuse
-  #XXX - parallels
-  - tunnelblick
   - wireshark
   # Nice side effect of XQuartz: DISPLAY environment variable gets
   # set.  This is necessary for OpenSSH to even think about calling
@@ -107,33 +94,24 @@ other_software_system_casks_common:
 other_software_system_casks: '{{ other_software_system_casks_common }}'
 
 other_software_user_casks_common:
-  - airfoil
   - alfred
   - alt-tab
-  - appcleaner
   - audio-hijack
   - bartender
   - bettertouchtool
-  - calibre
   - dash
-  - ghidra
-  - grandperspective
   - hammerspoon
-  - handbrake
-  - insomnia
   # Using beta because (1) has 1Password support, and (2) 3.5 has been
   # in beta since 2021, apparently.
   - iterm2-beta
   - knockknock
-  - libreoffice
   - loopback
   - micro-snitch
-  - plex
+  # This is mostly for unrar.
+  - rar
   - silentknight
   - soundsource
   - the-unarchiver
-  - tor-browser
-  - vlc
 
 other_software_user_casks: '{{ other_software_user_casks_common }}'
 
@@ -141,14 +119,15 @@ other_software_user_casks: '{{ other_software_user_casks_common }}'
 # elsewhere.
 other_software_mac_app_store_common:
   - [1440147259, /Applications/AdGuard for Safari.app]
-  - [824183456, /Applications/Affinity Photo.app]
-  - [937984704, /Applications/Amphetamine.app]
+  # NOTE: OneNote is installed in a common place because I snarf fonts
+  # out of it.  Work machine may not like this...
   - [784801555, /Applications/Microsoft OneNote.app]
+  - [1289583905, /Applications/Pixelmator Pro.app]
   - [1480933944, /Applications/Vimari.app]
 
 other_software_mac_app_store: '{{ other_software_mac_app_store_common }}'
 
-other_software_pipx_python: '{{ macports_python_3 }}'
+other_software_pipx_python: '{{ homebrew_bin }}/python3'
 
 other_software_pipx_common:
   - magic-wormhole
@@ -164,16 +143,6 @@ other_software_preferences_common:
 
   com.runningwithcrayons.Alfred-Preferences:
     - [syncfolder, string, '~/Dropbox']
-
-  ~/Library/Containers/com.if.Amphetamine/Data/Library/Preferences/com.if.Amphetamine:
-    - ["Default Duration", int, 14]
-    - ["End Session On Low Battery", int, 1]
-    - ["Hide Dock Icon", int, 1]
-    - ["Icon Style", int, 5]
-    - ["Ignore Battery on AC", int, 1]
-    - ["Lower Icon Opacity", int, 1]
-    - ["Session End Time Calcuation", int, 1]
-    - ["Show Welcome Window", int, 0]
 
   com.hegenberg.BetterTouchTool:
     - [windowSnappingEnabled, bool, false]
@@ -193,9 +162,6 @@ other_software_preferences_common:
     - [PrefsCustomFolder, string, '{{ dropbox_dir }}/app_sync/iTerm']
     - [NoSyncNeverRemindPrefsChangesLostForFile, bool, true]
     - [NoSyncNeverRemindPrefsChangesLostForFile_selection, int, 0]
-
-  net.tunnelblick.tunnelblick:
-    - [keyboardShortcutIndex, int, 0]
 
   com.surteesstudios.Bartender:
     - [HideItemsWhenShowingOthers, bool, false]

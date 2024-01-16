@@ -1,5 +1,4 @@
 dependencies:
   - role: software_xcode
   # display_manager needs Python with PyObjC.
-  # Apple's Python 3.9 doesn't seem to include it on Ventura, at least.
-  - role: macports
+  - role: pyobjc_venv

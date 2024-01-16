@@ -1,13 +1,16 @@
 dotfiles_private_which: personal
 
-other_software_macports_personal_machine:
+other_software_homebrew_personal_machine:
+  - ffmpeg
   - mp3splt
   - mp4v2
+  # This is a maintained fork of youtube-dl.
+  - yt-dlp
 
-other_software_macports: >-
+other_software_homebrew: >-
   {{
-      other_software_macports_common
-      | union(other_software_macports_personal_machine)
+      other_software_homebrew_common
+      | union(other_software_homebrew_personal_machine)
   }}
 
 other_software_system_casks_personal_machine:
@@ -21,14 +24,24 @@ other_software_system_casks: >-
   }}
 
 other_software_user_casks_personal_machine:
+  - airfoil
   - anki
+  - appcleaner
+  - calibre
   - epic-games
   - freac
+  - ghidra
+  - grandperspective
+  - handbrake
+  - libreoffice
   - moonlight
+  - plex
   - signal
   - simple-comic
   - steam
   - subsync
+  - tor-browser
+  - vlc
   - vmware-fusion
 
 other_software_user_casks: >-
@@ -38,6 +51,7 @@ other_software_user_casks: >-
   }}
 
 other_software_mac_app_store_personal_machine:
+  - [937984704, /Applications/Amphetamine.app]
   - [1193539993, '/Applications/Brother iPrint&Scan.app']
   - [515886877, /Applications/Joystick Show.app]
 
@@ -63,4 +77,21 @@ other_software_add_dock: >-
   {{
       other_software_add_dock_common
       | union(other_software_add_dock_personal_machine)
+  }}
+
+other_software_preferences_personal_machine:
+  ~/Library/Containers/com.if.Amphetamine/Data/Library/Preferences/com.if.Amphetamine:
+    - ["Default Duration", int, 14]
+    - ["End Session On Low Battery", int, 1]
+    - ["Hide Dock Icon", int, 1]
+    - ["Icon Style", int, 5]
+    - ["Ignore Battery on AC", int, 1]
+    - ["Lower Icon Opacity", int, 1]
+    - ["Session End Time Calcuation", int, 1]
+    - ["Show Welcome Window", int, 0]
+
+other_software_preferences: >-
+  {{
+      other_software_preferences_common
+      | combine(other_software_preferences_personal_machine)
   }}

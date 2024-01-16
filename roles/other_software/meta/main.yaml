@@ -1,6 +1,5 @@
 dependencies:
-  - role: homebrew_cask
-  - role: macports
+  - role: homebrew
   - role: software_dockutil
   # Lots of the software being installed is configured to look to
   # files in my Dropbox account.

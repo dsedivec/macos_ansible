@@ -1,8 +1,8 @@
 - name: Install Go
-  dsedivec.ansible_dlc.x_macports:
-    state: installed
+  homebrew:
+    update_homebrew: true
     name: go
-  become: yes
+    state: present
 
 - name: Get value of GOENV
   command:

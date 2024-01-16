@@ -1,22 +1,5 @@
 - name: 'Install Ruby {{ ruby_version }}'
-  dsedivec.ansible_dlc.x_macports:
+  homebrew:
+    update_homebrew: true
     state: present
-    name: '{{ ruby_macports_package_name }}'
-  become: true
-
-- name: Check MacPorts default Ruby
-  stat:
-    path: /opt/local/bin/ruby
-  register: macports_ruby
-  changed_when: false
-
-- name: 'Set MacPorts default Ruby to Ruby {{ ruby_version }}'
-  command: '/opt/local/bin/port select --set ruby {{ ruby_macports_package_name }}'
-  when: '
-    not (
-      macports_ruby.stat.exists
-      and macports_ruby.stat.islnk
-      and macports_ruby.stat.lnk_source.endswith("/ruby" + ruby_version)
-    )
-  '
-  become: true
+    name: '{{ ruby_homebrew_package_name }}'

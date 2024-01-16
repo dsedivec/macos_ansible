@@ -1,20 +1,9 @@
-- name: Install packages from MacPorts
-  dsedivec.ansible_dlc.x_macports:
-    name: '{{ other_software_macports }}'
+- name: Install Homebrew packages
+  homebrew:
+    update_homebrew: true
     state: present
-  become: true
+    name: '{{ other_software_homebrew }}'
   tags: [slow]
-
-- name: Check if sleepwatcher is running
-  command: pgrep sleepwatcher
-  register: pgrep
-  failed_when: 'pgrep.rc > 1'
-  changed_when: false
-
-- name: Start sleepwatcher
-  command: port load sleepwatcher
-  become: true
-  when: 'pgrep.rc != 0'
 
 # I don't want to install this from Homebrew because it builds it from
 # source, since my Homebrew installation isn't in /usr/local, and that
@@ -28,8 +17,8 @@
 - block:
   - name: Install system-wide casks
     homebrew_cask:
-      name: '{{ other_software_system_casks }}'
       state: present
+      name: '{{ other_software_system_casks }}'
       path: '{{ homebrew_sudo_wrapper | dirname }}'
     notify:
       - Run macsigcheck
@@ -71,22 +60,25 @@
   notify:
     - Run macsigcheck
 
-- name: Check if PMP Helper is running
-  command:
-    argv: [pgrep, PMP Helper]
-  register: pgrep
-  failed_when: 'pgrep.rc > 1'
-  changed_when: False
+- when: '"plex" in other_software_user_casks'
+  block:
+    - name: Check if PMP Helper is running
+      command:
+        argv: [pgrep, PMP Helper]
+      register: pgrep
+      failed_when: 'pgrep.rc > 1'
+      changed_when: False
 
-- name: Disable Plex's mysterious PMP Helper
-  command:
-    argv: [
-      launchctl, unload, -w,
-      '{{ ansible_env.HOME }}/Library/LaunchAgents/tv.plex.player-helper.plist',
-    ]
-  when: 'pgrep.rc == 0'
+    - name: Disable Plex's mysterious PMP Helper
+      command:
+        argv: [
+          launchctl, unload, -w,
+          '{{ ansible_env.HOME }}/Library/LaunchAgents/tv.plex.player-helper.plist',
+        ]
+      when: 'pgrep.rc == 0'
 
 - name: Set VLC preferences
+  when: '"vlc" in other_software_user_casks'
   ini_file:
     path: '{{ ansible_env.HOME }}/Library/Preferences/org.videolan.vlc/vlcrc'
     state: present
@@ -125,18 +117,6 @@
       | list
   }}'
 
-# Copying a working plist wholesale because there are a shitload of
-# preferences to set otherwise, including a complicated array of
-# custom commands.
-- name: Install Moom settings
-  copy:
-    # Note: This file was produced from a working, configured install
-    # of Moom with "plutil -convert xml1" on the *binary* plist file.
-    src: com.manytricks.Moom.plist
-    dest: '{{ ansible_env.HOME }}/Library/Preferences/'
-    # Don't overwrite if the file exists.
-    force: no
-
 - name: Put software on the Dock
   command:
     argv: ['{{ dockutil }}', --add, '{{ item }}', --no-restart]
@@ -144,50 +124,6 @@
   loop: '{{ other_software_add_dock }}'
   notify:
     - Restart Dock
-
-- name: Clone sshfs
-  git:
-    repo: https://github.com/libfuse/sshfs.git
-    dest: '{{ repositories_root }}/sshfs'
-    # sshfs > 2 needs FUSE > 3, but osxfuse is only up to 2.9x, or
-    # something like that.
-    version: sshfs_2.x
-    update: no
-
-- name: Install dependencies for sshfs
-  dsedivec.ansible_dlc.x_macports:
-    name: [meson, ninja]
-    state: installed
-  become: yes
-
-# https://github.com/osxfuse/osxfuse/issues/751
-- name: Symlink fuse_darwin.h so sshfs 2.x will build
-  file:
-    state: link
-    src: fuse.h
-    path: /usr/local/include/fuse_darwin.h
-
-- name: Build sshfs
-  shell: |
-    install -d build
-    cd build
-    meson ..
-    ninja
-  args:
-    chdir: '{{ repositories_root }}/sshfs'
-    creates: '{{ repositories_root }}/sshfs/build/sshfs'
-  environment:
-    PKG_CONFIG_PATH: /usr/local/lib/pkgconfig
-
-- name: Install sshfs
-  copy:
-    remote_src: yes
-    src: '{{ repositories_root }}/sshfs/build/sshfs'
-    dest: /usr/local/bin/sshfs
-    owner: root
-    group: wheel
-    mode: 0755
-  become: yes
 
 # For no reason I can fathom, SPAN will only work when installed under
 # /Library, and not when installed under ~/Library.  ¯\_(ツ)_/¯
@@ -237,9 +173,9 @@
     - Recognize new Audio Units
 
 - name: Install pipx
-  dsedivec.ansible_dlc.x_macports:
+  homebrew:
+    state: present
     name: pipx
-    state: installed
 
 - name: Install software via pipx
   community.general.pipx:
@@ -261,7 +197,7 @@
     name: html2email
     source: git+https://github.com/dsedivec/html2email.git
     state: present
-    python: '{{ macports_python_3 }}'
+    python: '{{ homebrew_bin }}/python3'
 
 # This lets me print envelopes correctly.  Not 100% convinced I need
 # this for printing envelopes from LibreOffice.

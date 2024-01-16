@@ -1,4 +1,3 @@
 dependencies:
-  - {role: macports, when: 'preferred_pkg_mgr == "macports"'}
-  - {role: homebrew, when: 'preferred_pkg_mgr == "homebrew"'}
+  - role: homebrew
   - role: software_dockutil

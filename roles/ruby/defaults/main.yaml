@@ -1,2 +1,2 @@
-ruby_version: '3.2'
-ruby_macports_package_name: 'ruby{{ ruby_version.replace(".", "") }}'
+ruby_version: '3.3'
+ruby_homebrew_package_name: 'ruby@{{ ruby_version }}'

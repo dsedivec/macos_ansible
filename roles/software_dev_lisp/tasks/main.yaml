@@ -1,9 +1,7 @@
-- name: Install SBCL and some other dependencies
-  # OpenSSL is used by install_quicklisp.sh.
-  # macOS curl is too old to talk to beta.quicklisp.org.
-  dsedivec.ansible_dlc.x_macports:
+- name: Install SBCL
+  homebrew:
+    name: sbcl
     state: present
-    name: [sbcl, openssl, curl]
   become: yes
 
 - name: Install Quicklisp

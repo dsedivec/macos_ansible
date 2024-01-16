@@ -1,8 +1,7 @@
 - name: Install jq
-  dsedivec.ansible_dlc.x_macports:
+  homebrew:
     state: present
     name: jq
-  become: yes
 
 - name: Download and install Stack
   script: install_stack.sh '{{ user_bin_dir | quote }}'

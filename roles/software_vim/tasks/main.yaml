@@ -1,8 +1,8 @@
 - name: Install Vim
-  dsedivec.ansible_dlc.x_macports:
+  homebrew:
+    update_homebrew: true
     name: vim
     state: present
-  become: true
 
 - name: Make Vim autoload directory
   file:

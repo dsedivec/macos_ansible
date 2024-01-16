@@ -1,5 +1,4 @@
 - name: Install NPM
-  dsedivec.ansible_dlc.x_macports:
+  homebrew:
     state: present
-    name: npm8
-  become: yes
+    name: npm

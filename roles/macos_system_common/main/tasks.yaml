@@ -1,6 +1,3 @@
-- import_tasks: tasks/as_root.yaml
-  become: true
-
 # Lots of stuff wants to make *relative* symlinks in user_bin_dir,
 # which Ansible will fail on if user_bin_dir isn't a directory (can't
 # look up .. in a directory that doesn't exist).

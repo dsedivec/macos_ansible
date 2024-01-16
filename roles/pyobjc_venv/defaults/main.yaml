@@ -1,0 +1,4 @@
+pyobjc_venv_venvs_root: '{{ ansible_env.HOME }}/.venvs'
+pyobjc_venv_venv_dir: '{{ pyobjc_venv_venvs_root }}/pyobjc'
+pyobjc_venv_python: '{{ pyobjc_venv_venv_dir }}/bin/python'
+

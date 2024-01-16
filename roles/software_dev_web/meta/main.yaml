@@ -1,5 +1,5 @@
 dependencies:
-  - role: macports
+  - role: homebrew
   - role: npm
   # For devd
   - role: go

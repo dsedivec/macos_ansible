@@ -1,5 +1,5 @@
-- name: Install MacPorts packages for shell work
-  dsedivec.ansible_dlc.x_macports:
+- name: Install packages for shell work
+  homebrew:
+    update_homebrew: true
+    name: '{{ dev_shell_homebrew_packages }}'
     state: present
-    name: '{{ dev_shell_macports_packages }}'
-  become: yes

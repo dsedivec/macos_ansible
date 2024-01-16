@@ -9,34 +9,6 @@
   register: git_clone_emacs
 
 - name: Install Emacs dependencies
-  macports:
-    state: present
-    selfupdate: true
-    name:
-      - autoconf
-      - automake
-      - jansson
-      - cairo
-      - xpm
-      - libpng
-      - jpeg
-      - tiff
-      - giflib
-      - librsvg
-      - gnutls
-      - libxml2
-      - ccache
-      - texinfo
-      # native-comp
-      - gcc12
-      # org-mode needs this to build.
-      - gnutar
-      - tree-sitter
-  become: true
-  tags: [slow]
-  when: 'preferred_pkg_mgr == "macports"'
-
-- name: Install Emacs dependencies
   homebrew:
     state: present
     update_homebrew: true
@@ -62,7 +34,6 @@
       - gnu-tar
       - tree-sitter
   tags: [slow]
-  when: 'preferred_pkg_mgr == "homebrew"'
 
 - name: Check for Emacs.app installed
   stat:

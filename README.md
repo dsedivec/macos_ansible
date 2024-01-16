@@ -6,7 +6,7 @@ title: Ansible Automated Setup of macOS
 
 This is my somewhat untested, haphazard, but hopefully useful automated setup of some of my macOS software and settings.
 
-As a general principle, I prefer using MacPorts to Homebrew.  I have, however, decided to use Homebrew Cask to install lots of binary/GUI packages, because it is very convenient and none (or almost none) of these packages can be installed via MacPorts.
+I have broken down and am now using Homebrew by default.
 
 Documentation here is very far from complete.
 
@@ -19,7 +19,7 @@ Role `other_software` tends to be for software that I want to use as a "normal u
 
 `software_dev_*` roles tend to be for "development" in particular languages/activities.
 
-Other `software_*` roles tend to be for specific software that other role(s) will need to depend on.  For example, lots of stuff needs MacPorts installed first, so MacPorts gets it own `software_macports` role that others can depend on.
+Other `software_*` roles tend to be for specific software that other role(s) will need to depend on.  For example, lots of stuff needs Homebrew installed first, so Homebrew gets it own `homebrew` role that others can depend on.
 
 Additionally, some software has been broken out into its own roles to get me software that I need to actually work on this Ansible setup first.  For example, Emacs and/or Vim get installed early on so that I have good editors with good configurations to start editing YAML or Python if need be.
 
@@ -42,7 +42,7 @@ Additionally, some software has been broken out into its own roles to get me sof
   * GreaseMonkey?  Not sure if this is necessary
 * Export your iStat Menus configuration
 * Maybe check that you have all your repositories committed up, like dotfiles and dot-emacs-d
-* Save off `port echo requested`, `brew list`, and `mas list`
+* Save off `brew list` and `mas list`
 * Save off `ls /Applications ~/Applications` (particularly since `mas list` doesn't seem to be complete as of this writing)
 * Make CCC backup
 

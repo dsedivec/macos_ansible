@@ -1,0 +1,21 @@
+- name: Make user Python venv directory
+  file:
+    path: '{{ pyobjc_venv_venvs_root }}'
+    state: directory
+
+- name: Make Python venv
+  command:
+    argv: ['{{ ansible_python_interpreter }}', '-m', venv, '{{ pyobjc_venv_venv_dir}}']
+    creates: '{{ pyobjc_venv_python }}'
+
+- name: Make sure pip and wheel are up-to-date in venv
+  pip:
+    virtualenv: '{{ pyobjc_venv_venv_dir }}'
+    name: [pip, wheel]
+    state: latest
+
+- name: Install PyObjC in venv
+  pip:
+    virtualenv: '{{ pyobjc_venv_venv_dir }}'
+    name: pyobjc
+    state: present

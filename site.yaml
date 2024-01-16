@@ -1,11 +1,11 @@
 - hosts: all
   roles:
     - {role: macos_facts, tags: [always]}
-    - {role: macos_system, tags: [macos_system]}
-    # Force install of MacPorts before macos_prefs so we get the fast
-    # PyObjC.  See roles/macports/tasks/main.yaml for more
-    # information.
-    - {role: macports, tags: [macports]}
+    - {role: macos_system_common, tags: [macos_system_common]}
+
+- hosts: personal_machines
+  roles:
+    - {role: macos_system_personal, tags: [macos_system_personal]}
     - {role: macos_prefs, tags: [macos_prefs]}
     - {role: software_emacs, tags: [software_emacs]}
     - {role: dotfiles, tags: [dotfiles]}
@@ -24,20 +24,29 @@
     - {role: software_dev_web, tags: [software_dev_web]}
     - {role: other_software, tags: [other_software]}
     - {role: software_mactex, tags: [software_mactex]}
-    - {role: mail_plug_ins, tags: [mail_plug_ins]}
     - {role: fonts, tags: [fonts]}
-  environment:
-    PATH: '/opt/local/bin:{{ homebrew_bin }}:/Library/TeX/texbin:{{ ansible_env.PATH }}'
-
-- hosts: personal_machines
-  roles:
     - {role: software_dev_go, tags: [software_dev_go]}
     - {role: software_dev_haskell, tags: [software_dev_haskell]}
     - {role: software_dev_ruby, tags: [software_dev_ruby]}
     - {role: software_postgresql, tags: [software_postgresql]}
     - {role: software_gocryptfs, tags: [software_gocryptfs]}
-    - {role: software_hugo, tags: [software_hugo]}
+    # Not using this for now.
+    #- {role: software_hugo, tags: [software_hugo]}
+  environment:
+    PATH: '/opt/local/bin:{{ homebrew_bin }}:/Library/TeX/texbin:{{ ansible_env.PATH }}'
 
 - hosts: work_machines
   roles:
-    - {role: software_gcloud_sdk, tags: [software_gcloud_sdk]}
+    - {role: macos_prefs, tags: [macos_prefs]}
+    - {role: software_emacs, tags: [software_emacs]}
+    - {role: dotfiles, tags: [dotfiles]}
+    - {role: software_vim, tags: [software_vim]}
+    - {role: software_tmux, tags: [software_tmux]}
+    - {role: software_dockutil, tags: [software_dockutil]}
+    - {role: software_dev_python, tags: [software_dev_python]}
+    - {role: software_dev_shell, tags: [software_dev_shell]}
+    - {role: software_dev_sql, tags: [software_dev_sql]}
+    - {role: other_software, tags: [other_software]}
+    - {role: software_postgresql, tags: [software_postgresql]}
+  environment:
+    PATH: '/opt/local/bin:{{ homebrew_bin }}:/Library/TeX/texbin:{{ ansible_env.PATH }}'

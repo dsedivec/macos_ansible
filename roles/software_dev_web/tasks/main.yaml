@@ -1,11 +1,10 @@
-- name: Install web development MacPorts packages
-  dsedivec.ansible_dlc.x_macports:
-    state: present
+- name: Install web development packages
+  homebrew:
+    update_homebrew: true
     # Explicitly install latest Node.js, needed for Tide (Emacs
-    # TypeScript development).  Not using latest version as of this
-    # writing because npm9 port wants nodejs18.
-    name: [nodejs18]
-  become: yes
+    # TypeScript development).
+    name: nodejs
+    state: present
 
 - name: Install web development packages from NPM
   npm:

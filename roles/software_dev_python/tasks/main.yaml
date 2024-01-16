@@ -1,14 +1,13 @@
 - name: Install pipx
-  dsedivec.ansible_dlc.x_macports:
-    state: present
+  homebrew:
+    update_homebrew: true
     name: pipx
-  become: yes
+    state: present
 
 - name: Install Python 3 development tools
   community.general.pipx:
     name: '{{ item }}'
     state: '{{ software_dev_python_pipx_state }}'
-    python: '{{ macports_python_3 }}'
   loop:
     - flake8
     - pylint

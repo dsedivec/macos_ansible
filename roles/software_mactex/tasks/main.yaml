@@ -5,16 +5,6 @@
     path: '{{ homebrew_sudo_wrapper | dirname }}'
   become: yes
 
-# Installing Ghostscript from Homebrew (see below) may install
-# pkg-config?  This is bad since it ends up shadowing MacPorts's
-# pkg-config (via my .bashrc), and MacPorts is where I actually
-# install all my libraries.  Make sure pkg-config isn't installed by
-# Homebrew.
-- name: Uninstall Homebrew pkg-config
-  homebrew:
-    state: absent
-    name: pkg-config
-
 # Homebrew (annoyingly) disables installing Ghostscript with MacTeX,
 # so you have to tell LaTeXiT where to find Homebrew's Ghostscript and
 # ps2pdf.
@@ -33,3 +23,5 @@
       value: '{{ homebrew_bin }}/gs'
     - key: psToPdfPath
       value: '{{ homebrew_bin }}/ps2pdf'
+  vars:
+    ansible_python_interpreter: '{{ pyobjc_venv_python }}'

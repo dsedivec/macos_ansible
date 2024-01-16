@@ -1,0 +1,6 @@
+homebrew_root: '{{ "/opt/homebrew" if ansible_machine == "arm64" else "/usr/local" }}'
+homebrew_bin: '{{ homebrew_root }}/bin'
+# Note that this needs to be installed into a directory because we're
+# going to just put this directory first on PATH so that anything
+# running "brew" gets our wrapper instead.
+homebrew_sudo_wrapper: '{{ homebrew_root }}/brew-sudo-keep-alive/brew'

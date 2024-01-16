@@ -1,19 +1,5 @@
 - name: Install PostgreSQL
-  dsedivec.ansible_dlc.x_macports:
-    name:
-      - 'postgresql{{ software_postgresql_version }}'
-      - 'postgresql{{ software_postgresql_version }}-server'
+  homebrew:
     state: present
-  become: true
+    name: 'postgresql@{{ software_postgresql_version }}'
   tags: [slow]
-
-- name: Select PostgreSQL {{ software_postgresql_version }}
-  command:
-    argv:
-      - port
-      - select
-      - --set
-      - postgresql
-      - 'postgresql{{ software_postgresql_version }}'
-    creates: /opt/local/bin/pg_config
-  become: yes
