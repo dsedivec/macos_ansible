@@ -43,6 +43,7 @@ Additionally, some software has been broken out into its own roles to get me sof
 * Export your iStat Menus configuration
 * Maybe check that you have all your repositories committed up, like dotfiles and dot-emacs-d
 * Save off `port echo requested`, `brew list`, and `mas list`
+* Save off `ls /Applications ~/Applications` (particularly since `mas list` doesn't seem to be complete as of this writing)
 * Make CCC backup
 
 
