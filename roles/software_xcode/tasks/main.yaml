@@ -34,11 +34,6 @@
   failed_when: 'first_launch_status.rc not in (0, 69)'
   changed_when: false
 
-- name: Run Xcode first run tasks
-  command:
-    argv: [xcodebuild, '-runFirstLaunch']
-  when: 'first_launch_status.rc != 0'
-
 - name: Check if we need to accept the Xcode license
   # This command is also courtesy of Homebrew's installer.
   shell: '/usr/bin/xcrun clang 2>&1'
