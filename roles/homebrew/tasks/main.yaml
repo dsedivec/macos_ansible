@@ -17,6 +17,10 @@
   file:
     state: directory
     path: '{{ homebrew_sudo_wrapper | dirname }}'
+    owner: '{{ ansible_user_uid }}'
+    group: '{{ ansible_user_gid }}'
+    mode: 0755
+  become: yes
 
 - name: Install brew-sudo-keep-alive wrapper
   copy:
