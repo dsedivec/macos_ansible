@@ -42,7 +42,6 @@ other_software_homebrew_common:
   #   something?? otherwise you get audited up the ass)
   # * SAP (major contributor to JDK, but why do they ship their own CA??)
   # * Anything else
-  - homebrew/cask-versions/zulu21
   - openssh
   - p7zip
   - parallel
@@ -83,6 +82,7 @@ other_software_system_casks_common:
   # https://forum.portswigger.net/thread/install-macos-catalina-344b229e78f65
   - burp-suite
   - homebrew/cask-versions/firefox-developer-edition
+  - homebrew/cask-versions/zulu21
   - google-chrome
   - istat-menus
   - macfuse
