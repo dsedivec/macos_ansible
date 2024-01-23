@@ -16,7 +16,7 @@ configure_args=(
 	--with-threads
 	# Supposedly important on macOS to get around 1024 file descriptor
 	# limit.
-	--with-poll
+	#--with-poll
 	--with-xwidgets
 	--with-zlib
 	--with-xml2
