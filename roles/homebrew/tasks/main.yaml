@@ -4,6 +4,11 @@
   become: yes
   when: '"sh.brew.homebrew" not in macos_installed_pkgs'
 
+- name: Tap cask-versions
+  homebrew_tap:
+    name: homebrew/cask-versions
+    state: present
+
 # Some brew commands may take a long time (ex. downloading large
 # files), and then expect to get an sudo password.  Little Python
 # wrapper script keeps sudo alive while brew is running.
