@@ -109,6 +109,8 @@
     key: '{{ item.key }}'
     value_type: '{{ item.type }}'
     value: '{{ item.value }}'
+  vars:
+    ansible_python_interpreter: '{{ pyobjc_venv_python }}'
   loop: '{{
       other_software_preferences
       | dict_product

@@ -7,3 +7,4 @@ dependencies:
   - role: software_dropbox
   - role: software_macsigcheck
   - role: software_macfit
+  - role: pyobjc_venv
