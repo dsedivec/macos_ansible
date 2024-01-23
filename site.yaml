@@ -1,4 +1,12 @@
 - hosts: all
+  pre_tasks:
+    - name: Make sure you typed the sudo password right
+      command:
+        argv: ['true']
+      become: yes
+      changed_when: false
+      tags: [always]
+
   roles:
     - {role: macos_facts, tags: [always]}
     - {role: macos_system_common, tags: [macos_system_common]}
