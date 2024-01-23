@@ -3,6 +3,9 @@
     update_homebrew: true
     state: present
     name: '{{ other_software_homebrew }}'
+  environment:
+    # Adding this just for MS SQL Server stuff (only on work machine).
+    HOMEBREW_ACCEPT_EULA: 'Y'
   tags: [slow]
 
 # I don't want to install this from Homebrew because it builds it from
