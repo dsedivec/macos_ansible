@@ -77,6 +77,7 @@ other_software_system_casks_common:
   # difference.  AgileBits says in their forums that the version
   # direct from them is sandboxed just like the MAS version.
   - 1password
+  - 1password-cli
   # Burp has its own installer that installs to /Applications.
   # 2020-06-30: Breaks under quarantine
   # https://forum.portswigger.net/thread/install-macos-catalina-344b229e78f65
