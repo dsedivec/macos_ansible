@@ -1,6 +1,7 @@
 - name: Clone Emacs Git repo
   dsedivec.ansible_dlc.x_git:
-    repo: https://git.savannah.gnu.org/git/emacs.git
+    repo: git@github.com:dsedivec/emacs.git
+    remote: mine
     dest: '{{ emacs_src_dir }}'
     # Make this conditional, since I usually want to control when I
     # rebuild Emacs.
