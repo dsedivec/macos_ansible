@@ -1,9 +1,28 @@
 dotfiles_private_which: work
 
+other_software_homebrew_work_machine:
+  - awscli
+  - carvel-dev/carvel/ytt
+  # I think this is actually a cask, but it installs only a CLI AFAIK.
+  - maven
+  # These two require HOMEBREW_ACCEPT_EULA=Y, which is done over in
+  # the task.
+  - Microsoft/homebrew-mssql-release/msodbcsql18
+  - Microsoft/homebrew-mssql-release/mssql-tools18
+  - postgresql@14
+  - pre-commit
+  - python@3.11
+  - python@3.10
+  - xo/xo/usql
+
+other_software_homebrew: >-
+  {{
+      other_software_homebrew_common
+      | union(other_software_homebrew_work_machine)
+  }}
+
 other_software_system_casks_work_machine:
   - microsoft-teams
-  - ringcentral-meetings
-  - tableau
 
 other_software_system_casks: >-
   {{
@@ -12,8 +31,12 @@ other_software_system_casks: >-
   }}
 
 other_software_user_casks_work_machine:
-  - adium
-  - ringcentral-phone
+  - cloudfoundry/tap/cf-cli@7
+  - fly
+  # I get this for p4merge.  Maybe should move up to common?
+  - p4v
+  - rancher
+  - visual-studio-code
 
 other_software_user_casks: >-
   {{
@@ -22,13 +45,14 @@ other_software_user_casks: >-
   }}
 
 other_software_mac_app_store_work_machine:
+  - [823766827, /Applications/Microsoft OneDrive.app]
   # NOTE: For reasons I cannot fathom, I had to start the download on
   # each of these in the App Store, then type in my password *for each
   # one*, and only then could mas download them.
+  - [462054704, /Applications/Microsoft Word.app]
   - [462058435, /Applications/Microsoft Excel.app]
   - [462062816, /Applications/Microsoft PowerPoint.app]
   - [1295203466, /Applications/Microsoft Remote Desktop.app]
-  - [462054704, /Applications/Microsoft Word.app]
 
 other_software_mac_app_store: >-
   {{
@@ -37,9 +61,7 @@ other_software_mac_app_store: >-
   }}
 
 other_software_add_dock_work_machine:
-  - /Applications/Microsoft Teams.app
-  - ~/Applications/Adium.app
-  - ~/Applications/RingCentral Phone.app
+  - '/Applications/Microsoft Teams (work or school).app'
 
 other_software_add_dock: >-
   {{
