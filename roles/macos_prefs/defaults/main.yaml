@@ -245,7 +245,7 @@ macos_prefs_set:
     key: [AppleSymbolicHotKeys, 32]
     type: dict
     value:
-      enabled: true
+      enabled: false
       value:
         parameters:
           - 65535
@@ -260,7 +260,7 @@ macos_prefs_set:
     key: [AppleSymbolicHotKeys, 33]
     type: dict
     value:
-      enabled: true
+      enabled: false
       value:
         parameters:
           - 65535
@@ -275,7 +275,7 @@ macos_prefs_set:
     key: [AppleSymbolicHotKeys, 34]
     type: dict
     value:
-      enabled: true
+      enabled: false
       value:
         parameters:
           - 65535
@@ -290,7 +290,7 @@ macos_prefs_set:
     key: [AppleSymbolicHotKeys, 35]
     type: dict
     value:
-      enabled: true
+      enabled: false
       value:
         parameters:
           - 65535
