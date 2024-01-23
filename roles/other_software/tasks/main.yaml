@@ -172,7 +172,7 @@
   community.general.pipx:
     name: '{{ item }}'
     state: present
-    python: '{{ other_software_pipx_python }}'
+    executable: '{{ homebrew_bin }}/pipx'
   loop: '{{ other_software_pipx }}'
 
 - name: Install VisiData optional packages
@@ -182,13 +182,14 @@
     inject_packages:
       - openpyxl
       - xlrd
+    executable: '{{ homebrew_bin }}/pipx'
 
 - name: Install html2email
   community.general.pipx:
     name: html2email
     source: git+https://github.com/dsedivec/html2email.git
     state: present
-    python: '{{ homebrew_bin }}/python3'
+    executable: '{{ homebrew_bin }}/pipx'
 
 # This lets me print envelopes correctly.  Not 100% convinced I need
 # this for printing envelopes from LibreOffice.
