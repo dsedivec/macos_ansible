@@ -16,6 +16,7 @@
     name:
       - autoconf
       - automake
+      - pkg-config
       - jansson
       - cairo
       - libxpm
