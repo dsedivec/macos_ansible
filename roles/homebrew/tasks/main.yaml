@@ -1,7 +1,8 @@
 - name: Install Homebrew
   command:
     argv: ['{{ macfit }}', '--github', '^Homebrew.*\.pkg$', 'Homebrew/brew', '--check-signature', 'valid']
-  when: '"sh.brew.Homebrew" not in macos_installed_pkgs'
+  become: yes
+  when: '"sh.brew.homebrew" not in macos_installed_pkgs'
 
 # Some brew commands may take a long time (ex. downloading large
 # files), and then expect to get an sudo password.  Little Python
