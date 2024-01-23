@@ -172,11 +172,6 @@
   notify:
     - Recognize new Audio Units
 
-- name: Install pipx
-  homebrew:
-    state: present
-    name: pipx
-
 - name: Install software via pipx
   community.general.pipx:
     name: '{{ item }}'

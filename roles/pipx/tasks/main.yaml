@@ -1,0 +1,12 @@
+# https://github.com/pypa/pipx/issues/1212
+- name: Make sure you've changed PIPX_HOME
+  fail:
+    msg: 'You need to set PIPX_HOME=$HOME/.local/share/pipx'
+    # Or anything without spaces.
+  when: '(ansible_env.PIPX_HOME|default("")) == ""'
+
+- name: Install pipx
+  homebrew:
+    update_homebrew: true
+    name: pipx
+    state: present

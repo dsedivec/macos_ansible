@@ -131,8 +131,6 @@ other_software_mac_app_store_common:
 
 other_software_mac_app_store: '{{ other_software_mac_app_store_common }}'
 
-other_software_pipx_python: '{{ homebrew_bin }}/python3'
-
 other_software_pipx_common:
   - magic-wormhole
   - proselint

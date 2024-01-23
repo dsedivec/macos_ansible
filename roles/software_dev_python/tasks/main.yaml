@@ -1,8 +1,8 @@
-- name: Install pipx
+- name: Install Python development packages from Homebrew
   homebrew:
     update_homebrew: true
-    name: pipx
     state: present
+    name: pyright
 
 - name: Install Python 3 development tools
   community.general.pipx:
