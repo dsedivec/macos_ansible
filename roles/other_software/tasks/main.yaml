@@ -26,15 +26,6 @@
     notify:
       - Run macsigcheck
 
-  - name: Install intel-power-gadget on Intel machines
-    homebrew_cask:
-      name: intel-power-gadget
-      state: present
-      path: '{{ homebrew_sudo_wrapper | dirname }}'
-    when: 'ansible_machine == "x86_64"'
-    notify:
-      - Run macsigcheck
-
   become: yes
   environment:
     # Necessary so our wrapper script can find the real "brew".
