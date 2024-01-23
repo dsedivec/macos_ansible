@@ -86,6 +86,17 @@ Now you can log out and log in as your new account.
         ansible-playbook site.yaml -l dale -K
 
 
+# After Install
+
+* Give iTerm2 full disk access
+* Get 1Password set up (if you have an old machine, follow their instructions for setting up on the new machine because it's easier)
+* At work you probably want OneDrive right away
+* You may want to fire up Ubuntu in Docker (don't forget `--privileged`) to use FUSE to mount up the Restic repo
+* Probably prioritize getting Firefox up and running (e.g. so you can log into sites like GitHub and set up your new host key)
+* Alfred before you go nuts
+* AltTab for similar reasons, maybe restore prefs from backup?
+
+
 # Things Not Automated
 
 * Set firmware password
