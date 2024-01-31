@@ -11,6 +11,7 @@ other_software_homebrew_work_machine:
   - Microsoft/homebrew-mssql-release/mssql-tools18
   - postgresql@14
   - pre-commit
+  - pyenv
   - 'python@3.11'
   - 'python@3.10'
   - xo/xo/usql
@@ -23,6 +24,7 @@ other_software_homebrew: >-
 
 other_software_system_casks_work_machine:
   - microsoft-teams
+  - zulu17
 
 other_software_system_casks: >-
   {{
