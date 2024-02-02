@@ -2,7 +2,6 @@
   homebrew:
     name: sbcl
     state: present
-  become: yes
 
 - name: Install Quicklisp
   script: install_quicklisp.sh
