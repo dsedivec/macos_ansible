@@ -1,6 +1,11 @@
-- name: Install Python development packages from Homebrew
+- name: Install Homebrew default Python
   homebrew:
     update_homebrew: true
+    state: present
+    name: python3
+
+- name: Install Python development packages from Homebrew
+  homebrew:
     state: present
     name: pyright
 
