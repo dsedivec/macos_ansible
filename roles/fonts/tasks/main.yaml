@@ -116,7 +116,7 @@
   loop: [Regular, Bold, Italic, Bold-Italic]
 
 - name: Download and install Iosevka
-  script: install_fonts_from_latest_github.py be5invis/Iosevka --dre '(?i)^ttc-iosevka-[\d.]+.zip$' -d {{ user_font_dir | quote }}
+  script: install_fonts_from_latest_github.py be5invis/Iosevka --dre '(?i)^PkgTTC-Iosevka-[\d.]+.zip$' -d {{ user_font_dir | quote }}
   args:
     creates: '{{ user_font_dir }}/iosevka-regular.ttc'
 
