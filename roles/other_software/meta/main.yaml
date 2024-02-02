@@ -2,9 +2,6 @@ dependencies:
   - role: homebrew
   - role: pipx
   - role: software_dockutil
-  # Lots of the software being installed is configured to look to
-  # files in my Dropbox account.
-  - role: software_dropbox
   - role: software_macsigcheck
   - role: software_macfit
   - role: pyobjc_venv
