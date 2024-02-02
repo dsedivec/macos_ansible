@@ -42,7 +42,9 @@ other_software_user_casks_personal_machine:
   - subsync
   - tor-browser
   - vlc
-  - vmware-fusion
+  # 2024-01-30: Not installing correctly on my M2.  Not sure why I
+  # want/need it, anyway.
+  # - vmware-fusion
 
 other_software_user_casks: >-
   {{
