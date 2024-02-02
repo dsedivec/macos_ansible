@@ -143,27 +143,13 @@ other_software_preferences_common:
   com.adguard.safari.AdGuard:
     - [NSFullScreenMenuItemEverywhere, bool, false]
 
-  com.runningwithcrayons.Alfred-Preferences:
-    - [syncfolder, string, '~/Dropbox']
-
   com.hegenberg.BetterTouchTool:
     - [windowSnappingEnabled, bool, false]
 
   com.kapeli.dashdoc:
-    - [shouldSyncGeneral, int, 1]
-    - [shouldSyncDocsets, int, 1]
-    - [shouldSyncBookmarks, int, 1]
-    # Seems like sync is not getting set up.
-    - [syncFolderPath, string, '~/Dropbox/app_sync/Dash']
     - [DHNotificationNestedResultTip, bool, true]
     - [DHNotificationTableOfContentsTip, bool, true]
     - [DHNotificationFindTip, bool, true]
-
-  com.googlecode.iterm2:
-    - [LoadPrefsFromCustomFolder, int, 1]
-    - [PrefsCustomFolder, string, '{{ dropbox_dir }}/app_sync/iTerm']
-    - [NoSyncNeverRemindPrefsChangesLostForFile, bool, true]
-    - [NoSyncNeverRemindPrefsChangesLostForFile_selection, int, 0]
 
   com.surteesstudios.Bartender:
     - [HideItemsWhenShowingOthers, bool, false]
