@@ -3,6 +3,7 @@ dotfiles_private_which: work
 other_software_homebrew_work_machine:
   - awscli
   - carvel-dev/carvel/ytt
+  - cloudfoundry/tap/cf-cli@7
   # I think this is actually a cask, but it installs only a CLI AFAIK.
   - maven
   # These two require HOMEBREW_ACCEPT_EULA=Y, which is done over in
@@ -33,7 +34,6 @@ other_software_system_casks: >-
   }}
 
 other_software_user_casks_work_machine:
-  - cloudfoundry/tap/cf-cli@7
   - fly
   # I get this for p4merge.  Maybe should move up to common?
   - p4v
