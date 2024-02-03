@@ -1087,11 +1087,6 @@ macos_prefs_set:
     type: bool
     value: true
 
-  # Archive -> ⌥E
-  - domain: '{{ macos_prefs_domain_mail }}'
-    key: [NSUserKeyEquivalents, Archive]
-    value: '~e'
-
   - domain: com.apple.scriptmenu
     key: ScriptMenuEnabled
     type: bool
