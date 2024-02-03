@@ -1,3 +1,0 @@
-homebrew_dir: '{{ ansible_env.HOME }}/.brew'
-homebrew_bin: '{{ homebrew_dir }}/bin'
-homebrew_sudo_wrapper: '{{ homebrew_dir }}/brew-sudo-keep-alive/brew'
