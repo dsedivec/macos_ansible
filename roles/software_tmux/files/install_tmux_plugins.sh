@@ -14,7 +14,7 @@ result=ANSIBLE_OK
 for plugin in $(tpm_plugins_list_helper); do
 	if ! plugin_already_installed "$plugin"; then
 		~/.tmux/plugins/tpm/scripts/install_plugins.sh
-		result=ANSIBLE_CHANGED
+		result="$result"$'\n'ANSIBLE_CHANGED
 		break
 	fi
 done
