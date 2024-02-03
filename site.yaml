@@ -56,5 +56,6 @@
     - {role: software_dev_sql, tags: [software_dev_sql]}
     - {role: other_software, tags: [other_software]}
     - {role: software_postgresql, tags: [software_postgresql]}
+    - {role: fonts, tags: [fonts]}
   environment:
     PATH: '/opt/local/bin:{{ homebrew_bin }}:/Library/TeX/texbin:{{ ansible_env.PATH }}'
