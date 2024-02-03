@@ -16,6 +16,9 @@ other_software_homebrew_work_machine:
   - 'python@3.11'
   - 'python@3.10'
   - xo/xo/usql
+  # Hoping to replace this with an Open Source™ alternative some day.
+  # Failing that, use https://github.com/hashicorp/homebrew-tap instead.
+  - vault
 
 other_software_homebrew: >-
   {{
