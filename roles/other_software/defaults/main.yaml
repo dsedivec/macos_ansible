@@ -111,6 +111,7 @@ other_software_user_casks_common:
   - knockknock
   - loopback
   - micro-snitch
+  - pycharm
   # This is mostly for unrar.
   - rar
   - silentknight
