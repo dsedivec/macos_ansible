@@ -116,6 +116,7 @@ other_software_user_casks_common:
   - rar
   - silentknight
   - soundsource
+  - suspicious-package
   - the-unarchiver
 
 other_software_user_casks: '{{ other_software_user_casks_common }}'
