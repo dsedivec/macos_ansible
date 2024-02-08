@@ -153,16 +153,16 @@ other_software_preferences_common:
     - [DHNotificationTableOfContentsTip, bool, true]
     - [DHNotificationFindTip, bool, true]
 
+  com.lwouis.alt-tab-macos:
+    - [windowDisplayDelay, int, 70]
+    - [nextWindowShortcut2, string, ""]
+
   com.surteesstudios.Bartender:
     - [HideItemsWhenShowingOthers, bool, false]
     - [ClickingMenuBarTogglesBartender, bool, false]
     - [MouseOverMenuBarTogglesBartender, bool, false]
     - [ReduceMenuItemSpacing, int, 1]
     - [ReduceUpdateCheckFrequencyWhenOnBattery, bool, true]
-
-  com.lwouis.alt-tab-macos:
-    - [windowDisplayDelay, int, 70]
-    - [nextWindowShortcut2, string, ""]
 
 other_software_preferences: '{{ other_software_preferences_common }}'
 
