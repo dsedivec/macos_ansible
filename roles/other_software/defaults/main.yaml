@@ -145,6 +145,9 @@ other_software_preferences_common:
   com.adguard.safari.AdGuard:
     - [NSFullScreenMenuItemEverywhere, bool, false]
 
+  com.googlecode.iterm2:
+    - [EnterCopyModeAutomatically, bool, false]
+
   com.hegenberg.BetterTouchTool:
     - [windowSnappingEnabled, bool, false]
 
