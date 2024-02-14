@@ -71,6 +71,26 @@
         ]
       when: 'pgrep.rc == 0'
 
+# https://github.com/rancher-sandbox/rancher-desktop/issues/2072#issuecomment-1474289111
+- when: '"rancher" in other_software_users_casks'
+  block:
+    - name: Make sure Rancher's Lima config directory exists
+      file:
+        state: directory
+        path: '{{ other_software_rancher_lima_config_dir }}'
+        # I'm squeamish about actually forcing any permissions here
+        # because I don't really know what they should be, and running
+        # Docker/Rancher "on" a Mac is weird.  Let's pretend we see
+        # nothing.
+
+    - name: Allow Rancher Desktop to forward the SSH agent
+      copy:
+        content: |
+          ssh:
+            forwardAgent: true
+        dest: '{{ other_software_rancher_lima_config_dir }}/override.yaml'
+
+
 - name: Set VLC preferences
   when: '"vlc" in other_software_user_casks'
   ini_file:

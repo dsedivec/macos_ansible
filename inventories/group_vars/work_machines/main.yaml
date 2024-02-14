@@ -53,6 +53,8 @@ other_software_user_casks: >-
       | union(other_software_user_casks_work_machine)
   }}
 
+other_software_rancher_lima_config_dir: '{{ ansible_env.HOME }}/Library/Application Support/rancher-desktop/lima/_config'
+
 other_software_mac_app_store_work_machine:
   #- [823766827, /Applications/Microsoft OneDrive.app]
   # NOTE: For reasons I cannot fathom, I had to start the download on
