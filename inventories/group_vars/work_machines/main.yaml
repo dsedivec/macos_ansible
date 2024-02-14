@@ -4,6 +4,7 @@ other_software_homebrew_work_machine:
   - awscli
   - carvel-dev/carvel/ytt
   - cloudfoundry/tap/cf-cli@7
+  - flyway
   # I think this is actually a cask, but it installs only a CLI AFAIK.
   - maven
   # These two require HOMEBREW_ACCEPT_EULA=Y, which is done over in
@@ -15,6 +16,8 @@ other_software_homebrew_work_machine:
   - pyenv
   - 'python@3.11'
   - 'python@3.10'
+  - terraform
+  - terragrunt
   - xo/xo/usql
   # Hoping to replace this with an Open Source™ alternative some day.
   # Failing that, use https://github.com/hashicorp/homebrew-tap instead.
@@ -28,6 +31,7 @@ other_software_homebrew: >-
 
 other_software_system_casks_work_machine:
   - microsoft-teams
+  - zulu11
   - zulu17
 
 other_software_system_casks: >-
