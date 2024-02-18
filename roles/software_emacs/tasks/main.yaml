@@ -35,6 +35,8 @@
       - libgccjit
       # org-mode needs this to build.
       - gnu-tar
+      # Vterm needs this to build
+      - cmake
   tags: [slow]
 
 - name: Check for Emacs.app installed
