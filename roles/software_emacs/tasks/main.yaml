@@ -16,25 +16,25 @@
     name:
       - autoconf
       - automake
-      - pkg-config
-      - jansson
       - cairo
-      - libxpm
-      - libpng
-      - jpeg
-      - libtiff
-      - giflib
-      - librsvg
-      - gnutls
-      - libxml2
       - ccache
+      - giflib
+      - gnutls
+      - jansson
+      - jpeg
+      - libpng
+      - librsvg
+      - libtiff
+      - libxml2
+      - libxpm
+      - pkg-config
       - texinfo
+      - tree-sitter
       # native-comp
       - gcc
       - libgccjit
       # org-mode needs this to build.
       - gnu-tar
-      - tree-sitter
   tags: [slow]
 
 - name: Check for Emacs.app installed
