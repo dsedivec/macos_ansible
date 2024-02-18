@@ -120,6 +120,18 @@
   args:
     creates: '{{ user_font_dir }}/iosevka-regular.ttc'
 
+- name: Download and install random fonts from GitHub
+  script: install_fonts_from_latest_github.py {{ item.repo | quote }} -d {{ user_font_dir | quote }}
+  args:
+    creates: '{{ user_font_dir }}/{{ item.creates }}'
+  loop:
+    - repo: githubnext/monaspace
+      creates: MonaspaceNeon-Regular.otf
+    - repo: JetBrains/JetBrainsMono
+      creates: JetBrainsMono-Regular.ttf
+    - repo: microsoft/cascadia-code
+      creates: CascadiaCode-Regular.otf
+
 - name: Grab some fonts from OneNote
   copy:
     remote_src: true
