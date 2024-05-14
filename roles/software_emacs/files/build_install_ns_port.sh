@@ -12,21 +12,18 @@ set_cflags() {
 
 configure_args=(
 	--without-x
-	--with-modules
-	--with-threads
-	# Supposedly important on macOS to get around 1024 file descriptor
-	# limit.
-	#--with-poll
 	--with-xwidgets
-	--with-zlib
-	--with-xml2
 	--with-json
-	--with-cairo
-	--with-gnutls
-	--with-{xpm,jpeg,tiff,gif,png,rsvg}
 	--with-tree-sitter
 	# Explicitly turn off ImageMagick because sure it's full of holes.
 	--without-imagemagick
+
+	# These are all defaults.  I'm putting them here in the hope that,
+	# if I end up missing one of the dependencies, I'll get an error
+	# in ./configure, alerting me to the absence of a necessary library.
+	--with-{xpm,jpeg,tiff,gif,png,rsvg,webp}
+	--with-{sqlite3,cairo,xml2,gnutls,zlib}
+	--with-{modules,threads}
 )
 
 native_comp=0
@@ -47,8 +44,11 @@ while [ $# -gt 0 ]; do
 
 		--native-comp|--native)
 			native_comp=1
+			# If you want full AOT, I'd start by reading
+			# https://github.com/d12frosted/homebrew-emacs-plus/pull/667.
+			# Note that, as of this writing, the way to do that is
+			# --with-native-compilation=aot.
 			configure_args+=(--with-native-compilation)
-			export NATIVE_FULL_AOT=1
 			if [ -d /opt/local/etc/macports ]; then
 				# MacPorts needs this.  Homebrew Just Works™.
 				export LDFLAGS="-Wl,-rpath /opt/local/lib/gcc12"

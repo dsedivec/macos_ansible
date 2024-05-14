@@ -25,6 +25,7 @@
       - libpng
       - librsvg
       - libtiff
+      - libwebm
       - libxml2
       - libxpm
       - pkg-config
