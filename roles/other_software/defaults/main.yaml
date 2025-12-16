@@ -1,14 +1,21 @@
 other_software_homebrew_common:
+  - age
   - aspell
   - bash-completion
   - bat
   - ccache
+  - colima
   - colordiff
   - coreutils
   - ctags
+  # - difftastic
   - direnv
+  - docker
+  - docker-compose
   - dsh
-#  - emacs-app
+  - dua-cli
+  # - duckdb
+  # - emacs-app
   - fd
   - figlet
   - file-formula
@@ -21,27 +28,18 @@ other_software_homebrew_common:
   - graphviz
   - grep
   - gnu-units
+  - imagemagick
   - iperf3
   - jq
   - less
   - lftp
   - lnav
+  - markdownlint-cli2
   - mercurial
   - miller
   - mtr
-  - ncdu
   - neomutt
   - nmap
-  # I officially hate picking a JDK build now.  My top choices in
-  # descending order of confidence:
-  #
-  # * Azul Zulu Community (Azul has been involved in JDK for a long time)
-  # * Amazon Corretto
-  # * Temurin (AKA Adoptium, née AdoptOpenJDK)
-  # * Oracle (actually open OpenJDK only supported for last release or
-  #   something?? otherwise you get audited up the ass)
-  # * SAP (major contributor to JDK, but why do they ship their own CA??)
-  # * Anything else
   - openssh
   - p7zip
   - parallel
@@ -54,7 +52,7 @@ other_software_homebrew_common:
   - pstree
   - pv
   - qrencode
-  # Do I want this on my personal Mac?  I use it at work.
+  - qsv
   - restic
   - ripgrep
   - rlwrap
@@ -66,7 +64,6 @@ other_software_homebrew_common:
   - tree
   - watch
   - weechat
-  - xsv
   - zoxide
 
 other_software_homebrew: '{{ other_software_homebrew_common }}'
